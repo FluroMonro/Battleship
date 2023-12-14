@@ -470,9 +470,9 @@ Public Class BattleShipsGame
         End While
         gameArr(col, row) = 4
         If currentplayer = 1 Then
-            generateShipImages(gameArr, 1, length, direction, col, row)
+            assignShipImages(gameArr, 1, length, direction, col, row)
         Else
-            generateShipImages(gameArr, 2, length, direction, col, row)
+            assignShipImages(gameArr, 2, length, direction, col, row)
         End If
         Return gameArr
     End Function
@@ -506,7 +506,7 @@ Public Class BattleShipsGame
         End Select
         Return valid
     End Function
-    Private Sub generateShipImages(gameArr As Array, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
+    Private Sub assignShipImages(gameArr As Array, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
         Dim shipPictureBox As PictureBox
         Select Case length
             Case 2
