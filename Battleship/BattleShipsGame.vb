@@ -1,0 +1,922 @@
+﻿Imports System.Diagnostics.PerformanceData
+Imports System.Drawing.Text
+Imports System.Runtime.Intrinsics.Arm
+Imports System.Security.Cryptography.X509Certificates
+Imports System.Security.Permissions
+Imports System.Windows.Forms.VisualStyles
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+
+Public Class BattleShipsGame
+
+    Dim currentPlayer As Integer
+    Dim gameOver As Boolean
+    Dim boardEmpty As Boolean
+    Dim playerMoveX As Integer
+    Dim PlayerMoveY As Integer
+    Dim opponentMoveX As Integer
+    Dim opponentMoveY As Integer
+    Dim gridCircleSizeNum As Integer
+    Public playergameArray(14, 14) As Integer
+    Public playerpictureBoxArray(14, 14) As PictureBox
+    Public opponentgameArray(14, 14) As Integer
+    Public opponentpictureBoxArray(14, 14) As PictureBox
+    Public score As Integer
+    Dim boardSizes As Short
+    Dim startOfBoardPosX As Integer
+    Dim startOfOpponentBoardPosY As Integer
+    Dim startOfPlayerBoardPosY As Integer
+    Dim gridOffSet As Integer
+    Dim turnsbannerHeight As Short
+    Dim has3alreadydone As Boolean
+
+
+    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
+        playerName = name
+        gridSize = size
+        difficulty = userDifficulty
+        isShipPlacementRandom = shipPlacementOption
+    End Sub
+    Public Sub onFormLoad()
+        playernametxt.Text = playerName
+
+        initialiseControlsPlacement()
+
+        'reset the boards before generating a new
+        resetGameArray(playergameArray)
+        resetGameArray(opponentgameArray)
+
+        'generate gameArray randomly (both computer and Player)
+        generateGameArr(playergameArray, 1)
+        generateGameArr(opponentgameArray, 2)
+
+        'will hide the ships if gameOver = false
+        revealopponentships()
+
+        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
+        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+
+        updatePictureBoxes(playergameArray, playerpictureBoxArray, 1)
+        updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, 2)
+
+
+
+        currentPlayer = 1
+        opponentMoveX = 0
+        opponentMoveY = 1
+    End Sub
+    Private Sub initialiseControlsPlacement()
+        'To place the controls in the same position relative to the custom display size of the user
+
+        'To initialise the screen size as the fullscreen display size of the user
+        Me.WindowState = FormWindowState.Maximized
+        Me.Width = Screen.PrimaryScreen.Bounds.Width
+        Me.Height = Screen.PrimaryScreen.Bounds.Height
+
+        Dim turnsbannerWidth As Short
+
+        Dim turnsbannerXloc As Short
+        Dim turnsbannerYLoc As Short
+
+        If Me.Width / Me.Height = 1528 / 960 Then
+            '2023 Macbook Pro M2 scree ratio (through a virtual machine)
+
+            turnsbannerWidth = 330
+            turnsbannerHeight = 45
+            turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
+            turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - 40
+            boardSizes = turnsbannerYLoc - ((turnsbannerHeight / 2) - 9)
+
+            'Setting the placement and size relative to the screen
+            backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+            resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
+
+
+            OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
+            PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
+
+            timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
+            timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
+            timelbl.Size = New Size(80, 30)
+
+            playernamelbl.Location = New Point(Me.Width / 2 - boardSizes - 100, Me.Bottom - 230)
+            playernametxt.Location = New Point(Me.Width / 2 - boardSizes - 20, Me.Bottom - 230)
+            playernametxt.Location = New Point(Me.Width / 2 - boardSizes - 20, Me.Bottom - 230)
+            playerscorelbl.Location = New Point(Me.Width / 2 - boardSizes - 68, Me.Bottom - 200)
+            playerscoretxt.Location = New Point(Me.Width / 2 - boardSizes + 10, Me.Bottom - 200)
+            opponentnamelbl.Location = New Point(Me.Width / 2 + boardSizes - 100, Me.Top + 150)
+            opponentscorelbl.Location = New Point(Me.Width / 2 + boardSizes - 68, Me.Top + 180)
+            opponentscoretxt.Location = New Point(Me.Width / 2 + boardSizes + 10, Me.Top + 180)
+
+            gridCircleSizeNum = (boardSizes - 30) / gridSize
+
+        Else
+            If Me.Width / Me.Height = 23 / 13 Then
+                'Monitor (Through a virtual machine
+                turnsbannerWidth = Me.Width * 0.215
+                turnsbannerHeight = Me.Height * 0.048
+                turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
+                turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - (Me.Height / 36.4)
+                boardSizes = turnsbannerYLoc - (turnsbannerHeight / 2) + Me.Height / 97.0666666667
+
+
+                'Setting the placement and size relative to the screen
+                backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+                resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
+
+                OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), Me.Height / 48.5333333333)
+                PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + Me.Height / 24.2666666667)
+
+                timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
+                timelbl.Location = New Point((Me.Width / 2) - (Me.Width / 39.9379844961), Me.Height - (Me.Height / 13.2363636364))
+                timelbl.Size = New Size(Me.Width / 19.9689922481, Me.Height / 32.3555555556)
+
+                playernamelbl.Location = New Point(Me.Width / 2 - 600, Me.Bottom - 230)
+                playernametxt.Location = New Point(Me.Width / 2 - 520, Me.Bottom - 230)
+                playernametxt.Location = New Point(Me.Width / 2 - 520, Me.Bottom - 230)
+                playerscorelbl.Location = New Point(Me.Width / 2 - 568, Me.Bottom - 200)
+                playerscoretxt.Location = New Point(Me.Width / 2 - 490, Me.Bottom - 200)
+                opponentnamelbl.Location = New Point(Me.Width / 2 + 400, Me.Top + 150)
+                opponentscorelbl.Location = New Point(Me.Width / 2 + 432, Me.Top + 180)
+                opponentscoretxt.Location = New Point(Me.Width / 2 + 510, Me.Top + 180)
+
+                gridCircleSizeNum = CInt(Me.Width / 44.4137931034)
+            End If
+        End If
+
+
+        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
+        PlayerBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
+        OpponentBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
+
+        WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
+        'Declarations of variables in relation to custom screensize (eg. Me.Width)
+
+        OpponentBoardBGImg.Size = New Size(boardSizes, boardSizes)
+        PlayerBoardBGImg.Size = New Size(boardSizes, boardSizes)
+        TurnsBannerPic.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
+        TurnsBannerPic.Size = New Size(turnsbannerWidth, turnsbannerHeight)
+        TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
+
+
+
+
+
+        playernamelbl.Size = New Size(88, 26)
+        playernametxt.Size = New Size(118, 24)
+        playerscorelbl.Size = New Size(79, 26)
+        playerscoretxt.Size = New Size(22, 24)
+        opponentnamelbl.Size = New Size(113, 26)
+        opponentscorelbl.Size = New Size(79, 26)
+        opponentscoretxt.Size = New Size(22, 24)
+
+
+
+    End Sub
+    Private Sub resetGameArray(gameArray As Array)
+        'resets the entire array to all 0s
+        Dim row, col As Integer
+        For col = 1 To gridSize
+            For row = 1 To gridSize
+                gameArray(col, row) = 0
+            Next row
+        Next col
+    End Sub
+    Public Sub generatePicture(pictureBoxArray As Array, picBoard As Object, currentPlayer As Integer)
+        'generates grid of pictures
+
+        Dim col As Integer
+        Dim row As Integer
+
+        For row = 1 To gridSize
+            For col = 1 To gridSize
+                Dim picbox = New PictureBox
+                'Data
+                picbox.Name = col & row
+                picbox.Parent = picBoard
+                pictureBoxArray(col, row) = picbox
+                picbox.BringToFront()
+                picbox.BackColor = Color.FromArgb(CByte(0), CByte(237), CByte(28), CByte(36))
+
+                'presentation
+                picbox.Width = gridCircleSizeNum
+                picbox.Height = gridCircleSizeNum
+                If currentPlayer = 1 Then
+                    If Me.Width / Me.Height = 1528 / 960 Then
+                        '2023 Macbook Pro M2 screen ratio (through a virtual machine)
+
+                        If gridSize = 10 Then
+                            picbox.Left = col * gridCircleSizeNum - gridOffSet
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                        Else
+                            If gridSize = 8 Then
+                                picbox.Left = col * gridCircleSizeNum - 33
+                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
+                            Else
+                                If gridSize = 12 Then
+                                    picbox.Left = col * gridCircleSizeNum - 15
+                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                                Else
+                                    If gridSize = 14 Then
+                                        picbox.Left = col * gridCircleSizeNum - 14
+                                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                                    End If
+                                End If
+                            End If
+                        End If
+
+                    Else
+                        If Me.Width / Me.Height = 23 / 13 Then
+                            'Monitor (Through a virtual machine
+                            picbox.Left = col * gridCircleSizeNum - 31
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 122
+                        End If
+                    End If
+                Else
+                    If currentPlayer = 2 Then
+                        If Me.Width / Me.Height = 1528 / 960 Then
+                            '2023 Macbook Pro M2 scree ratio (through a virtual machine)
+                            If gridSize = 10 Then
+                                picbox.Left = col * gridCircleSizeNum - 20
+                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                            Else
+                                If gridSize = 8 Then
+                                    picbox.Left = col * gridCircleSizeNum - 33
+                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
+                                Else
+                                    If gridSize = 12 Then
+                                        picbox.Left = col * gridCircleSizeNum - 15
+                                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                                    Else
+                                        If gridSize = 14 Then
+                                            picbox.Left = col * gridCircleSizeNum - 14
+                                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        Else
+                            If Me.Width / Me.Height = 23 / 13 Then
+                                'Monitor (Through a virtual machine
+                                picbox.Left = col * gridCircleSizeNum - 31
+                                picbox.Top = (row * gridCircleSizeNum) - 32
+                            End If
+                        End If
+                        AddHandler picbox.Click, AddressOf getPlayerMove
+                    End If
+                End If
+
+
+                picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircle.png"
+                picbox.SizeMode = PictureBoxSizeMode.StretchImage
+
+                picbox.SizeMode = PictureBoxSizeMode.StretchImage
+            Next col
+        Next row
+    End Sub
+    Private Sub generateGameArr(gameArr As Array, player As Integer)
+        If isShipPlacementRandom = True Then
+            generateShips(gameArr, 2, player)
+            generateShips(gameArr, 3, player)
+            generateShips(gameArr, 3, player)
+            generateShips(gameArr, 4, player)
+            generateShips(gameArr, 5, player)
+        Else
+            If isShipPlacementRandom = False Then
+                MsgBox("own choice shipPlacement")
+            End If
+        End If
+    End Sub
+    Private Function generateShips(gameArr As Array, length As Integer, currentplayer As Integer) As Array
+        Dim valid As Boolean
+        valid = False
+        Dim col As Integer
+        Dim row As Integer
+        Dim direction As Integer
+        While valid = False
+            col = Int(Rnd() * gridSize) + 1
+            row = Int(Rnd() * gridSize) + 1
+            If gameArr(col, row) = 0 Then
+                direction = Int(Rnd() * 4) + 1
+                Select Case direction
+                    Case 1
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col, row - 1) = 0 Then
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 3
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 Then
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 4
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 Then
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 5
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 AndAlso gameArr(col, row - 4) = 0 Then
+                                        For i = row To row - (length - 1) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                            End Select
+
+                        End If
+                    Case 2
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col, row + 1) = 0 Then
+                                        For i = row To (row + (length - 1))
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 3
+                                    If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 Then
+                                        For i = row To (row + (length - 1))
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 4
+                                    If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 Then
+                                        For i = row To (row + (length - 1))
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 5
+                                    If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 AndAlso gameArr(col, row + 4) = 0 Then
+                                        For i = row To (row + (length - 1))
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                            End Select
+
+                        End If
+                    Case 3
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col - 1, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 3
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 4
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 5
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 AndAlso gameArr(col - 4, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                            End Select
+
+                        End If
+                    Case 4
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col + 1, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 3
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 4
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                                Case 5
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 AndAlso gameArr(col + 4, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        valid = True
+                                    Else
+                                        valid = False
+                                    End If
+                            End Select
+
+                        End If
+                End Select
+            End If
+        End While
+        gameArr(col, row) = 4
+        If currentplayer = 1 Then
+            generateShipImages(gameArr, 1, length, direction, col, row)
+        Else
+            generateShipImages(gameArr, 2, length, direction, col, row)
+        End If
+        Return gameArr
+    End Function
+    Private Function isValidPlace(col, row, length, direction) As Boolean
+        Dim valid As Boolean
+        Select Case direction
+            Case 1
+                If row - length < 0 Then
+                    valid = False
+                Else
+                    valid = True
+                End If
+            Case 2
+                If row + length > gridSize Then
+                    valid = False
+                Else
+                    valid = True
+                End If
+            Case 3
+                If col - length < 0 Then
+                    valid = False
+                Else
+                    valid = True
+                End If
+            Case 4
+                If col + length > gridSize Then
+                    valid = False
+                Else
+                    valid = True
+                End If
+        End Select
+        Return valid
+    End Function
+    Private Sub generateShipImages(gameArr As Array, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
+        Dim shipPictureBox As PictureBox
+        Select Case length
+            Case 2
+                If currentplayer = 2 Then
+                    opponentshipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+                    shipPictureBox = opponentshipPicbox2
+                Else
+                    playershipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+                    shipPictureBox = playershipPicbox2
+                End If
+            Case 3
+                If currentplayer = 2 Then
+                    If has3alreadydone = True Then
+                        opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+                        shipPictureBox = opponentshipPicbox3b
+                        has3alreadydone = False
+                    Else
+                        opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+                        shipPictureBox = opponentshipPicbox3a
+                        has3alreadydone = True
+                    End If
+                Else
+                    If has3alreadydone = True Then
+                        playershipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+                        shipPictureBox = playershipPicbox3b
+                        has3alreadydone = False
+                    Else
+                        playershipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+                        shipPictureBox = playershipPicbox3a
+                        has3alreadydone = True
+                    End If
+                End If
+            Case 4
+                If currentplayer = 2 Then
+                    opponentshipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+                    shipPictureBox = opponentshipPicbox4
+                Else
+                    playershipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+                    shipPictureBox = playershipPicbox4
+                End If
+            Case 5
+                If currentplayer = 2 Then
+                    opponentshipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+                    shipPictureBox = opponentshipPicbox5
+                Else
+                    playershipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+                    shipPictureBox = playershipPicbox5
+                End If
+
+        End Select
+
+        shipImageGenerate(shipPictureBox, currentplayer, length, direction, column, row)
+    End Sub
+
+    Private Sub shipImageGenerate(picbox As PictureBox, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
+        gridOffSet = 20
+        startOfBoardPosX = (Me.Width / 2) - (boardSizes / 2) + gridOffSet - gridCircleSizeNum
+        startOfOpponentBoardPosY = (Me.Height / 2) - turnsbannerHeight - gridOffSet
+        startOfPlayerBoardPosY = Me.Bottom - turnsbannerHeight - gridOffSet - gridCircleSizeNum
+
+        Select Case direction
+            Case 1
+                'down
+                Dim dimension1 As Short
+                dimension1 = gridCircleSizeNum * 0.6
+                Dim dimension2 As Short
+                dimension2 = length * gridCircleSizeNum * 0.9
+                If currentplayer = 1 Then
+                    picbox.Location = New Point(startOfBoardPosX + 3 + (column * gridCircleSizeNum), startOfPlayerBoardPosY - 7 - (row * gridCircleSizeNum))
+
+                Else
+                    picbox.Location = New Point(startOfBoardPosX + 3 + (column * gridCircleSizeNum), startOfOpponentBoardPosY - 7 - (row * gridCircleSizeNum))
+                End If
+                'needs to wait to register rotation
+                wait(0.01)
+                rotateImage90(picbox, dimension1, dimension2)
+
+
+            Case 2
+                'up
+                Dim dimension1 As Short
+                dimension1 = gridCircleSizeNum * 0.6
+                Dim dimension2 As Short
+                dimension2 = length * gridCircleSizeNum * 0.9
+                If currentplayer = 1 Then
+                    picbox.Location = New Point(startOfBoardPosX + 3 + (column * gridCircleSizeNum), startOfPlayerBoardPosY - 5 - ((row + (length - 1)) * gridCircleSizeNum))
+                Else
+                    picbox.Location = New Point(startOfBoardPosX + 3 + (column * gridCircleSizeNum), startOfOpponentBoardPosY - 5 - ((row + (length - 1)) * gridCircleSizeNum))
+                End If
+
+                'needs to wait to register rotation
+                wait(0.01)
+                rotateImage90(picbox, dimension1, dimension2)
+            Case 3
+                'left
+                If currentplayer = 1 Then
+                    picbox.Location = New Point(startOfBoardPosX + ((column - (length - 1)) * gridCircleSizeNum), startOfPlayerBoardPosY - (row * gridCircleSizeNum))
+
+                Else
+                    picbox.Location = New Point(startOfBoardPosX + ((column - (length - 1)) * gridCircleSizeNum), startOfOpponentBoardPosY - (row * gridCircleSizeNum))
+
+                End If
+                picbox.Size = New Size((length * gridCircleSizeNum) * 0.9, (gridCircleSizeNum * 0.6))
+            Case 4
+                'right
+                If column = 10 Then
+                    column = column - (length - 1)
+                End If
+                Dim dimension1 As Short
+                dimension1 = length * gridCircleSizeNum * 0.9
+                Dim dimension2 As Short
+                dimension2 = gridCircleSizeNum * 0.6
+
+
+                'needs to wait to register rotation
+                wait(0.01)
+                rotateImage90(picbox, dimension1, dimension2)
+                'needs to wait to register rotation
+                wait(0.01)
+                rotateImage90(picbox, dimension1, dimension2)
+
+                If currentplayer = 1 Then
+                    picbox.Location = New Point(startOfBoardPosX + (column * gridCircleSizeNum), startOfPlayerBoardPosY - (row * gridCircleSizeNum))
+
+                Else
+                    picbox.Location = New Point(startOfBoardPosX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - (row * gridCircleSizeNum))
+
+                End If
+
+                picbox.Size = New Size(dimension1, dimension2)
+        End Select
+    End Sub
+
+    Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
+        picbox.Size = New Size(dimension1, dimension2)
+        Dim bmp As Bitmap = New Bitmap(picbox.Image)
+        bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
+        picbox.Image = bmp
+    End Sub
+
+
+    Private Sub revealopponentships()
+        If gameOver = True Then
+            'show opponentsShips
+            opponentshipPicbox2.Visible = True
+            opponentshipPicbox3a.Visible = True
+            opponentshipPicbox3b.Visible = True
+            opponentshipPicbox4.Visible = True
+            opponentshipPicbox5.Visible = True
+        Else
+            'hide opponents ships
+            opponentshipPicbox2.Visible = False
+            opponentshipPicbox3a.Visible = False
+            opponentshipPicbox3b.Visible = False
+            opponentshipPicbox4.Visible = False
+            opponentshipPicbox5.Visible = False
+        End If
+    End Sub
+    Private Sub updatePictureBoxes(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
+        'Updates and changes the picture depending on the value of the palyer
+        Dim col As Integer
+        Dim row As Integer
+
+        For col = 1 To gridSize
+            For row = 1 To gridSize
+                Select Case gameArray(col, row)
+                    Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
+                    'Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\placeHolderCircle.png"
+                    Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png"
+                    Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png"
+                        'Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
+                End Select
+            Next row
+        Next col
+    End Sub
+    Private Sub getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
+        Dim picLocation As String
+
+        If currentPlayer = 1 Then
+            picLocation = sender.Name
+            If picLocation.Length = 3 Then
+                If picLocation(1) = "0" Then
+                    'row 10
+                    playerMoveX = CInt(Strings.Left(sender.Name, 2))
+                    PlayerMoveY = CInt(Strings.Right(sender.Name, 1))
+                Else
+                    'col 10
+                    If picLocation(2) = "0" Then
+                        playerMoveX = CInt(Strings.Left(sender.Name, 1))
+                        PlayerMoveY = CInt(Strings.Right(sender.Name, 2))
+                    End If
+                End If
+            Else
+                If picLocation.Length = 4 Then
+                    'row 10 col 10
+                    playerMoveX = CInt(Strings.Left(sender.Name, 2))
+                    PlayerMoveY = CInt(Strings.Right(sender.Name, 2))
+                Else
+                    'single digit row and col
+                    playerMoveX = CInt(Strings.Left(sender.Name, 1))
+                    PlayerMoveY = CInt(Strings.Right(sender.Name, 1))
+                End If
+            End If
+            game()
+        End If
+    End Sub
+    Private Sub game()
+        gameOver = False
+
+        'check
+        check(playerMoveX, PlayerMoveY, opponentgameArray)
+
+        'update score
+        updateInGameScore(1)
+
+        'display grid
+        updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, currentPlayer)
+
+        If gameOver = True Then
+            revealopponentships()
+            determineWinner()
+            'scoring()
+        Else
+            swapPlayer()
+            displayCurrentPlayer()
+
+            wait(1)
+            computerMove()
+
+            'check, returns whether it is game over or not
+            check(opponentMoveX, opponentMoveY, playergameArray)
+
+            'update score
+            updateInGameScore(2)
+
+            'display grid
+            updatePictureBoxes(playergameArray, playerpictureBoxArray, currentPlayer)
+
+
+            If gameOver = True Then
+                revealopponentships()
+                determineWinner()
+                'scoring()
+            Else
+                swapPlayer()
+                displayCurrentPlayer()
+            End If
+        End If
+    End Sub
+    Private Function check(MoveX As Integer, MoveY As Integer, gameArr As Array) As Array
+        Dim extraTurn As Boolean
+
+        If gameArr(MoveX, MoveY) = 0 Then
+            'Miss
+            gameArr(MoveX, MoveY) = 2
+        Else
+            If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
+                'Hit
+                gameArr(MoveX, MoveY) = 3
+
+                'To add extra turns if necessary, depending on the difficulty set 
+                'turnNum = 1 is player, turnNum = 2 is computer	
+                If currentPlayer = 1 Then
+                    Select Case difficulty
+                        Case 1 : extraTurn = True
+                        Case 2 : extraTurn = False
+                        Case 3 : extraTurn = False
+                        Case 4 : extraTurn = False
+                    End Select
+                Else
+                    If currentPlayer = 2 Then
+                        Select Case difficulty
+                            Case 1 : extraTurn = False
+                            Case 2 : extraTurn = False
+                            Case 3 : extraTurn = True
+                            Case 4 : extraTurn = False
+                        End Select
+                    End If
+                End If
+            End If
+        End If
+
+        'Determine if there are still battleships left to hit
+        gameOver = True
+        boardEmpty = True
+        For row = 1 To gridSize
+            For column = 1 To gridSize
+                If gameArr(column, row) = 1 OrElse gameArr(column, row) = 4 Then
+                    gameOver = False
+                    boardEmpty = False
+                End If
+            Next column
+        Next row
+        Return gameArr
+    End Function
+    Private Function determineWinner() As Integer
+        Dim winner = currentPlayer
+        'game ended by time, boardEmpty = False
+        If boardEmpty = True Then
+            If winner = 1 Then
+                MsgBox("YOU WIN!")
+
+            Else
+                MsgBox("YOU LOSE!")
+            End If
+            score = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
+        Else
+            MsgBox("Ended by timer")
+            For row = 1 To gridSize
+                For column = 1 To gridSize
+                    If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                        score = score + 1
+                    End If
+                Next column
+            Next row
+
+            For row = 1 To gridSize
+                For column = 1 To gridSize
+                    If opponentgameArray(column, row) = 1 Then
+                        score = score - 1
+                    End If
+                Next column
+            Next row
+
+            If score > 0 Then
+                MsgBox("YOU WIN!")
+            Else
+                MsgBox("YOU LOSE!")
+            End If
+        End If
+        MsgBox(score)
+        Return score
+    End Function
+    Private Sub updateInGameScore(currentPlayer As Integer)
+        Dim playerScore As Integer
+        Dim opponentScore As Integer
+
+        If currentPlayer = 1 Then
+            For row = 1 To gridSize
+                For column = 1 To gridSize
+                    If opponentgameArray(column, row) = 3 Then
+                        playerScore = playerScore + 1
+                    End If
+                Next column
+            Next row
+            playerscoretxt.Text = playerScore
+        Else
+            For row = 1 To gridSize
+                For column = 1 To gridSize
+                    If playergameArray(column, row) = 3 Then
+                        opponentScore = opponentScore + 1
+                    End If
+                Next column
+            Next row
+            opponentscoretxt.Text = opponentScore
+        End If
+    End Sub
+    Private Sub wait(ByVal seconds As Integer)
+        For i As Integer = 0 To seconds * 100
+            System.Threading.Thread.Sleep(10)
+            Application.DoEvents()
+        Next
+    End Sub
+    Private Sub displayCurrentPlayer()
+        If currentPlayer = 1 Then
+            TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
+        ElseIf currentPlayer = 2 Then
+            TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
+        End If
+    End Sub
+    Private Sub computerMove()
+        Select Case difficulty
+            'Case 1
+            '    'begineer
+            'Case 2
+            '    'normal
+            'Case 3
+            '    'hard
+
+            Case 4
+                'impossible
+                For row = 1 To gridSize
+                    For column = 1 To gridSize
+                        If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                            opponentMoveX = column
+                            opponentMoveY = row
+                        End If
+                    Next column
+                Next row
+            Case Else
+                'temporary Go thru array
+                If opponentMoveX = gridSize Then
+                    opponentMoveY = opponentMoveY + 1
+                    opponentMoveX = 1
+                Else
+                    opponentMoveX = opponentMoveX + 1
+                End If
+        End Select
+    End Sub
+    Private Sub swapPlayer()
+        'switches between the value of 1 and 2 each time to swap players after each turn
+        currentPlayer = 2 / currentPlayer
+        displayCurrentPlayer()
+    End Sub
+    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+        Me.Hide()
+        MainMenuForm.Show()
+    End Sub
+    Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
+        onFormLoad()
+    End Sub
+End Class
