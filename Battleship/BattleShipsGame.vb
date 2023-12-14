@@ -7,7 +7,6 @@ Imports System.Windows.Forms.VisualStyles
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class BattleShipsGame
-
     Dim currentPlayer As Integer
     Dim gameOver As Boolean
     Dim boardEmpty As Boolean
