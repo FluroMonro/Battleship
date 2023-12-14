@@ -556,9 +556,7 @@ Public Class BattleShipsGame
                     playershipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
                     shipPictureBox = playershipPicbox5
                 End If
-
         End Select
-
         shipImageGenerate(shipPictureBox, currentplayer, length, direction, column, row)
     End Sub
 
