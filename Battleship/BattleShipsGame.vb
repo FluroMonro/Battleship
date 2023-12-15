@@ -445,12 +445,14 @@ Public Class BattleShipsGame
                                         valid = False
                                     End If
                             End Select
-
                         End If
                 End Select
             End If
         End While
+
+        'useful for debuging purposes, to determine where the head of the ship is.
         gameArr(col, row) = 4
+
         If currentplayer = 1 Then
             assignShipImages(gameArr, 1, length, direction, col, row)
         Else
@@ -547,6 +549,8 @@ Public Class BattleShipsGame
                     MsgBox("Length error")
                 End If
         End Select
+
+        'generate each assigned picture in it's correct location
         shipImageGenerate(shipPictureBox, currentplayer, length, direction, column, row)
     End Sub
     Private Sub shipImageGenerate(picbox As PictureBox, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
@@ -683,12 +687,14 @@ Public Class BattleShipsGame
                         opponentShipOffsetY = -2
                 End Select
 
+                picbox.Size = New Size((length * gridCircleSizeNum) * 0.9, (gridCircleSizeNum * 0.6))
+
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + ((column - (length - 1)) * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + ((column - (length - 1)) * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
-                picbox.Size = New Size((length * gridCircleSizeNum) * 0.9, (gridCircleSizeNum * 0.6))
+
                 If currentplayer = 1 Then
                     revealships(1, picbox)
                 End If
@@ -744,7 +750,7 @@ Public Class BattleShipsGame
 
     End Sub
     Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
-        wait(0.25)
+        wait(0.1)
         picbox.Size = New Size(dimension1, dimension2)
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
