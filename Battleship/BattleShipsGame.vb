@@ -604,12 +604,17 @@ Public Class BattleShipsGame
 
                 If currentplayer = 1 Then
                     revealships(1, picbox)
+                Else
+                    gameOver = True
+                    revealships(2, revealAllShips)
+                    gameOver = False
                 End If
 
                 'to face image of the ship upwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
+                revealships(2, revealAllShips)
             Case 2
                 'Ship faces Downwards
 
@@ -653,9 +658,14 @@ Public Class BattleShipsGame
 
                 If currentplayer = 1 Then
                     revealships(1, picbox)
+                Else
+                    gameOver = True
+                    revealships(2, revealAllShips)
+                    gameOver = False
                 End If
                 'to face image of the ship downwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
+                revealships(2, revealAllShips)
             Case 3
                 'Ship faces right (Default image rotation so no need To rotate)
 
@@ -742,15 +752,21 @@ Public Class BattleShipsGame
 
                 If currentplayer = 1 Then
                     revealships(1, picbox)
+                Else
+                    gameOver = True
+                    revealships(2, revealAllShips)
+                    gameOver = False
                 End If
                 'to face image of the ship left (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
+
+                revealships(2, revealAllShips)
         End Select
 
     End Sub
     Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
-        wait(0.1)
+        wait(0.01)
         picbox.Size = New Size(dimension1, dimension2)
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
@@ -1040,6 +1056,9 @@ Public Class BattleShipsGame
         MainMenuForm.Show()
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
+        gameOver = True
+        revealships(2, revealAllShips)
+        wait(1)
         onFormLoad()
     End Sub
 End Class
