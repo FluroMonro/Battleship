@@ -779,7 +779,7 @@ Public Class BattleShipsGame
                 '    revealships(2, revealAllShips)
                 '    wait(0.5)
 
-
+                '
 
                 '    'Offset for correct presentation
                 '    Dim playerShipOffsetX As Integer
