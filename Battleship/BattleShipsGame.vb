@@ -288,6 +288,7 @@ Public Class BattleShipsGame
         Dim col As Integer
         Dim row As Integer
         Dim direction As Integer
+
         While valid = False
             col = Int(Rnd() * gridSize) + 1
             row = Int(Rnd() * gridSize) + 1
@@ -341,7 +342,6 @@ Public Class BattleShipsGame
                                         valid = False
                                     End If
                             End Select
-
                         End If
                     Case 2
                         If isValidPlace(col, row, length, direction) = True Then
@@ -383,7 +383,6 @@ Public Class BattleShipsGame
                                         valid = False
                                     End If
                             End Select
-
                         End If
                     Case 3
                         If isValidPlace(col, row, length, direction) = True Then
@@ -425,7 +424,6 @@ Public Class BattleShipsGame
                                         valid = False
                                     End If
                             End Select
-
                         End If
                     Case 4
                         If isValidPlace(col, row, length, direction) = True Then
@@ -582,7 +580,6 @@ Public Class BattleShipsGame
                 MsgBox("Length error")
         End Select
     End Sub
-
     Private Sub shipImageGenerate(picbox As PictureBox, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
         gridOffSet = 20
         startOfBoardPosX = (Me.Width / 2) - (boardSizes / 2) + gridOffSet - gridCircleSizeNum
