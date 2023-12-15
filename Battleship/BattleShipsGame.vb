@@ -61,9 +61,12 @@ Public Class BattleShipsGame
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        Me.WindowState = FormWindowState.Maximized
-        Me.Width = Screen.PrimaryScreen.Bounds.Width
-        Me.Height = Screen.PrimaryScreen.Bounds.Height
+        'Me.WindowState = FormWindowState.Maximized
+        'Me.Width = Screen.PrimaryScreen.Bounds.Width
+        'Me.Height = Screen.PrimaryScreen.Bounds.Height
+
+        Me.Width = 1528
+        Me.Height = 960
 
         Dim turnsbannerWidth As Short
 
@@ -155,22 +158,33 @@ Public Class BattleShipsGame
         opponentscorelbl.Size = New Size(79, 26)
         opponentscoretxt.Size = New Size(22, 24)
 
-        opponentshipPicbox2.Location = New Point(-100, -100)
-        opponentshipPicbox3a.Location = New Point(-100, -100)
-        opponentshipPicbox3b.Location = New Point(-100, -100)
-        opponentshipPicbox4.Location = New Point(-100, -100)
-        opponentshipPicbox5.Location = New Point(-100, -100)
-        playershipPicbox2.Location = New Point(-100, -100)
-        playershipPicbox3a.Location = New Point(-100, -100)
-        playershipPicbox3b.Location = New Point(-100, -100)
-        playershipPicbox4.Location = New Point(-100, -100)
-        playershipPicbox5.Location = New Point(-100, -100)
+        opponentshipPicbox2.Location = New Point(100, 100)
+        opponentshipPicbox3a.Location = New Point(100, 100)
+        opponentshipPicbox3b.Location = New Point(100, 100)
+        opponentshipPicbox4.Location = New Point(100, 100)
+        opponentshipPicbox5.Location = New Point(100, 100)
+        playershipPicbox2.Location = New Point(100, 100)
+        playershipPicbox3a.Location = New Point(100, 100)
+        playershipPicbox3b.Location = New Point(100, 100)
+        playershipPicbox4.Location = New Point(100, 100)
+        playershipPicbox5.Location = New Point(100, 100)
+
+        opponentshipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
         revealAllShips.Name = "revealAllShips"
         revealships(2, revealAllShips)
-        revealships(1, revealAllShips)
+        'revealships(1, revealAllShips)
     End Sub
     Private Sub resetGameArray(gameArray As Array)
         'resets the entire array to all 0s
@@ -465,9 +479,9 @@ Public Class BattleShipsGame
         gameArr(col, row) = 4
 
         If currentplayer = 1 Then
-            assignShipImages(gameArr, 1, length, direction, col, row)
+            assignShips(gameArr, 1, length, direction, col, row)
         Else
-            assignShipImages(gameArr, 2, length, direction, col, row)
+            assignShips(gameArr, 2, length, direction, col, row)
         End If
         Return gameArr
     End Function
@@ -501,53 +515,43 @@ Public Class BattleShipsGame
         End Select
         Return valid
     End Function
-    Private Sub assignShipImages(gameArr As Array, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
+    Private Sub assignShips(gameArr As Array, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
         Dim shipPictureBox As PictureBox
         Select Case length
             Case 2
                 If currentplayer = 2 Then
-                    opponentshipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
                     shipPictureBox = opponentshipPicbox2
                 Else
-                    playershipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
                     shipPictureBox = playershipPicbox2
                 End If
             Case 3
                 If currentplayer = 2 Then
                     If has3alreadydone = True Then
-                        opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
                         shipPictureBox = opponentshipPicbox3b
                         has3alreadydone = False
                     Else
-                        opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
                         shipPictureBox = opponentshipPicbox3a
                         has3alreadydone = True
                     End If
                 Else
                     If has3alreadydone = True Then
-                        playershipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
                         shipPictureBox = playershipPicbox3b
                         has3alreadydone = False
                     Else
-                        playershipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
                         shipPictureBox = playershipPicbox3a
                         has3alreadydone = True
                     End If
                 End If
             Case 4
                 If currentplayer = 2 Then
-                    opponentshipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
                     shipPictureBox = opponentshipPicbox4
                 Else
-                    playershipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
                     shipPictureBox = playershipPicbox4
                 End If
             Case 5
                 If currentplayer = 2 Then
-                    opponentshipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
                     shipPictureBox = opponentshipPicbox5
                 Else
-                    playershipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
                     shipPictureBox = playershipPicbox5
                 End If
             Case Else
@@ -564,6 +568,24 @@ Public Class BattleShipsGame
         'generate each assigned picture in it's correct location
         shipImageGenerate(shipPictureBox, currentplayer, length, direction, column, row)
     End Sub
+    Private Sub assignShipImages(currentplayer As Integer, picboard As PictureBox)
+        Select Case picboard.Name
+            Case opponentshipPicbox2.Name : opponentshipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+            Case playershipPicbox2.Name : playershipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+            Case opponentshipPicbox3a.Name : opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case playershipPicbox3a.Name : playershipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case opponentshipPicbox3b.Name : opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case playershipPicbox3b.Name : playershipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case opponentshipPicbox4.Name : opponentshipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+            Case playershipPicbox4.Name : playershipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+            Case opponentshipPicbox5.Name : opponentshipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+            Case playershipPicbox5.Name : playershipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+            Case Else
+                'Shouldn't run unless there's an error as length is always 2, 3, 4, 5.
+                MsgBox("Length error")
+        End Select
+    End Sub
+
     Private Sub shipImageGenerate(picbox As PictureBox, currentplayer As Integer, length As Integer, direction As Integer, column As Integer, row As Integer)
         gridOffSet = 20
         startOfBoardPosX = (Me.Width / 2) - (boardSizes / 2) + gridOffSet - gridCircleSizeNum
@@ -580,8 +602,8 @@ Public Class BattleShipsGame
                 dimension2 = length * gridCircleSizeNum * 0.9
 
                 If currentplayer = 1 Then
-                    revealships(1, picbox)
-                    wait(1)
+                    'revealships(1, picbox)
+                    'wait(1)
                 Else
                     gameOver = True
                     revealships(2, revealAllShips)
@@ -631,7 +653,7 @@ Public Class BattleShipsGame
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
 
-
+                assignShipImages(currentplayer, picbox)
             Case 2
                 'Ship faces Downwards
 
@@ -641,20 +663,9 @@ Public Class BattleShipsGame
                 dimension2 = length * gridCircleSizeNum * 0.9
 
 
-                If currentplayer = 1 Then
+                If currentplayer = 2 Then
                     picbox.Visible = True
-                Else
-                    gameOver = True
-                    revealships(2, revealAllShips)
-                    gameOver = False
-
                 End If
-
-
-
-                'to face image of the ship downwards (facing right is the default image)
-                'wait(1)
-                'picbox.Refresh()
 
 
                 'Offset for correct presentation
@@ -692,12 +703,12 @@ Public Class BattleShipsGame
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - opponentShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 End If
+
                 rotateImage90(picbox, dimension1, dimension2)
-                wait(1)
-                revealships(2, revealAllShips)
-                wait(0.05)
+                'revealships(2, revealAllShips)
+                'wait(0.05)
 
-
+                assignShipImages(currentplayer, picbox)
             Case 3
                 'Ship faces right (Default image rotation so no need To rotate)
 
@@ -737,9 +748,10 @@ Public Class BattleShipsGame
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + ((column - (length - 1)) * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
 
-                If currentplayer = 1 Then
-                    revealships(1, picbox)
-                End If
+                'If currentplayer = 1 Then
+                '    revealships(1, picbox)
+                'End If
+                assignShipImages(currentplayer, picbox)
             Case 4
                 'Ship faces Left
                 Dim dimension1 As Short
@@ -748,8 +760,8 @@ Public Class BattleShipsGame
                 dimension2 = gridCircleSizeNum * 0.6
 
                 If currentplayer = 1 Then
-                    revealships(1, picbox)
-                    wait(1)
+                    'revealships(1, picbox)
+                    'wait(1)
                 Else
                     gameOver = True
                     revealships(2, revealAllShips)
@@ -800,6 +812,7 @@ Public Class BattleShipsGame
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
+                assignShipImages(currentplayer, picbox)
         End Select
 
     End Sub
@@ -827,18 +840,18 @@ Public Class BattleShipsGame
                 opponentshipPicbox4.Visible = False
                 opponentshipPicbox5.Visible = False
             End If
-        Else
-            If currentplayer = 1 Then
-                If picboard.Name = revealAllShips.Name Then
-                    playershipPicbox2.Visible = False
-                    playershipPicbox3a.Visible = False
-                    playershipPicbox3b.Visible = False
-                    playershipPicbox4.Visible = False
-                    playershipPicbox5.Visible = False
-                Else
-                    picboard.Visible = True
-                End If
-            End If
+            'Else
+            '    If currentplayer = 1 Then
+            '        If picboard.Name = revealAllShips.Name Then
+            '            playershipPicbox2.Visible = False
+            '            playershipPicbox3a.Visible = False
+            '            playershipPicbox3b.Visible = False
+            '            playershipPicbox4.Visible = False
+            '            playershipPicbox5.Visible = False
+            '        Else
+            '            picboard.Visible = True
+            '        End If
+            '    End If
         End If
     End Sub
     Private Sub updatePictureBoxes(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
