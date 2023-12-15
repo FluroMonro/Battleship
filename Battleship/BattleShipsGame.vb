@@ -183,8 +183,7 @@ Public Class BattleShipsGame
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
         revealAllShips.Name = "revealAllShips"
-        revealships(2, revealAllShips)
-        'revealships(1, revealAllShips)
+        revealships()
     End Sub
     Private Sub resetGameArray(gameArray As Array)
         'resets the entire array to all 0s
@@ -807,35 +806,21 @@ Public Class BattleShipsGame
         picbox.Image = bmp
         picbox.Size = New Size(dimension1, dimension2)
     End Sub
-    Private Sub revealships(currentplayer As Integer, ByRef picboard As PictureBox)
-        If currentplayer = 2 Then
-            If gameOver = True Then
-                'show opponentsShips
-                opponentshipPicbox2.Visible = True
-                opponentshipPicbox3a.Visible = True
-                opponentshipPicbox3b.Visible = True
-                opponentshipPicbox4.Visible = True
-                opponentshipPicbox5.Visible = True
-            Else
-                'hide opponents ships
-                opponentshipPicbox2.Visible = False
-                opponentshipPicbox3a.Visible = False
-                opponentshipPicbox3b.Visible = False
-                opponentshipPicbox4.Visible = False
-                opponentshipPicbox5.Visible = False
-            End If
-            'Else
-            '    If currentplayer = 1 Then
-            '        If picboard.Name = revealAllShips.Name Then
-            '            playershipPicbox2.Visible = False
-            '            playershipPicbox3a.Visible = False
-            '            playershipPicbox3b.Visible = False
-            '            playershipPicbox4.Visible = False
-            '            playershipPicbox5.Visible = False
-            '        Else
-            '            picboard.Visible = True
-            '        End If
-            '    End If
+    Private Sub revealships()
+        If gameOver = True Then
+            'show opponentsShips
+            opponentshipPicbox2.Visible = True
+            opponentshipPicbox3a.Visible = True
+            opponentshipPicbox3b.Visible = True
+            opponentshipPicbox4.Visible = True
+            opponentshipPicbox5.Visible = True
+        Else
+            'hide opponents ships
+            opponentshipPicbox2.Visible = False
+            opponentshipPicbox3a.Visible = False
+            opponentshipPicbox3b.Visible = False
+            opponentshipPicbox4.Visible = False
+            opponentshipPicbox5.Visible = False
         End If
     End Sub
     Private Sub updatePictureBoxes(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
@@ -897,7 +882,7 @@ Public Class BattleShipsGame
         updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, currentPlayer)
 
         If gameOver = True Then
-            revealships(2, OpponentBoardBGImg)
+            revealships()
             determineWinner()
             'scoring()
         Else
@@ -918,7 +903,7 @@ Public Class BattleShipsGame
 
 
             If gameOver = True Then
-                revealships(2, OpponentBoardBGImg)
+                revealships()
                 determineWinner()
                 'scoring()
             Else
@@ -1092,7 +1077,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         gameOver = True
-        revealships(2, revealAllShips)
+        revealships()
         wait(1)
         onFormLoad()
     End Sub
