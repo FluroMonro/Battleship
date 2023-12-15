@@ -605,7 +605,7 @@ Public Class BattleShipsGame
                     picbox.Visible = True
                 End If
 
-                picbox.Location = New Point(0, 0)
+                picbox.Location = New Point(100, 500)
 
                 assignShipImages(currentplayer, picbox)
                 rotateImage90(picbox, dimension1, dimension2)
@@ -661,7 +661,7 @@ Public Class BattleShipsGame
                     picbox.Visible = True
                 End If
 
-                picbox.Location = New Point(0, 0)
+                picbox.Location = New Point(100, 500)
 
                 assignShipImages(currentplayer, picbox)
                 rotateImage90(picbox, dimension1, dimension2)
@@ -754,7 +754,7 @@ Public Class BattleShipsGame
                     picbox.Visible = True
                 End If
 
-                picbox.Location = New Point(0, 0)
+                picbox.Location = New Point(100, 500)
 
                 assignShipImages(currentplayer, picbox)
                 rotateImage90(picbox, dimension1, dimension2)
@@ -763,8 +763,6 @@ Public Class BattleShipsGame
                 If currentplayer = 2 Then
                     picbox.Visible = False
                 End If
-
-
 
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
