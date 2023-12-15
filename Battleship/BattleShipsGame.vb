@@ -820,7 +820,7 @@ Public Class BattleShipsGame
 
     End Sub
     Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
-        wait(0.5)
+        wait(0.11)
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
@@ -1054,7 +1054,7 @@ Public Class BattleShipsGame
             opponentscoretxt.Text = opponentScore
         End If
     End Sub
-    Private Sub wait(ByVal seconds As Integer)
+    Private Sub wait(ByVal seconds As Short)
         For i As Integer = 0 To seconds * 100
             System.Threading.Thread.Sleep(10)
             Application.DoEvents()
