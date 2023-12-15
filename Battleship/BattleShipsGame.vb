@@ -593,67 +593,62 @@ Public Class BattleShipsGame
         startOfPlayerBoardPosY = Me.Bottom - turnsbannerHeight - gridOffSet - gridCircleSizeNum
 
         Select Case direction
-            'Case 1
-            '    'Ship faces upwards
+            Case 1
+                'Ship faces upwards
 
-            '    Dim dimension1 As Short
-            '    dimension1 = gridCircleSizeNum * 0.6
-            '    Dim dimension2 As Short
-            '    dimension2 = length * gridCircleSizeNum * 0.9
+                Dim dimension1 As Short
+                dimension1 = gridCircleSizeNum * 0.6
+                Dim dimension2 As Short
+                dimension2 = length * gridCircleSizeNum * 0.9
 
-            '    If currentplayer = 1 Then
-            '        'revealships(1, picbox)
-            '        'wait(1)
-            '    Else
-            '        gameOver = True
-            '        revealships(2, revealAllShips)
-            '        gameOver = False
-            '        wait(1)
-            '    End If
-            '    MsgBox("Me")
-            '    'to face image of the ship upwards (facing right is the default image)
-            '    rotateImage90(picbox, dimension1, dimension2)
-            '    rotateImage90(picbox, dimension1, dimension2)
-            '    rotateImage90(picbox, dimension1, dimension2)
-            '    wait(1)
-            '    revealships(2, revealAllShips)
-            '    wait(0.5)
+                If currentplayer = 2 Then
+                    picbox.Visible = True
+                End If
 
-            '    'Offset for correct presentation
-            '    Dim playerShipOffsetX As Integer
-            '    Dim playerShipOffsetY As Integer
-            '    Dim opponentShipOffsetX As Integer
-            '    Dim opponentShipOffsetY As Integer
-            '    Select Case length
-            '        Case 2
-            '            playerShipOffsetX = 4
-            '            playerShipOffsetY = -2
-            '            opponentShipOffsetX = 4
-            '            opponentShipOffsetY = -5
-            '        Case 3
-            '            playerShipOffsetX = 4
-            '            playerShipOffsetY = 0
-            '            opponentShipOffsetX = 4
-            '            opponentShipOffsetY = -3
-            '        Case 4
-            '            playerShipOffsetX = 4
-            '            playerShipOffsetY = 0
-            '            opponentShipOffsetX = 4
-            '            opponentShipOffsetY = -2
-            '        Case 5
-            '            playerShipOffsetX = 4
-            '            playerShipOffsetY = 0
-            '            opponentShipOffsetX = 4
-            '            opponentShipOffsetY = 0
-            '    End Select
+                picbox.Location = New Point(0, 0)
 
-            '    If currentplayer = 1 Then
-            '        picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
-            '    Else
-            '        picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
-            '    End If
+                assignShipImages(currentplayer, picbox)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
 
-            '    assignShipImages(currentplayer, picbox)
+                If currentplayer = 2 Then
+                    picbox.Visible = False
+                End If
+
+                'Offset for correct presentation
+                Dim playerShipOffsetX As Integer
+                Dim playerShipOffsetY As Integer
+                Dim opponentShipOffsetX As Integer
+                Dim opponentShipOffsetY As Integer
+                Select Case length
+                    Case 2
+                        playerShipOffsetX = 4
+                        playerShipOffsetY = -2
+                        opponentShipOffsetX = 4
+                        opponentShipOffsetY = -5
+                    Case 3
+                        playerShipOffsetX = 4
+                        playerShipOffsetY = 0
+                        opponentShipOffsetX = 4
+                        opponentShipOffsetY = -3
+                    Case 4
+                        playerShipOffsetX = 4
+                        playerShipOffsetY = 0
+                        opponentShipOffsetX = 4
+                        opponentShipOffsetY = -2
+                    Case 5
+                        playerShipOffsetX = 4
+                        playerShipOffsetY = 0
+                        opponentShipOffsetX = 4
+                        opponentShipOffsetY = 0
+                End Select
+
+                If currentplayer = 1 Then
+                    picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
+                Else
+                    picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
+                End If
             Case 2
                 'Ship faces Downwards
 
@@ -707,10 +702,6 @@ Public Class BattleShipsGame
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - opponentShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 End If
-
-               
-
-
 
                 'Case 3
                 '    'Ship faces right (Default image rotation so no need To rotate)
