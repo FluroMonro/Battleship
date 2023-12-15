@@ -169,16 +169,16 @@ Public Class BattleShipsGame
         playershipPicbox4.Location = New Point(100, 100)
         playershipPicbox5.Location = New Point(100, 100)
 
-        'opponentshipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'opponentshipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'opponentshipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'playershipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'playershipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'playershipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        'playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        opponentshipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+        playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
@@ -662,13 +662,9 @@ Public Class BattleShipsGame
                 Dim dimension2 As Short
                 dimension2 = length * gridCircleSizeNum * 0.9
 
-
                 If currentplayer = 2 Then
                     picbox.Visible = True
                 End If
-
-
-
 
                 picbox.Location = New Point(0, 0)
 
