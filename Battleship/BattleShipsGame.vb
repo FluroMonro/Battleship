@@ -27,6 +27,7 @@ Public Class BattleShipsGame
     Dim gridOffSet As Integer
     Dim turnsbannerHeight As Short
     Dim has3alreadydone As Boolean
+    Dim alternated As Integer
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -46,16 +47,11 @@ Public Class BattleShipsGame
         generateGameArr(playergameArray, 1)
         generateGameArr(opponentgameArray, 2)
 
-        'will hide the ships if gameOver = false
-        revealopponentships()
-
         generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
 
         updatePictureBoxes(playergameArray, playerpictureBoxArray, 1)
         updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, 2)
-
-
 
         currentPlayer = 1
         opponentMoveX = 0
@@ -140,7 +136,6 @@ Public Class BattleShipsGame
             End If
         End If
 
-
         WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
         PlayerBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
         OpponentBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
@@ -154,10 +149,6 @@ Public Class BattleShipsGame
         TurnsBannerPic.Size = New Size(turnsbannerWidth, turnsbannerHeight)
         TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
 
-
-
-
-
         playernamelbl.Size = New Size(88, 26)
         playernametxt.Size = New Size(118, 24)
         playerscorelbl.Size = New Size(79, 26)
@@ -166,8 +157,11 @@ Public Class BattleShipsGame
         opponentscorelbl.Size = New Size(79, 26)
         opponentscoretxt.Size = New Size(22, 24)
 
-
-
+        'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
+        gameOver = False
+        alternated = 2
+        revealships(2, OpponentBoardBGImg)
+        revealships(1, PlayerBoardBGImg)
     End Sub
     Private Sub resetGameArray(gameArray As Array)
         'resets the entire array to all 0s
@@ -618,6 +612,9 @@ Public Class BattleShipsGame
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                End If
 
                 'to face image of the ship upwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
@@ -663,6 +660,9 @@ Public Class BattleShipsGame
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - opponentShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 End If
 
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                End If
                 'to face image of the ship downwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
             Case 3
@@ -702,8 +702,9 @@ Public Class BattleShipsGame
 
                 End If
                 picbox.Size = New Size((length * gridCircleSizeNum) * 0.9, (gridCircleSizeNum * 0.6))
-
-
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                End If
             Case 4
                 'Ship faces Left
 
@@ -737,17 +738,23 @@ Public Class BattleShipsGame
                 Dim dimension2 As Short
                 dimension2 = gridCircleSizeNum * 0.6
 
-                'to face image of the ship left (facing right is the default image)
-                rotateImage90(picbox, dimension1, dimension2)
-                rotateImage90(picbox, dimension1, dimension2)
+
 
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
+
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                End If
+                'to face image of the ship left (facing right is the default image)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
                 picbox.Size = New Size(dimension1, dimension2)
         End Select
+
     End Sub
     Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
         wait(0.25)
@@ -756,21 +763,55 @@ Public Class BattleShipsGame
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
     End Sub
-    Private Sub revealopponentships()
-        If gameOver = True Then
-            'show opponentsShips
-            opponentshipPicbox2.Visible = True
-            opponentshipPicbox3a.Visible = True
-            opponentshipPicbox3b.Visible = True
-            opponentshipPicbox4.Visible = True
-            opponentshipPicbox5.Visible = True
+    Private Sub revealships(currentplayer As Integer, ByRef picboard As PictureBox)
+        If currentplayer = 2 Then
+            If gameOver = True Then
+                'show opponentsShips
+                opponentshipPicbox2.Visible = True
+                opponentshipPicbox3a.Visible = True
+                opponentshipPicbox3b.Visible = True
+                opponentshipPicbox4.Visible = True
+                opponentshipPicbox5.Visible = True
+            Else
+                'hide opponents ships
+                opponentshipPicbox2.Visible = False
+                opponentshipPicbox3a.Visible = False
+                opponentshipPicbox3b.Visible = False
+                opponentshipPicbox4.Visible = False
+                opponentshipPicbox5.Visible = False
+            End If
         Else
-            'hide opponents ships
-            opponentshipPicbox2.Visible = False
-            opponentshipPicbox3a.Visible = False
-            opponentshipPicbox3b.Visible = False
-            opponentshipPicbox4.Visible = False
-            opponentshipPicbox5.Visible = False
+            If currentplayer = 1 Then
+                If picboard.Name = PlayerBoardBGImg.Name Then
+                    If AlternateNum(alternated) = 1 Then
+                        alternated = 1
+                        playershipPicbox2.Visible = False
+                        playershipPicbox3a.Visible = False
+                        playershipPicbox3b.Visible = False
+                        playershipPicbox4.Visible = False
+                        playershipPicbox5.Visible = False
+                    Else
+                        If AlternateNum(alternated) = 2 Then
+                            alternated = 1
+                            playershipPicbox2.Visible = True
+                            playershipPicbox3a.Visible = True
+                            playershipPicbox3b.Visible = True
+                            playershipPicbox4.Visible = True
+                            playershipPicbox5.Visible = True
+                        End If
+                    End If
+                Else
+                    If AlternateNum(alternated) = 1 Then
+                        alternated = 1
+                        picboard.Visible = False
+                    Else
+                        If AlternateNum(alternated) = 2 Then
+                            alternated = 1
+                            picboard.Visible = True
+                        End If
+                    End If
+                End If
+            End If
         End If
     End Sub
     Private Sub updatePictureBoxes(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
@@ -822,8 +863,6 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub game()
-        gameOver = False
-
         'check
         check(playerMoveX, PlayerMoveY, opponentgameArray)
 
@@ -834,7 +873,7 @@ Public Class BattleShipsGame
         updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, currentPlayer)
 
         If gameOver = True Then
-            revealopponentships()
+            revealships(2, OpponentBoardBGImg)
             determineWinner()
             'scoring()
         Else
@@ -855,7 +894,7 @@ Public Class BattleShipsGame
 
 
             If gameOver = True Then
-                revealopponentships()
+                revealships(2, OpponentBoardBGImg)
                 determineWinner()
                 'scoring()
             Else
@@ -1016,9 +1055,13 @@ Public Class BattleShipsGame
     End Sub
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
-        currentPlayer = 2 / currentPlayer
+        AlternateNum(currentPlayer)
         displayCurrentPlayer()
     End Sub
+    Private Function AlternateNum(num As Integer)
+        num = 2 / num
+        Return num
+    End Function
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         Me.Hide()
         MainMenuForm.Show()
