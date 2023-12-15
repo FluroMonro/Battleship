@@ -27,7 +27,6 @@ Public Class BattleShipsGame
     Dim gridOffSet As Integer
     Dim turnsbannerHeight As Short
     Dim has3alreadydone As Boolean
-    Dim revealAllShips As New PictureBox
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -182,7 +181,6 @@ Public Class BattleShipsGame
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
-        revealAllShips.Name = "revealAllShips"
         revealships()
     End Sub
     Private Sub resetGameArray(gameArray As Array)
