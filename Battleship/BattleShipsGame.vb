@@ -663,11 +663,21 @@ Public Class BattleShipsGame
                 dimension2 = length * gridCircleSizeNum * 0.9
 
 
-                'If currentplayer = 2 Then
-                '    picbox.Visible = True
-                'End If
+                If currentplayer = 2 Then
+                    picbox.Visible = True
+                End If
 
 
+
+
+                picbox.Location = New Point(0, 0)
+
+                assignShipImages(currentplayer, picbox)
+                rotateImage90(picbox, dimension1, dimension2)
+
+                If currentplayer = 2 Then
+                    picbox.Visible = False
+                End If
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
                 Dim playerShipOffsetY As Integer
@@ -697,20 +707,13 @@ Public Class BattleShipsGame
                 End Select
 
                 If currentplayer = 1 Then
-                    'picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
-                    picbox.Location = New Point(500, 100)
+                    picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - opponentShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 End If
 
                
 
-                'revealships(2, revealAllShips)
-
-
-
-                assignShipImages(currentplayer, picbox)
-                rotateImage90(picbox, dimension1, dimension2)
 
 
                 'Case 3
