@@ -27,7 +27,7 @@ Public Class BattleShipsGame
     Dim gridOffSet As Integer
     Dim turnsbannerHeight As Short
     Dim has3alreadydone As Boolean
-    Dim alternated As Integer
+    Dim revealAllShips As New PictureBox
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -101,7 +101,6 @@ Public Class BattleShipsGame
             opponentscoretxt.Location = New Point(Me.Width / 2 + boardSizes + 10, Me.Top + 180)
 
             gridCircleSizeNum = (boardSizes - 30) / gridSize
-
         Else
             If Me.Width / Me.Height = 23 / 13 Then
                 'Monitor (Through a virtual machine
@@ -110,7 +109,6 @@ Public Class BattleShipsGame
                 turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
                 turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - (Me.Height / 36.4)
                 boardSizes = turnsbannerYLoc - (turnsbannerHeight / 2) + Me.Height / 97.0666666667
-
 
                 'Setting the placement and size relative to the screen
                 backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
@@ -159,9 +157,9 @@ Public Class BattleShipsGame
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
-        alternated = 2
-        revealships(2, OpponentBoardBGImg)
-        revealships(1, PlayerBoardBGImg)
+        revealAllShips.Name = "revealAllShips"
+        revealships(2, revealAllShips)
+        revealships(1, revealAllShips)
     End Sub
     Private Sub resetGameArray(gameArray As Array)
         'resets the entire array to all 0s
@@ -194,27 +192,20 @@ Public Class BattleShipsGame
                 If currentPlayer = 1 Then
                     If Me.Width / Me.Height = 1528 / 960 Then
                         '2023 Macbook Pro M2 screen ratio (through a virtual machine)
-
-                        If gridSize = 10 Then
-                            picbox.Left = col * gridCircleSizeNum - gridOffSet
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
-                        Else
-                            If gridSize = 8 Then
+                        Select Case gridSize
+                            Case 8
                                 picbox.Left = col * gridCircleSizeNum - 33
                                 picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
-                            Else
-                                If gridSize = 12 Then
-                                    picbox.Left = col * gridCircleSizeNum - 15
-                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
-                                Else
-                                    If gridSize = 14 Then
-                                        picbox.Left = col * gridCircleSizeNum - 14
-                                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
-                                    End If
-                                End If
-                            End If
-                        End If
-
+                            Case 10
+                                picbox.Left = col * gridCircleSizeNum - gridOffSet
+                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                            Case 12
+                                picbox.Left = col * gridCircleSizeNum - 15
+                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                            Case 14
+                                picbox.Left = col * gridCircleSizeNum - 14
+                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                        End Select
                     Else
                         If Me.Width / Me.Height = 23 / 13 Then
                             'Monitor (Through a virtual machine
@@ -226,25 +217,21 @@ Public Class BattleShipsGame
                     If currentPlayer = 2 Then
                         If Me.Width / Me.Height = 1528 / 960 Then
                             '2023 Macbook Pro M2 scree ratio (through a virtual machine)
-                            If gridSize = 10 Then
-                                picbox.Left = col * gridCircleSizeNum - 20
-                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
-                            Else
-                                If gridSize = 8 Then
+
+                            Select Case gridSize
+                                Case 8
                                     picbox.Left = col * gridCircleSizeNum - 33
                                     picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
-                                Else
-                                    If gridSize = 12 Then
-                                        picbox.Left = col * gridCircleSizeNum - 15
-                                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
-                                    Else
-                                        If gridSize = 14 Then
-                                            picbox.Left = col * gridCircleSizeNum - 14
-                                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
-                                        End If
-                                    End If
-                                End If
-                            End If
+                                Case 10
+                                    picbox.Left = col * gridCircleSizeNum - 20
+                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                                Case 12
+                                    picbox.Left = col * gridCircleSizeNum - 15
+                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                                Case 14
+                                    picbox.Left = col * gridCircleSizeNum - 14
+                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                            End Select
                         Else
                             If Me.Width / Me.Height = 23 / 13 Then
                                 'Monitor (Through a virtual machine
@@ -255,11 +242,7 @@ Public Class BattleShipsGame
                         AddHandler picbox.Click, AddressOf getPlayerMove
                     End If
                 End If
-
-
                 picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircle.png"
-                picbox.SizeMode = PictureBoxSizeMode.StretchImage
-
                 picbox.SizeMode = PictureBoxSizeMode.StretchImage
             Next col
         Next row
@@ -592,15 +575,18 @@ Public Class BattleShipsGame
                         playerShipOffsetY = -2
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = -5
-                    Case 3 : playerShipOffsetX = 4
+                    Case 3
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 0
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = -3
-                    Case 4 : playerShipOffsetX = 4
+                    Case 4
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 0
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = -2
-                    Case 5 : playerShipOffsetX = 4
+                    Case 5
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 0
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = 0
@@ -608,10 +594,10 @@ Public Class BattleShipsGame
 
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
-
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
+
                 If currentplayer = 1 Then
                     revealships(1, picbox)
                 End If
@@ -620,8 +606,6 @@ Public Class BattleShipsGame
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
-
-
             Case 2
                 'Ship faces Downwards
 
@@ -636,15 +620,18 @@ Public Class BattleShipsGame
                         playerShipOffsetY = -2
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = 6
-                    Case 3 : playerShipOffsetX = 4
+                    Case 3
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 0
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = 4
-                    Case 4 : playerShipOffsetX = 4
+                    Case 4
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 4
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = 1
-                    Case 5 : playerShipOffsetX = 4
+                    Case 5
+                        playerShipOffsetX = 4
                         playerShipOffsetY = 0
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = 0
@@ -666,8 +653,7 @@ Public Class BattleShipsGame
                 'to face image of the ship downwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
             Case 3
-                'Ship faces right
-                'Default image rotation so no need to rotate
+                'Ship faces right (Default image rotation so no need To rotate)
 
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
@@ -680,15 +666,18 @@ Public Class BattleShipsGame
                         playerShipOffsetY = 2
                         opponentShipOffsetX = 0
                         opponentShipOffsetY = -1
-                    Case 3 : playerShipOffsetX = 2
+                    Case 3
+                        playerShipOffsetX = 2
                         playerShipOffsetY = 1
                         opponentShipOffsetX = 2
                         opponentShipOffsetY = -1
-                    Case 4 : playerShipOffsetX = 3
+                    Case 4
+                        playerShipOffsetX = 3
                         playerShipOffsetY = 1
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = -1
-                    Case 5 : playerShipOffsetX = 6
+                    Case 5
+                        playerShipOffsetX = 6
                         playerShipOffsetY = 2
                         opponentShipOffsetX = 7
                         opponentShipOffsetY = -2
@@ -696,10 +685,8 @@ Public Class BattleShipsGame
 
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + ((column - (length - 1)) * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
-
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + ((column - (length - 1)) * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
-
                 End If
                 picbox.Size = New Size((length * gridCircleSizeNum) * 0.9, (gridCircleSizeNum * 0.6))
                 If currentplayer = 1 Then
@@ -719,15 +706,18 @@ Public Class BattleShipsGame
                         playerShipOffsetY = 2
                         opponentShipOffsetX = 0
                         opponentShipOffsetY = -2
-                    Case 3 : playerShipOffsetX = 2
+                    Case 3
+                        playerShipOffsetX = 2
                         playerShipOffsetY = 1
                         opponentShipOffsetX = 2
                         opponentShipOffsetY = -2
-                    Case 4 : playerShipOffsetX = 6
+                    Case 4
+                        playerShipOffsetX = 6
                         playerShipOffsetY = 2
                         opponentShipOffsetX = 4
                         opponentShipOffsetY = -1
-                    Case 5 : playerShipOffsetX = 6
+                    Case 5
+                        playerShipOffsetX = 6
                         playerShipOffsetY = 2
                         opponentShipOffsetX = 6
                         opponentShipOffsetY = -2
@@ -737,8 +727,6 @@ Public Class BattleShipsGame
                 dimension1 = length * gridCircleSizeNum * 0.9
                 Dim dimension2 As Short
                 dimension2 = gridCircleSizeNum * 0.6
-
-
 
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
@@ -752,7 +740,6 @@ Public Class BattleShipsGame
                 'to face image of the ship left (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
                 rotateImage90(picbox, dimension1, dimension2)
-                picbox.Size = New Size(dimension1, dimension2)
         End Select
 
     End Sub
@@ -782,34 +769,14 @@ Public Class BattleShipsGame
             End If
         Else
             If currentplayer = 1 Then
-                If picboard.Name = PlayerBoardBGImg.Name Then
-                    If AlternateNum(alternated) = 1 Then
-                        alternated = 1
-                        playershipPicbox2.Visible = False
-                        playershipPicbox3a.Visible = False
-                        playershipPicbox3b.Visible = False
-                        playershipPicbox4.Visible = False
-                        playershipPicbox5.Visible = False
-                    Else
-                        If AlternateNum(alternated) = 2 Then
-                            alternated = 1
-                            playershipPicbox2.Visible = True
-                            playershipPicbox3a.Visible = True
-                            playershipPicbox3b.Visible = True
-                            playershipPicbox4.Visible = True
-                            playershipPicbox5.Visible = True
-                        End If
-                    End If
+                If picboard.Name = revealAllShips.Name Then
+                    playershipPicbox2.Visible = False
+                    playershipPicbox3a.Visible = False
+                    playershipPicbox3b.Visible = False
+                    playershipPicbox4.Visible = False
+                    playershipPicbox5.Visible = False
                 Else
-                    If AlternateNum(alternated) = 1 Then
-                        alternated = 1
-                        picboard.Visible = False
-                    Else
-                        If AlternateNum(alternated) = 2 Then
-                            alternated = 1
-                            picboard.Visible = True
-                        End If
-                    End If
+                    picboard.Visible = True
                 End If
             End If
         End If
