@@ -155,6 +155,17 @@ Public Class BattleShipsGame
         opponentscorelbl.Size = New Size(79, 26)
         opponentscoretxt.Size = New Size(22, 24)
 
+        opponentshipPicbox2.Location = New Point(-100, -100)
+        opponentshipPicbox3a.Location = New Point(-100, -100)
+        opponentshipPicbox3b.Location = New Point(-100, -100)
+        opponentshipPicbox4.Location = New Point(-100, -100)
+        opponentshipPicbox5.Location = New Point(-100, -100)
+        playershipPicbox2.Location = New Point(-100, -100)
+        playershipPicbox3a.Location = New Point(-100, -100)
+        playershipPicbox3b.Location = New Point(-100, -100)
+        playershipPicbox4.Location = New Point(-100, -100)
+        playershipPicbox5.Location = New Point(-100, -100)
+
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
         revealAllShips.Name = "revealAllShips"
@@ -568,6 +579,24 @@ Public Class BattleShipsGame
                 Dim dimension2 As Short
                 dimension2 = length * gridCircleSizeNum * 0.9
 
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                    wait(1)
+                Else
+                    gameOver = True
+                    revealships(2, revealAllShips)
+                    gameOver = False
+                    wait(1)
+                End If
+                MsgBox("Me")
+                'to face image of the ship upwards (facing right is the default image)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
+                wait(1)
+                revealships(2, revealAllShips)
+                wait(0.5)
+
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
                 Dim playerShipOffsetY As Integer
@@ -602,21 +631,31 @@ Public Class BattleShipsGame
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
 
+
+            Case 2
+                'Ship faces Downwards
+
+                Dim dimension1 As Short
+                dimension1 = gridCircleSizeNum * 0.6
+                Dim dimension2 As Short
+                dimension2 = length * gridCircleSizeNum * 0.9
+
+
                 If currentplayer = 1 Then
-                    revealships(1, picbox)
+                    picbox.Visible = True
                 Else
                     gameOver = True
                     revealships(2, revealAllShips)
                     gameOver = False
+
                 End If
 
-                'to face image of the ship upwards (facing right is the default image)
-                rotateImage90(picbox, dimension1, dimension2)
-                rotateImage90(picbox, dimension1, dimension2)
-                rotateImage90(picbox, dimension1, dimension2)
-                revealships(2, revealAllShips)
-            Case 2
-                'Ship faces Downwards
+
+
+                'to face image of the ship downwards (facing right is the default image)
+                'wait(1)
+                'picbox.Refresh()
+
 
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
@@ -646,26 +685,19 @@ Public Class BattleShipsGame
                         opponentShipOffsetY = 0
                 End Select
 
-                Dim dimension1 As Short
-                dimension1 = gridCircleSizeNum * 0.6
-                Dim dimension2 As Short
-                dimension2 = length * gridCircleSizeNum * 0.9
+
+
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY - opponentShipOffsetY - ((row + (length - 1)) * gridCircleSizeNum))
                 End If
-
-                If currentplayer = 1 Then
-                    revealships(1, picbox)
-                Else
-                    gameOver = True
-                    revealships(2, revealAllShips)
-                    gameOver = False
-                End If
-                'to face image of the ship downwards (facing right is the default image)
                 rotateImage90(picbox, dimension1, dimension2)
+                wait(1)
                 revealships(2, revealAllShips)
+                wait(0.05)
+
+
             Case 3
                 'Ship faces right (Default image rotation so no need To rotate)
 
@@ -710,6 +742,29 @@ Public Class BattleShipsGame
                 End If
             Case 4
                 'Ship faces Left
+                Dim dimension1 As Short
+                dimension1 = length * gridCircleSizeNum * 0.9
+                Dim dimension2 As Short
+                dimension2 = gridCircleSizeNum * 0.6
+
+                If currentplayer = 1 Then
+                    revealships(1, picbox)
+                    wait(1)
+                Else
+                    gameOver = True
+                    revealships(2, revealAllShips)
+                    gameOver = False
+                    wait(1)
+                End If
+                'to face image of the ship left (facing right is the default image)
+                rotateImage90(picbox, dimension1, dimension2)
+                rotateImage90(picbox, dimension1, dimension2)
+                wait(0.5)
+
+                revealships(2, revealAllShips)
+                wait(0.5)
+
+
 
                 'Offset for correct presentation
                 Dim playerShipOffsetX As Integer
@@ -739,29 +794,12 @@ Public Class BattleShipsGame
                         opponentShipOffsetY = -2
                 End Select
 
-                Dim dimension1 As Short
-                dimension1 = length * gridCircleSizeNum * 0.9
-                Dim dimension2 As Short
-                dimension2 = gridCircleSizeNum * 0.6
 
                 If currentplayer = 1 Then
                     picbox.Location = New Point(startOfBoardPosX + playerShipOffsetX + (column * gridCircleSizeNum), startOfPlayerBoardPosY + playerShipOffsetY - (row * gridCircleSizeNum))
                 Else
                     picbox.Location = New Point(startOfBoardPosX + opponentShipOffsetX + (column * gridCircleSizeNum), startOfOpponentBoardPosY + opponentShipOffsetY - (row * gridCircleSizeNum))
                 End If
-
-                If currentplayer = 1 Then
-                    revealships(1, picbox)
-                Else
-                    gameOver = True
-                    revealships(2, revealAllShips)
-                    gameOver = False
-                End If
-                'to face image of the ship left (facing right is the default image)
-                rotateImage90(picbox, dimension1, dimension2)
-                rotateImage90(picbox, dimension1, dimension2)
-
-                revealships(2, revealAllShips)
         End Select
 
     End Sub
