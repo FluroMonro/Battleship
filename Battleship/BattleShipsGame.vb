@@ -560,6 +560,15 @@ Public Class BattleShipsGame
                     playershipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
                     shipPictureBox = playershipPicbox5
                 End If
+            Case Else
+                'Shouldn't run unless there's an error as length is always 2, 3, 4, 5.
+                If currentplayer = 1 Then
+                    shipPictureBox = playershipPicbox5
+                    MsgBox("Length error")
+                Else
+                    shipPictureBox = opponentshipPicbox5
+                    MsgBox("Length error")
+                End If
         End Select
         shipImageGenerate(shipPictureBox, currentplayer, length, direction, column, row)
     End Sub
