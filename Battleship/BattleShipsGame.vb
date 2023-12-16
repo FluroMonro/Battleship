@@ -883,7 +883,6 @@ Public Class BattleShipsGame
             'scoring()
         Else
             swapPlayer()
-            displayCurrentPlayer()
 
             wait(1)
             computerMove()
@@ -904,7 +903,6 @@ Public Class BattleShipsGame
                 'scoring()
             Else
                 swapPlayer()
-                displayCurrentPlayer()
             End If
         End If
     End Sub
@@ -1060,7 +1058,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
-        AlternateNum(currentPlayer)
+        currentPlayer = AlternateNum(currentPlayer)
         displayCurrentPlayer()
     End Sub
     Private Function AlternateNum(num As Integer)
