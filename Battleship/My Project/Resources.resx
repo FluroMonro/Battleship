@@ -118,26 +118,35 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PlayerTurnBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\PlayerTurnBanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="BattleShip2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ButtonBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\ButtonBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TransparentCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\TransparentCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayerTurnBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\PlayerTurnBanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleShip3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BattleShip5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smallButtonBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\smallButtonBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpponentTurnBanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\net6.0-windows\Pictures\OpponentTurnBanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RedCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\RedCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="GreenCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\net6.0-windows\Pictures\GreenCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="smallButtonBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\smallButtonBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BattleShip4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ButtonBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\ButtonBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WaterBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\net6.0-windows\Pictures\WaterBoard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,16 +154,10 @@
   <data name="Board" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\net6.0-windows\Pictures\Board.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BattleShip4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RedCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\RedCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BattleShip3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TransparentCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\TransparentCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="BattleShip5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\net6.0-windows\Pictures\BattleShip5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BlueCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\net6.0-windows\Pictures\BlueCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

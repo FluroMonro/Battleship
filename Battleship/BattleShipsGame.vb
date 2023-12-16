@@ -168,6 +168,8 @@ Public Class BattleShipsGame
         playershipPicbox4.Location = New Point(100, 100)
         playershipPicbox5.Location = New Point(100, 100)
 
+        KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
+
         opponentshipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
         opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
         opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
@@ -276,7 +278,7 @@ Public Class BattleShipsGame
             generateShips(gameArr, 3, player)
             generateShips(gameArr, 4, player)
             generateShips(gameArr, 5, player)
-             wait(0.2)
+            wait(0.2)
         Else
             If isShipPlacementRandom = False Then
                 MsgBox("own choice shipPlacement")
