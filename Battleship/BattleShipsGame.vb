@@ -43,8 +43,8 @@ Public Class BattleShipsGame
         resetGameArray(opponentgameArray)
 
         'generate gameArray randomly (both computer and Player)
-        generateGameArr(playergameArray, 1)
-        generateGameArr(opponentgameArray, 2)
+        generateGameArr(playergameArray, 2)
+        generateGameArr(opponentgameArray, 1)
 
         generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
@@ -276,6 +276,7 @@ Public Class BattleShipsGame
             generateShips(gameArr, 3, player)
             generateShips(gameArr, 4, player)
             generateShips(gameArr, 5, player)
+             wait(0.2)
         Else
             If isShipPlacementRandom = False Then
                 MsgBox("own choice shipPlacement")
@@ -795,7 +796,7 @@ Public Class BattleShipsGame
 
     End Sub
     Private Sub rotateImage90(picbox As PictureBox, dimension1 As Short, dimension2 As Short)
-        wait(0.11)
+        wait(0.01)
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
