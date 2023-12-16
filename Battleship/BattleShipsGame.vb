@@ -39,18 +39,18 @@ Public Class BattleShipsGame
         initialiseControlsPlacement()
 
         'reset the boards before generating a new
-        resetGameArray(playergameArray)
         resetGameArray(opponentgameArray)
+        resetGameArray(playergameArray)
 
         'generate gameArray randomly (both computer and Player)
         generateGameArr(opponentgameArray, 2)
         generateGameArr(playergameArray, 1)
 
-        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
 
-        updatePictureBoxes(playergameArray, playerpictureBoxArray, 1)
-        updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, 2)
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
+        assignGridImages(playergameArray, playerpictureBoxArray, 1)
 
         currentPlayer = 1
         opponentMoveX = 0
@@ -822,7 +822,7 @@ Public Class BattleShipsGame
             opponentshipPicbox5.Visible = False
         End If
     End Sub
-    Private Sub updatePictureBoxes(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
+    Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object, currentPlayer As Integer)
         'Updates and changes the picture depending on the value of the palyer
         Dim col As Integer
         Dim row As Integer
@@ -878,7 +878,7 @@ Public Class BattleShipsGame
         updateInGameScore(1)
 
         'display grid
-        updatePictureBoxes(opponentgameArray, opponentpictureBoxArray, currentPlayer)
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, currentPlayer)
 
         If gameOver = True Then
             revealships()
@@ -897,7 +897,7 @@ Public Class BattleShipsGame
             updateInGameScore(2)
 
             'display grid
-            updatePictureBoxes(playergameArray, playerpictureBoxArray, currentPlayer)
+            assignGridImages(playergameArray, playerpictureBoxArray, currentPlayer)
 
 
             If gameOver = True Then
