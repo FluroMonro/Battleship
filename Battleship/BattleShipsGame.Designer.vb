@@ -136,8 +136,8 @@ Partial Class BattleShipsGame
         playernamelbl.AutoSize = True
         playernamelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playernamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
-        playernamelbl.ForeColor = Color.Red
-        playernamelbl.Location = New Point(-8, 36)
+        playernamelbl.ForeColor = Color.Black
+        playernamelbl.Location = New Point(104, 35)
         playernamelbl.Name = "playernamelbl"
         playernamelbl.Size = New Size(88, 26)
         playernamelbl.TabIndex = 12
@@ -148,8 +148,8 @@ Partial Class BattleShipsGame
         playerscorelbl.AutoSize = True
         playerscorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
-        playerscorelbl.ForeColor = Color.Red
-        playerscorelbl.Location = New Point(0, 36)
+        playerscorelbl.ForeColor = Color.Black
+        playerscorelbl.Location = New Point(104, 9)
         playerscorelbl.Name = "playerscorelbl"
         playerscorelbl.Size = New Size(79, 26)
         playerscorelbl.TabIndex = 13
@@ -160,19 +160,19 @@ Partial Class BattleShipsGame
         playerscoretxt.AutoSize = True
         playerscoretxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerscoretxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
-        playerscoretxt.ForeColor = Color.Red
-        playerscoretxt.Location = New Point(0, 0)
+        playerscoretxt.ForeColor = Color.Black
+        playerscoretxt.Location = New Point(104, 61)
         playerscoretxt.Name = "playerscoretxt"
         playerscoretxt.Size = New Size(22, 24)
         playerscoretxt.TabIndex = 14
         playerscoretxt.Text = "0"
         ' 
         ' playernametxt
-        ' 
+        ' s
         playernametxt.AutoSize = True
         playernametxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playernametxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
-        playernametxt.ForeColor = Color.Red
+        playernametxt.ForeColor = Color.Black
         playernametxt.Location = New Point(-18, 26)
         playernametxt.Name = "playernametxt"
         playernametxt.Size = New Size(0, 24)
@@ -183,8 +183,8 @@ Partial Class BattleShipsGame
         opponentnamelbl.AutoSize = True
         opponentnamelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentnamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
-        opponentnamelbl.ForeColor = Color.FromArgb(CByte(64), CByte(119), CByte(168))
-        opponentnamelbl.Location = New Point(164, 36)
+        opponentnamelbl.ForeColor = Color.Black
+        opponentnamelbl.Location = New Point(341, 10)
         opponentnamelbl.Name = "opponentnamelbl"
         opponentnamelbl.Size = New Size(113, 26)
         opponentnamelbl.TabIndex = 16
@@ -195,8 +195,8 @@ Partial Class BattleShipsGame
         opponentscorelbl.AutoSize = True
         opponentscorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
-        opponentscorelbl.ForeColor = Color.FromArgb(CByte(64), CByte(119), CByte(168))
-        opponentscorelbl.Location = New Point(164, 36)
+        opponentscorelbl.ForeColor = Color.Black
+        opponentscorelbl.Location = New Point(341, 36)
         opponentscorelbl.Name = "opponentscorelbl"
         opponentscorelbl.Size = New Size(79, 26)
         opponentscorelbl.TabIndex = 17
@@ -207,8 +207,8 @@ Partial Class BattleShipsGame
         opponentscoretxt.AutoSize = True
         opponentscoretxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentscoretxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentscoretxt.ForeColor = Color.FromArgb(CByte(64), CByte(119), CByte(168))
-        opponentscoretxt.Location = New Point(0, 0)
+        opponentscoretxt.ForeColor = Color.Black
+        opponentscoretxt.Location = New Point(341, 62)
         opponentscoretxt.Name = "opponentscoretxt"
         opponentscoretxt.Size = New Size(22, 24)
         opponentscoretxt.TabIndex = 18
@@ -254,7 +254,7 @@ Partial Class BattleShipsGame
         ' 
         opponentshipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentshipPicbox2.Image = My.Resources.Resources.BattleShip2
-        opponentshipPicbox2.Location = New Point(115, 491)
+        opponentshipPicbox2.Location = New Point(83, 131)
         opponentshipPicbox2.Name = "opponentshipPicbox2"
         opponentshipPicbox2.Size = New Size(100, 50)
         opponentshipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
@@ -309,7 +309,7 @@ Partial Class BattleShipsGame
         ' 
         playershipPicbox5.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playershipPicbox5.Image = My.Resources.Resources.BattleShip5
-        playershipPicbox5.Location = New Point(115, 491)
+        playershipPicbox5.Location = New Point(83, 131)
         playershipPicbox5.Name = "playershipPicbox5"
         playershipPicbox5.Size = New Size(100, 50)
         playershipPicbox5.SizeMode = PictureBoxSizeMode.StretchImage
@@ -320,7 +320,7 @@ Partial Class BattleShipsGame
         ' 
         playershipPicbox4.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playershipPicbox4.Image = My.Resources.Resources.BattleShip4
-        playershipPicbox4.Location = New Point(115, 491)
+        playershipPicbox4.Location = New Point(83, 131)
         playershipPicbox4.Name = "playershipPicbox4"
         playershipPicbox4.Size = New Size(100, 50)
         playershipPicbox4.SizeMode = PictureBoxSizeMode.StretchImage
@@ -331,7 +331,7 @@ Partial Class BattleShipsGame
         ' 
         playershipPicbox3b.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playershipPicbox3b.Image = My.Resources.Resources.BattleShip3
-        playershipPicbox3b.Location = New Point(115, 491)
+        playershipPicbox3b.Location = New Point(83, 131)
         playershipPicbox3b.Name = "playershipPicbox3b"
         playershipPicbox3b.Size = New Size(100, 50)
         playershipPicbox3b.SizeMode = PictureBoxSizeMode.StretchImage
@@ -342,7 +342,7 @@ Partial Class BattleShipsGame
         ' 
         playershipPicbox3a.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playershipPicbox3a.Image = My.Resources.Resources.BattleShip3
-        playershipPicbox3a.Location = New Point(115, 491)
+        playershipPicbox3a.Location = New Point(83, 131)
         playershipPicbox3a.Name = "playershipPicbox3a"
         playershipPicbox3a.Size = New Size(100, 50)
         playershipPicbox3a.SizeMode = PictureBoxSizeMode.StretchImage
@@ -353,7 +353,7 @@ Partial Class BattleShipsGame
         ' 
         playershipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playershipPicbox2.Image = My.Resources.Resources.BattleShip2
-        playershipPicbox2.Location = New Point(115, 491)
+        playershipPicbox2.Location = New Point(83, 131)
         playershipPicbox2.Name = "playershipPicbox2"
         playershipPicbox2.Size = New Size(100, 50)
         playershipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
