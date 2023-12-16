@@ -93,11 +93,12 @@ Public Class BattleShipsGame
             timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
             timelbl.Size = New Size(80, 30)
 
-            playernamelbl.Location = New Point(Me.Width / 2 - boardSizes - 100, Me.Bottom - 230)
-            playernametxt.Location = New Point(Me.Width / 2 - boardSizes - 20, Me.Bottom - 230)
-            playernametxt.Location = New Point(Me.Width / 2 - boardSizes - 20, Me.Bottom - 230)
-            playerscorelbl.Location = New Point(Me.Width / 2 - boardSizes - 68, Me.Bottom - 200)
-            playerscoretxt.Location = New Point(Me.Width / 2 - boardSizes + 10, Me.Bottom - 200)
+            Dim playernameoffSet = 5 * (playerName.Length)
+            playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
+            playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
+            playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
+            playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 98, Me.Bottom - 200)
+
             opponentnamelbl.Location = New Point(Me.Width / 2 + boardSizes - 100, Me.Top + 150)
             opponentscorelbl.Location = New Point(Me.Width / 2 + boardSizes - 68, Me.Top + 180)
             opponentscoretxt.Location = New Point(Me.Width / 2 + boardSizes + 10, Me.Top + 180)
