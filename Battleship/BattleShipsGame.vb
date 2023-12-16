@@ -60,12 +60,12 @@ Public Class BattleShipsGame
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        'Me.WindowState = FormWindowState.Maximized
-        'Me.Width = Screen.PrimaryScreen.Bounds.Width
-        'Me.Height = Screen.PrimaryScreen.Bounds.Height
+        Me.WindowState = FormWindowState.Maximized
+        Me.Width = Screen.PrimaryScreen.Bounds.Width
+        Me.Height = Screen.PrimaryScreen.Bounds.Height
 
-        Me.Width = 1528
-        Me.Height = 960
+        'Me.Width = 1528
+        'Me.Height = 960
 
         Dim turnsbannerWidth As Short
 
@@ -1071,9 +1071,6 @@ Public Class BattleShipsGame
         MainMenuForm.Show()
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
-        gameOver = True
-        revealships()
-        wait(1)
         onFormLoad()
     End Sub
 End Class
