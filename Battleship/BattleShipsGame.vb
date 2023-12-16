@@ -43,8 +43,8 @@ Public Class BattleShipsGame
         resetGameArray(opponentgameArray)
 
         'generate gameArray randomly (both computer and Player)
-        generateGameArr(playergameArray, 2)
-        generateGameArr(opponentgameArray, 1)
+        generateGameArr(opponentgameArray, 2)
+        generateGameArr(playergameArray, 1)
 
         generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
