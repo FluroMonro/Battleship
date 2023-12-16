@@ -97,11 +97,11 @@ Public Class BattleShipsGame
             playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
             playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
             playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
-            playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 98, Me.Bottom - 200)
+            playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
 
-            opponentnamelbl.Location = New Point(Me.Width / 2 + boardSizes - 100, Me.Top + 150)
-            opponentscorelbl.Location = New Point(Me.Width / 2 + boardSizes - 68, Me.Top + 180)
-            opponentscoretxt.Location = New Point(Me.Width / 2 + boardSizes + 10, Me.Top + 180)
+            opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 100, Me.Top + 150)
+            opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
+            opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
 
             gridCircleSizeNum = (boardSizes - 30) / gridSize
         Else
