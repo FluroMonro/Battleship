@@ -1120,6 +1120,12 @@ Public Class BattleShipsGame
             arrHighScores(i).time = fileContents
         Next
         FileSystem.FileClose(1)
+
+        For i = 1 To 10
+            MsgBox(arrHighScores(i).time)
+            MsgBox(convertTimeToInteger(arrHighScores(i).time))
+        Next
+
     End Sub
 
     Private Function convertTimeToDisplay(time) As String
@@ -1149,18 +1155,19 @@ Public Class BattleShipsGame
             subtime = Mid(time, 5, 1)
             time = "000" & subtime
         Else
+
             'between 10s and 1min
             If time(2) = "0" Then
                 subtime = Mid(time, 4, 2)
                 time = "00" & subtime
             Else
-                'between 1 and 10min
+                'between 1min and 10min
                 If time(1) = "0" Then
-                    subtime = (CInt(Mid(time, 2, 1) & Mid(time, 4, 2)) * 60)
+                    subtime = CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(2, 1) * 60))
                     time = "0" & subtime
                 Else
                     'anything above 10min
-                    time = Math.Floor(time * 60)
+                    time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(1, 2) * 60)))
                 End If
             End If
         End If
