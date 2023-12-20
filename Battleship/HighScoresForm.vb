@@ -30,26 +30,22 @@
         For i = 1 To 10
             Dim temp
             FileSystem.Input(1, temp)
-            If CInt(Asc(temp)) > 48 AndAlso CInt(Asc(temp)) < 57 Then
-                BattleShipsGame.arrHighScores(i).score = temp
-                MsgBox(temp)
-            Else
+            If CInt(Asc(temp)) > 57 Or CInt(Asc(temp)) < 48 Then
                 BattleShipsGame.arrHighScores(i).name = temp
-                'MsgBox(temp)
+                FileSystem.Input(1, temp)
             End If
-
-        Next i
-
-
-
+            If CInt(Asc(temp)) >= 48 AndAlso CInt(Asc(temp)) <= 57 Then
+                BattleShipsGame.arrHighScores(i).score = temp
+            End If
+        Next
         FileSystem.FileClose(1)
     End Sub
 
     Private Sub printHighScores()
-        Dim i As Integer
         For i = 1 To 10
-            ListBox1.Items.Add(i & " " & BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
+            ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
         Next i
+        MsgBox(BattleShipsGame.arrHighScores(1).score)
     End Sub
 
 
