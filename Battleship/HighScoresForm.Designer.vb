@@ -24,7 +24,6 @@ Partial Class HighScoresForm
     Private Sub InitializeComponent()
         WaterBoarder = New PictureBox()
         backtomainbtn = New Button()
-        ListBox1 = New ListBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -46,7 +45,7 @@ Partial Class HighScoresForm
         backtomainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
         backtomainbtn.FlatAppearance.BorderSize = 0
         backtomainbtn.FlatStyle = FlatStyle.Flat
-        backtomainbtn.Font = New Font("Arial", 12.0F, FontStyle.Bold, GraphicsUnit.Point)
+        backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
         backtomainbtn.ForeColor = SystemColors.ButtonHighlight
         backtomainbtn.Location = New Point(716, 425)
         backtomainbtn.Margin = New Padding(0)
@@ -56,22 +55,12 @@ Partial Class HighScoresForm
         backtomainbtn.Text = "EXIT"
         backtomainbtn.UseVisualStyleBackColor = False
         ' 
-        ' ListBox1
-        ' 
-        ListBox1.FormattingEnabled = True
-        ListBox1.ItemHeight = 15
-        ListBox1.Location = New Point(318, 166)
-        ListBox1.Name = "ListBox1"
-        ListBox1.Size = New Size(410, 319)
-        ListBox1.TabIndex = 37
-        ' 
         ' HighScoresForm
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(ListBox1)
         Controls.Add(backtomainbtn)
         Controls.Add(WaterBoarder)
         HelpButton = True
@@ -85,5 +74,4 @@ Partial Class HighScoresForm
 
     Friend WithEvents WaterBoarder As PictureBox
     Friend WithEvents backtomainbtn As Button
-    Friend WithEvents ListBox1 As ListBox
 End Class

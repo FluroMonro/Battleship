@@ -17,8 +17,6 @@
         backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
     End Sub
 
-
-
     Private Sub showscore()
         readhHighScores()
         printHighScores()
@@ -30,12 +28,12 @@
         For i = 1 To 10
             Dim fileContents
             FileSystem.Input(1, fileContents)
+            If CInt(Asc(fileContents)) >= 48 AndAlso CInt(Asc(fileContents)) <= 57 Then
+                BattleShipsGame.arrHighScores(i).score = fileContents
+            End If
             If CInt(Asc(fileContents)) > 57 Or CInt(Asc(fileContents)) < 48 Then
                 BattleShipsGame.arrHighScores(i).name = fileContents
                 FileSystem.Input(1, fileContents)
-            End If
-            If CInt(Asc(fileContents)) >= 48 AndAlso CInt(Asc(fileContents)) <= 57 Then
-                BattleShipsGame.arrHighScores(i).score = fileContents
             End If
         Next
         FileSystem.FileClose(1)
@@ -43,7 +41,7 @@
 
     Private Sub printHighScores()
         For i = 1 To 10
-            ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
+            'ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
         Next i
     End Sub
 
