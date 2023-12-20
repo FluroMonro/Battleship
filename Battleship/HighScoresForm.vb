@@ -50,13 +50,9 @@
                         'anything above 10min
                         fileContents = Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
                     End If
-
                 End If
-
             End If
-
             BattleShipsGame.arrHighScores(i).time = fileContents
-
         Next
         FileSystem.FileClose(1)
     End Sub
