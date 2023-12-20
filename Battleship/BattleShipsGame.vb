@@ -1085,7 +1085,7 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         onFormLoad()
     End Sub
-    Public Sub scoring()
+    Private Sub scoring()
         readHighScores()
         Dim sortbytime = False
         Dim sortbyscores = True
@@ -1093,7 +1093,7 @@ Public Class BattleShipsGame
         BubbleSort(sortbyscores, sortbytime, order)
         WriteHighScores()
     End Sub
-    Private Sub WriteHighScores()
+    Public Sub WriteHighScores()
         Dim i As Integer
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
         For i = 1 To 10

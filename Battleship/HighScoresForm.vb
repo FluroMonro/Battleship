@@ -16,7 +16,7 @@
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        Me.WindowState = FormWindowState.Minimized
+        Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
@@ -31,7 +31,7 @@
     End Sub
 
     Private Sub showscore()
-        BattleShipsGame.scoring()
+        BattleShipsGame.readHighScores()
         printHighScores()
     End Sub
 
@@ -70,6 +70,8 @@
         p8timelbl.Text = BattleShipsGame.arrHighScores(8).time
         p9timelbl.Text = BattleShipsGame.arrHighScores(9).time
         p10timelbl.Text = BattleShipsGame.arrHighScores(10).time
+
+
     End Sub
 
 
@@ -91,6 +93,9 @@
         End If
         updateArrowButtonImages(sortbytime, sortbyscores, order)
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
+        BattleShipsGame.WriteHighScores()
+        printHighScores()
+        updateRankings(order)
     End Sub
 
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
@@ -106,6 +111,9 @@
         End If
         updateArrowButtonImages(sortbytime, sortbyscores, order)
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
+        BattleShipsGame.WriteHighScores()
+        printHighScores()
+        updateRankings(order)
     End Sub
     Private Sub updateArrowButtonImages(sortBytime As Boolean, sortbyscores As Boolean, order As String)
         Select Case order
@@ -139,6 +147,31 @@
                         End Select
                 End Select
         End Select
-
+    End Sub
+    Private Sub updateRankings(order As String)
+        Select Case order
+            Case "descending"
+                ranklbl1.Text = 10
+                ranklbl2.Text = 9
+                ranklbl3.Text = 8
+                ranklbl4.Text = 7
+                ranklbl5.Text = 6
+                ranklbl6.Text = 5
+                ranklbl7.Text = 4
+                ranklbl8.Text = 3
+                ranklbl9.Text = 2
+                ranklbl10.Text = 1
+            Case "ascending"
+                ranklbl1.Text = 1
+                ranklbl2.Text = 2
+                ranklbl3.Text = 3
+                ranklbl4.Text = 4
+                ranklbl5.Text = 5
+                ranklbl6.Text = 6
+                ranklbl7.Text = 7
+                ranklbl8.Text = 8
+                ranklbl9.Text = 9
+                ranklbl10.Text = 10
+        End Select
     End Sub
 End Class
