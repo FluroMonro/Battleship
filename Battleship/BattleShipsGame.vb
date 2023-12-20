@@ -27,6 +27,14 @@ Public Class BattleShipsGame
     Dim gridOffSet As Integer
     Dim turnsbannerHeight As Short
     Dim has3alreadydone As Boolean
+
+    Public Structure recHighScore
+        Public name As String
+        Public score As Integer
+        Public time As Integer
+    End Structure
+
+    Public arrHighScores(10) As recHighScore
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -34,6 +42,8 @@ Public Class BattleShipsGame
         isShipPlacementRandom = shipPlacementOption
     End Sub
     Public Sub onFormLoad()
+        'scoring()
+
         playernametxt.Text = playerName
 
         initialiseControlsPlacement()
@@ -1075,4 +1085,71 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         onFormLoad()
     End Sub
+
+    Private Sub scoring()
+        readhHighScores()
+        'arrHighScores(6).name = "Ben"
+        'arrHighScores(6).score = 9
+        'BubbleSort()
+        'printHighScores()
+        'WriteHighSCores()
+    End Sub
+
+    Private Sub WriteHighSCores()
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
+        For i = 1 To 5
+            FileSystem.Write(1, arrHighScores(i).name)
+        Next i
+
+        For i = 1 To 5
+            FileSystem.Write(1, arrHighScores(i).score)
+        Next i
+
+
+        FileSystem.FileClose(1)
+    End Sub
+
+    Private Sub readhHighScores()
+        Dim i As Integer
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
+        For i = 1 To 5
+            FileSystem.Input(1, arrHighScores(i).name)
+        Next i
+
+        For i = 1 To 5
+            FileSystem.Input(1, arrHighScores(i).score)
+        Next i
+
+
+        FileSystem.FileClose(1)
+    End Sub
+
+    Private Sub BubbleSort()
+
+        Dim Swapped As Boolean
+        Swapped = True
+        Dim Last As Integer
+        Last = 6
+        While Swapped = True
+            Swapped = False
+            Dim i = 1
+            While i < Last
+                If arrHighScores(i).score < arrHighScores(i + 1).score Then
+                    Swap(arrHighScores(i), arrHighScores(i + 1))
+                    Swapped = True
+                End If
+                i = i + 1
+            End While
+            Last = Last - 1
+        End While
+    End Sub
+
+
+    Private sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
+        Dim Temp As recHighScore
+        Temp = A
+        A = B
+        B = Temp
+    End sub
+
 End Class

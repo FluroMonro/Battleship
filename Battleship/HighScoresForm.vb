@@ -1,12 +1,13 @@
 ﻿Public Class HighScoresForm
     Private Sub HighScoresForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         initialiseControlsPlacement()
+        showScore()
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        Me.WindowState = FormWindowState.Maximized
+        'Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
@@ -18,9 +19,38 @@
 
 
 
+    Private Sub showscore()
+        readhHighScores()
+        printHighScores()
+    End Sub
+
+    Private Sub readhHighScores()
+        Dim i As Integer
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
+        For i = 1 To 10
+            Dim temp
+            FileSystem.Input(1, temp)
+            If CInt(Asc(temp)) > 48 AndAlso CInt(Asc(temp)) < 57 Then
+                BattleShipsGame.arrHighScores(i).score = temp
+                MsgBox(temp)
+            Else
+                BattleShipsGame.arrHighScores(i).name = temp
+                'MsgBox(temp)
+            End If
+
+        Next i
 
 
 
+        FileSystem.FileClose(1)
+    End Sub
+
+    Private Sub printHighScores()
+        Dim i As Integer
+        For i = 1 To 10
+            ListBox1.Items.Add(i & " " & BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
+        Next i
+    End Sub
 
 
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
