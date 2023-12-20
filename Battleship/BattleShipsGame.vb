@@ -1085,13 +1085,11 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         onFormLoad()
     End Sub
-
     Private Sub scoring()
         readHighScores()
         'BubbleSort()
         'WriteHighSCores()
     End Sub
-
     Private Sub WriteHighScores()
         Dim i As Integer
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
@@ -1102,7 +1100,6 @@ Public Class BattleShipsGame
         Next
         FileSystem.FileClose(1)
     End Sub
-
     Public Sub readHighScores()
         Dim i As Integer
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
@@ -1121,7 +1118,6 @@ Public Class BattleShipsGame
         Next
         FileSystem.FileClose(1)
     End Sub
-
     Private Function convertTimeToDisplay(time) As String
         If time < 10 Then
             'under than 10 sec
@@ -1167,11 +1163,7 @@ Public Class BattleShipsGame
         End If
         Return time
     End Function
-
-
-
     Private Sub BubbleSort()
-
         Dim Swapped As Boolean
         Swapped = True
         Dim Last As Integer
@@ -1189,13 +1181,10 @@ Public Class BattleShipsGame
             Last = Last - 1
         End While
     End Sub
-
-
-    Private sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
+    Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
         Dim Temp As recHighScore
         Temp = A
         A = B
         B = Temp
-    End sub
-
+    End Sub
 End Class
