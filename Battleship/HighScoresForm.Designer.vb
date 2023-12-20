@@ -24,6 +24,7 @@ Partial Class HighScoresForm
     Private Sub InitializeComponent()
         WaterBoarder = New PictureBox()
         backtomainbtn = New Button()
+        ListBox1 = New ListBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -55,12 +56,22 @@ Partial Class HighScoresForm
         backtomainbtn.Text = "EXIT"
         backtomainbtn.UseVisualStyleBackColor = False
         ' 
+        ' ListBox1
+        ' 
+        ListBox1.FormattingEnabled = True
+        ListBox1.ItemHeight = 15
+        ListBox1.Location = New Point(396, 158)
+        ListBox1.Name = "ListBox1"
+        ListBox1.Size = New Size(221, 184)
+        ListBox1.TabIndex = 8
+        ' 
         ' HighScoresForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(ListBox1)
         Controls.Add(backtomainbtn)
         Controls.Add(WaterBoarder)
         HelpButton = True
@@ -74,4 +85,5 @@ Partial Class HighScoresForm
 
     Friend WithEvents WaterBoarder As PictureBox
     Friend WithEvents backtomainbtn As Button
+    Friend WithEvents ListBox1 As ListBox
 End Class

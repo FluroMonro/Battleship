@@ -28,20 +28,21 @@
         For i = 1 To 10
             Dim fileContents
             FileSystem.Input(1, fileContents)
-            If CInt(Asc(fileContents)) >= 48 AndAlso CInt(Asc(fileContents)) <= 57 Then
-                BattleShipsGame.arrHighScores(i).score = fileContents
-            End If
-            If CInt(Asc(fileContents)) > 57 Or CInt(Asc(fileContents)) < 48 Then
-                BattleShipsGame.arrHighScores(i).name = fileContents
-                FileSystem.Input(1, fileContents)
-            End If
+            BattleShipsGame.arrHighScores(i).score = fileContents
+
+            FileSystem.Input(1, fileContents)
+            BattleShipsGame.arrHighScores(i).name = fileContents
+
+            FileSystem.Input(1, fileContents)
+            BattleShipsGame.arrHighScores(i).time = fileContents
+
         Next
         FileSystem.FileClose(1)
     End Sub
 
     Private Sub printHighScores()
         For i = 1 To 10
-            'ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
+            ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score & " " & BattleShipsGame.arrHighScores(i).time)
         Next i
     End Sub
 
