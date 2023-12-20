@@ -31,7 +31,7 @@ Public Class BattleShipsGame
     Public Structure recHighScore
         Public name As String
         Public score As Integer
-        Public time As Integer
+        Public time As String
     End Structure
 
     Public arrHighScores(10) As recHighScore
