@@ -1088,24 +1088,18 @@ Public Class BattleShipsGame
 
     Private Sub scoring()
         readHighScores()
-        'arrHighScores(6).name = "Ben"
-        'arrHighScores(6).score = 9
-        'BubbleSort()
-        'printHighScores()
+        BubbleSort()
         'WriteHighSCores()
     End Sub
 
-    Private Sub WriteHighSCores()
-        FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
-        For i = 1 To 5
-            FileSystem.Write(1, arrHighScores(i).name)
-        Next i
-
-        For i = 1 To 5
+    Private Sub WriteHighScores()
+        Dim i As Integer
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
+        For i = 1 To 10
             FileSystem.Write(1, arrHighScores(i).score)
-        Next i
-
-
+            FileSystem.Write(1, arrHighScores(i).name)
+            FileSystem.Write(1, arrHighScores(i).time)
+        Next
         FileSystem.FileClose(1)
     End Sub
 
