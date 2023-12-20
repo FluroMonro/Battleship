@@ -1150,23 +1150,27 @@ Public Class BattleShipsGame
     End Function
     Private Function convertTimeToInteger(time As String) As String
         Dim subtime As String
-        If time(4) = "0" Then
+        If time(3) = "0" Then
             'under than 10 sec
+            MsgBox("under than 10 sec")
             subtime = Mid(time, 5, 1)
             time = "000" & subtime
         Else
-
             'between 10s and 1min
-            If time(2) = "0" Then
+            MsgBox("between 10s and 1min")
+
+            If time(1) = "0" Then
                 subtime = Mid(time, 4, 2)
                 time = "00" & subtime
             Else
-                'between 1min and 10min
-                If time(1) = "0" Then
+                If time(0) = "0" Then
+                    'between 1min and 10min
+                    MsgBox("between 1min and 10min")
                     subtime = CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(2, 1) * 60))
                     time = "0" & subtime
                 Else
                     'anything above 10min
+                    MsgBox("anything above 10min")
                     time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(1, 2) * 60)))
                 End If
             End If
