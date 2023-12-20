@@ -22,44 +22,11 @@
     End Sub
 
     Private Sub showscore()
-        readhHighScores()
+        BattleShipsGame.readHighScores()
         printHighScores()
     End Sub
 
-    Private Sub readhHighScores()
-        Dim i As Integer
-        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
-        For i = 1 To 10
-            Dim fileContents
-            FileSystem.Input(1, fileContents)
-            BattleShipsGame.arrHighScores(i).score = fileContents
 
-            FileSystem.Input(1, fileContents)
-            BattleShipsGame.arrHighScores(i).name = fileContents
-
-            FileSystem.Input(1, fileContents)
-
-            If fileContents < 10 Then
-                'under than 10 sec
-                fileContents = "00:0" & CStr(fileContents)
-            Else
-                'between 10s and 1min
-                If fileContents < 60 Then
-                    fileContents = "00:" & CStr(fileContents)
-                Else
-                    'between 1 and 10min
-                    If fileContents < 600 Then
-                        fileContents = "0 " & Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
-                    Else
-                        'anything above 10min
-                        fileContents = Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
-                    End If
-                End If
-            End If
-            BattleShipsGame.arrHighScores(i).time = fileContents
-        Next
-        FileSystem.FileClose(1)
-    End Sub
 
     Private Sub printHighScores()
         p1namelbl.Text = BattleShipsGame.arrHighScores(1).name

@@ -892,7 +892,7 @@ Public Class BattleShipsGame
 
         If gameOver = True Then
             revealships()
-            determineWinner()
+            determineScore()
             'scoring()
         Else
             swapPlayer()
@@ -912,7 +912,7 @@ Public Class BattleShipsGame
 
             If gameOver = True Then
                 revealships()
-                determineWinner()
+                determineScore()
                 'scoring()
             Else
                 swapPlayer()
@@ -965,7 +965,7 @@ Public Class BattleShipsGame
         Next row
         Return gameArr
     End Function
-    Private Function determineWinner() As Integer
+    Private Function determineScore() As Integer
         Dim winner = currentPlayer
         'game ended by time, boardEmpty = False
         If boardEmpty = True Then
@@ -1087,7 +1087,7 @@ Public Class BattleShipsGame
     End Sub
 
     Private Sub scoring()
-        readhHighScores()
+        readHighScores()
         'arrHighScores(6).name = "Ben"
         'arrHighScores(6).score = 9
         'BubbleSort()
@@ -1109,18 +1109,38 @@ Public Class BattleShipsGame
         FileSystem.FileClose(1)
     End Sub
 
-    Private Sub readhHighScores()
+    Public Sub readHighScores()
         Dim i As Integer
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
-        For i = 1 To 5
-            FileSystem.Input(1, arrHighScores(i).name)
-        Next i
+        For i = 1 To 10
+            Dim fileContents
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).score = fileContents
 
-        For i = 1 To 5
-            FileSystem.Input(1, arrHighScores(i).score)
-        Next i
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).name = fileContents
 
+            FileSystem.Input(1, fileContents)
 
+            If fileContents < 10 Then
+                'under than 10 sec
+                fileContents = "00:0" & CStr(fileContents)
+            Else
+                'between 10s and 1min
+                If fileContents < 60 Then
+                    fileContents = "00:" & CStr(fileContents)
+                Else
+                    'between 1 and 10min
+                    If fileContents < 600 Then
+                        fileContents = "0 " & Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
+                    Else
+                        'anything above 10min
+                        fileContents = Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
+                    End If
+                End If
+            End If
+            arrHighScores(i).time = fileContents
+        Next
         FileSystem.FileClose(1)
     End Sub
 
