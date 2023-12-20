@@ -1178,12 +1178,12 @@ Public Class BattleShipsGame
 
                 If sortByScores = True Then
                     If order = "descending" Then
-                        If CInt(convertTimeToInteger(arrHighScores(i).score)) < CInt(convertTimeToInteger(arrHighScores(i + 1).score)) Then
+                        If arrHighScores(i).score < arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
-                        If CInt(convertTimeToInteger(arrHighScores(i).score)) > CInt(convertTimeToInteger(arrHighScores(i + 1).score)) Then
+                        If arrHighScores(i).score > arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If

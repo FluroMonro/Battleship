@@ -27,7 +27,7 @@
 
         Dim sortbytime = False
         Dim sortbyscores = True
-        Dim order = "ascending"
+        Dim order = "descending"
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         For i = 1 To 10
             ListBox2.Items.Add(BattleShipsGame.arrHighScores(i).score)
