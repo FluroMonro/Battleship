@@ -24,6 +24,14 @@
     Private Sub showscore()
         BattleShipsGame.readHighScores()
         printHighScores()
+
+        Dim sortbytime = False
+        Dim sortbyscores = True
+        Dim order = "ascending"
+        BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
+        For i = 1 To 10
+            ListBox2.Items.Add(BattleShipsGame.arrHighScores(i).score)
+        Next
     End Sub
 
 

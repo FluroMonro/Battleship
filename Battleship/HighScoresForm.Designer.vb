@@ -74,6 +74,7 @@ Partial Class HighScoresForm
         timelbl = New Label()
         Titlelbl = New Label()
         subtitlelbl = New Label()
+        ListBox2 = New ListBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         rankingpanel.SuspendLayout()
         namepanel.SuspendLayout()
@@ -608,12 +609,22 @@ Partial Class HighScoresForm
         subtitlelbl.TabIndex = 52
         subtitlelbl.Text = "Highscores"
         ' 
+        ' ListBox2
+        ' 
+        ListBox2.FormattingEnabled = True
+        ListBox2.ItemHeight = 15
+        ListBox2.Location = New Point(235, 104)
+        ListBox2.Name = "ListBox2"
+        ListBox2.Size = New Size(284, 244)
+        ListBox2.TabIndex = 53
+        ' 
         ' HighScoresForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(ListBox2)
         Controls.Add(subtitlelbl)
         Controls.Add(Titlelbl)
         Controls.Add(timepanel)
@@ -693,4 +704,5 @@ Partial Class HighScoresForm
     Friend WithEvents timelbl As Label
     Friend WithEvents Titlelbl As Label
     Friend WithEvents subtitlelbl As Label
+    Friend WithEvents ListBox2 As ListBox
 End Class

@@ -1087,7 +1087,10 @@ Public Class BattleShipsGame
     End Sub
     Private Sub scoring()
         readHighScores()
-        'BubbleSort()
+        Dim sortbytime = True
+        Dim sortbyscores = False
+        Dim order = "ascending"
+        BubbleSort(sortbyscores, sortbytime, order)
         'WriteHighSCores()
     End Sub
     Private Sub WriteHighScores()
@@ -1163,19 +1166,45 @@ Public Class BattleShipsGame
         End If
         Return time
     End Function
-    Private Sub BubbleSort()
+    Public Sub BubbleSort(sortByScores As Boolean, sortByTime As Boolean, order As String)
         Dim Swapped As Boolean
         Swapped = True
         Dim Last As Integer
-        Last = 6
+        Last = arrHighScores.Length - 1
         While Swapped = True
             Swapped = False
             Dim i = 1
             While i < Last
-                If arrHighScores(i).score < arrHighScores(i + 1).score Then
-                    Swap(arrHighScores(i), arrHighScores(i + 1))
-                    Swapped = True
+
+                If sortByScores = True Then
+                    If order = "descending" Then
+                        If CInt(convertTimeToInteger(arrHighScores(i).score)) < CInt(convertTimeToInteger(arrHighScores(i + 1).score)) Then
+                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            Swapped = True
+                        End If
+                    Else
+                        If CInt(convertTimeToInteger(arrHighScores(i).score)) > CInt(convertTimeToInteger(arrHighScores(i + 1).score)) Then
+                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            Swapped = True
+                        End If
+                    End If
+
                 End If
+                If sortByTime = True Then
+                    If order = "descending" Then
+                        If CInt(convertTimeToInteger(arrHighScores(i).time)) < CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
+                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            Swapped = True
+                        End If
+                    Else
+                        If CInt(convertTimeToInteger(arrHighScores(i).time)) > CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
+                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            Swapped = True
+                        End If
+                    End If
+
+                End If
+
                 i = i + 1
             End While
             Last = Last - 1
