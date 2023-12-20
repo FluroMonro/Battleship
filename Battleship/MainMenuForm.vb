@@ -40,6 +40,7 @@
     Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openhsbutton.Click
         Me.Hide()
         HighScoresForm.Show()
+        HighScoresForm.onLoadHighScores()
     End Sub
 
     Private Sub quitProgrambtn_Click(sender As Object, e As EventArgs) Handles quitProgrambtn.Click

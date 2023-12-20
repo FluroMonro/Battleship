@@ -1085,21 +1085,21 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         onFormLoad()
     End Sub
-    Private Sub scoring()
+    Public Sub scoring()
         readHighScores()
-        Dim sortbytime = True
-        Dim sortbyscores = False
-        Dim order = "ascending"
+        Dim sortbytime = False
+        Dim sortbyscores = True
+        Dim order = "descending"
         BubbleSort(sortbyscores, sortbytime, order)
-        'WriteHighSCores()
+        WriteHighScores()
     End Sub
     Private Sub WriteHighScores()
         Dim i As Integer
-        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
         For i = 1 To 10
             FileSystem.Write(1, arrHighScores(i).score)
             FileSystem.Write(1, arrHighScores(i).name)
-            FileSystem.Write(1, arrHighScores(i).time)
+            FileSystem.Write(1, convertTimeToInteger(arrHighScores(i).time))
         Next
         FileSystem.FileClose(1)
     End Sub
@@ -1116,7 +1116,7 @@ Public Class BattleShipsGame
 
             FileSystem.Input(1, fileContents)
 
-            fileContents = convertTimeToDisplay(fileContents)
+            fileContents = convertTimeToDisplay(CInt(fileContents))
             arrHighScores(i).time = fileContents
         Next
         FileSystem.FileClose(1)
@@ -1143,27 +1143,32 @@ Public Class BattleShipsGame
     End Function
     Private Function convertTimeToInteger(time As String) As String
         Dim subtime As String
-        If time(0) = "0" AndAlso time(1) = "0" AndAlso time(2) = "0" Then
-            'under than 10 sec
-            subtime = Mid(time, 5, 1)
-            time = "000" & subtime
-        Else
-            'between 10s and 1min
-
-            If time(0) = "0" AndAlso time(1) = "0" Then
-                subtime = Mid(time, 4, 2)
-                time = "00" & subtime
+        If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
+            If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
+                'under than 10 sec
+                subtime = Mid(time, 5, 1)
+                time = "000" & subtime
             Else
-                If time(0) = "0" Then
-                    'between 1min and 10min
-                    subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
-                    time = "0" & subtime
+                'between 10s and 1min
+
+                If time(0) = "0" AndAlso time(1) = "0" Then
+                    subtime = Mid(time, 4, 2)
+                    time = "00" & subtime
                 Else
-                    'anything above 10min
-                    time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                    If time(0) = "0" Then
+                        'between 1min and 10min
+                        subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
+                        time = "0" & subtime
+                    Else
+                        'anything above 10min
+                        time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                    End If
                 End If
             End If
+        Else
+            MsgBox("Going wrong")
         End If
+
         Return time
     End Function
     Public Sub BubbleSort(sortByScores As Boolean, sortByTime As Boolean, order As String)

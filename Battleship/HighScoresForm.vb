@@ -2,7 +2,7 @@
 
     Public currentScoreArrow
     Public currentTimeArrow
-    Private Sub HighScoresForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub onLoadHighScores()
         currentScoreArrow = 1
         currentTimeArrow = 2
 
@@ -10,13 +10,13 @@
 
         initialiseControlsPlacement()
         showscore()
-
     End Sub
+
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        'Me.WindowState = FormWindowState.Maximized
+        Me.WindowState = FormWindowState.Minimized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
@@ -31,10 +31,8 @@
     End Sub
 
     Private Sub showscore()
-        BattleShipsGame.readHighScores()
+        BattleShipsGame.scoring()
         printHighScores()
-
-
     End Sub
 
 
