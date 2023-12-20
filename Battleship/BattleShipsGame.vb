@@ -1088,7 +1088,7 @@ Public Class BattleShipsGame
 
     Private Sub scoring()
         readHighScores()
-        BubbleSort()
+        'BubbleSort()
         'WriteHighSCores()
     End Sub
 
@@ -1116,27 +1116,58 @@ Public Class BattleShipsGame
 
             FileSystem.Input(1, fileContents)
 
-            If fileContents < 10 Then
-                'under than 10 sec
-                fileContents = "00:0" & CStr(fileContents)
-            Else
-                'between 10s and 1min
-                If fileContents < 60 Then
-                    fileContents = "00:" & CStr(fileContents)
-                Else
-                    'between 1 and 10min
-                    If fileContents < 600 Then
-                        fileContents = "0 " & Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
-                    Else
-                        'anything above 10min
-                        fileContents = Math.Floor(fileContents / 60) & ":" & (((fileContents / 60) - Math.Floor(fileContents / 60)) * 60)
-                    End If
-                End If
-            End If
+            fileContents = convertTimeToDisplay(fileContents)
             arrHighScores(i).time = fileContents
         Next
         FileSystem.FileClose(1)
     End Sub
+
+    Private Function convertTimeToDisplay(time) As String
+        If time < 10 Then
+            'under than 10 sec
+            time = "00:0" & CStr(time)
+        Else
+            'between 10s and 1min
+            If time < 60 Then
+                time = "00:" & CStr(time)
+            Else
+                'between 1 and 10min
+                If time < 600 Then
+                    time = "0 " & Math.Floor(time / 60) & ":" & (((time / 60) - Math.Floor(time / 60)) * 60)
+                Else
+                    'anything above 10min
+                    time = Math.Floor(time / 60) & ":" & (((time / 60) - Math.Floor(time / 60)) * 60)
+                End If
+            End If
+        End If
+        Return time
+    End Function
+    Private Function convertTimeToInteger(time As String) As String
+        Dim subtime As String
+        If time(4) = "0" Then
+            'under than 10 sec
+            subtime = Mid(time, 5, 1)
+            time = "000" & subtime
+        Else
+            'between 10s and 1min
+            If time(2) = "0" Then
+                subtime = Mid(time, 4, 2)
+                time = "00" & subtime
+            Else
+                'between 1 and 10min
+                If time(1) = "0" Then
+                    subtime = (CInt(Mid(time, 2, 1) & Mid(time, 4, 2)) * 60)
+                    time = "0" & subtime
+                Else
+                    'anything above 10min
+                    time = Math.Floor(time * 60)
+                End If
+            End If
+        End If
+        Return time
+    End Function
+
+
 
     Private Sub BubbleSort()
 
