@@ -45,7 +45,9 @@ Partial Class HighScoresForm
         p9namelbl = New Label()
         p10namelbl = New Label()
         rankingpanel = New Panel()
+        rankslbl = New Label()
         namepanel = New Panel()
+        namelbl = New Label()
         p1scorelbl = New Label()
         p2scorelbl = New Label()
         p3scorelbl = New Label()
@@ -57,6 +59,7 @@ Partial Class HighScoresForm
         p9scorelbl = New Label()
         p10scorelbl = New Label()
         scorepanel = New Panel()
+        Label1 = New Label()
         p1timelbl = New Label()
         p2timelbl = New Label()
         p3timelbl = New Label()
@@ -68,6 +71,9 @@ Partial Class HighScoresForm
         p7timelbl = New Label()
         p10timelbl = New Label()
         timepanel = New Panel()
+        timelbl = New Label()
+        Titlelbl = New Label()
+        subtitlelbl = New Label()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         rankingpanel.SuspendLayout()
         namepanel.SuspendLayout()
@@ -106,7 +112,7 @@ Partial Class HighScoresForm
         ' p1namelbl
         ' 
         p1namelbl.AutoSize = True
-        p1namelbl.Location = New Point(20, 16)
+        p1namelbl.Location = New Point(19, 36)
         p1namelbl.Name = "p1namelbl"
         p1namelbl.Size = New Size(45, 15)
         p1namelbl.TabIndex = 9
@@ -115,7 +121,7 @@ Partial Class HighScoresForm
         ' p3namelbl
         ' 
         p3namelbl.AutoSize = True
-        p3namelbl.Location = New Point(20, 56)
+        p3namelbl.Location = New Point(19, 76)
         p3namelbl.Name = "p3namelbl"
         p3namelbl.Size = New Size(45, 15)
         p3namelbl.TabIndex = 10
@@ -124,7 +130,7 @@ Partial Class HighScoresForm
         ' p2namelbl
         ' 
         p2namelbl.AutoSize = True
-        p2namelbl.Location = New Point(20, 36)
+        p2namelbl.Location = New Point(19, 56)
         p2namelbl.Name = "p2namelbl"
         p2namelbl.Size = New Size(45, 15)
         p2namelbl.TabIndex = 11
@@ -133,7 +139,7 @@ Partial Class HighScoresForm
         ' ranklbl1
         ' 
         ranklbl1.AutoSize = True
-        ranklbl1.Location = New Point(27, 15)
+        ranklbl1.Location = New Point(27, 35)
         ranklbl1.Name = "ranklbl1"
         ranklbl1.Size = New Size(13, 15)
         ranklbl1.TabIndex = 12
@@ -142,7 +148,7 @@ Partial Class HighScoresForm
         ' ranklbl2
         ' 
         ranklbl2.AutoSize = True
-        ranklbl2.Location = New Point(27, 35)
+        ranklbl2.Location = New Point(27, 55)
         ranklbl2.Name = "ranklbl2"
         ranklbl2.Size = New Size(13, 15)
         ranklbl2.TabIndex = 13
@@ -151,7 +157,7 @@ Partial Class HighScoresForm
         ' ranklbl3
         ' 
         ranklbl3.AutoSize = True
-        ranklbl3.Location = New Point(27, 55)
+        ranklbl3.Location = New Point(27, 75)
         ranklbl3.Name = "ranklbl3"
         ranklbl3.Size = New Size(13, 15)
         ranklbl3.TabIndex = 14
@@ -160,7 +166,7 @@ Partial Class HighScoresForm
         ' ranklbl4
         ' 
         ranklbl4.AutoSize = True
-        ranklbl4.Location = New Point(27, 75)
+        ranklbl4.Location = New Point(27, 95)
         ranklbl4.Name = "ranklbl4"
         ranklbl4.Size = New Size(13, 15)
         ranklbl4.TabIndex = 15
@@ -169,7 +175,7 @@ Partial Class HighScoresForm
         ' ranklbl5
         ' 
         ranklbl5.AutoSize = True
-        ranklbl5.Location = New Point(27, 95)
+        ranklbl5.Location = New Point(27, 115)
         ranklbl5.Name = "ranklbl5"
         ranklbl5.Size = New Size(13, 15)
         ranklbl5.TabIndex = 16
@@ -178,7 +184,7 @@ Partial Class HighScoresForm
         ' ranklbl6
         ' 
         ranklbl6.AutoSize = True
-        ranklbl6.Location = New Point(27, 115)
+        ranklbl6.Location = New Point(27, 135)
         ranklbl6.Name = "ranklbl6"
         ranklbl6.Size = New Size(13, 15)
         ranklbl6.TabIndex = 17
@@ -187,7 +193,7 @@ Partial Class HighScoresForm
         ' ranklbl7
         ' 
         ranklbl7.AutoSize = True
-        ranklbl7.Location = New Point(27, 135)
+        ranklbl7.Location = New Point(27, 155)
         ranklbl7.Name = "ranklbl7"
         ranklbl7.Size = New Size(13, 15)
         ranklbl7.TabIndex = 18
@@ -196,7 +202,7 @@ Partial Class HighScoresForm
         ' ranklbl8
         ' 
         ranklbl8.AutoSize = True
-        ranklbl8.Location = New Point(27, 155)
+        ranklbl8.Location = New Point(27, 175)
         ranklbl8.Name = "ranklbl8"
         ranklbl8.Size = New Size(13, 15)
         ranklbl8.TabIndex = 19
@@ -205,7 +211,7 @@ Partial Class HighScoresForm
         ' ranklbl9
         ' 
         ranklbl9.AutoSize = True
-        ranklbl9.Location = New Point(27, 175)
+        ranklbl9.Location = New Point(27, 195)
         ranklbl9.Name = "ranklbl9"
         ranklbl9.Size = New Size(13, 15)
         ranklbl9.TabIndex = 20
@@ -214,7 +220,7 @@ Partial Class HighScoresForm
         ' ranklbl10
         ' 
         ranklbl10.AutoSize = True
-        ranklbl10.Location = New Point(27, 195)
+        ranklbl10.Location = New Point(27, 215)
         ranklbl10.Name = "ranklbl10"
         ranklbl10.Size = New Size(19, 15)
         ranklbl10.TabIndex = 21
@@ -223,7 +229,7 @@ Partial Class HighScoresForm
         ' p4namelbl
         ' 
         p4namelbl.AutoSize = True
-        p4namelbl.Location = New Point(20, 76)
+        p4namelbl.Location = New Point(19, 96)
         p4namelbl.Name = "p4namelbl"
         p4namelbl.Size = New Size(45, 15)
         p4namelbl.TabIndex = 22
@@ -232,7 +238,7 @@ Partial Class HighScoresForm
         ' p5namelbl
         ' 
         p5namelbl.AutoSize = True
-        p5namelbl.Location = New Point(20, 96)
+        p5namelbl.Location = New Point(19, 116)
         p5namelbl.Name = "p5namelbl"
         p5namelbl.Size = New Size(45, 15)
         p5namelbl.TabIndex = 23
@@ -241,7 +247,7 @@ Partial Class HighScoresForm
         ' p6namelbl
         ' 
         p6namelbl.AutoSize = True
-        p6namelbl.Location = New Point(20, 116)
+        p6namelbl.Location = New Point(19, 136)
         p6namelbl.Name = "p6namelbl"
         p6namelbl.Size = New Size(45, 15)
         p6namelbl.TabIndex = 24
@@ -250,7 +256,7 @@ Partial Class HighScoresForm
         ' p7namelbl
         ' 
         p7namelbl.AutoSize = True
-        p7namelbl.Location = New Point(20, 136)
+        p7namelbl.Location = New Point(19, 156)
         p7namelbl.Name = "p7namelbl"
         p7namelbl.Size = New Size(45, 15)
         p7namelbl.TabIndex = 25
@@ -259,7 +265,7 @@ Partial Class HighScoresForm
         ' p8namelbl
         ' 
         p8namelbl.AutoSize = True
-        p8namelbl.Location = New Point(20, 156)
+        p8namelbl.Location = New Point(19, 176)
         p8namelbl.Name = "p8namelbl"
         p8namelbl.Size = New Size(45, 15)
         p8namelbl.TabIndex = 26
@@ -268,7 +274,7 @@ Partial Class HighScoresForm
         ' p9namelbl
         ' 
         p9namelbl.AutoSize = True
-        p9namelbl.Location = New Point(20, 176)
+        p9namelbl.Location = New Point(19, 196)
         p9namelbl.Name = "p9namelbl"
         p9namelbl.Size = New Size(45, 15)
         p9namelbl.TabIndex = 27
@@ -277,7 +283,7 @@ Partial Class HighScoresForm
         ' p10namelbl
         ' 
         p10namelbl.AutoSize = True
-        p10namelbl.Location = New Point(20, 196)
+        p10namelbl.Location = New Point(19, 216)
         p10namelbl.Name = "p10namelbl"
         p10namelbl.Size = New Size(51, 15)
         p10namelbl.TabIndex = 28
@@ -285,6 +291,8 @@ Partial Class HighScoresForm
         ' 
         ' rankingpanel
         ' 
+        rankingpanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        rankingpanel.Controls.Add(rankslbl)
         rankingpanel.Controls.Add(ranklbl10)
         rankingpanel.Controls.Add(ranklbl9)
         rankingpanel.Controls.Add(ranklbl8)
@@ -300,8 +308,20 @@ Partial Class HighScoresForm
         rankingpanel.Size = New Size(73, 236)
         rankingpanel.TabIndex = 29
         ' 
+        ' rankslbl
+        ' 
+        rankslbl.AutoSize = True
+        rankslbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        rankslbl.Location = New Point(15, 10)
+        rankslbl.Name = "rankslbl"
+        rankslbl.Size = New Size(40, 15)
+        rankslbl.TabIndex = 22
+        rankslbl.Text = "Ranks"
+        ' 
         ' namepanel
         ' 
+        namepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        namepanel.Controls.Add(namelbl)
         namepanel.Controls.Add(p10namelbl)
         namepanel.Controls.Add(p9namelbl)
         namepanel.Controls.Add(p8namelbl)
@@ -317,10 +337,20 @@ Partial Class HighScoresForm
         namepanel.Size = New Size(85, 238)
         namepanel.TabIndex = 30
         ' 
+        ' namelbl
+        ' 
+        namelbl.AutoSize = True
+        namelbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        namelbl.Location = New Point(19, 11)
+        namelbl.Name = "namelbl"
+        namelbl.Size = New Size(45, 15)
+        namelbl.TabIndex = 23
+        namelbl.Text = "Names"
+        ' 
         ' p1scorelbl
         ' 
         p1scorelbl.AutoSize = True
-        p1scorelbl.Location = New Point(11, 15)
+        p1scorelbl.Location = New Point(12, 35)
         p1scorelbl.Name = "p1scorelbl"
         p1scorelbl.Size = New Size(13, 15)
         p1scorelbl.TabIndex = 29
@@ -329,7 +359,7 @@ Partial Class HighScoresForm
         ' p2scorelbl
         ' 
         p2scorelbl.AutoSize = True
-        p2scorelbl.Location = New Point(11, 35)
+        p2scorelbl.Location = New Point(12, 55)
         p2scorelbl.Name = "p2scorelbl"
         p2scorelbl.Size = New Size(13, 15)
         p2scorelbl.TabIndex = 31
@@ -338,7 +368,7 @@ Partial Class HighScoresForm
         ' p3scorelbl
         ' 
         p3scorelbl.AutoSize = True
-        p3scorelbl.Location = New Point(11, 55)
+        p3scorelbl.Location = New Point(12, 75)
         p3scorelbl.Name = "p3scorelbl"
         p3scorelbl.Size = New Size(13, 15)
         p3scorelbl.TabIndex = 32
@@ -347,7 +377,7 @@ Partial Class HighScoresForm
         ' p4scorelbl
         ' 
         p4scorelbl.AutoSize = True
-        p4scorelbl.Location = New Point(11, 75)
+        p4scorelbl.Location = New Point(12, 95)
         p4scorelbl.Name = "p4scorelbl"
         p4scorelbl.Size = New Size(13, 15)
         p4scorelbl.TabIndex = 33
@@ -356,7 +386,7 @@ Partial Class HighScoresForm
         ' p5scorelbl
         ' 
         p5scorelbl.AutoSize = True
-        p5scorelbl.Location = New Point(11, 95)
+        p5scorelbl.Location = New Point(12, 115)
         p5scorelbl.Name = "p5scorelbl"
         p5scorelbl.Size = New Size(13, 15)
         p5scorelbl.TabIndex = 34
@@ -365,7 +395,7 @@ Partial Class HighScoresForm
         ' p6scorelbl
         ' 
         p6scorelbl.AutoSize = True
-        p6scorelbl.Location = New Point(11, 115)
+        p6scorelbl.Location = New Point(12, 135)
         p6scorelbl.Name = "p6scorelbl"
         p6scorelbl.Size = New Size(13, 15)
         p6scorelbl.TabIndex = 35
@@ -374,7 +404,7 @@ Partial Class HighScoresForm
         ' p7scorelbl
         ' 
         p7scorelbl.AutoSize = True
-        p7scorelbl.Location = New Point(11, 135)
+        p7scorelbl.Location = New Point(12, 155)
         p7scorelbl.Name = "p7scorelbl"
         p7scorelbl.Size = New Size(13, 15)
         p7scorelbl.TabIndex = 36
@@ -383,7 +413,7 @@ Partial Class HighScoresForm
         ' p8scorelbl
         ' 
         p8scorelbl.AutoSize = True
-        p8scorelbl.Location = New Point(11, 155)
+        p8scorelbl.Location = New Point(12, 175)
         p8scorelbl.Name = "p8scorelbl"
         p8scorelbl.Size = New Size(13, 15)
         p8scorelbl.TabIndex = 37
@@ -392,7 +422,7 @@ Partial Class HighScoresForm
         ' p9scorelbl
         ' 
         p9scorelbl.AutoSize = True
-        p9scorelbl.Location = New Point(11, 175)
+        p9scorelbl.Location = New Point(12, 195)
         p9scorelbl.Name = "p9scorelbl"
         p9scorelbl.Size = New Size(13, 15)
         p9scorelbl.TabIndex = 38
@@ -401,7 +431,7 @@ Partial Class HighScoresForm
         ' p10scorelbl
         ' 
         p10scorelbl.AutoSize = True
-        p10scorelbl.Location = New Point(11, 195)
+        p10scorelbl.Location = New Point(12, 215)
         p10scorelbl.Name = "p10scorelbl"
         p10scorelbl.Size = New Size(13, 15)
         p10scorelbl.TabIndex = 39
@@ -409,6 +439,8 @@ Partial Class HighScoresForm
         ' 
         ' scorepanel
         ' 
+        scorepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        scorepanel.Controls.Add(Label1)
         scorepanel.Controls.Add(p10scorelbl)
         scorepanel.Controls.Add(p9scorelbl)
         scorepanel.Controls.Add(p8scorelbl)
@@ -424,10 +456,20 @@ Partial Class HighScoresForm
         scorepanel.Size = New Size(41, 242)
         scorepanel.TabIndex = 40
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        Label1.Location = New Point(-3, 10)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(44, 15)
+        Label1.TabIndex = 29
+        Label1.Text = "Scores"
+        ' 
         ' p1timelbl
         ' 
         p1timelbl.AutoSize = True
-        p1timelbl.Location = New Point(13, 16)
+        p1timelbl.Location = New Point(13, 36)
         p1timelbl.Name = "p1timelbl"
         p1timelbl.Size = New Size(34, 15)
         p1timelbl.TabIndex = 40
@@ -436,7 +478,7 @@ Partial Class HighScoresForm
         ' p2timelbl
         ' 
         p2timelbl.AutoSize = True
-        p2timelbl.Location = New Point(13, 36)
+        p2timelbl.Location = New Point(13, 56)
         p2timelbl.Name = "p2timelbl"
         p2timelbl.Size = New Size(34, 15)
         p2timelbl.TabIndex = 41
@@ -445,7 +487,7 @@ Partial Class HighScoresForm
         ' p3timelbl
         ' 
         p3timelbl.AutoSize = True
-        p3timelbl.Location = New Point(13, 56)
+        p3timelbl.Location = New Point(13, 76)
         p3timelbl.Name = "p3timelbl"
         p3timelbl.Size = New Size(34, 15)
         p3timelbl.TabIndex = 42
@@ -454,7 +496,7 @@ Partial Class HighScoresForm
         ' p6timelbl
         ' 
         p6timelbl.AutoSize = True
-        p6timelbl.Location = New Point(13, 116)
+        p6timelbl.Location = New Point(13, 136)
         p6timelbl.Name = "p6timelbl"
         p6timelbl.Size = New Size(34, 15)
         p6timelbl.TabIndex = 45
@@ -463,7 +505,7 @@ Partial Class HighScoresForm
         ' p5timelbl
         ' 
         p5timelbl.AutoSize = True
-        p5timelbl.Location = New Point(13, 96)
+        p5timelbl.Location = New Point(13, 116)
         p5timelbl.Name = "p5timelbl"
         p5timelbl.Size = New Size(34, 15)
         p5timelbl.TabIndex = 44
@@ -472,7 +514,7 @@ Partial Class HighScoresForm
         ' p4timelbl
         ' 
         p4timelbl.AutoSize = True
-        p4timelbl.Location = New Point(13, 76)
+        p4timelbl.Location = New Point(13, 96)
         p4timelbl.Name = "p4timelbl"
         p4timelbl.Size = New Size(34, 15)
         p4timelbl.TabIndex = 43
@@ -481,7 +523,7 @@ Partial Class HighScoresForm
         ' p9timelbl
         ' 
         p9timelbl.AutoSize = True
-        p9timelbl.Location = New Point(13, 176)
+        p9timelbl.Location = New Point(13, 196)
         p9timelbl.Name = "p9timelbl"
         p9timelbl.Size = New Size(34, 15)
         p9timelbl.TabIndex = 48
@@ -490,7 +532,7 @@ Partial Class HighScoresForm
         ' p8timelbl
         ' 
         p8timelbl.AutoSize = True
-        p8timelbl.Location = New Point(13, 156)
+        p8timelbl.Location = New Point(13, 176)
         p8timelbl.Name = "p8timelbl"
         p8timelbl.Size = New Size(34, 15)
         p8timelbl.TabIndex = 47
@@ -499,7 +541,7 @@ Partial Class HighScoresForm
         ' p7timelbl
         ' 
         p7timelbl.AutoSize = True
-        p7timelbl.Location = New Point(13, 136)
+        p7timelbl.Location = New Point(13, 156)
         p7timelbl.Name = "p7timelbl"
         p7timelbl.Size = New Size(34, 15)
         p7timelbl.TabIndex = 46
@@ -508,7 +550,7 @@ Partial Class HighScoresForm
         ' p10timelbl
         ' 
         p10timelbl.AutoSize = True
-        p10timelbl.Location = New Point(13, 196)
+        p10timelbl.Location = New Point(13, 216)
         p10timelbl.Name = "p10timelbl"
         p10timelbl.Size = New Size(34, 15)
         p10timelbl.TabIndex = 49
@@ -516,6 +558,8 @@ Partial Class HighScoresForm
         ' 
         ' timepanel
         ' 
+        timepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timepanel.Controls.Add(timelbl)
         timepanel.Controls.Add(p10timelbl)
         timepanel.Controls.Add(p9timelbl)
         timepanel.Controls.Add(p8timelbl)
@@ -531,12 +575,47 @@ Partial Class HighScoresForm
         timepanel.Size = New Size(59, 236)
         timepanel.TabIndex = 50
         ' 
+        ' timelbl
+        ' 
+        timelbl.AutoSize = True
+        timelbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        timelbl.Location = New Point(7, 11)
+        timelbl.Name = "timelbl"
+        timelbl.Size = New Size(40, 15)
+        timelbl.TabIndex = 40
+        timelbl.Text = "Times"
+        timelbl.UseWaitCursor = True
+        ' 
+        ' Titlelbl
+        ' 
+        Titlelbl.AutoSize = True
+        Titlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Titlelbl.Font = New Font("Segoe UI", 39.75F, FontStyle.Bold, GraphicsUnit.Point)
+        Titlelbl.Location = New Point(588, 403)
+        Titlelbl.Name = "Titlelbl"
+        Titlelbl.Size = New Size(336, 71)
+        Titlelbl.TabIndex = 51
+        Titlelbl.Text = "BATTLESHIP"
+        ' 
+        ' subtitlelbl
+        ' 
+        subtitlelbl.AutoSize = True
+        subtitlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        subtitlelbl.Font = New Font("Segoe UI", 30F, FontStyle.Italic, GraphicsUnit.Point)
+        subtitlelbl.Location = New Point(671, 480)
+        subtitlelbl.Name = "subtitlelbl"
+        subtitlelbl.Size = New Size(208, 54)
+        subtitlelbl.TabIndex = 52
+        subtitlelbl.Text = "Highscores"
+        ' 
         ' HighScoresForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(subtitlelbl)
+        Controls.Add(Titlelbl)
         Controls.Add(timepanel)
         Controls.Add(scorepanel)
         Controls.Add(namepanel)
@@ -558,6 +637,7 @@ Partial Class HighScoresForm
         timepanel.ResumeLayout(False)
         timepanel.PerformLayout()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
 
     Friend WithEvents WaterBoarder As PictureBox
@@ -607,4 +687,10 @@ Partial Class HighScoresForm
     Friend WithEvents p7timelbl As Label
     Friend WithEvents p10timelbl As Label
     Friend WithEvents timepanel As Panel
+    Friend WithEvents rankslbl As Label
+    Friend WithEvents namelbl As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents timelbl As Label
+    Friend WithEvents Titlelbl As Label
+    Friend WithEvents subtitlelbl As Label
 End Class

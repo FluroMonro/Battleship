@@ -7,7 +7,7 @@
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        'Me.WindowState = FormWindowState.Maximized
+        Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
@@ -15,6 +15,10 @@
         WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
         WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
         backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+        Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
+        Titlelbl.Size = New Size(336, 71)
+        subtitlelbl.Location = New Point(Me.Width / 2 - (208 / 2), 200)
+        subtitlelbl.Size = New Size(208, 54)
     End Sub
 
     Private Sub showscore()
