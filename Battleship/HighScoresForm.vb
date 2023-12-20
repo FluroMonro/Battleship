@@ -1,7 +1,16 @@
 ﻿Public Class HighScoresForm
+
+    Public currentScoreArrow
+    Public currentTimeArrow
     Private Sub HighScoresForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        currentScoreArrow = 1
+        currentTimeArrow = 2
+
+        updateArrowButtonImages(False, True, "descending")
+
         initialiseControlsPlacement()
-        showScore()
+        showscore()
+
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
@@ -25,13 +34,7 @@
         BattleShipsGame.readHighScores()
         printHighScores()
 
-        Dim sortbytime = False
-        Dim sortbyscores = True
-        Dim order = "descending"
-        BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
-        For i = 1 To 10
-            ListBox2.Items.Add(BattleShipsGame.arrHighScores(i).score)
-        Next
+
     End Sub
 
 
@@ -75,5 +78,69 @@
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         Me.Hide()
         MainMenuForm.Show()
+    End Sub
+
+    Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
+        currentScoreArrow = BattleShipsGame.AlternateNum(currentScoreArrow)
+        Dim sortbytime = False
+        Dim sortbyscores = True
+        Dim order As String
+
+        If currentScoreArrow = 1 Then
+            order = "descending"
+        Else
+            order = "ascending"
+        End If
+        updateArrowButtonImages(sortbytime, sortbyscores, order)
+        BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
+    End Sub
+
+    Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
+        currentTimeArrow = BattleShipsGame.AlternateNum(currentTimeArrow)
+        Dim sortbytime = True
+        Dim sortbyscores = False
+        Dim order As String
+
+        If currentTimeArrow = 1 Then
+            order = "descending"
+        Else
+            order = "ascending"
+        End If
+        updateArrowButtonImages(sortbytime, sortbyscores, order)
+        BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
+    End Sub
+    Private Sub updateArrowButtonImages(sortBytime As Boolean, sortbyscores As Boolean, order As String)
+        Select Case order
+            Case "descending"
+                'descending
+                Select Case sortBytime
+                    Case True : timebtn.ImageLocation = Application.StartupPath & "\Pictures\blackdownArrow.png"
+                        Select Case currentScoreArrow
+                            Case 1 : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
+                            Case 2 : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
+                        End Select
+
+                    Case False : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\blackdownArrow.png"
+                        Select Case currentTimeArrow
+                            Case 1 : timebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
+                            Case 2 : timebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
+                        End Select
+                End Select
+            Case "ascending"
+                Select Case sortBytime
+                    Case True : timebtn.ImageLocation = Application.StartupPath & "\Pictures\blackupArrow.png"
+                        Select Case currentScoreArrow
+                            Case 1 : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
+                            Case 2 : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
+                        End Select
+
+                    Case False : scorebtn.ImageLocation = Application.StartupPath & "\Pictures\blackupArrow.png"
+                        Select Case currentTimeArrow
+                            Case 1 : timebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
+                            Case 2 : timebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
+                        End Select
+                End Select
+        End Select
+
     End Sub
 End Class

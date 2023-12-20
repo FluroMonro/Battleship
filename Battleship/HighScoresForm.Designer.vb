@@ -74,12 +74,15 @@ Partial Class HighScoresForm
         timelbl = New Label()
         Titlelbl = New Label()
         subtitlelbl = New Label()
-        Button1 = New Button()
+        scorebtn = New PictureBox()
+        timebtn = New PictureBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         rankingpanel.SuspendLayout()
         namepanel.SuspendLayout()
         scorepanel.SuspendLayout()
         timepanel.SuspendLayout()
+        CType(scorebtn, ComponentModel.ISupportInitialize).BeginInit()
+        CType(timebtn, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' WaterBoarder
@@ -100,7 +103,7 @@ Partial Class HighScoresForm
         backtomainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
         backtomainbtn.FlatAppearance.BorderSize = 0
         backtomainbtn.FlatStyle = FlatStyle.Flat
-        backtomainbtn.Font = New Font("Arial", 12.0F, FontStyle.Bold, GraphicsUnit.Point)
+        backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
         backtomainbtn.ForeColor = SystemColors.ButtonHighlight
         backtomainbtn.Location = New Point(716, 425)
         backtomainbtn.Margin = New Padding(0)
@@ -312,7 +315,7 @@ Partial Class HighScoresForm
         ' rankslbl
         ' 
         rankslbl.AutoSize = True
-        rankslbl.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point)
+        rankslbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
         rankslbl.Location = New Point(15, 10)
         rankslbl.Name = "rankslbl"
         rankslbl.Size = New Size(40, 15)
@@ -341,7 +344,7 @@ Partial Class HighScoresForm
         ' namelbl
         ' 
         namelbl.AutoSize = True
-        namelbl.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point)
+        namelbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
         namelbl.Location = New Point(19, 11)
         namelbl.Name = "namelbl"
         namelbl.Size = New Size(45, 15)
@@ -460,7 +463,7 @@ Partial Class HighScoresForm
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point)
+        Label1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
         Label1.Location = New Point(12, 9)
         Label1.Name = "Label1"
         Label1.Size = New Size(44, 15)
@@ -579,7 +582,7 @@ Partial Class HighScoresForm
         ' timelbl
         ' 
         timelbl.AutoSize = True
-        timelbl.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point)
+        timelbl.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
         timelbl.Location = New Point(13, 9)
         timelbl.Name = "timelbl"
         timelbl.Size = New Size(40, 15)
@@ -602,29 +605,43 @@ Partial Class HighScoresForm
         ' 
         subtitlelbl.AutoSize = True
         subtitlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        subtitlelbl.Font = New Font("Segoe UI", 30.0F, FontStyle.Italic, GraphicsUnit.Point)
+        subtitlelbl.Font = New Font("Segoe UI", 30F, FontStyle.Italic, GraphicsUnit.Point)
         subtitlelbl.Location = New Point(671, 480)
         subtitlelbl.Name = "subtitlelbl"
         subtitlelbl.Size = New Size(208, 54)
         subtitlelbl.TabIndex = 52
         subtitlelbl.Text = "Highscores"
         ' 
-        ' Button1
+        ' scorebtn
         ' 
-        Button1.Location = New Point(223, 678)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(64, 23)
-        Button1.TabIndex = 53
-        Button1.Text = "Button1"
-        Button1.UseVisualStyleBackColor = True
+        scorebtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        scorebtn.Image = My.Resources.Resources.BlackDownArrow
+        scorebtn.Location = New Point(280, 256)
+        scorebtn.Name = "scorebtn"
+        scorebtn.Size = New Size(46, 94)
+        scorebtn.SizeMode = PictureBoxSizeMode.StretchImage
+        scorebtn.TabIndex = 55
+        scorebtn.TabStop = False
+        ' 
+        ' timebtn
+        ' 
+        timebtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timebtn.Image = My.Resources.Resources.BlackDownArrow
+        timebtn.Location = New Point(373, 256)
+        timebtn.Name = "timebtn"
+        timebtn.Size = New Size(46, 94)
+        timebtn.SizeMode = PictureBoxSizeMode.StretchImage
+        timebtn.TabIndex = 56
+        timebtn.TabStop = False
         ' 
         ' HighScoresForm
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(Button1)
+        Controls.Add(timebtn)
+        Controls.Add(scorebtn)
         Controls.Add(subtitlelbl)
         Controls.Add(Titlelbl)
         Controls.Add(timepanel)
@@ -647,6 +664,8 @@ Partial Class HighScoresForm
         scorepanel.PerformLayout()
         timepanel.ResumeLayout(False)
         timepanel.PerformLayout()
+        CType(scorebtn, ComponentModel.ISupportInitialize).EndInit()
+        CType(timebtn, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -704,5 +723,6 @@ Partial Class HighScoresForm
     Friend WithEvents timelbl As Label
     Friend WithEvents Titlelbl As Label
     Friend WithEvents subtitlelbl As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents scorebtn As PictureBox
+    Friend WithEvents timebtn As PictureBox
 End Class

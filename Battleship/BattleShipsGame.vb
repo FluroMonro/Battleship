@@ -1074,7 +1074,7 @@ Public Class BattleShipsGame
         currentPlayer = AlternateNum(currentPlayer)
         displayCurrentPlayer()
     End Sub
-    Private Function AlternateNum(num As Integer)
+    Public Function AlternateNum(num As Integer)
         num = 2 / num
         Return num
     End Function
