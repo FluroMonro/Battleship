@@ -28,14 +28,14 @@
         Dim i As Integer
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
         For i = 1 To 10
-            Dim temp
-            FileSystem.Input(1, temp)
-            If CInt(Asc(temp)) > 57 Or CInt(Asc(temp)) < 48 Then
-                BattleShipsGame.arrHighScores(i).name = temp
-                FileSystem.Input(1, temp)
+            Dim fileContents
+            FileSystem.Input(1, fileContents)
+            If CInt(Asc(fileContents)) > 57 Or CInt(Asc(fileContents)) < 48 Then
+                BattleShipsGame.arrHighScores(i).name = fileContents
+                FileSystem.Input(1, fileContents)
             End If
-            If CInt(Asc(temp)) >= 48 AndAlso CInt(Asc(temp)) <= 57 Then
-                BattleShipsGame.arrHighScores(i).score = temp
+            If CInt(Asc(fileContents)) >= 48 AndAlso CInt(Asc(fileContents)) <= 57 Then
+                BattleShipsGame.arrHighScores(i).score = fileContents
             End If
         Next
         FileSystem.FileClose(1)
@@ -45,7 +45,6 @@
         For i = 1 To 10
             ListBox1.Items.Add(BattleShipsGame.arrHighScores(i).name & " " & BattleShipsGame.arrHighScores(i).score)
         Next i
-        MsgBox(BattleShipsGame.arrHighScores(1).score)
     End Sub
 
 
