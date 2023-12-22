@@ -54,6 +54,7 @@ Partial Class BattleShipsGame
         KeyHitlbl = New Windows.Forms.Label()
         keyRedpicbox = New PictureBox()
         KeyPanel = New Panel()
+        backgroundMapImg = New PictureBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -71,6 +72,7 @@ Partial Class BattleShipsGame
         CType(keyBluepicbox, ComponentModel.ISupportInitialize).BeginInit()
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).BeginInit()
         KeyPanel.SuspendLayout()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' WaterBoarder
@@ -121,7 +123,7 @@ Partial Class BattleShipsGame
         ' timelbl
         ' 
         timelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timelbl.Font = New Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point)
+        timelbl.Font = New Font("Segoe UI", 30.0F, FontStyle.Bold, GraphicsUnit.Point)
         timelbl.ForeColor = Color.Red
         timelbl.ImageAlign = ContentAlignment.BottomCenter
         timelbl.Location = New Point(0, 50)
@@ -135,7 +137,7 @@ Partial Class BattleShipsGame
         ' 
         playernamelbl.AutoSize = True
         playernamelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playernamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
+        playernamelbl.Font = New Font("Arial", 16.0F, FontStyle.Bold, GraphicsUnit.Point)
         playernamelbl.ForeColor = Color.Black
         playernamelbl.Location = New Point(104, 35)
         playernamelbl.Name = "playernamelbl"
@@ -147,7 +149,7 @@ Partial Class BattleShipsGame
         ' 
         playerscorelbl.AutoSize = True
         playerscorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
+        playerscorelbl.Font = New Font("Arial", 16.0F, FontStyle.Bold, GraphicsUnit.Point)
         playerscorelbl.ForeColor = Color.Black
         playerscorelbl.Location = New Point(104, 9)
         playerscorelbl.Name = "playerscorelbl"
@@ -182,7 +184,7 @@ Partial Class BattleShipsGame
         ' 
         opponentnamelbl.AutoSize = True
         opponentnamelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentnamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
+        opponentnamelbl.Font = New Font("Arial", 16.0F, FontStyle.Bold, GraphicsUnit.Point)
         opponentnamelbl.ForeColor = Color.Black
         opponentnamelbl.Location = New Point(341, 10)
         opponentnamelbl.Name = "opponentnamelbl"
@@ -194,7 +196,7 @@ Partial Class BattleShipsGame
         ' 
         opponentscorelbl.AutoSize = True
         opponentscorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
+        opponentscorelbl.Font = New Font("Arial", 16.0F, FontStyle.Bold, GraphicsUnit.Point)
         opponentscorelbl.ForeColor = Color.Black
         opponentscorelbl.Location = New Point(341, 36)
         opponentscorelbl.Name = "opponentscorelbl"
@@ -222,7 +224,7 @@ Partial Class BattleShipsGame
         backtomainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
         backtomainbtn.FlatAppearance.BorderSize = 0
         backtomainbtn.FlatStyle = FlatStyle.Flat
-        backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        backtomainbtn.Font = New Font("Arial", 12.0F, FontStyle.Bold, GraphicsUnit.Point)
         backtomainbtn.ForeColor = SystemColors.ButtonHighlight
         backtomainbtn.Location = New Point(537, 131)
         backtomainbtn.Margin = New Padding(0)
@@ -240,7 +242,7 @@ Partial Class BattleShipsGame
         resetbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
         resetbtn.FlatAppearance.BorderSize = 0
         resetbtn.FlatStyle = FlatStyle.Flat
-        resetbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        resetbtn.Font = New Font("Arial", 12.0F, FontStyle.Bold, GraphicsUnit.Point)
         resetbtn.ForeColor = SystemColors.ButtonHighlight
         resetbtn.Location = New Point(308, 163)
         resetbtn.Margin = New Padding(0)
@@ -375,7 +377,7 @@ Partial Class BattleShipsGame
         ' 
         keytitlelbl.AutoSize = True
         keytitlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        keytitlelbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        keytitlelbl.Font = New Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point)
         keytitlelbl.Location = New Point(15, 12)
         keytitlelbl.Name = "keytitlelbl"
         keytitlelbl.Size = New Size(38, 21)
@@ -386,7 +388,7 @@ Partial Class BattleShipsGame
         ' 
         Keymisslbl.AutoSize = True
         Keymisslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Keymisslbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        Keymisslbl.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point)
         Keymisslbl.Location = New Point(73, 56)
         Keymisslbl.Name = "Keymisslbl"
         Keymisslbl.Size = New Size(37, 19)
@@ -397,7 +399,7 @@ Partial Class BattleShipsGame
         ' 
         KeyHitlbl.AutoSize = True
         KeyHitlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        KeyHitlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        KeyHitlbl.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point)
         KeyHitlbl.Location = New Point(73, 102)
         KeyHitlbl.Name = "KeyHitlbl"
         KeyHitlbl.Size = New Size(27, 19)
@@ -428,12 +430,22 @@ Partial Class BattleShipsGame
         KeyPanel.Size = New Size(136, 157)
         KeyPanel.TabIndex = 35
         ' 
+        ' backgroundMapImg
+        ' 
+        backgroundMapImg.Location = New Point(706, 413)
+        backgroundMapImg.Name = "backgroundMapImg"
+        backgroundMapImg.Size = New Size(100, 50)
+        backgroundMapImg.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundMapImg.TabIndex = 59
+        backgroundMapImg.TabStop = False
+        ' 
         ' BattleShipsGame
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+
         Controls.Add(KeyPanel)
         Controls.Add(playershipPicbox5)
         Controls.Add(playershipPicbox4)
@@ -459,6 +471,7 @@ Partial Class BattleShipsGame
         Controls.Add(PlayerBoardBGImg)
         Controls.Add(backtomainbtn)
         Controls.Add(WaterBoarder)
+        Controls.Add(backgroundMapImg)
         HelpButton = True
         MinimizeBox = False
         Name = "BattleShipsGame"
@@ -482,6 +495,7 @@ Partial Class BattleShipsGame
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).EndInit()
         KeyPanel.ResumeLayout(False)
         KeyPanel.PerformLayout()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -516,4 +530,5 @@ Partial Class BattleShipsGame
     Friend WithEvents KeyHitlbl As Windows.Forms.Label
     Friend WithEvents keyRedpicbox As PictureBox
     Friend WithEvents KeyPanel As Panel
+    Friend WithEvents backgroundMapImg As PictureBox
 End Class

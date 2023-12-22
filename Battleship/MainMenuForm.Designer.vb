@@ -28,7 +28,9 @@ Partial Class MainMenuForm
         playfrommainbtn = New Button()
         openhsbutton = New Button()
         quitProgrambtn = New Button()
+        backgroundMapImg = New PictureBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' WaterBoarder
@@ -60,7 +62,7 @@ Partial Class MainMenuForm
         playfrommainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
         playfrommainbtn.FlatAppearance.BorderSize = 0
         playfrommainbtn.FlatStyle = FlatStyle.Flat
-        playfrommainbtn.Font = New Font("Arial", 20.0F, FontStyle.Bold, GraphicsUnit.Point)
+        playfrommainbtn.Font = New Font("Arial", 20F, FontStyle.Bold, GraphicsUnit.Point)
         playfrommainbtn.ForeColor = SystemColors.ButtonHighlight
         playfrommainbtn.Location = New Point(654, 155)
         playfrommainbtn.Margin = New Padding(0)
@@ -77,7 +79,7 @@ Partial Class MainMenuForm
         openhsbutton.BackgroundImageLayout = ImageLayout.Stretch
         openhsbutton.FlatAppearance.BorderSize = 0
         openhsbutton.FlatStyle = FlatStyle.Flat
-        openhsbutton.Font = New Font("Arial", 20.0F, FontStyle.Bold, GraphicsUnit.Point)
+        openhsbutton.Font = New Font("Arial", 20F, FontStyle.Bold, GraphicsUnit.Point)
         openhsbutton.ForeColor = SystemColors.ButtonHighlight
         openhsbutton.Location = New Point(654, 293)
         openhsbutton.Name = "openhsbutton"
@@ -95,7 +97,7 @@ Partial Class MainMenuForm
         quitProgrambtn.FlatAppearance.BorderColor = Color.Lime
         quitProgrambtn.FlatAppearance.BorderSize = 0
         quitProgrambtn.FlatStyle = FlatStyle.Flat
-        quitProgrambtn.Font = New Font("Arial", 20.0F, FontStyle.Bold, GraphicsUnit.Point)
+        quitProgrambtn.Font = New Font("Arial", 20F, FontStyle.Bold, GraphicsUnit.Point)
         quitProgrambtn.ForeColor = SystemColors.ButtonHighlight
         quitProgrambtn.Location = New Point(654, 452)
         quitProgrambtn.Name = "quitProgrambtn"
@@ -104,9 +106,18 @@ Partial Class MainMenuForm
         quitProgrambtn.Text = "QUIT"
         quitProgrambtn.UseVisualStyleBackColor = False
         ' 
+        ' backgroundMapImg
+        ' 
+        backgroundMapImg.Location = New Point(706, 413)
+        backgroundMapImg.Name = "backgroundMapImg"
+        backgroundMapImg.Size = New Size(100, 50)
+        backgroundMapImg.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundMapImg.TabIndex = 58
+        backgroundMapImg.TabStop = False
+        ' 
         ' MainMenuForm
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
@@ -115,12 +126,14 @@ Partial Class MainMenuForm
         Controls.Add(playfrommainbtn)
         Controls.Add(Titlelbl)
         Controls.Add(WaterBoarder)
+        Controls.Add(backgroundMapImg)
         HelpButton = True
         MinimizeBox = False
         Name = "MainMenuForm"
         Text = "Main Menu"
         TopMost = True
         CType(WaterBoarder, ComponentModel.ISupportInitialize).EndInit()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -130,4 +143,5 @@ Partial Class MainMenuForm
     Friend WithEvents playfrommainbtn As Button
     Friend WithEvents openhsbutton As Button
     Friend WithEvents quitProgrambtn As Button
+    Friend WithEvents backgroundMapImg As PictureBox
 End Class

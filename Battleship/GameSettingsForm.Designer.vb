@@ -47,11 +47,13 @@ Partial Class GameSettingsForm
         Panel3 = New Panel()
         timerckbx = New CheckBox()
         timerValueBar = New TrackBar()
+        backgroundMapImg = New PictureBox()
         CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
         Panel3.SuspendLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).BeginInit()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' WaterBoarder
@@ -350,12 +352,22 @@ Partial Class GameSettingsForm
         timerValueBar.Value = 5
         timerValueBar.Visible = False
         ' 
+        ' backgroundMapImg
+        ' 
+        backgroundMapImg.Location = New Point(706, 413)
+        backgroundMapImg.Name = "backgroundMapImg"
+        backgroundMapImg.Size = New Size(100, 50)
+        backgroundMapImg.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundMapImg.TabIndex = 58
+        backgroundMapImg.TabStop = False
+        ' 
         ' GameSettingsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+
         Controls.Add(timerValueBar)
         Controls.Add(timerckbx)
         Controls.Add(Panel3)
@@ -368,6 +380,7 @@ Partial Class GameSettingsForm
         Controls.Add(backtomainbtn)
         Controls.Add(playbtnGameSettings)
         Controls.Add(WaterBoarder)
+        Controls.Add(backgroundMapImg)
         Name = "GameSettingsForm"
         Text = "Game Settings"
         CType(WaterBoarder, ComponentModel.ISupportInitialize).EndInit()
@@ -378,6 +391,7 @@ Partial Class GameSettingsForm
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).EndInit()
+        CType(backgroundMapImg, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -406,4 +420,5 @@ Partial Class GameSettingsForm
     Friend WithEvents Panel3 As Panel
     Friend WithEvents timerckbx As CheckBox
     Friend WithEvents timerValueBar As TrackBar
+    Friend WithEvents backgroundMapImg As PictureBox
 End Class

@@ -20,11 +20,8 @@
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
         'Setting the placement and size relative to the screen
-        Me.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
-        WaterBoarder.Size = New Size(Me.Width - 220, Me.Height - 250)
-        WaterBoarder.Location = New Point(100, 100)
-        backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+
+
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
         subtitlelbl.Location = New Point(Me.Width / 2 - (208 / 2), 200)
@@ -33,6 +30,14 @@
         backgroundMapImg.Size = New Size(Me.Width - (Me.Width / 90), Me.Height - (Me.Height / 24))
         backgroundMapImg.Location = New Point(0, 0)
         backgroundMapImg.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Me.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
+        WaterBoarder.Size = New Size(Me.Width - 220, Me.Height - 250)
+        WaterBoarder.Location = New Point(100, 100)
+        WaterBoarder.BackColor = Color.FromArgb(CByte(193), CByte(144), CByte(88))
+        backtomainbtn.Parent = WaterBoarder
+        backtomainbtn.Location = New Point(WaterBoarder.Width - 120, WaterBoarder.Height - 60)
+
     End Sub
 
     Private Sub showscore()

@@ -109,7 +109,7 @@ Public Class BattleShipsGame
             playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
             playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
 
-            opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 100, Me.Top + 150)
+            opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 40, Me.Top + 150)
             opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
             opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
 
@@ -191,6 +191,11 @@ Public Class BattleShipsGame
         playershipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
         playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
         playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+
+        backgroundMapImg.ImageLocation = Application.StartupPath & "\Pictures\mapBackground.png"
+        backgroundMapImg.Size = New Size(Me.Width * 1.15, Me.Height * 1.15)
+        backgroundMapImg.Location = New Point(-75, -90)
+        WaterBoarder.BackColor = Color.FromArgb(CByte(193), CByte(144), CByte(88))
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False

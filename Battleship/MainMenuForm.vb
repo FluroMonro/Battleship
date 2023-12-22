@@ -12,16 +12,25 @@
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'Setting the placement and size relative to the screen
-        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
-        WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
+        'WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
+        'WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
-        playfrommainbtn.Location = New Point(Me.Width / 2 - (250 / 2), 350)
+        playfrommainbtn.Location = New Point(Me.Width / 2 - (250 / 2), 300)
         playfrommainbtn.Size = New Size(250, 50)
-        openhsbutton.Location = New Point(Me.Width / 2 - (250 / 2), 475)
+        openhsbutton.Location = New Point(Me.Width / 2 - (250 / 2), 425)
         openhsbutton.Size = New Size(250, 50)
-        quitProgrambtn.Location = New Point(Me.Width / 2 - (250 / 2), 600)
+        quitProgrambtn.Location = New Point(Me.Width / 2 - (250 / 2), 550)
         quitProgrambtn.Size = New Size(250, 50)
+        backgroundMapImg.ImageLocation = Application.StartupPath & "\Pictures\mapBackground.png"
+        backgroundMapImg.Size = New Size(Me.Width - (Me.Width / 90), Me.Height - (Me.Height / 24))
+        backgroundMapImg.Location = New Point(0, 0)
+        backgroundMapImg.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Me.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
+        WaterBoarder.Size = New Size(Me.Width - 220, Me.Height - 250)
+        WaterBoarder.Location = New Point(100, 100)
+        WaterBoarder.BackColor = Color.FromArgb(CByte(193), CByte(144), CByte(88))
     End Sub
 
 
