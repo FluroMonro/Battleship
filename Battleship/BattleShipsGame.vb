@@ -1069,8 +1069,11 @@ Public Class BattleShipsGame
     End Sub
     Private Sub computerMove()
         Select Case difficulty
-            'Case 1
-            '    'begineer
+            Case 1
+                'beginner: random
+                opponentMoveX = Int(Rnd() * gridSize) + 1
+                opponentMoveY = Int(Rnd() * gridSize) + 1
+
             'Case 2
             '    'normal
             'Case 3
