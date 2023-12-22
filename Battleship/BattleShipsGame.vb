@@ -5,7 +5,6 @@ Imports System.Security.Cryptography.X509Certificates
 Imports System.Security.Permissions
 Imports System.Windows.Forms.VisualStyles
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-
 Public Class BattleShipsGame
     Dim currentPlayer As Integer
     Dim gameOver As Boolean
@@ -29,13 +28,11 @@ Public Class BattleShipsGame
     Dim has3alreadydone As Boolean
     Dim playerextraTurn As Boolean
     Dim computerextraTurn As Boolean
-
     Public Structure recHighScore
         Public name As String
         Public score As Integer
         Public time As String
     End Structure
-
     Public arrHighScores(10) As recHighScore
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
         playerName = name
