@@ -29,19 +29,11 @@
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
         playerNameInputTxtbox.Size = New Size(100, 40)
-        backgroundMapImg.ImageLocation = Application.StartupPath & "\Pictures\mapBackground.png"
-        backgroundMapImg.Size = New Size(Me.Width - (Me.Width / 90), Me.Height - (Me.Height / 24))
-        backgroundMapImg.Location = New Point(0, 0)
-        backgroundMapImg.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Me.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
-        WaterBoarder.Size = New Size(Me.Width - 220, Me.Height - 250)
-        WaterBoarder.Location = New Point(100, 100)
-        WaterBoarder.BackColor = Color.FromArgb(CByte(193), CByte(144), CByte(88))
-        backtomainbtn.Parent = WaterBoarder
-        playbtnGameSettings.Parent = WaterBoarder
-        backtomainbtn.Location = New Point(WaterBoarder.Width - 120, WaterBoarder.Height - 60)
-        playbtnGameSettings.Location = New Point(WaterBoarder.Width - 220, WaterBoarder.Height - 60)
+        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
+        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundImg.Location = New Point(0, 0)
+        backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        playbtnGameSettings.Location = New Point(Me.Width - 365, Me.Height - 195)
     End Sub
 
 

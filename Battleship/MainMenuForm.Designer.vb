@@ -23,25 +23,23 @@ Partial Class MainMenuForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(MainMenuForm))
-        WaterBoarder = New PictureBox()
+        backgroundImg = New PictureBox()
         Titlelbl = New Label()
         playfrommainbtn = New Button()
         openhsbutton = New Button()
         quitProgrambtn = New Button()
-        backgroundMapImg = New PictureBox()
-        CType(WaterBoarder, ComponentModel.ISupportInitialize).BeginInit()
-        CType(backgroundMapImg, ComponentModel.ISupportInitialize).BeginInit()
+        CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' WaterBoarder
+        ' backgroundImg
         ' 
-        WaterBoarder.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\42okntgt.zbq\\Pictures\WaterBoard.png"
-        WaterBoarder.Location = New Point(12, 12)
-        WaterBoarder.Name = "WaterBoarder"
-        WaterBoarder.Size = New Size(1488, 852)
-        WaterBoarder.SizeMode = PictureBoxSizeMode.StretchImage
-        WaterBoarder.TabIndex = 0
-        WaterBoarder.TabStop = False
+        backgroundImg.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\42okntgt.zbq\\Pictures\WaterBoard.png"
+        backgroundImg.Location = New Point(12, 12)
+        backgroundImg.Name = "backgroundImg"
+        backgroundImg.Size = New Size(1488, 852)
+        backgroundImg.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundImg.TabIndex = 0
+        backgroundImg.TabStop = False
         ' 
         ' Titlelbl
         ' 
@@ -106,15 +104,6 @@ Partial Class MainMenuForm
         quitProgrambtn.Text = "QUIT"
         quitProgrambtn.UseVisualStyleBackColor = False
         ' 
-        ' backgroundMapImg
-        ' 
-        backgroundMapImg.Location = New Point(706, 413)
-        backgroundMapImg.Name = "backgroundMapImg"
-        backgroundMapImg.Size = New Size(100, 50)
-        backgroundMapImg.SizeMode = PictureBoxSizeMode.StretchImage
-        backgroundMapImg.TabIndex = 58
-        backgroundMapImg.TabStop = False
-        ' 
         ' MainMenuForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -125,23 +114,20 @@ Partial Class MainMenuForm
         Controls.Add(openhsbutton)
         Controls.Add(playfrommainbtn)
         Controls.Add(Titlelbl)
-        Controls.Add(WaterBoarder)
-        Controls.Add(backgroundMapImg)
+        Controls.Add(backgroundImg)
         HelpButton = True
         MinimizeBox = False
         Name = "MainMenuForm"
         Text = "Main Menu"
         TopMost = True
-        CType(WaterBoarder, ComponentModel.ISupportInitialize).EndInit()
-        CType(backgroundMapImg, ComponentModel.ISupportInitialize).EndInit()
+        CType(backgroundImg, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents WaterBoarder As PictureBox
+    Friend WithEvents backgroundImg As PictureBox
     Friend WithEvents Titlelbl As Label
     Friend WithEvents playfrommainbtn As Button
     Friend WithEvents openhsbutton As Button
     Friend WithEvents quitProgrambtn As Button
-    Friend WithEvents backgroundMapImg As PictureBox
 End Class

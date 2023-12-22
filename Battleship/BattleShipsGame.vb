@@ -27,6 +27,8 @@ Public Class BattleShipsGame
     Dim gridOffSet As Integer
     Dim turnsbannerHeight As Short
     Dim has3alreadydone As Boolean
+    Dim playerextraTurn As Boolean
+    Dim computerextraTurn As Boolean
 
     Public Structure recHighScore
         Public name As String
@@ -147,11 +149,8 @@ Public Class BattleShipsGame
             End If
         End If
 
-        WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
         PlayerBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
         OpponentBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
-
-        WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
         'Declarations of variables in relation to custom screensize (eg. Me.Width)
 
         OpponentBoardBGImg.Size = New Size(boardSizes, boardSizes)
@@ -192,11 +191,9 @@ Public Class BattleShipsGame
         playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
         playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
 
-        backgroundMapImg.ImageLocation = Application.StartupPath & "\Pictures\mapBackground.png"
-        backgroundMapImg.Size = New Size(Me.Width * 1.15, Me.Height * 1.15)
-        backgroundMapImg.Location = New Point(-75, -90)
-        WaterBoarder.BackColor = Color.FromArgb(CByte(193), CByte(144), CByte(88))
-
+        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
+        backgroundImg.Location = New Point(0, 0)
+        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
         revealships()
@@ -900,6 +897,11 @@ Public Class BattleShipsGame
             determineScore()
             'scoring()
         Else
+
+            If playerextraTurn = True Then
+                MsgBox("player extra turn...")
+            End If
+
             swapPlayer()
 
             wait(1)
@@ -920,12 +922,16 @@ Public Class BattleShipsGame
                 determineScore()
                 'scoring()
             Else
+                If computerextraTurn = True Then
+                    MsgBox("computer extra turn...")
+                End If
+
+
                 swapPlayer()
             End If
         End If
     End Sub
     Private Function check(MoveX As Integer, MoveY As Integer, gameArr As Array) As Array
-        Dim extraTurn As Boolean
 
         If gameArr(MoveX, MoveY) = 0 Then
             'Miss
@@ -936,21 +942,20 @@ Public Class BattleShipsGame
                 gameArr(MoveX, MoveY) = 3
 
                 'To add extra turns if necessary, depending on the difficulty set 
-                'turnNum = 1 is player, turnNum = 2 is computer	
                 If currentPlayer = 1 Then
                     Select Case difficulty
-                        Case 1 : extraTurn = True
-                        Case 2 : extraTurn = False
-                        Case 3 : extraTurn = False
-                        Case 4 : extraTurn = False
+                        Case 1 : playerextraTurn = True
+                        Case 2 : playerextraTurn = False
+                        Case 3 : playerextraTurn = False
+                        Case 4 : playerextraTurn = False
                     End Select
                 Else
                     If currentPlayer = 2 Then
                         Select Case difficulty
-                            Case 1 : extraTurn = False
-                            Case 2 : extraTurn = False
-                            Case 3 : extraTurn = True
-                            Case 4 : extraTurn = False
+                            Case 1 : computerextraTurn = False
+                            Case 2 : computerextraTurn = False
+                            Case 3 : computerextraTurn = True
+                            Case 4 : computerextraTurn = False
                         End Select
                     End If
                 End If
