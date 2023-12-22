@@ -922,9 +922,23 @@ Public Class BattleShipsGame
                     If computerextraTurn = False Then
                         swapPlayer()
                     Else
-                        MsgBox("computer extra turn...")
-                    End If
+                        While computerextraTurn = True
+                            MsgBox("computer extra turn...")
 
+                            wait(1)
+                            computerMove()
+
+                            'check, returns whether it is game over or not
+                            check(opponentMoveX, opponentMoveY, playergameArray)
+
+                            'update score
+                            updateInGameScore(2)
+
+                            'display grid
+                            assignGridImages(playergameArray, playerpictureBoxArray, currentPlayer)
+                        End While
+                        swapPlayer()
+                    End If
                 End If
             Else
                 MsgBox("player extra turn...")
