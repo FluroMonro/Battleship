@@ -105,7 +105,7 @@ Partial Class GameSettingsForm
         playerNamelbl.AutoSize = True
         playerNamelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerNamelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        playerNamelbl.Location = New Point(211, 260)
+        playerNamelbl.Location = New Point(242, 260)
         playerNamelbl.Name = "playerNamelbl"
         playerNamelbl.Size = New Size(138, 28)
         playerNamelbl.TabIndex = 7
@@ -124,7 +124,7 @@ Partial Class GameSettingsForm
         ' 
         ' playerNameInputTxtbox
         ' 
-        playerNameInputTxtbox.Location = New Point(355, 265)
+        playerNameInputTxtbox.Location = New Point(386, 265)
         playerNameInputTxtbox.Name = "playerNameInputTxtbox"
         playerNameInputTxtbox.PlaceholderText = "Enter your name"
         playerNameInputTxtbox.Size = New Size(195, 23)
@@ -134,9 +134,9 @@ Partial Class GameSettingsForm
         ' 
         playernamewarninglbl.AutoSize = True
         playernamewarninglbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playernamewarninglbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playernamewarninglbl.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point)
         playernamewarninglbl.ForeColor = Color.Red
-        playernamewarninglbl.Location = New Point(355, 291)
+        playernamewarninglbl.Location = New Point(386, 291)
         playernamewarninglbl.Name = "playernamewarninglbl"
         playernamewarninglbl.Size = New Size(195, 19)
         playernamewarninglbl.TabIndex = 10
@@ -146,7 +146,7 @@ Partial Class GameSettingsForm
         ' 
         shipPlacementlbl.AutoSize = True
         shipPlacementlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipPlacementlbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        shipPlacementlbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
         shipPlacementlbl.Location = New Point(24, 15)
         shipPlacementlbl.Name = "shipPlacementlbl"
         shipPlacementlbl.Size = New Size(169, 28)
@@ -157,9 +157,10 @@ Partial Class GameSettingsForm
         ' 
         shipPlacementOwn.AutoSize = True
         shipPlacementOwn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipPlacementOwn.FlatStyle = FlatStyle.Flat
         shipPlacementOwn.Location = New Point(204, 49)
         shipPlacementOwn.Name = "shipPlacementOwn"
-        shipPlacementOwn.Size = New Size(90, 19)
+        shipPlacementOwn.Size = New Size(89, 19)
         shipPlacementOwn.TabIndex = 17
         shipPlacementOwn.Text = "Own Choice"
         shipPlacementOwn.UseVisualStyleBackColor = False
@@ -169,9 +170,10 @@ Partial Class GameSettingsForm
         shipPlacementRand.AutoSize = True
         shipPlacementRand.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         shipPlacementRand.Checked = True
+        shipPlacementRand.FlatStyle = FlatStyle.Flat
         shipPlacementRand.Location = New Point(204, 24)
         shipPlacementRand.Name = "shipPlacementRand"
-        shipPlacementRand.Size = New Size(70, 19)
+        shipPlacementRand.Size = New Size(69, 19)
         shipPlacementRand.TabIndex = 16
         shipPlacementRand.TabStop = True
         shipPlacementRand.Text = "Random"
@@ -181,7 +183,7 @@ Partial Class GameSettingsForm
         ' 
         difficultylbl.AutoSize = True
         difficultylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        difficultylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        difficultylbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
         difficultylbl.Location = New Point(57, 19)
         difficultylbl.Name = "difficultylbl"
         difficultylbl.Size = New Size(113, 28)
@@ -192,9 +194,10 @@ Partial Class GameSettingsForm
         ' 
         difImpos.AutoSize = True
         difImpos.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difImpos.FlatStyle = FlatStyle.Flat
         difImpos.Location = New Point(181, 103)
         difImpos.Name = "difImpos"
-        difImpos.Size = New Size(82, 19)
+        difImpos.Size = New Size(81, 19)
         difImpos.TabIndex = 19
         difImpos.Text = "Impossible"
         difImpos.UseVisualStyleBackColor = False
@@ -203,9 +206,10 @@ Partial Class GameSettingsForm
         ' 
         difHard.AutoSize = True
         difHard.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difHard.FlatStyle = FlatStyle.Flat
         difHard.Location = New Point(181, 78)
         difHard.Name = "difHard"
-        difHard.Size = New Size(51, 19)
+        difHard.Size = New Size(50, 19)
         difHard.TabIndex = 18
         difHard.Text = "Hard"
         difHard.UseVisualStyleBackColor = False
@@ -215,9 +219,10 @@ Partial Class GameSettingsForm
         difNorm.AutoSize = True
         difNorm.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         difNorm.Checked = True
+        difNorm.FlatStyle = FlatStyle.Flat
         difNorm.Location = New Point(181, 53)
         difNorm.Name = "difNorm"
-        difNorm.Size = New Size(65, 19)
+        difNorm.Size = New Size(64, 19)
         difNorm.TabIndex = 17
         difNorm.TabStop = True
         difNorm.Text = "Normal"
@@ -227,9 +232,10 @@ Partial Class GameSettingsForm
         ' 
         difBegin.AutoSize = True
         difBegin.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difBegin.FlatStyle = FlatStyle.Flat
         difBegin.Location = New Point(181, 28)
         difBegin.Name = "difBegin"
-        difBegin.Size = New Size(72, 19)
+        difBegin.Size = New Size(71, 19)
         difBegin.TabIndex = 16
         difBegin.Text = "Beginner"
         difBegin.UseVisualStyleBackColor = False
@@ -238,9 +244,10 @@ Partial Class GameSettingsForm
         ' 
         BoardSizebtn8.AutoSize = True
         BoardSizebtn8.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        BoardSizebtn8.FlatStyle = FlatStyle.Flat
         BoardSizebtn8.Location = New Point(165, 27)
         BoardSizebtn8.Name = "BoardSizebtn8"
-        BoardSizebtn8.Size = New Size(43, 19)
+        BoardSizebtn8.Size = New Size(42, 19)
         BoardSizebtn8.TabIndex = 11
         BoardSizebtn8.Text = "8x8"
         BoardSizebtn8.UseVisualStyleBackColor = False
@@ -250,9 +257,15 @@ Partial Class GameSettingsForm
         BoardSizebtn10.AutoSize = True
         BoardSizebtn10.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         BoardSizebtn10.Checked = True
+        BoardSizebtn10.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(128), CByte(255))
+        BoardSizebtn10.FlatAppearance.BorderSize = 3
+        BoardSizebtn10.FlatAppearance.CheckedBackColor = Color.Red
+        BoardSizebtn10.FlatAppearance.MouseDownBackColor = Color.FromArgb(CByte(255), CByte(255), CByte(128))
+        BoardSizebtn10.FlatAppearance.MouseOverBackColor = Color.Black
+        BoardSizebtn10.FlatStyle = FlatStyle.Flat
         BoardSizebtn10.Location = New Point(165, 52)
         BoardSizebtn10.Name = "BoardSizebtn10"
-        BoardSizebtn10.Size = New Size(55, 19)
+        BoardSizebtn10.Size = New Size(54, 19)
         BoardSizebtn10.TabIndex = 12
         BoardSizebtn10.TabStop = True
         BoardSizebtn10.Text = "10x10"
@@ -262,9 +275,10 @@ Partial Class GameSettingsForm
         ' 
         BoardSizebtn12.AutoSize = True
         BoardSizebtn12.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        BoardSizebtn12.FlatStyle = FlatStyle.Flat
         BoardSizebtn12.Location = New Point(165, 77)
         BoardSizebtn12.Name = "BoardSizebtn12"
-        BoardSizebtn12.Size = New Size(55, 19)
+        BoardSizebtn12.Size = New Size(54, 19)
         BoardSizebtn12.TabIndex = 13
         BoardSizebtn12.Text = "12x12"
         BoardSizebtn12.UseVisualStyleBackColor = False
@@ -273,9 +287,10 @@ Partial Class GameSettingsForm
         ' 
         BoardSizebtn14.AutoSize = True
         BoardSizebtn14.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        BoardSizebtn14.FlatStyle = FlatStyle.Flat
         BoardSizebtn14.Location = New Point(165, 102)
         BoardSizebtn14.Name = "BoardSizebtn14"
-        BoardSizebtn14.Size = New Size(55, 19)
+        BoardSizebtn14.Size = New Size(54, 19)
         BoardSizebtn14.TabIndex = 14
         BoardSizebtn14.Text = "14x14"
         BoardSizebtn14.UseVisualStyleBackColor = False
@@ -284,7 +299,7 @@ Partial Class GameSettingsForm
         ' 
         boardSizelbl.AutoSize = True
         boardSizelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        boardSizelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        boardSizelbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
         boardSizelbl.Location = New Point(31, 18)
         boardSizelbl.Name = "boardSizelbl"
         boardSizelbl.Size = New Size(123, 28)
@@ -332,8 +347,8 @@ Partial Class GameSettingsForm
         ' 
         timerckbx.AutoSize = True
         timerckbx.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timerckbx.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        timerckbx.Location = New Point(257, 542)
+        timerckbx.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
+        timerckbx.Location = New Point(288, 542)
         timerckbx.Name = "timerckbx"
         timerckbx.Size = New Size(92, 32)
         timerckbx.TabIndex = 26
@@ -343,7 +358,7 @@ Partial Class GameSettingsForm
         ' timerValueBar
         ' 
         timerValueBar.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timerValueBar.Location = New Point(355, 542)
+        timerValueBar.Location = New Point(386, 542)
         timerValueBar.Name = "timerValueBar"
         timerValueBar.Size = New Size(205, 45)
         timerValueBar.TabIndex = 27
