@@ -100,7 +100,7 @@
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
         printHighScores()
-        updateRankings(order)
+        updateRankings(order, "score")
     End Sub
 
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
@@ -118,7 +118,7 @@
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
         printHighScores()
-        updateRankings(order)
+        updateRankings(order, "time")
     End Sub
     Private Sub updateArrowButtonImages(sortBytime As Boolean, sortbyscores As Boolean, order As String)
         Select Case order
@@ -153,30 +153,56 @@
                 End Select
         End Select
     End Sub
-    Private Sub updateRankings(order As String)
+    Private Sub updateRankings(order As String, type As String)
         Select Case order
             Case "descending"
-                ranklbl1.Text = 10
-                ranklbl2.Text = 9
-                ranklbl3.Text = 8
-                ranklbl4.Text = 7
-                ranklbl5.Text = 6
-                ranklbl6.Text = 5
-                ranklbl7.Text = 4
-                ranklbl8.Text = 3
-                ranklbl9.Text = 2
-                ranklbl10.Text = 1
+                If type = "time" Then
+                    ranklbl1.Text = 10
+                    ranklbl2.Text = 9
+                    ranklbl3.Text = 8
+                    ranklbl4.Text = 7
+                    ranklbl5.Text = 6
+                    ranklbl6.Text = 5
+                    ranklbl7.Text = 4
+                    ranklbl8.Text = 3
+                    ranklbl9.Text = 2
+                    ranklbl10.Text = 1
+                Else
+                    ranklbl1.Text = 1
+                    ranklbl2.Text = 2
+                    ranklbl3.Text = 3
+                    ranklbl4.Text = 4
+                    ranklbl5.Text = 5
+                    ranklbl6.Text = 6
+                    ranklbl7.Text = 7
+                    ranklbl8.Text = 8
+                    ranklbl9.Text = 9
+                    ranklbl10.Text = 10
+                End If
             Case "ascending"
-                ranklbl1.Text = 1
-                ranklbl2.Text = 2
-                ranklbl3.Text = 3
-                ranklbl4.Text = 4
-                ranklbl5.Text = 5
-                ranklbl6.Text = 6
-                ranklbl7.Text = 7
-                ranklbl8.Text = 8
-                ranklbl9.Text = 9
-                ranklbl10.Text = 10
+                If type = "time" Then
+                    ranklbl1.Text = 1
+                    ranklbl2.Text = 2
+                    ranklbl3.Text = 3
+                    ranklbl4.Text = 4
+                    ranklbl5.Text = 5
+                    ranklbl6.Text = 6
+                    ranklbl7.Text = 7
+                    ranklbl8.Text = 8
+                    ranklbl9.Text = 9
+                    ranklbl10.Text = 10
+                Else
+                    ranklbl1.Text = 10
+                    ranklbl2.Text = 9
+                    ranklbl3.Text = 8
+                    ranklbl4.Text = 7
+                    ranklbl5.Text = 6
+                    ranklbl6.Text = 5
+                    ranklbl7.Text = 4
+                    ranklbl8.Text = 3
+                    ranklbl9.Text = 2
+                    ranklbl10.Text = 1
+                End If
         End Select
     End Sub
 
