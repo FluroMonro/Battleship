@@ -1076,6 +1076,7 @@ Public Class BattleShipsGame
 
             'Case 2
             '    'normal
+
             'Case 3
             '    'hard
 
@@ -1089,6 +1090,7 @@ Public Class BattleShipsGame
                         End If
                     Next column
                 Next row
+
             Case Else
                 'temporary Go thru array
                 If opponentMoveX = gridSize Then
