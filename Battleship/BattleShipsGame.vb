@@ -898,36 +898,36 @@ Public Class BattleShipsGame
             'scoring()
         Else
 
-            If playerextraTurn = True Then
-                MsgBox("player extra turn...")
-            End If
-
-            swapPlayer()
-
-            wait(1)
-            computerMove()
-
-            'check, returns whether it is game over or not
-            check(opponentMoveX, opponentMoveY, playergameArray)
-
-            'update score
-            updateInGameScore(2)
-
-            'display grid
-            assignGridImages(playergameArray, playerpictureBoxArray, currentPlayer)
-
-
-            If gameOver = True Then
-                revealships()
-                determineScore()
-                'scoring()
-            Else
-                If computerextraTurn = True Then
-                    MsgBox("computer extra turn...")
-                End If
-
-
+            If playerextraTurn = False Then
                 swapPlayer()
+
+                wait(1)
+                computerMove()
+
+                'check, returns whether it is game over or not
+                check(opponentMoveX, opponentMoveY, playergameArray)
+
+                'update score
+                updateInGameScore(2)
+
+                'display grid
+                assignGridImages(playergameArray, playerpictureBoxArray, currentPlayer)
+
+
+                If gameOver = True Then
+                    revealships()
+                    determineScore()
+                    'scoring()
+                Else
+                    If computerextraTurn = False Then
+                        swapPlayer()
+                    Else
+                        MsgBox("computer extra turn...")
+                    End If
+
+                End If
+            Else
+                MsgBox("player extra turn...")
             End If
         End If
     End Sub
@@ -936,6 +936,9 @@ Public Class BattleShipsGame
         If gameArr(MoveX, MoveY) = 0 Then
             'Miss
             gameArr(MoveX, MoveY) = 2
+            playerextraTurn = False
+            computerextraTurn = False
+
         Else
             If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
                 'Hit
