@@ -28,6 +28,19 @@ Public Class BattleShipsGame
     Dim has3alreadydone As Boolean
     Dim playerextraTurn As Boolean
     Dim computerextraTurn As Boolean
+
+    Dim computership2(2, 2) As Integer
+    Dim computership3a(3, 3) As Integer
+    Dim computership3b(3, 3) As Integer
+    Dim computership4(4, 4) As Integer
+    Dim computership5(5, 5) As Integer
+
+    Dim playership2(2, 2) As Integer
+    Dim playership3a(3, 3) As Integer
+    Dim playership3b(3, 3) As Integer
+    Dim playership4(4, 4) As Integer
+    Dim playership5(5, 5) As Integer
+
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -73,78 +86,47 @@ Public Class BattleShipsGame
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
-        'Me.Width = 1528
-        'Me.Height = 960
-
         Dim turnsbannerWidth As Short
 
         Dim turnsbannerXloc As Short
         Dim turnsbannerYLoc As Short
 
-        If Me.Width / Me.Height = 1528 / 960 Then
-            '2023 Macbook Pro M2 scree ratio (through a virtual machine)
 
-            turnsbannerWidth = 330
-            turnsbannerHeight = 45
-            turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
-            turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - 40
-            boardSizes = turnsbannerYLoc - ((turnsbannerHeight / 2) - 9)
-
-            'Setting the placement and size relative to the screen
-            backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
-            resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
-
-
-            OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
-            PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
-
-            timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
-            timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
-            timelbl.Size = New Size(80, 30)
-
-            Dim playernameoffSet = 5 * (playerName.Length)
-            playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
-            playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
-            playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
-            playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
-
-            opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 40, Me.Top + 150)
-            opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
-            opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
-
-            gridCircleSizeNum = (boardSizes - 30) / gridSize
-        Else
-            If Me.Width / Me.Height = 23 / 13 Then
-                'Monitor (Through a virtual machine
-                turnsbannerWidth = Me.Width * 0.215
-                turnsbannerHeight = Me.Height * 0.048
-                turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
-                turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - (Me.Height / 36.4)
-                boardSizes = turnsbannerYLoc - (turnsbannerHeight / 2) + Me.Height / 97.0666666667
-
-                'Setting the placement and size relative to the screen
-                backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
-                resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
-
-                OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), Me.Height / 48.5333333333)
-                PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + Me.Height / 24.2666666667)
-
-                timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
-                timelbl.Location = New Point((Me.Width / 2) - (Me.Width / 39.9379844961), Me.Height - (Me.Height / 13.2363636364))
-                timelbl.Size = New Size(Me.Width / 19.9689922481, Me.Height / 32.3555555556)
-
-                playernamelbl.Location = New Point(Me.Width / 2 - 600, Me.Bottom - 230)
-                playernametxt.Location = New Point(Me.Width / 2 - 520, Me.Bottom - 230)
-                playernametxt.Location = New Point(Me.Width / 2 - 520, Me.Bottom - 230)
-                playerscorelbl.Location = New Point(Me.Width / 2 - 568, Me.Bottom - 200)
-                playerscoretxt.Location = New Point(Me.Width / 2 - 490, Me.Bottom - 200)
-                opponentnamelbl.Location = New Point(Me.Width / 2 + 400, Me.Top + 150)
-                opponentscorelbl.Location = New Point(Me.Width / 2 + 432, Me.Top + 180)
-                opponentscoretxt.Location = New Point(Me.Width / 2 + 510, Me.Top + 180)
-
-                gridCircleSizeNum = CInt(Me.Width / 44.4137931034)
-            End If
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Width = 1528
+            Me.Height = 961
         End If
+
+        turnsbannerWidth = 330
+        turnsbannerHeight = 45
+        turnsbannerXloc = Me.Width / 2 - (turnsbannerWidth / 2)
+        turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - 40
+        boardSizes = turnsbannerYLoc - ((turnsbannerHeight / 2) - 9)
+
+        'Setting the placement and size relative to the screen
+        backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+        resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
+
+
+        OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
+        PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
+
+        timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
+        timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
+        timelbl.Size = New Size(80, 30)
+
+        Dim playernameoffSet = 5 * (playerName.Length)
+        playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
+        playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
+        playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
+        playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
+
+        opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 40, Me.Top + 150)
+        opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
+        opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
+
+        gridCircleSizeNum = (boardSizes - 30) / gridSize
 
         PlayerBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
         OpponentBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
@@ -224,14 +206,28 @@ Public Class BattleShipsGame
                 picbox.Width = gridCircleSizeNum
                 picbox.Height = gridCircleSizeNum
                 If currentPlayer = 1 Then
-                    If Me.Width / Me.Height = 1528 / 960 Then
-                        '2023 Macbook Pro M2 screen ratio (through a virtual machine)
+                    Select Case gridSize
+                        Case 8
+                            picbox.Left = col * gridCircleSizeNum - 33
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
+                        Case 10
+                            picbox.Left = col * gridCircleSizeNum - gridOffSet
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                        Case 12
+                            picbox.Left = col * gridCircleSizeNum - 15
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                        Case 14
+                            picbox.Left = col * gridCircleSizeNum - 14
+                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                    End Select
+                Else
+                    If currentPlayer = 2 Then
                         Select Case gridSize
                             Case 8
                                 picbox.Left = col * gridCircleSizeNum - 33
                                 picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
                             Case 10
-                                picbox.Left = col * gridCircleSizeNum - gridOffSet
+                                picbox.Left = col * gridCircleSizeNum - 20
                                 picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
                             Case 12
                                 picbox.Left = col * gridCircleSizeNum - 15
@@ -240,39 +236,6 @@ Public Class BattleShipsGame
                                 picbox.Left = col * gridCircleSizeNum - 14
                                 picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
                         End Select
-                    Else
-                        If Me.Width / Me.Height = 23 / 13 Then
-                            'Monitor (Through a virtual machine
-                            picbox.Left = col * gridCircleSizeNum - 31
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 122
-                        End If
-                    End If
-                Else
-                    If currentPlayer = 2 Then
-                        If Me.Width / Me.Height = 1528 / 960 Then
-                            '2023 Macbook Pro M2 scree ratio (through a virtual machine)
-
-                            Select Case gridSize
-                                Case 8
-                                    picbox.Left = col * gridCircleSizeNum - 33
-                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
-                                Case 10
-                                    picbox.Left = col * gridCircleSizeNum - 20
-                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
-                                Case 12
-                                    picbox.Left = col * gridCircleSizeNum - 15
-                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
-                                Case 14
-                                    picbox.Left = col * gridCircleSizeNum - 14
-                                    picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
-                            End Select
-                        Else
-                            If Me.Width / Me.Height = 23 / 13 Then
-                                'Monitor (Through a virtual machine
-                                picbox.Left = col * gridCircleSizeNum - 31
-                                picbox.Top = (row * gridCircleSizeNum) - 32
-                            End If
-                        End If
                         AddHandler picbox.Click, AddressOf getPlayerMove
                     End If
                 End If
