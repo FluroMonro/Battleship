@@ -34,6 +34,7 @@ Public Class BattleShipsGame
     Dim computerStage As Integer
     Dim oppositePath As Boolean
     Dim NextShip As Boolean
+    Dim duplicateShip As Boolean
 
     Public Structure recHighScore
         Public name As String
@@ -61,25 +62,6 @@ Public Class BattleShipsGame
     End Sub
     Public Sub onFormLoad()
         'scoring()
-
-        playernametxt.Text = playerName
-
-        initialiseControlsPlacement()
-
-        'reset the boards before generating a new
-        resetGameArray(opponentgameArray)
-        resetGameArray(playergameArray)
-
-        'generate gameArray randomly (both computer and Player)
-        generateGameArr(opponentgameArray, 2)
-        generateGameArr(playergameArray, 1)
-
-        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
-        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
-
-        assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
-        assignGridImages(playergameArray, playerpictureBoxArray, 1)
-
         currentPlayer = 1
         opponentMoveX = 0
         opponentMoveY = 1
@@ -108,21 +90,42 @@ Public Class BattleShipsGame
                 IndividualShipLocations(numberOfShips).Y(numberOfElements) = 0
             Next numberOfElements
         Next numberOfShips
+
+        playernametxt.Text = playerName
+
+        initialiseControlsPlacement()
+
+        'reset the boards before generating a new
+        resetGameArray(opponentgameArray)
+        resetGameArray(playergameArray)
+
+        'generate gameArray randomly (both computer and Player)
+        generateGameArr(opponentgameArray, 2)
+        generateGameArr(playergameArray, 1)
+
+        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
+
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
+        assignGridImages(playergameArray, playerpictureBoxArray, 1)
+
+
+
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        Me.WindowState = FormWindowState.Normal
+        Me.WindowState = FormWindowState.Minimized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'To force the game to a 1528x960 window unless already that resolution in fullscreen
-        If Me.Width <> 1528 And Me.Height <> 960 Then
-            Me.WindowState = FormWindowState.Normal
-            Me.Width = 1528
-            Me.Height = 960
-        End If
+        'If Me.Width <> 1528 And Me.Height <> 960 Then
+        '    Me.WindowState = FormWindowState.Normal
+        '    Me.Width = 1528
+        '    Me.Height = 960
+        'End If
 
         Dim turnsbannerWidth As Short
         Dim turnsbannerXloc As Short
@@ -278,6 +281,7 @@ Public Class BattleShipsGame
         If isShipPlacementRandom = True Then
             generateShips(gameArr, 2, player)
             generateShips(gameArr, 3, player)
+            duplicateShip = True
             generateShips(gameArr, 3, player)
             generateShips(gameArr, 4, player)
             generateShips(gameArr, 5, player)
@@ -294,6 +298,8 @@ Public Class BattleShipsGame
         Dim col As Integer
         Dim row As Integer
         Dim direction As Integer
+        Dim temporarySpace As Integer
+        temporarySpace = 1
 
         While valid = False
             col = Int(Rnd() * gridSize) + 1
@@ -315,6 +321,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -324,6 +331,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -333,6 +341,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -342,6 +351,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 AndAlso gameArr(col, row - 4) = 0 Then
                                         For i = row To row - (length - 1) Step -1
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -356,6 +366,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -365,6 +376,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -374,6 +386,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -383,6 +396,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 AndAlso gameArr(col, row + 4) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -397,6 +411,9 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
+
+                                            setIndividualShipLocations(col, row, length, temporarySpace)
+                                            temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
                                     Else
@@ -406,6 +423,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -415,6 +433,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -424,6 +443,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 AndAlso gameArr(col - 4, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -438,6 +458,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -447,6 +468,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -456,6 +478,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -465,6 +488,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 AndAlso gameArr(col + 4, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
+                                            setIndividualShipLocations(col, row, length, i)
                                         Next i
                                         valid = True
                                     Else
@@ -486,6 +510,40 @@ Public Class BattleShipsGame
         End If
         Return gameArr
     End Function
+
+    Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, i As Integer)
+        Dim shipNumber As Integer
+        If currentPlayer = 2 Then
+            'opponent
+            Select Case length
+                Case 2 : shipNumber = 1
+                Case 3
+                    If duplicateShip = False Then
+                        shipNumber = 2
+                    Else
+                        shipNumber = 3
+                    End If
+                Case 4 : shipNumber = 4
+                Case 5 : shipNumber = 5
+            End Select
+        Else
+            'player
+            Select Case length
+                Case 2 : shipNumber = 6
+                Case 3
+                    If duplicateShip = False Then
+                        shipNumber = 7
+                    Else
+                        shipNumber = 8
+                    End If
+                Case 4 : shipNumber = 9
+                Case 5 : shipNumber = 10
+            End Select
+        End If
+
+        IndividualShipLocations(shipNumber).X(i) = col
+        IndividualShipLocations(shipNumber).Y(i) = row
+    End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         Dim valid As Boolean
         Select Case direction
