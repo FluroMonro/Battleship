@@ -95,7 +95,7 @@ Public Class BattleShipsGame
         If Me.Width <> 1528 And Me.Height <> 960 Then
             Me.WindowState = FormWindowState.Normal
             Me.Width = 1528
-            Me.Height = 961
+            Me.Height = 960
         End If
 
         turnsbannerWidth = 330
