@@ -1042,8 +1042,7 @@ Public Class BattleShipsGame
     Private Sub computerMove()
         Select Case difficulty
             Case "beginner"
-                opponentMoveX = Int(Rnd() * gridSize) + 1
-                opponentMoveY = Int(Rnd() * gridSize) + 1
+                randomSquare()
 
             'Case "Normal"
             '    'normal
@@ -1069,6 +1068,11 @@ Public Class BattleShipsGame
                     opponentMoveX = opponentMoveX + 1
                 End If
         End Select
+    End Sub
+
+    Private Sub randomSquare()
+        opponentMoveX = Int(Rnd() * gridSize) + 1
+        opponentMoveY = Int(Rnd() * gridSize) + 1
     End Sub
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
