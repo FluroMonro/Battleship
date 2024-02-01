@@ -41,6 +41,11 @@ Public Class BattleShipsGame
     Dim playership4(4, 4) As Integer
     Dim playership5(5, 5) As Integer
 
+    Dim hasAHit As Boolean
+    Dim hasAHitLocation As String
+    Dim previousHit As Boolean
+    Dim computerStage As Integer
+
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -928,6 +933,19 @@ Public Class BattleShipsGame
                 'Hit
                 gameArr(MoveX, MoveY) = 3
 
+                'To control the computer move
+                If currentPlayer = 2 Then
+                    If hasAHit = False Then
+                        hasAHit = True
+                        hasAHitLocation = CStr(MoveX) & "," & CStr(MoveY)
+                        previousHit = False
+                        computerStage = 1
+                    Else
+                        previousHit = True
+                        computerStage = 2
+                    End If
+                End If
+
                 'To add extra turns if necessary, depending on the difficulty set 
                 If currentPlayer = 1 Then
                     Select Case difficulty
@@ -1045,10 +1063,9 @@ Public Class BattleShipsGame
                 randomSquare()
 
             'Case "Normal"
-            '    'normal
-
-            'Case "Hard"
-            '    'hard
+                '
+            Case "Hard"
+                MsgBox("Hard move")
 
             Case "Impossible"
                 For row = 1 To gridSize
