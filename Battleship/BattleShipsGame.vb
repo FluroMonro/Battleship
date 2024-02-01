@@ -29,18 +29,6 @@ Public Class BattleShipsGame
     Dim playerextraTurn As Boolean
     Dim computerextraTurn As Boolean
 
-    Dim computership2(2, 2) As Integer
-    Dim computership3a(3, 3) As Integer
-    Dim computership3b(3, 3) As Integer
-    Dim computership4(4, 4) As Integer
-    Dim computership5(5, 5) As Integer
-
-    Dim playership2(2, 2) As Integer
-    Dim playership3a(3, 3) As Integer
-    Dim playership3b(3, 3) As Integer
-    Dim playership4(4, 4) As Integer
-    Dim playership5(5, 5) As Integer
-
     Dim hasAHit As Boolean
     Dim previousHit As Boolean
     Dim computerStage As Integer
@@ -56,11 +44,25 @@ Public Class BattleShipsGame
     Public Structure gridLocation
         Public X As Integer
         Public Y As Integer
+        Public Name As Integer
     End Structure
 
     Public arrHighScores(10) As recHighScore
     Public arrgridLocation(boardSizes) As gridLocation
     Public hasAhitLocation As gridLocation
+    Public IndividualShipLocations(10) As gridLocation
+
+    'Dim computership2 As gridLocation
+    'Dim computership3a As gridLocation
+    'Dim computership3b As gridLocation
+    'Dim computership4 As gridLocation
+    'Dim computership5 As gridLocation
+
+    'Dim playership2 As gridLocation
+    'Dim playership3a As gridLocation
+    'Dim playership3b As gridLocation
+    'Dim playership4 As gridLocation
+    'Dim playership5 As gridLocation
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
