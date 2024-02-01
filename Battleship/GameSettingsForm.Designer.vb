@@ -33,7 +33,7 @@ Partial Class GameSettingsForm
         shipPlacementOwn = New RadioButton()
         shipPlacementRand = New RadioButton()
         difficultylbl = New Label()
-        difImpos = New RadioButton()
+        difUnfair = New RadioButton()
         difHard = New RadioButton()
         difNorm = New RadioButton()
         difBegin = New RadioButton()
@@ -45,6 +45,7 @@ Partial Class GameSettingsForm
         Panel1 = New Panel()
         Panel2 = New Panel()
         Panel3 = New Panel()
+        difImpos = New RadioButton()
         timerckbx = New CheckBox()
         timerValueBar = New TrackBar()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +135,7 @@ Partial Class GameSettingsForm
         ' 
         playernamewarninglbl.AutoSize = True
         playernamewarninglbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playernamewarninglbl.Font = New Font("Segoe UI", 10.0F, FontStyle.Regular, GraphicsUnit.Point)
+        playernamewarninglbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
         playernamewarninglbl.ForeColor = Color.Red
         playernamewarninglbl.Location = New Point(386, 291)
         playernamewarninglbl.Name = "playernamewarninglbl"
@@ -146,7 +147,7 @@ Partial Class GameSettingsForm
         ' 
         shipPlacementlbl.AutoSize = True
         shipPlacementlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipPlacementlbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
+        shipPlacementlbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         shipPlacementlbl.Location = New Point(24, 15)
         shipPlacementlbl.Name = "shipPlacementlbl"
         shipPlacementlbl.Size = New Size(169, 28)
@@ -183,24 +184,24 @@ Partial Class GameSettingsForm
         ' 
         difficultylbl.AutoSize = True
         difficultylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        difficultylbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
+        difficultylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         difficultylbl.Location = New Point(57, 19)
         difficultylbl.Name = "difficultylbl"
         difficultylbl.Size = New Size(113, 28)
         difficultylbl.TabIndex = 20
         difficultylbl.Text = "Difficulty: "
         ' 
-        ' difImpos
+        ' difUnfair
         ' 
-        difImpos.AutoSize = True
-        difImpos.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        difImpos.FlatStyle = FlatStyle.Flat
-        difImpos.Location = New Point(181, 103)
-        difImpos.Name = "difImpos"
-        difImpos.Size = New Size(81, 19)
-        difImpos.TabIndex = 19
-        difImpos.Text = "Impossible"
-        difImpos.UseVisualStyleBackColor = False
+        difUnfair.AutoSize = True
+        difUnfair.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difUnfair.FlatStyle = FlatStyle.Flat
+        difUnfair.Location = New Point(181, 103)
+        difUnfair.Name = "difUnfair"
+        difUnfair.Size = New Size(56, 19)
+        difUnfair.TabIndex = 19
+        difUnfair.Text = "Unfair"
+        difUnfair.UseVisualStyleBackColor = False
         ' 
         ' difHard
         ' 
@@ -299,7 +300,7 @@ Partial Class GameSettingsForm
         ' 
         boardSizelbl.AutoSize = True
         boardSizelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        boardSizelbl.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
+        boardSizelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         boardSizelbl.Location = New Point(31, 18)
         boardSizelbl.Name = "boardSizelbl"
         boardSizelbl.Size = New Size(123, 28)
@@ -333,21 +334,34 @@ Partial Class GameSettingsForm
         ' Panel3
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Panel3.Controls.Add(difficultylbl)
         Panel3.Controls.Add(difImpos)
+        Panel3.Controls.Add(difficultylbl)
+        Panel3.Controls.Add(difUnfair)
         Panel3.Controls.Add(difHard)
         Panel3.Controls.Add(difNorm)
         Panel3.Controls.Add(difBegin)
         Panel3.Location = New Point(820, 542)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(321, 157)
+        Panel3.Size = New Size(321, 164)
         Panel3.TabIndex = 25
+        ' 
+        ' difImpos
+        ' 
+        difImpos.AutoSize = True
+        difImpos.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difImpos.FlatStyle = FlatStyle.Flat
+        difImpos.Location = New Point(181, 128)
+        difImpos.Name = "difImpos"
+        difImpos.Size = New Size(81, 19)
+        difImpos.TabIndex = 21
+        difImpos.Text = "Impossible"
+        difImpos.UseVisualStyleBackColor = False
         ' 
         ' timerckbx
         ' 
         timerckbx.AutoSize = True
         timerckbx.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timerckbx.Font = New Font("Segoe UI", 15.0F, FontStyle.Bold, GraphicsUnit.Point)
+        timerckbx.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         timerckbx.Location = New Point(288, 542)
         timerckbx.Name = "timerckbx"
         timerckbx.Size = New Size(92, 32)
@@ -407,7 +421,7 @@ Partial Class GameSettingsForm
     Friend WithEvents shipPlacementOwn As RadioButton
     Friend WithEvents shipPlacementRand As RadioButton
     Friend WithEvents difficultylbl As Label
-    Friend WithEvents difImpos As RadioButton
+    Friend WithEvents difUnfair As RadioButton
     Friend WithEvents difHard As RadioButton
     Friend WithEvents difNorm As RadioButton
     Friend WithEvents difBegin As RadioButton
@@ -421,4 +435,5 @@ Partial Class GameSettingsForm
     Friend WithEvents Panel3 As Panel
     Friend WithEvents timerckbx As CheckBox
     Friend WithEvents timerValueBar As TrackBar
+    Friend WithEvents difImpos As RadioButton
 End Class

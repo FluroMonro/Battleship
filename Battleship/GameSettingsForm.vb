@@ -86,16 +86,20 @@
 
 
         If difBegin.Checked = True Then
-            difficulty = 1
+            difficulty = "beginner"
         Else
             If difNorm.Checked = True Then
-                difficulty = 2
+                difficulty = "Normal"
             Else
                 If difHard.Checked = True Then
-                    difficulty = 3
+                    difficulty = "Hard"
                 Else
-                    If difImpos.Checked = True Then
-                        difficulty = 4
+                    If difUnfair.Checked = True Then
+                        difficulty = "Unfair"
+                    Else
+                        If difImpos.Checked = True Then
+                            difficulty = "Impossible"
+                        End If
                     End If
                 End If
             End If

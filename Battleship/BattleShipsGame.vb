@@ -47,7 +47,7 @@ Public Class BattleShipsGame
         Public time As String
     End Structure
     Public arrHighScores(10) As recHighScore
-    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As Integer, shipPlacementOption As Boolean)
+    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
         difficulty = userDifficulty
@@ -895,8 +895,19 @@ Public Class BattleShipsGame
 
                             'display grid
                             assignGridImages(playergameArray, playerpictureBoxArray, currentPlayer)
+
+                            If gameOver = True Then
+                                computerextraTurn = False
+                            End If
+
                         End While
-                        swapPlayer()
+                        If gameOver = True Then
+                            revealships()
+                            determineScore()
+                            'scoring()
+                        Else
+                            swapPlayer()
+                        End If
                     End If
                 End If
             Else
@@ -920,18 +931,20 @@ Public Class BattleShipsGame
                 'To add extra turns if necessary, depending on the difficulty set 
                 If currentPlayer = 1 Then
                     Select Case difficulty
-                        Case 1 : playerextraTurn = True
-                        Case 2 : playerextraTurn = False
-                        Case 3 : playerextraTurn = False
-                        Case 4 : playerextraTurn = False
+                        Case "Beginner" : playerextraTurn = True
+                        Case "Normal" : playerextraTurn = False
+                        Case "Hard" : playerextraTurn = False
+                        Case "Unfair" : playerextraTurn = False
+                        Case "Impossible" : playerextraTurn = True
                     End Select
                 Else
                     If currentPlayer = 2 Then
                         Select Case difficulty
-                            Case 1 : computerextraTurn = False
-                            Case 2 : computerextraTurn = False
-                            Case 3 : computerextraTurn = True
-                            Case 4 : computerextraTurn = False
+                            Case "Beginner" : computerextraTurn = False
+                            Case "Normal" : computerextraTurn = False
+                            Case "Hard" : computerextraTurn = False
+                            Case "Unfair" : computerextraTurn = True
+                            Case "Impossible" : computerextraTurn = False
                         End Select
                     End If
                 End If
@@ -1028,19 +1041,17 @@ Public Class BattleShipsGame
     End Sub
     Private Sub computerMove()
         Select Case difficulty
-            Case 1
-                'beginner: random
+            Case "beginner"
                 opponentMoveX = Int(Rnd() * gridSize) + 1
                 opponentMoveY = Int(Rnd() * gridSize) + 1
 
-            'Case 2
+            'Case "Normal"
             '    'normal
 
-            'Case 3
+            'Case "Hard"
             '    'hard
 
-            Case 4
-                'impossible
+            Case "Impossible"
                 For row = 1 To gridSize
                     For column = 1 To gridSize
                         If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
@@ -1049,7 +1060,6 @@ Public Class BattleShipsGame
                         End If
                     Next column
                 Next row
-
             Case Else
                 'temporary Go thru array
                 If opponentMoveX = gridSize Then

@@ -5,5 +5,5 @@
     Public timeLeft As Integer
     Public timeSpent As Integer
     Public isShipPlacementRandom As Boolean
-    Public difficulty As Integer
+    Public difficulty As String
 End Module
