@@ -42,17 +42,20 @@ Public Class BattleShipsGame
         Public time As String
     End Structure
 
-    Public Structure gridLocation
+    Public Structure shipGridLocations
         Public X() As Integer
         Public Y() As Integer
-        Public Name As Integer
+        Public Name As String
+    End Structure
+
+    Public Structure singleGridLocation
+        Public X As Integer
+        Public Y As Integer
     End Structure
 
     Public arrHighScores(10) As recHighScore
-    Public arrgridLocation(boardSizes) As gridLocation
-    Public hasAhitLocation As gridLocation
-    Public IndividualShipLocations(10) As gridLocation
-
+    Public hasAhitLocation As singleGridLocation
+    Public IndividualShipLocations(10) As shipGridLocations
 
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
@@ -61,13 +64,19 @@ Public Class BattleShipsGame
         isShipPlacementRandom = shipPlacementOption
     End Sub
     Public Sub onFormLoad()
-        'scoring()
+        initialiseControlsPlacement()
+
+        'reset the boards before generating a new
+        resetGameArray(opponentgameArray)
+        resetGameArray(playergameArray)
+
         currentPlayer = 1
         opponentMoveX = 0
         opponentMoveY = 1
         hasAHit = False
-        hasAhitLocation.X(1) = 0
-        hasAhitLocation.Y(1) = 0
+
+        hasAhitLocation.X = 0
+        hasAhitLocation.Y = 0
         previousHit = False
         computerStage = 0
         oppositePath = False
@@ -84,6 +93,7 @@ Public Class BattleShipsGame
         IndividualShipLocations(9).Name = "playership4"
         IndividualShipLocations(10).Name = "playership5"
 
+
         For numberOfShips = 1 To 10
             For numberOfElements = 1 To 5
                 IndividualShipLocations(numberOfShips).X(numberOfElements) = 0
@@ -93,11 +103,6 @@ Public Class BattleShipsGame
 
         playernametxt.Text = playerName
 
-        initialiseControlsPlacement()
-
-        'reset the boards before generating a new
-        resetGameArray(opponentgameArray)
-        resetGameArray(playergameArray)
 
         'generate gameArray randomly (both computer and Player)
         generateGameArr(opponentgameArray, 2)
@@ -109,7 +114,7 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
         assignGridImages(playergameArray, playerpictureBoxArray, 1)
 
-
+        'scoring()
 
     End Sub
     Private Sub initialiseControlsPlacement()
@@ -1027,8 +1032,8 @@ Public Class BattleShipsGame
                 If currentPlayer = 2 Then
                     If hasAHit = False Then
                         hasAHit = True
-                        hasAhitLocation.X(1) = MoveX
-                        hasAhitLocation.Y(1) = MoveY
+                        hasAhitLocation.X = MoveX
+                        hasAhitLocation.Y = MoveY
                         previousHit = False
                         computerStage = 1
                     Else
