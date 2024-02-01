@@ -1066,33 +1066,52 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub computerMove()
-        Select Case difficulty
-            Case "beginner"
-                randomSquare()
+        Dim tempdifficulty As String
+        tempdifficulty = difficulty
+        If tempdifficulty = "Unfair" Then
+            tempdifficulty = "Hard"
+        End If
+        Select Case tempdifficulty
+                Case "beginner"
+                    randomSquare()
 
-            'Case "Normal"
-                '
-            Case "Hard"
-                MsgBox("Hard move")
+                Case "Normal"
+                    If hasAHit = False Then
+                        randomSquare()
+                    Else
+                        randomAdjacent()
+                    End If
 
-            Case "Impossible"
-                For row = 1 To gridSize
-                    For column = 1 To gridSize
-                        If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
-                            opponentMoveX = column
-                            opponentMoveY = row
+                Case "Hard"
+                    If hasAHit = False Then
+                        randomSquare()
+                    Else
+                        If computerStage = 1 Then
+                            randomAdjacent()
+                        Else
+
                         End If
-                    Next column
-                Next row
-            Case Else
-                'temporary Go thru array
-                If opponentMoveX = gridSize Then
-                    opponentMoveY = opponentMoveY + 1
-                    opponentMoveX = 1
-                Else
-                    opponentMoveX = opponentMoveX + 1
-                End If
-        End Select
+
+                    End If
+
+                Case "Impossible"
+                    For row = 1 To gridSize
+                        For column = 1 To gridSize
+                            If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                                opponentMoveX = column
+                                opponentMoveY = row
+                            End If
+                        Next column
+                    Next row
+                Case Else
+                    'temporary Go thru array
+                    If opponentMoveX = gridSize Then
+                        opponentMoveY = opponentMoveY + 1
+                        opponentMoveX = 1
+                    Else
+                        opponentMoveX = opponentMoveX + 1
+                    End If
+            End Select
     End Sub
 
     Private Sub randomSquare()
@@ -1103,6 +1122,13 @@ Public Class BattleShipsGame
     Private Sub randomAdjacent()
         MsgBox("Random Adjacent")
     End Sub
+    Private Sub continueOnPath()
+        MsgBox("Continue On Path")
+    End Sub
+    Private Sub swapPathDirection()
+        MsgBox("Swap Path Direction")
+    End Sub
+
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
