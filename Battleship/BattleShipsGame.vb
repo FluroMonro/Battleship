@@ -52,17 +52,7 @@ Public Class BattleShipsGame
     Public hasAhitLocation As gridLocation
     Public IndividualShipLocations(10) As gridLocation
 
-    'Dim computership2 As gridLocation
-    'Dim computership3a As gridLocation
-    'Dim computership3b As gridLocation
-    'Dim computership4 As gridLocation
-    'Dim computership5 As gridLocation
 
-    'Dim playership2 As gridLocation
-    'Dim playership3a As gridLocation
-    'Dim playership3b As gridLocation
-    'Dim playership4 As gridLocation
-    'Dim playership5 As gridLocation
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -101,6 +91,21 @@ Public Class BattleShipsGame
         oppositePath = False
         NextShip = False
 
+        IndividualShipLocations(1).Name = "computership2"
+        IndividualShipLocations(2).Name = "computership3a"
+        IndividualShipLocations(3).Name = "computership3b"
+        IndividualShipLocations(4).Name = "computership4"
+        IndividualShipLocations(5).Name = "computership5"
+        IndividualShipLocations(6).Name = "playership2"
+        IndividualShipLocations(7).Name = "playership3a"
+        IndividualShipLocations(8).Name = "playership3b"
+        IndividualShipLocations(9).Name = "playership4"
+        IndividualShipLocations(10).Name = "playership5"
+
+        For i = 1 To 10
+            IndividualShipLocations(i).X = 0
+            IndividualShipLocations(i).Y = 0
+        Next
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
