@@ -1071,6 +1071,7 @@ Public Class BattleShipsGame
         If tempdifficulty = "Unfair" Then
             tempdifficulty = "Hard"
         End If
+
         Select Case tempdifficulty
             Case "beginner"
                 randomSquare()
@@ -1100,9 +1101,7 @@ Public Class BattleShipsGame
                                 continueOnPath()
                             End If
                         End If
-
                     End If
-
                 End If
 
             Case "Impossible"
