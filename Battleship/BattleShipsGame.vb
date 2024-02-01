@@ -42,7 +42,6 @@ Public Class BattleShipsGame
     Dim playership5(5, 5) As Integer
 
     Dim hasAHit As Boolean
-    Dim hasAHitLocation As String
     Dim previousHit As Boolean
     Dim computerStage As Integer
     Dim oppositePath As Boolean
@@ -53,7 +52,15 @@ Public Class BattleShipsGame
         Public score As Integer
         Public time As String
     End Structure
+
+    Public Structure gridLocation
+        Public X As Integer
+        Public Y As Integer
+    End Structure
+
     Public arrHighScores(10) As recHighScore
+    Public arrgridLocation(boardSizes) As gridLocation
+    Public hasAhitLocation As gridLocation
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -84,12 +91,20 @@ Public Class BattleShipsGame
         currentPlayer = 1
         opponentMoveX = 0
         opponentMoveY = 1
+        hasAHit = False
+        hasAhitLocation.X = 0
+        hasAhitLocation.Y = 0
+        previousHit = False
+        computerStage = 0
+        oppositePath = False
+        NextShip = False
+
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
         'To initialise the screen size as the fullscreen display size of the user
-        Me.WindowState = FormWindowState.Maximized
+        Me.WindowState = FormWindowState.Normal
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
@@ -945,7 +960,8 @@ Public Class BattleShipsGame
                 If currentPlayer = 2 Then
                     If hasAHit = False Then
                         hasAHit = True
-                        hasAHitLocation = CStr(MoveX) & "," & CStr(MoveY)
+                        hasAhitLocation.X = MoveX
+                        hasAhitLocation.Y = MoveY
                         previousHit = False
                         computerStage = 1
                     Else
