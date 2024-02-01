@@ -86,6 +86,7 @@ Public Class BattleShipsGame
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
+        'To force the game to a 1528x960 window unless already that resolution in fullscreen
         If Me.Width <> 1528 And Me.Height <> 960 Then
             Me.WindowState = FormWindowState.Normal
             Me.Width = 1528
