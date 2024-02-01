@@ -86,17 +86,15 @@ Public Class BattleShipsGame
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
-        Dim turnsbannerWidth As Short
-
-        Dim turnsbannerXloc As Short
-        Dim turnsbannerYLoc As Short
-
-
         If Me.Width <> 1528 And Me.Height <> 960 Then
             Me.WindowState = FormWindowState.Normal
             Me.Width = 1528
             Me.Height = 960
         End If
+
+        Dim turnsbannerWidth As Short
+        Dim turnsbannerXloc As Short
+        Dim turnsbannerYLoc As Short
 
         turnsbannerWidth = 330
         turnsbannerHeight = 45
