@@ -1074,6 +1074,10 @@ Public Class BattleShipsGame
         opponentMoveX = Int(Rnd() * gridSize) + 1
         opponentMoveY = Int(Rnd() * gridSize) + 1
     End Sub
+
+    Private Sub randomAdjacent()
+        MsgBox("Random Adjacent")
+    End Sub
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
