@@ -42,8 +42,8 @@ Public Class BattleShipsGame
     End Structure
 
     Public Structure gridLocation
-        Public X As Integer
-        Public Y As Integer
+        Public X() As Integer
+        Public Y() As Integer
         Public Name As Integer
     End Structure
 
@@ -84,8 +84,8 @@ Public Class BattleShipsGame
         opponentMoveX = 0
         opponentMoveY = 1
         hasAHit = False
-        hasAhitLocation.X = 0
-        hasAhitLocation.Y = 0
+        hasAhitLocation.X(1) = 0
+        hasAhitLocation.Y(1) = 0
         previousHit = False
         computerStage = 0
         oppositePath = False
@@ -102,10 +102,12 @@ Public Class BattleShipsGame
         IndividualShipLocations(9).Name = "playership4"
         IndividualShipLocations(10).Name = "playership5"
 
-        For i = 1 To 10
-            IndividualShipLocations(i).X = 0
-            IndividualShipLocations(i).Y = 0
-        Next
+        For numberOfShips = 1 To 10
+            For numberOfElements = 1 To 5
+                IndividualShipLocations(numberOfShips).X(numberOfElements) = 0
+                IndividualShipLocations(numberOfShips).Y(numberOfElements) = 0
+            Next numberOfElements
+        Next numberOfShips
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
@@ -967,8 +969,8 @@ Public Class BattleShipsGame
                 If currentPlayer = 2 Then
                     If hasAHit = False Then
                         hasAHit = True
-                        hasAhitLocation.X = MoveX
-                        hasAhitLocation.Y = MoveY
+                        hasAhitLocation.X(1) = MoveX
+                        hasAhitLocation.Y(1) = MoveY
                         previousHit = False
                         computerStage = 1
                     Else
