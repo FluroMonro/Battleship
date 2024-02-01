@@ -1072,29 +1072,40 @@ Public Class BattleShipsGame
             tempdifficulty = "Hard"
         End If
         Select Case tempdifficulty
-                Case "beginner"
+            Case "beginner"
+                randomSquare()
+
+            Case "Normal"
+                If hasAHit = False Then
                     randomSquare()
+                Else
+                    randomAdjacent()
+                End If
 
-                Case "Normal"
-                    If hasAHit = False Then
-                        randomSquare()
-                    Else
+            Case "Hard"
+                If hasAHit = False Then
+                    randomSquare()
+                Else
+                    If computerStage = 1 Then
                         randomAdjacent()
-                    End If
-
-                Case "Hard"
-                    If hasAHit = False Then
-                        randomSquare()
                     Else
-                        If computerStage = 1 Then
-                            randomAdjacent()
+                        If previousHit = True Then
+                            continueOnPath()
                         Else
-
+                            If NextShip = True Then
+                                hasAHit = False
+                                randomSquare()
+                            Else
+                                swapPathDirection()
+                                continueOnPath()
+                            End If
                         End If
 
                     End If
 
-                Case "Impossible"
+                End If
+
+            Case "Impossible"
                     For row = 1 To gridSize
                         For column = 1 To gridSize
                             If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
