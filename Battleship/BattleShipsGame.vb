@@ -45,6 +45,8 @@ Public Class BattleShipsGame
     Dim hasAHitLocation As String
     Dim previousHit As Boolean
     Dim computerStage As Integer
+    Dim oppositePath As Boolean
+    Dim NextShip As Boolean
 
     Public Structure recHighScore
         Public name As String
@@ -928,6 +930,12 @@ Public Class BattleShipsGame
             playerextraTurn = False
             computerextraTurn = False
 
+            If currentPlayer = 2 Then
+                previousHit = False
+                If oppositePath = True Then
+                    NextShip = True
+                End If
+            End If
         Else
             If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
                 'Hit
