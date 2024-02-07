@@ -1048,8 +1048,8 @@ Public Class BattleShipsGame
 
             If playerextraTurn = False Then
                 swapPlayer()
-
-                wait(1)
+                Me.WindowState = FormWindowState.Minimized
+                wait(0.5)
                 computerMove()
 
                 'check, returns whether it is game over or not
@@ -1364,7 +1364,7 @@ Public Class BattleShipsGame
             opponentscoretxt.Text = opponentScore
         End If
     End Sub
-    Private Sub wait(ByVal seconds As Short)
+    Private Sub wait(ByVal seconds As Single)
         For i As Integer = 0 To seconds * 100
             System.Threading.Thread.Sleep(10)
             Application.DoEvents()
