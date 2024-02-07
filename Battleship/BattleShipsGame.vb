@@ -1117,18 +1117,30 @@ Public Class BattleShipsGame
                         shipSunk = False
                         whichShip = "opponentShip2"
                     End If
+                    If playerShip2(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip2"
+                    End If
                 Next
 
                 For i = 1 To 3
                     If opponentShip3a(i).isHit = False Then
                         shipSunk = False
-                        whichShip = "opponentShip3"
+                        whichShip = "opponentShip3a"
+                    End If
+                    If playerShip3a(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "playerShip3a"
                     End If
                 Next
                 For i = 1 To 3
                     If opponentShip3b(i).isHit = False Then
                         shipSunk = False
                         whichShip = "opponentShip3b"
+                    End If
+                    If playerShip3b(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "playerShip3b"
                     End If
                 Next
 
@@ -1137,6 +1149,10 @@ Public Class BattleShipsGame
                         shipSunk = False
                         whichShip = "opponentShip4"
                     End If
+                    If playerShip4(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "playerShip4"
+                    End If
                 Next
 
                 For i = 1 To 5
@@ -1144,8 +1160,13 @@ Public Class BattleShipsGame
                         shipSunk = False
                         whichShip = "opponentShip5"
                     End If
+                    If playerShip5(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "plaerShip5"
+                    End If
                 Next
 
+                'to reveal each of opponents ship
                 If shipSunk = True Then
                     Select Case whichShip
                         Case "opponentShip2" : opponentshipPicbox2.Visible = True
