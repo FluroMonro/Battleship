@@ -554,12 +554,12 @@ Public Class BattleShipsGame
         End If
         Return gameArr
     End Function
-
     Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, direction As Integer, i As Integer, currentplayernum As Integer)
         'to set storage of the individual ships
         Dim Xoffset As Integer
         Dim Yoffset As Integer
         Dim duplicateship As Boolean
+
         If playerShip3a(1).X = 0 Then
             duplicateship = False
         End If
@@ -1100,7 +1100,62 @@ Public Class BattleShipsGame
         Else
             If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
                 'Hit
+
                 gameArr(MoveX, MoveY) = 3
+
+                'if a ship has been hit
+
+
+
+                'If a ship has been sunk
+                Dim shipSunk As Boolean
+                Dim whichShip As String
+                shipSunk = True
+
+                For i = 1 To 2
+                    If opponentShip2(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip2"
+                    End If
+                Next
+
+                For i = 1 To 3
+                    If opponentShip3a(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip3"
+                    End If
+                Next
+                For i = 1 To 3
+                    If opponentShip3b(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip3b"
+                    End If
+                Next
+
+                For i = 1 To 4
+                    If opponentShip4(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip4"
+                    End If
+                Next
+
+                For i = 1 To 5
+                    If opponentShip5(i).isHit = False Then
+                        shipSunk = False
+                        whichShip = "opponentShip5"
+                    End If
+                Next
+
+                If shipSunk = True Then
+                    Select Case whichShip
+                        Case "opponentShip2" : opponentshipPicbox2.Visible = True
+                        Case "opponentShip3a" : opponentshipPicbox3a.Visible = True
+                        Case "opponentShip3b" : opponentshipPicbox3b.Visible = True
+                        Case "opponentShip4" : opponentshipPicbox4.Visible = True
+                        Case "opponentShip5" : opponentshipPicbox5.Visible = True
+                    End Select
+                End If
+
 
                 'To control the computer move
                 If currentPlayer = 2 Then
@@ -1285,12 +1340,10 @@ Public Class BattleShipsGame
                 End If
         End Select
     End Sub
-
     Private Sub randomSquare()
         opponentMoveX = Int(Rnd() * gridSize) + 1
         opponentMoveY = Int(Rnd() * gridSize) + 1
     End Sub
-
     Private Sub randomAdjacent()
         MsgBox("Random Adjacent")
     End Sub
@@ -1300,7 +1353,6 @@ Public Class BattleShipsGame
     Private Sub swapPathDirection()
         MsgBox("Swap Path Direction")
     End Sub
-
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
