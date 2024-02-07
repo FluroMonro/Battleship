@@ -1161,6 +1161,7 @@ Public Class BattleShipsGame
                 If opponentShip2(1).isHit = True AndAlso opponentShip2(2).isHit = True Then
                     MsgBox("You sunk a ship")
                     opponentshipPicbox2.Visible = True
+                    opponentshipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 End If
 
                 If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
@@ -1171,6 +1172,7 @@ Public Class BattleShipsGame
                 If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
                     MsgBox("You sunk a ship")
                     opponentshipPicbox3a.Visible = True
+                    opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 End If
 
                 If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
@@ -1180,6 +1182,8 @@ Public Class BattleShipsGame
                 If opponentShip3b(1).isHit = True AndAlso opponentShip3b(2).isHit = True AndAlso opponentShip3b(3).isHit = True Then
                     MsgBox("You sunk a ship")
                     opponentshipPicbox3b.Visible = True
+                    opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+
                 End If
 
                 If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
@@ -1190,6 +1194,8 @@ Public Class BattleShipsGame
                 If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
                     MsgBox("You sunk a ship")
                     opponentshipPicbox4.Visible = True
+                    opponentshipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+
                 End If
 
                 If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
@@ -1200,6 +1206,8 @@ Public Class BattleShipsGame
                 If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
                     MsgBox("You sunk a ship")
                     opponentshipPicbox5.Visible = True
+                    opponentshipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+
                 End If
 
                 If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
