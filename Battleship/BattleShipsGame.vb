@@ -558,10 +558,19 @@ Public Class BattleShipsGame
         'to set storage of the individual ships
         Dim Xoffset As Integer
         Dim Yoffset As Integer
-        Dim duplicateship As Boolean
+        Dim playerDuplicateship As Boolean
+        Dim opponenetDuplicateship As Boolean
 
-        If playerShip3a(1).X = 0 Then
-            duplicateship = False
+        If playerShip3a(1).X = 0 AndAlso playerShip3a(1).Y = 0 Then
+            playerDuplicateship = False
+        Else
+            playerDuplicateship = True
+        End If
+
+        If opponentShip3a(1).X = 0 AndAlso opponentShip3a(1).Y = 0 Then
+            opponenetDuplicateship = False
+        Else
+            opponenetDuplicateship = True
         End If
 
         For elementCount = 1 To length
@@ -571,7 +580,7 @@ Public Class BattleShipsGame
                         playerShip2(elementCount).X = col + Xoffset
                         playerShip2(elementCount).Y = row + Yoffset
                     Case 3
-                        If duplicateship = False Then
+                        If playerDuplicateship = False Then
                             playerShip3a(elementCount).X = col + Xoffset
                             playerShip3a(elementCount).Y = row + Yoffset
                         Else
@@ -591,7 +600,7 @@ Public Class BattleShipsGame
                         opponentShip2(elementCount).X = col + Xoffset
                         opponentShip2(elementCount).Y = row + Yoffset
                     Case 3
-                        If duplicateship = False Then
+                        If opponenetDuplicateship = False Then
                             opponentShip3a(elementCount).X = col + Xoffset
                             opponentShip3a(elementCount).Y = row + Yoffset
                         Else
@@ -621,6 +630,10 @@ Public Class BattleShipsGame
                     'Down
                     Xoffset = Xoffset + 1
             End Select
+        Next
+
+        For i = 1 To 3
+            ListBox1.Items.Add(opponentShip3b(i).X & " " & opponentShip3b(i).Y)
         Next
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
@@ -1100,120 +1113,135 @@ Public Class BattleShipsGame
         Else
             If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
                 'Hit
-
                 gameArr(MoveX, MoveY) = 3
 
                 'if a ship has been hit
-
-
+                For i = 1 To 2
+                    If playerShip2(i).X = MoveX AndAlso playerShip2(i).Y = MoveY Then
+                        playerShip2(i).isHit = True
+                    End If
+                    If opponentShip2(i).X = MoveX AndAlso opponentShip2(i).Y = MoveY Then
+                        opponentShip2(i).isHit = True
+                    End If
+                Next i
+                For i = 1 To 3
+                    If playerShip3a(i).X = MoveX AndAlso playerShip3a(i).Y = MoveY Then
+                        playerShip3a(i).isHit = True
+                    End If
+                    If opponentShip3a(i).X = MoveX AndAlso opponentShip3a(i).Y = MoveY Then
+                        opponentShip3a(i).isHit = True
+                    End If
+                    If playerShip3b(i).X = MoveX AndAlso playerShip3b(i).Y = MoveY Then
+                        playerShip3b(i).isHit = True
+                    End If
+                    If opponentShip3b(i).X = MoveX AndAlso opponentShip3b(i).Y = MoveY Then
+                        opponentShip3b(i).isHit = True
+                    End If
+                Next i
+                For i = 1 To 4
+                    If playerShip4(i).X = MoveX AndAlso playerShip4(i).Y = MoveY Then
+                        playerShip4(i).isHit = True
+                    End If
+                    If opponentShip4(i).X = MoveX AndAlso opponentShip4(i).Y = MoveY Then
+                        opponentShip4(i).isHit = True
+                    End If
+                Next i
+                For i = 1 To 5
+                    If playerShip5(i).X = MoveX AndAlso playerShip5(i).Y = MoveY Then
+                        playerShip5(i).isHit = True
+                    End If
+                    If opponentShip5(i).X = MoveX AndAlso opponentShip5(i).Y = MoveY Then
+                        opponentShip5(i).isHit = True
+                    End If
+                Next i
 
                 'If a ship has been sunk
-                Dim shipSunk As Boolean
-                Dim whichShip As String
-                shipSunk = True
 
-                For i = 1 To 2
-                    If opponentShip2(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip2"
-                    End If
-                    If playerShip2(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip2"
-                    End If
-                Next
-
-                For i = 1 To 3
-                    If opponentShip3a(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip3a"
-                    End If
-                    If playerShip3a(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "playerShip3a"
-                    End If
-                Next
-                For i = 1 To 3
-                    If opponentShip3b(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip3b"
-                    End If
-                    If playerShip3b(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "playerShip3b"
-                    End If
-                Next
-
-                For i = 1 To 4
-                    If opponentShip4(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip4"
-                    End If
-                    If playerShip4(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "playerShip4"
-                    End If
-                Next
-
-                For i = 1 To 5
-                    If opponentShip5(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "opponentShip5"
-                    End If
-                    If playerShip5(i).isHit = False Then
-                        shipSunk = False
-                        whichShip = "plaerShip5"
-                    End If
-                Next
-
-                'to reveal each of opponents ship
-                If shipSunk = True Then
-                    Select Case whichShip
-                        Case "opponentShip2" : opponentshipPicbox2.Visible = True
-                        Case "opponentShip3a" : opponentshipPicbox3a.Visible = True
-                        Case "opponentShip3b" : opponentshipPicbox3b.Visible = True
-                        Case "opponentShip4" : opponentshipPicbox4.Visible = True
-                        Case "opponentShip5" : opponentshipPicbox5.Visible = True
-                    End Select
+                'Length 2
+                If opponentShip2(1).isHit = True AndAlso opponentShip2(2).isHit = True Then
+                    MsgBox("You sunk a ship")
+                    opponentshipPicbox2.Visible = True
                 End If
 
+                If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
+                    MsgBox("Your ship has been sunken")
+                End If
+
+                'Length 3
+                If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
+                    MsgBox("You sunk a ship")
+                    opponentshipPicbox3a.Visible = True
+                End If
+
+                If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
+                    MsgBox("Your ship has been sunken")
+                End If
+
+                If opponentShip3b(1).isHit = True AndAlso opponentShip3b(2).isHit = True AndAlso opponentShip3b(3).isHit = True Then
+                    MsgBox("You sunk a ship")
+                    opponentshipPicbox3b.Visible = True
+                End If
+
+                If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
+                    MsgBox("Your ship has been sunken")
+                End If
+
+                'Length 4
+                If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
+                    MsgBox("You sunk a ship")
+                    opponentshipPicbox4.Visible = True
+                End If
+
+                If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
+                    MsgBox("Your ship has been sunken")
+                End If
+
+                'Length 5
+                If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
+                    MsgBox("You sunk a ship")
+                    opponentshipPicbox5.Visible = True
+                End If
+
+                If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
+                    MsgBox("Your ship has been sunken")
+                End If
 
                 'To control the computer move
                 If currentPlayer = 2 Then
-                    If hasAHit = False Then
-                        hasAHit = True
-                        hasAhitLocation.X = MoveX
-                        hasAhitLocation.Y = MoveY
-                        previousHit = False
-                        computerStage = 1
-                    Else
-                        previousHit = True
-                        computerStage = 2
-                    End If
-                End If
-
-                'To add extra turns if necessary, depending on the difficulty set 
-                If currentPlayer = 1 Then
-                    Select Case difficulty
-                        Case "Beginner" : playerextraTurn = True
-                        Case "Normal" : playerextraTurn = False
-                        Case "Hard" : playerextraTurn = False
-                        Case "Unfair" : playerextraTurn = False
-                        Case "Impossible" : playerextraTurn = True
-                    End Select
+                If hasAHit = False Then
+                    hasAHit = True
+                    hasAhitLocation.X = MoveX
+                    hasAhitLocation.Y = MoveY
+                    previousHit = False
+                    computerStage = 1
                 Else
-                    If currentPlayer = 2 Then
+                    previousHit = True
+                    computerStage = 2
+                End If
+            End If
+
+            'To add extra turns if necessary, depending on the difficulty set 
+            If currentPlayer = 1 Then
                         Select Case difficulty
-                            Case "Beginner" : computerextraTurn = False
-                            Case "Normal" : computerextraTurn = False
-                            Case "Hard" : computerextraTurn = False
-                            Case "Unfair" : computerextraTurn = True
-                            Case "Impossible" : computerextraTurn = False
+                            Case "Beginner" : playerextraTurn = True
+                            Case "Normal" : playerextraTurn = False
+                            Case "Hard" : playerextraTurn = False
+                            Case "Unfair" : playerextraTurn = False
+                            Case "Impossible" : playerextraTurn = True
                         End Select
+                    Else
+                        If currentPlayer = 2 Then
+                            Select Case difficulty
+                                Case "Beginner" : computerextraTurn = False
+                                Case "Normal" : computerextraTurn = False
+                                Case "Hard" : computerextraTurn = False
+                                Case "Unfair" : computerextraTurn = True
+                                Case "Impossible" : computerextraTurn = False
+                            End Select
+                        End If
                     End If
                 End If
             End If
-        End If
 
         'Determine if there are still battleships left to hit
         gameOver = True
@@ -1234,7 +1262,6 @@ Public Class BattleShipsGame
         If boardEmpty = True Then
             If winner = 1 Then
                 MsgBox("YOU WIN!")
-
             Else
                 MsgBox("YOU LOSE!")
             End If
