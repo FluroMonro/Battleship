@@ -344,11 +344,11 @@ Public Class BattleShipsGame
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
+                                    'Right
                                     If gameArr(col, row - 1) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -359,9 +359,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -372,9 +370,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 Then
                                         For i = row To (row - (length - 1)) Step -1
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -385,9 +381,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 AndAlso gameArr(col, row - 4) = 0 Then
                                         For i = row To row - (length - 1) Step -1
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -397,15 +391,14 @@ Public Class BattleShipsGame
                             End Select
                         End If
                     Case 2
+                        'Left
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
                                     If gameArr(col, row + 1) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -416,9 +409,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -429,9 +420,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -442,9 +431,7 @@ Public Class BattleShipsGame
                                     If gameArr(col, row + 1) = 0 AndAlso gameArr(col, row + 2) = 0 AndAlso gameArr(col, row + 3) = 0 AndAlso gameArr(col, row + 4) = 0 Then
                                         For i = row To (row + (length - 1))
                                             gameArr(col, i) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -454,15 +441,14 @@ Public Class BattleShipsGame
                             End Select
                         End If
                     Case 3
+                        'Up
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
                                     If gameArr(col - 1, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -473,9 +459,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -486,9 +470,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -499,9 +481,7 @@ Public Class BattleShipsGame
                                     If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 AndAlso gameArr(col - 4, row) = 0 Then
                                         For i = col To (col - (length - 1)) Step -1
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -511,15 +491,14 @@ Public Class BattleShipsGame
                             End Select
                         End If
                     Case 4
+                        'Down
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
                                     If gameArr(col + 1, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -530,9 +509,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -543,9 +520,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -556,9 +531,7 @@ Public Class BattleShipsGame
                                     If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 AndAlso gameArr(col + 4, row) = 0 Then
                                         For i = col To (col + (length - 1))
                                             gameArr(i, row) = 1
-
-                                            setIndividualShipLocations(col, row, length, temporarySpace, currentplayer)
-
+                                            setIndividualShipLocations(col, row, length, direction, temporarySpace, currentplayer)
                                             temporarySpace = temporarySpace + 1
                                         Next i
                                         valid = True
@@ -582,7 +555,7 @@ Public Class BattleShipsGame
         Return gameArr
     End Function
 
-    Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, i As Integer, currentplayer As Integer)
+    Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, direction As Integer, i As Integer, currentplayer As Integer)
 
         'to set storage of the individual ships
         If currentplayer = 1 Then
@@ -626,6 +599,47 @@ Public Class BattleShipsGame
                     opponentShip5(i).Y = row
             End Select
         End If
+
+        'the rest of the elemnts of each ship
+        Dim Xoffset As Integer
+        Dim Yoffset As Integer
+
+        For elementCount = 2 To length
+            Select Case direction
+                Case 1
+                    'Right
+                    Yoffset = Yoffset - 1
+                Case 2
+                    'Left
+                    Yoffset = Yoffset + 1
+                Case 3
+                    'Up
+                    Xoffset = Xoffset - 1
+                Case 4
+                    'Down
+                    Xoffset = Xoffset + 1
+            End Select
+
+            Select Case length
+                Case 2
+                    opponentShip2(elementCount).X = col + Xoffset
+                    opponentShip2(elementCount).Y = row + Yoffset
+                Case 3
+                    If opponentShip3a(elementCount).X = 0 Then
+                        opponentShip3a(elementCount).X = col + Xoffset
+                        opponentShip3a(elementCount).Y = row + Yoffset
+                    Else
+                        opponentShip3b(elementCount).X = col + Xoffset
+                        opponentShip3b(elementCount).Y = row + Yoffset
+                    End If
+                Case 4
+                    opponentShip4(elementCount).X = col + Xoffset
+                    opponentShip4(elementCount).Y = row + Yoffset
+                Case 5
+                    opponentShip5(elementCount).X = col + Xoffset
+                    opponentShip5(elementCount).Y = row + Yoffset
+            End Select
+        Next
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         Dim valid As Boolean
