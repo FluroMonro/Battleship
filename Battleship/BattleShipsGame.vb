@@ -3,6 +3,7 @@ Imports System.Drawing.Text
 Imports System.Runtime.Intrinsics.Arm
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Security.Permissions
+Imports System.Threading
 Imports System.Windows.Forms.VisualStyles
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Public Class BattleShipsGame
@@ -1123,135 +1124,8 @@ Public Class BattleShipsGame
                 'Hit
                 gameArr(MoveX, MoveY) = 3
 
-                'if a ship has been hit
-                For i = 1 To 2
-                    If playerShip2(i).X = MoveX AndAlso playerShip2(i).Y = MoveY Then
-                        playerShip2(i).isHit = True
-                    End If
-                    If opponentShip2(i).X = MoveX AndAlso opponentShip2(i).Y = MoveY Then
-                        opponentShip2(i).isHit = True
-                    End If
-                Next i
-                For i = 1 To 3
-                    If playerShip3a(i).X = MoveX AndAlso playerShip3a(i).Y = MoveY Then
-                        playerShip3a(i).isHit = True
-                    End If
-                    If opponentShip3a(i).X = MoveX AndAlso opponentShip3a(i).Y = MoveY Then
-                        opponentShip3a(i).isHit = True
-                    End If
-                    If playerShip3b(i).X = MoveX AndAlso playerShip3b(i).Y = MoveY Then
-                        playerShip3b(i).isHit = True
-                    End If
-                    If opponentShip3b(i).X = MoveX AndAlso opponentShip3b(i).Y = MoveY Then
-                        opponentShip3b(i).isHit = True
-                    End If
-                Next i
-                For i = 1 To 4
-                    If playerShip4(i).X = MoveX AndAlso playerShip4(i).Y = MoveY Then
-                        playerShip4(i).isHit = True
-                    End If
-                    If opponentShip4(i).X = MoveX AndAlso opponentShip4(i).Y = MoveY Then
-                        opponentShip4(i).isHit = True
-                    End If
-                Next i
-                For i = 1 To 5
-                    If playerShip5(i).X = MoveX AndAlso playerShip5(i).Y = MoveY Then
-                        playerShip5(i).isHit = True
-                    End If
-                    If opponentShip5(i).X = MoveX AndAlso opponentShip5(i).Y = MoveY Then
-                        opponentShip5(i).isHit = True
-                    End If
-                Next i
-
-                'If a ship has been sunk
-
-                'Length 2
-                If opponentShip2sunk = False Then
-                    If opponentShip2(1).isHit = True AndAlso opponentShip2(2).isHit = True Then
-                        MsgBox("You sunk a ship")
-                        opponentShip2sunk = True
-                        opponentshipPicbox2.Visible = True
-                        opponentshipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                    End If
-                End If
-
-                If playerShip2sunk = False Then
-                    If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
-                        MsgBox("Your ship has been sunken")
-                        playerShip2sunk = True
-                    End If
-                End If
-
-
-                'Length 3
-                If opponentShip3asunk = False Then
-                    If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
-                        MsgBox("You sunk a ship")
-                        opponentShip3asunk = True
-                        opponentshipPicbox3a.Visible = True
-                        opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                    End If
-                End If
-
-                If playerShip3asunk = False Then
-                    If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
-                        playerShip3asunk = True
-                        MsgBox("Your ship has been sunken")
-                    End If
-                End If
-
-                If opponentShip3bsunk = False Then
-                    If opponentShip3b(1).isHit = True AndAlso opponentShip3b(2).isHit = True AndAlso opponentShip3b(3).isHit = True Then
-                        MsgBox("You sunk a ship")
-                        opponentShip3bsunk = True
-                        opponentshipPicbox3b.Visible = True
-                        opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                    End If
-                End If
-
-                If playerShip3bsunk = False Then
-                    If playerShip3b(1).isHit = True AndAlso playerShip3b(2).isHit = True AndAlso playerShip3b(3).isHit = True Then
-                        MsgBox("Your ship has been sunken")
-                        playerShip3bsunk = True
-                    End If
-                End If
-
-
-                'Length 4
-                If opponentShip4sunk = False Then
-                    If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
-                        MsgBox("You sunk a ship")
-                        opponentshipPicbox4.Visible = True
-                        opponentshipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                        opponentShip4sunk = True
-                    End If
-                End If
-
-                If playerShip4sunk = False Then
-                    If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
-                        MsgBox("Your ship has been sunken")
-                        playerShip4sunk = True
-                    End If
-                End If
-
-
-                'Length 5
-                If opponentShip5sunk = False Then
-                    If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
-                        MsgBox("You sunk a ship")
-                        opponentshipPicbox5.Visible = True
-                        opponentshipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                        opponentShip5sunk = True
-                    End If
-                End If
-
-                If playerShip5sunk = False Then
-                    If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
-                        MsgBox("Your ship has been sunken")
-                        playerShip5sunk = True
-                    End If
-                End If
-
+                checkShipsIfHit(MoveX, MoveY)
+                checkIfSunk(MoveX, MoveY)
 
                 'To control the computer move
                 If currentPlayer = 2 Then
@@ -1303,6 +1177,136 @@ Public Class BattleShipsGame
         Next row
         Return gameArr
     End Function
+    Private Sub checkShipsIfHit(MoveX, MoveY) 'if a ship has been hit
+        For i = 1 To 2
+            If playerShip2(i).X = MoveX AndAlso playerShip2(i).Y = MoveY Then
+                playerShip2(i).isHit = True
+            End If
+            If opponentShip2(i).X = MoveX AndAlso opponentShip2(i).Y = MoveY Then
+                opponentShip2(i).isHit = True
+            End If
+        Next i
+        For i = 1 To 3
+            If playerShip3a(i).X = MoveX AndAlso playerShip3a(i).Y = MoveY Then
+                playerShip3a(i).isHit = True
+            End If
+            If opponentShip3a(i).X = MoveX AndAlso opponentShip3a(i).Y = MoveY Then
+                opponentShip3a(i).isHit = True
+            End If
+            If playerShip3b(i).X = MoveX AndAlso playerShip3b(i).Y = MoveY Then
+                playerShip3b(i).isHit = True
+            End If
+            If opponentShip3b(i).X = MoveX AndAlso opponentShip3b(i).Y = MoveY Then
+                opponentShip3b(i).isHit = True
+            End If
+        Next i
+        For i = 1 To 4
+            If playerShip4(i).X = MoveX AndAlso playerShip4(i).Y = MoveY Then
+                playerShip4(i).isHit = True
+            End If
+            If opponentShip4(i).X = MoveX AndAlso opponentShip4(i).Y = MoveY Then
+                opponentShip4(i).isHit = True
+            End If
+        Next i
+        For i = 1 To 5
+            If playerShip5(i).X = MoveX AndAlso playerShip5(i).Y = MoveY Then
+                playerShip5(i).isHit = True
+            End If
+            If opponentShip5(i).X = MoveX AndAlso opponentShip5(i).Y = MoveY Then
+                opponentShip5(i).isHit = True
+            End If
+        Next i
+    End Sub
+    Private Sub checkIfSunk(MoveX, MoveY)
+        'If a ship has been sunk
+
+        'Length 2
+        If opponentShip2sunk = False Then
+            If opponentShip2(1).isHit = True AndAlso opponentShip2(2).isHit = True Then
+                MsgBox("You sunk a ship")
+                opponentShip2sunk = True
+                opponentshipPicbox2.Visible = True
+                opponentshipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+            End If
+        End If
+
+        If playerShip2sunk = False Then
+            If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
+                MsgBox("Your ship has been sunken")
+                playerShip2sunk = True
+            End If
+        End If
+
+
+        'Length 3
+        If opponentShip3asunk = False Then
+            If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
+                MsgBox("You sunk a ship")
+                opponentShip3asunk = True
+                opponentshipPicbox3a.Visible = True
+                opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+            End If
+        End If
+
+        If playerShip3asunk = False Then
+            If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
+                playerShip3asunk = True
+                MsgBox("Your ship has been sunken")
+            End If
+        End If
+
+        If opponentShip3bsunk = False Then
+            If opponentShip3b(1).isHit = True AndAlso opponentShip3b(2).isHit = True AndAlso opponentShip3b(3).isHit = True Then
+                MsgBox("You sunk a ship")
+                opponentShip3bsunk = True
+                opponentshipPicbox3b.Visible = True
+                opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+            End If
+        End If
+
+        If playerShip3bsunk = False Then
+            If playerShip3b(1).isHit = True AndAlso playerShip3b(2).isHit = True AndAlso playerShip3b(3).isHit = True Then
+                MsgBox("Your ship has been sunken")
+                playerShip3bsunk = True
+            End If
+        End If
+
+
+        'Length 4
+        If opponentShip4sunk = False Then
+            If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
+                MsgBox("You sunk a ship")
+                opponentshipPicbox4.Visible = True
+                opponentshipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                opponentShip4sunk = True
+            End If
+        End If
+
+        If playerShip4sunk = False Then
+            If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
+                MsgBox("Your ship has been sunken")
+                playerShip4sunk = True
+            End If
+        End If
+
+
+        'Length 5
+        If opponentShip5sunk = False Then
+            If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
+                MsgBox("You sunk a ship")
+                opponentshipPicbox5.Visible = True
+                opponentshipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                opponentShip5sunk = True
+            End If
+        End If
+
+        If playerShip5sunk = False Then
+            If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
+                MsgBox("Your ship has been sunken")
+                playerShip5sunk = True
+            End If
+        End If
+    End Sub
     Private Function determineScore() As Integer
         Dim winner = currentPlayer
         'game ended by time, boardEmpty = False
