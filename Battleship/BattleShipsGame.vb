@@ -622,38 +622,6 @@ Public Class BattleShipsGame
                     Xoffset = Xoffset + 1
             End Select
         Next
-
-        'temporary listbox print
-
-        If currentplayernum = 1 Then
-            For i = 1 To length
-                Select Case length
-                    Case 2
-                        MsgBox("Help 2")
-                        ListBox1.Items.Add("2 length")
-                        ListBox1.Items.Add(i & ": " & playerShip2(i).X)
-                        ListBox1.Items.Add(i & ": " & playerShip2(i).Y)
-                    Case 3
-                        If duplicateship = False Then
-                            ListBox1.Items.Add("3 length")
-                            ListBox1.Items.Add(playerShip3a(i).X)
-                            ListBox1.Items.Add(playerShip3a(i).Y)
-                        Else
-                            ListBox1.Items.Add("3 length")
-                            ListBox1.Items.Add(playerShip3b(i).X)
-                            ListBox1.Items.Add(playerShip3b(i).Y)
-                        End If
-                    Case 4
-                        ListBox1.Items.Add("4 length")
-                        ListBox1.Items.Add(playerShip4(i).X)
-                        ListBox1.Items.Add(playerShip4(i).Y)
-                    Case 5
-                        ListBox1.Items.Add("5 length")
-                        ListBox1.Items.Add(playerShip5(i).X)
-                        ListBox1.Items.Add(playerShip5(i).Y)
-                End Select
-            Next i
-        End If
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         Dim valid As Boolean
