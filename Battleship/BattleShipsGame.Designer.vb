@@ -54,7 +54,6 @@ Partial Class BattleShipsGame
         KeyHitlbl = New Windows.Forms.Label()
         keyRedpicbox = New PictureBox()
         KeyPanel = New Panel()
-        ListBox1 = New ListBox()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -429,22 +428,12 @@ Partial Class BattleShipsGame
         KeyPanel.Size = New Size(136, 157)
         KeyPanel.TabIndex = 35
         ' 
-        ' ListBox1
-        ' 
-        ListBox1.FormattingEnabled = True
-        ListBox1.ItemHeight = 15
-        ListBox1.Location = New Point(231, 436)
-        ListBox1.Name = "ListBox1"
-        ListBox1.Size = New Size(189, 229)
-        ListBox1.TabIndex = 36
-        ' 
         ' BattleShipsGame
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(ListBox1)
         Controls.Add(KeyPanel)
         Controls.Add(playershipPicbox5)
         Controls.Add(playershipPicbox4)
@@ -528,5 +517,4 @@ Partial Class BattleShipsGame
     Friend WithEvents KeyHitlbl As Windows.Forms.Label
     Friend WithEvents keyRedpicbox As PictureBox
     Friend WithEvents KeyPanel As Panel
-    Friend WithEvents ListBox1 As ListBox
 End Class

@@ -643,10 +643,6 @@ Public Class BattleShipsGame
                     Xoffset = Xoffset + 1
             End Select
         Next
-
-        For i = 1 To 3
-            ListBox1.Items.Add(opponentShip3b(i).X & " " & opponentShip3b(i).Y)
-        Next
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         Dim valid As Boolean
@@ -1259,40 +1255,40 @@ Public Class BattleShipsGame
 
                 'To control the computer move
                 If currentPlayer = 2 Then
-                If hasAHit = False Then
-                    hasAHit = True
-                    hasAhitLocation.X = MoveX
-                    hasAhitLocation.Y = MoveY
-                    previousHit = False
-                    computerStage = 1
-                Else
-                    previousHit = True
-                    computerStage = 2
-                End If
-            End If
-
-            'To add extra turns if necessary, depending on the difficulty set 
-            If currentPlayer = 1 Then
-                        Select Case difficulty
-                            Case "Beginner" : playerextraTurn = True
-                            Case "Normal" : playerextraTurn = False
-                            Case "Hard" : playerextraTurn = False
-                            Case "Unfair" : playerextraTurn = False
-                            Case "Impossible" : playerextraTurn = True
-                        End Select
+                    If hasAHit = False Then
+                        hasAHit = True
+                        hasAhitLocation.X = MoveX
+                        hasAhitLocation.Y = MoveY
+                        previousHit = False
+                        computerStage = 1
                     Else
-                        If currentPlayer = 2 Then
-                            Select Case difficulty
-                                Case "Beginner" : computerextraTurn = False
-                                Case "Normal" : computerextraTurn = False
-                                Case "Hard" : computerextraTurn = False
-                                Case "Unfair" : computerextraTurn = True
-                                Case "Impossible" : computerextraTurn = False
-                            End Select
-                        End If
+                        previousHit = True
+                        computerStage = 2
+                    End If
+                End If
+
+                'To add extra turns if necessary, depending on the difficulty set 
+                If currentPlayer = 1 Then
+                    Select Case difficulty
+                        Case "Beginner" : playerextraTurn = True
+                        Case "Normal" : playerextraTurn = False
+                        Case "Hard" : playerextraTurn = False
+                        Case "Unfair" : playerextraTurn = False
+                        Case "Impossible" : playerextraTurn = True
+                    End Select
+                Else
+                    If currentPlayer = 2 Then
+                        Select Case difficulty
+                            Case "Beginner" : computerextraTurn = False
+                            Case "Normal" : computerextraTurn = False
+                            Case "Hard" : computerextraTurn = False
+                            Case "Unfair" : computerextraTurn = True
+                            Case "Impossible" : computerextraTurn = False
+                        End Select
                     End If
                 End If
             End If
+        End If
 
         'Determine if there are still battleships left to hit
         gameOver = True
