@@ -86,7 +86,7 @@
 
 
         If difBegin.Checked = True Then
-            difficulty = "beginner"
+            difficulty = "Beginner"
         Else
             If difNorm.Checked = True Then
                 difficulty = "Normal"
