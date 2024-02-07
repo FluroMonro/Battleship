@@ -43,9 +43,9 @@ Public Class BattleShipsGame
     End Structure
 
     Public Structure shipGridLocations
-        Public X() As Integer
-        Public Y() As Integer
-        Public Name As String
+        Public X As Integer
+        Public Y As Integer
+        Public isHit As Boolean
     End Structure
 
     Public Structure singleGridLocation
@@ -55,7 +55,18 @@ Public Class BattleShipsGame
 
     Public arrHighScores(10) As recHighScore
     Public hasAhitLocation As singleGridLocation
-    Public IndividualShipLocations(10) As shipGridLocations
+
+    Public opponentShip2(2) As shipGridLocations
+    Public opponentShip3a(3) As shipGridLocations
+    Public opponentShip3b(3) As shipGridLocations
+    Public opponentShip4(4) As shipGridLocations
+    Public opponentShip5(5) As shipGridLocations
+
+    Public playerShip2(2) As shipGridLocations
+    Public playerShip3a(3) As shipGridLocations
+    Public playerShip3b(3) As shipGridLocations
+    Public playerShip4(4) As shipGridLocations
+    Public playerShip5(5) As shipGridLocations
 
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
@@ -82,24 +93,34 @@ Public Class BattleShipsGame
         oppositePath = False
         NextShip = False
 
-        IndividualShipLocations(1).Name = "computership2"
-        IndividualShipLocations(2).Name = "computership3a"
-        IndividualShipLocations(3).Name = "computership3b"
-        IndividualShipLocations(4).Name = "computership4"
-        IndividualShipLocations(5).Name = "computership5"
-        IndividualShipLocations(6).Name = "playership2"
-        IndividualShipLocations(7).Name = "playership3a"
-        IndividualShipLocations(8).Name = "playership3b"
-        IndividualShipLocations(9).Name = "playership4"
-        IndividualShipLocations(10).Name = "playership5"
-
-
-        For numberOfShips = 1 To 10
-            For numberOfElements = 1 To 5
-                IndividualShipLocations(numberOfShips).X(numberOfElements) = 0
-                IndividualShipLocations(numberOfShips).Y(numberOfElements) = 0
-            Next numberOfElements
-        Next numberOfShips
+        For i = 1 To 2
+            opponentShip2(i).X = 0
+            opponentShip2(i).Y = 0
+            playerShip2(i).X = 0
+            playerShip2(i).Y = 0
+        Next
+        For i = 1 To 3
+            opponentShip3a(i).X = 0
+            opponentShip3a(i).Y = 0
+            playerShip3a(i).X = 0
+            playerShip3a(i).Y = 0
+            opponentShip3b(i).X = 0
+            opponentShip3b(i).Y = 0
+            playerShip3b(i).X = 0
+            playerShip3b(i).Y = 0
+        Next
+        For i = 1 To 4
+            opponentShip4(i).X = 0
+            opponentShip4(i).Y = 0
+            playerShip4(i).X = 0
+            playerShip4(i).Y = 0
+        Next
+        For i = 1 To 5
+            opponentShip5(i).X = 0
+            opponentShip5(i).Y = 0
+            playerShip5(i).X = 0
+            playerShip5(i).Y = 0
+        Next
 
         playernametxt.Text = playerName
 
@@ -546,8 +567,48 @@ Public Class BattleShipsGame
             End Select
         End If
 
-        IndividualShipLocations(shipNumber).X(i) = col
-        IndividualShipLocations(shipNumber).Y(i) = row
+        'to set storage of the individual ships
+        If currentPlayer = 1 Then
+            Select Case length
+                Case 2
+                    playerShip2(i).X = col
+                    playerShip2(i).Y = row
+                Case 3
+                    If playerShip3a(i).X = 0 Then
+                        playerShip3a(i).X = col
+                        playerShip3a(i).Y = row
+                    Else
+                        playerShip3b(i).X = col
+                        playerShip3b(i).Y = row
+                    End If
+                Case 4
+                    playerShip4(i).X = col
+                    playerShip4(i).Y = row
+                Case 5
+                    playerShip5(i).X = col
+                    playerShip5(i).Y = row
+            End Select
+        Else
+            Select Case length
+                Case 2
+                    opponentShip2(i).X = col
+                    opponentShip2(i).Y = row
+                Case 3
+                    If opponentShip3a(i).X = 0 Then
+                        opponentShip3a(i).X = col
+                        opponentShip3a(i).Y = row
+                    Else
+                        opponentShip3b(i).X = col
+                        opponentShip3b(i).Y = row
+                    End If
+                Case 4
+                    opponentShip4(i).X = col
+                    opponentShip4(i).Y = row
+                Case 5
+                    opponentShip5(i).X = col
+                    opponentShip5(i).Y = row
+            End Select
+        End If
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         Dim valid As Boolean
@@ -1193,23 +1254,23 @@ Public Class BattleShipsGame
                 End If
 
             Case "Impossible"
-                    For row = 1 To gridSize
-                        For column = 1 To gridSize
-                            If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
-                                opponentMoveX = column
-                                opponentMoveY = row
-                            End If
-                        Next column
-                    Next row
-                Case Else
-                    'temporary Go thru array
-                    If opponentMoveX = gridSize Then
-                        opponentMoveY = opponentMoveY + 1
-                        opponentMoveX = 1
-                    Else
-                        opponentMoveX = opponentMoveX + 1
-                    End If
-            End Select
+                For row = 1 To gridSize
+                    For column = 1 To gridSize
+                        If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                            opponentMoveX = column
+                            opponentMoveY = row
+                        End If
+                    Next column
+                Next row
+            Case Else
+                'temporary Go thru array
+                If opponentMoveX = gridSize Then
+                    opponentMoveY = opponentMoveY + 1
+                    opponentMoveX = 1
+                Else
+                    opponentMoveX = opponentMoveX + 1
+                End If
+        End Select
     End Sub
 
     Private Sub randomSquare()

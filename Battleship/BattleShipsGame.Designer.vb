@@ -460,6 +460,7 @@ Partial Class BattleShipsGame
         Controls.Add(backtomainbtn)
         Controls.Add(backgroundImg)
         HelpButton = True
+        MaximizeBox = False
         MinimizeBox = False
         Name = "BattleShipsGame"
         Text = "Battleship"
