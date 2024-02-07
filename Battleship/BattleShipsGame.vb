@@ -1048,8 +1048,8 @@ Public Class BattleShipsGame
 
             If playerextraTurn = False Then
                 swapPlayer()
-                Me.WindowState = FormWindowState.Minimized
-                wait(0.5)
+
+                wait(0.3)
                 computerMove()
 
                 'check, returns whether it is game over or not
@@ -1073,7 +1073,7 @@ Public Class BattleShipsGame
                         While computerextraTurn = True
                             MsgBox("computer extra turn...")
 
-                            wait(1)
+                            wait(0.3)
                             computerMove()
 
                             'check, returns whether it is game over or not
