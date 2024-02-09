@@ -1121,7 +1121,7 @@ Public Class BattleShipsGame
                 gameArr(MoveX, MoveY) = 3
 
                 checkShipsIfHit(MoveX, MoveY)
-                checkIfSunk(MoveX, MoveY)
+                checkIfSunk()
 
                 'To control the computer move
                 If currentPlayer = 2 Then
@@ -1213,7 +1213,7 @@ Public Class BattleShipsGame
             End If
         Next i
     End Sub
-    Private Sub checkIfSunk(MoveX, MoveY)
+    Private Sub checkIfSunk()
         'If a ship has been sunk
 
         'Length 2
