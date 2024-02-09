@@ -1,5 +1,6 @@
 ﻿Imports System.Diagnostics.PerformanceData
 Imports System.Drawing.Text
+Imports System.Runtime.CompilerServices
 Imports System.Runtime.Intrinsics.Arm
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Security.Permissions
@@ -69,17 +70,17 @@ Public Class BattleShipsGame
     Public playerShip4(4) As shipGridLocations
     Public playerShip5(5) As shipGridLocations
 
-    Dim opponentShip2sunk = False
-    Dim opponentShip3asunk = False
-    Dim opponentShip3bsunk = False
-    Dim opponentShip4sunk = False
-    Dim opponentShip5sunk = False
+    Public opponentShip2sunk As Boolean
+    Public opponentShip3asunk As Boolean
+    Public opponentShip3bsunk As Boolean
+    Public opponentShip4sunk As Boolean
+    Public opponentShip5sunk As Boolean
+    Public playerShip2sunk As Boolean
+    Public playerShip3asunk As Boolean
+    Public playerShip3bsunk As Boolean
+    Public playerShip4sunk As Boolean
+    Public playerShip5sunk As Boolean
 
-    Dim playerShip2sunk = False
-    Dim playerShip3asunk = False
-    Dim playerShip3bsunk = False
-    Dim playerShip4sunk = False
-    Dim playerShip5sunk = False
 
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
@@ -88,17 +89,39 @@ Public Class BattleShipsGame
         isShipPlacementRandom = shipPlacementOption
     End Sub
     Public Sub onFormLoad()
+        'mainline of the setup
         initialiseControlsPlacement()
+        initialiseVariables()
 
         'reset the boards before generating a new
         resetGameArray(opponentgameArray)
         resetGameArray(playergameArray)
 
-        currentPlayer = 1
-        opponentMoveX = 0
-        opponentMoveY = 1
-        hasAHit = False
+        'generate gameArray randomly (both computer and Player)
+        generateGameArr(opponentgameArray, 2)
+        generateGameArr(playergameArray, 1)
 
+        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
+
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
+        assignGridImages(playergameArray, playerpictureBoxArray, 1)
+    End Sub
+    Private Sub initialiseVariables()
+        currentPlayer = 1
+
+        opponentShip2sunk = False
+        opponentShip3asunk = False
+        opponentShip3bsunk = False
+        opponentShip4sunk = False
+        opponentShip5sunk = False
+        playerShip2sunk = False
+        playerShip3asunk = False
+        playerShip3bsunk = False
+        playerShip4sunk = False
+        playerShip5sunk = False
+
+        hasAHit = False
         hasAhitLocation.X = 0
         hasAhitLocation.Y = 0
         previousHit = False
@@ -134,22 +157,6 @@ Public Class BattleShipsGame
             playerShip5(i).X = 0
             playerShip5(i).Y = 0
         Next
-
-        playernametxt.Text = playerName
-
-
-        'generate gameArray randomly (both computer and Player)
-        generateGameArr(opponentgameArray, 2)
-        generateGameArr(playergameArray, 1)
-
-        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
-        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
-
-        assignGridImages(opponentgameArray, opponentpictureBoxArray, 2)
-        assignGridImages(playergameArray, playerpictureBoxArray, 1)
-
-        'scoring()
-
     End Sub
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
@@ -160,11 +167,11 @@ Public Class BattleShipsGame
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'To force the game to a 1528x960 window unless already that resolution in fullscreen
-        'If Me.Width <> 1528 And Me.Height <> 960 Then
-        '    Me.WindowState = FormWindowState.Normal
-        '    Me.Width = 1528
-        '    Me.Height = 960
-        'End If
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Width = 1528
+            Me.Height = 960
+        End If
 
         Dim turnsbannerWidth As Short
         Dim turnsbannerXloc As Short
@@ -179,7 +186,6 @@ Public Class BattleShipsGame
         'Setting the placement and size relative to the screen
         backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
         resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
-
 
         OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
         PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
@@ -200,47 +206,50 @@ Public Class BattleShipsGame
 
         gridCircleSizeNum = (boardSizes - 30) / gridSize
 
-        PlayerBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
-        OpponentBoardBGImg.ImageLocation = Application.StartupPath & "\Pictures\board.png"
-        'Declarations of variables in relation to custom screensize (eg. Me.Width)
-
-        OpponentBoardBGImg.Size = New Size(boardSizes, boardSizes)
-        PlayerBoardBGImg.Size = New Size(boardSizes, boardSizes)
         TurnsBannerPic.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         TurnsBannerPic.Size = New Size(turnsbannerWidth, turnsbannerHeight)
         TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
 
-        playernamelbl.Size = New Size(88, 26)
-        playernametxt.Size = New Size(118, 24)
-        playerscorelbl.Size = New Size(79, 26)
-        playerscoretxt.Size = New Size(22, 24)
-        opponentnamelbl.Size = New Size(113, 26)
-        opponentscorelbl.Size = New Size(79, 26)
-        opponentscoretxt.Size = New Size(22, 24)
 
-        opponentshipPicbox2.Location = New Point(100, 100)
-        opponentshipPicbox3a.Location = New Point(100, 100)
-        opponentshipPicbox3b.Location = New Point(100, 100)
-        opponentshipPicbox4.Location = New Point(100, 100)
-        opponentshipPicbox5.Location = New Point(100, 100)
-        playershipPicbox2.Location = New Point(100, 100)
-        playershipPicbox3a.Location = New Point(100, 100)
-        playershipPicbox3b.Location = New Point(100, 100)
-        playershipPicbox4.Location = New Point(100, 100)
-        playershipPicbox5.Location = New Point(100, 100)
+
+        playernametxt.Text = playerName
+
+        Dim duplicateShip As Boolean
+        Dim targetObject As PictureBox
+        Dim str As String
+        Dim currentplayerstr As String
+
+        For player = 1 To 2
+            If player = 1 Then
+                currentplayerstr = "player"
+            Else
+                currentplayerstr = "opponent"
+            End If
+
+            'boards
+            targetObject = Me.Controls.Item(currentplayerstr + "BoardBGImg")
+            targetObject.ImageLocation = Application.StartupPath & "\Pictures\board.png"
+            targetObject.Size = New Size(boardSizes, boardSizes)
+
+            'ships picture boxes
+            For i = 2 To 5
+                str = i.ToString
+                If i = 3 Then
+                    str = "3a"
+                    duplicateShip = True
+                End If
+                If duplicateShip = True Then
+                    str = "3b"
+                    duplicateShip = False
+                End If
+
+                targetObject = Me.Controls.Item(currentplayerstr + "shipPicbox" + str)
+                targetObject.Location = New Point(100, 100)
+                targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+            Next
+        Next
 
         KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
-
-        opponentshipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        opponentshipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        opponentshipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        opponentshipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        opponentshipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        playershipPicbox2.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        playershipPicbox3a.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        playershipPicbox3b.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        playershipPicbox4.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
-        playershipPicbox5.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
 
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
         backgroundImg.Location = New Point(0, 0)
