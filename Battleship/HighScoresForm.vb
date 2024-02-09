@@ -1,5 +1,4 @@
 ﻿Public Class HighScoresForm
-
     Public currentScoreArrow
     Public currentTimeArrow
     Public Sub onLoadHighScores()
@@ -21,7 +20,6 @@
         Me.Height = Screen.PrimaryScreen.Bounds.Height
         'Setting the placement and size relative to the screen
 
-
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
         subtitlelbl.Location = New Point(Me.Width / 2 - (208 / 2), 200)
@@ -36,20 +34,17 @@
         BattleShipsGame.readHighScores()
         printHighScores()
     End Sub
-
-
-
     Private Sub printHighScores()
-        Dim targetObj As New Label
+        Dim targetObject As Label
         For i = 1 To 10
-            targetObj = Me.Controls.Item("p" + i.ToString + "namelbl")
-            targetObj.Text = BattleShipsGame.arrHighScores(i).name
+            targetObject = Me.namepanel.Controls.Item("namelbl" + i.ToString())
+            targetObject.Text = BattleShipsGame.arrHighScores(i).name
 
-            targetObj = Me.Controls.Item("p" + i.ToString + "scorelbl")
-            targetObj.Text = BattleShipsGame.arrHighScores(i).score
+            targetObject = Me.scorepanel.Controls.Item("scorelbl" + i.ToString())
+            targetObject.Text = BattleShipsGame.arrHighScores(i).score
 
-            targetObj = Me.Controls.Item("p" + i.ToString + "timelbl")
-            targetObj.Text = BattleShipsGame.arrHighScores(i).time
+            targetObject = Me.timepanel.Controls.Item("timelbl" + i.ToString())
+            targetObject.Text = BattleShipsGame.arrHighScores(i).time
         Next
     End Sub
 
