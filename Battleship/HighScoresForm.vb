@@ -1,11 +1,14 @@
-﻿Public Class HighScoresForm
+﻿Imports System.Runtime
+
+Public Class HighScoresForm
     Public currentScoreArrow
     Public currentTimeArrow
     Public Sub onLoadHighScores()
         currentScoreArrow = 1
         currentTimeArrow = 2
 
-        updateArrowButtonImages(False, True, "descending")
+        updateArrowButtonImages(True, False, "descending")
+        updateRankings("ascending", "score")
 
         initialiseControlsPlacement()
         showscore()
@@ -46,13 +49,16 @@
         Next
     End Sub
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+        BattleShipsGame.BubbleSort(True, False, "descending")
+        BattleShipsGame.WriteHighScores()
+
         Me.Hide()
         MainMenuForm.Show()
     End Sub
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
         currentScoreArrow = BattleShipsGame.AlternateNum(currentScoreArrow)
-        Dim sortbytime = False
         Dim sortbyscores = True
+        Dim sortbytime = False
         Dim order As String
 
         If currentScoreArrow = 1 Then
@@ -60,7 +66,7 @@
         Else
             order = "ascending"
         End If
-        updateArrowButtonImages(sortbytime, sortbyscores, order)
+        updateArrowButtonImages(sortbyscores, sortbytime, order)
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
         printHighScores()
@@ -77,13 +83,13 @@
         Else
             order = "ascending"
         End If
-        updateArrowButtonImages(sortbytime, sortbyscores, order)
+        updateArrowButtonImages(sortbyscores, sortbytime, order)
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
         printHighScores()
         updateRankings(order, "time")
     End Sub
-    Private Sub updateArrowButtonImages(sortBytime As Boolean, sortbyscores As Boolean, order As String)
+    Private Sub updateArrowButtonImages(sortbyscores As Boolean, sortBytime As Boolean, order As String)
         Select Case order
             Case "descending"
                 'descending
