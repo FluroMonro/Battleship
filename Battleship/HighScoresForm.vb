@@ -1,5 +1,4 @@
 ﻿Imports System.Runtime
-
 Public Class HighScoresForm
     Public currentScoreArrow
     Public currentTimeArrow

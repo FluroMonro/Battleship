@@ -30,46 +30,38 @@ Public Class BattleShipsGame
     Dim has3alreadydone As Boolean
     Dim playerextraTurn As Boolean
     Dim computerextraTurn As Boolean
-
     Dim hasAHit As Boolean
     Dim previousHit As Boolean
     Dim computerStage As Integer
     Dim oppositePath As Boolean
     Dim NextShip As Boolean
     Dim duplicateShip As Boolean
-
     Public Structure recHighScore
         Public name As String
         Public score As Integer
         Public time As String
     End Structure
-
     Public Structure shipGridLocations
         Public X As Integer
         Public Y As Integer
         Public isHit As Boolean
     End Structure
-
     Public Structure singleGridLocation
         Public X As Integer
         Public Y As Integer
     End Structure
-
     Public arrHighScores(10) As recHighScore
     Public hasAhitLocation As singleGridLocation
-
     Public opponentShip2(2) As shipGridLocations
     Public opponentShip3a(3) As shipGridLocations
     Public opponentShip3b(3) As shipGridLocations
     Public opponentShip4(4) As shipGridLocations
     Public opponentShip5(5) As shipGridLocations
-
     Public playerShip2(2) As shipGridLocations
     Public playerShip3a(3) As shipGridLocations
     Public playerShip3b(3) As shipGridLocations
     Public playerShip4(4) As shipGridLocations
     Public playerShip5(5) As shipGridLocations
-
     Public opponentShip2sunk As Boolean
     Public opponentShip3asunk As Boolean
     Public opponentShip3bsunk As Boolean
@@ -80,8 +72,6 @@ Public Class BattleShipsGame
     Public playerShip3bsunk As Boolean
     Public playerShip4sunk As Boolean
     Public playerShip5sunk As Boolean
-
-
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -195,6 +185,7 @@ Public Class BattleShipsGame
         timelbl.Size = New Size(80, 30)
 
         Dim playernameoffSet = 5 * (playerName.Length)
+        playernametxt.Text = playerName
         playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
         playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
         playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
@@ -209,10 +200,6 @@ Public Class BattleShipsGame
         TurnsBannerPic.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         TurnsBannerPic.Size = New Size(turnsbannerWidth, turnsbannerHeight)
         TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
-
-
-
-        playernametxt.Text = playerName
 
         Dim duplicateShip As Boolean
         Dim targetObject As PictureBox
@@ -977,7 +964,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub revealships()
         If gameOver = True Then
-            'show opponentsShips
+            'show opponents Ships
             opponentshipPicbox2.Visible = True
             opponentshipPicbox3a.Visible = True
             opponentshipPicbox3b.Visible = True
@@ -1560,7 +1547,6 @@ Public Class BattleShipsGame
         Else
             MsgBox("Going wrong")
         End If
-
         Return time
     End Function
     Public Sub BubbleSort(sortByScores As Boolean, sortByTime As Boolean, order As String)
@@ -1572,7 +1558,6 @@ Public Class BattleShipsGame
             Swapped = False
             Dim i = 1
             While i < Last
-
                 If sortByScores = True Then
                     If order = "descending" Then
                         If arrHighScores(i).score < arrHighScores(i + 1).score Then
@@ -1585,8 +1570,8 @@ Public Class BattleShipsGame
                             Swapped = True
                         End If
                     End If
-
                 End If
+
                 If sortByTime = True Then
                     If order = "descending" Then
                         If CInt(convertTimeToInteger(arrHighScores(i).time)) < CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
@@ -1599,9 +1584,7 @@ Public Class BattleShipsGame
                             Swapped = True
                         End If
                     End If
-
                 End If
-
                 i = i + 1
             End While
             Last = Last - 1
