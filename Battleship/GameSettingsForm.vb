@@ -4,16 +4,13 @@
         initialiseControlsPlacement()
         onLoadSettings()
     End Sub
-
     Public Sub onLoadSettings()
         playerNameInputTxtbox.Text = ""
         playernamewarninglbl.Visible = False
         BoardSizebtn10.Checked = True
         shipPlacementRand.Checked = True
         difNorm.Checked = True
-
     End Sub
-
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
@@ -21,10 +18,6 @@
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
-
-        'Setting the placement and size relative to the screen
-        'WaterBoarder.ImageLocation = Application.StartupPath & "\Pictures\WaterBoard.png"
-        'WaterBoarder.Size = New Size(Me.Width - 42, Me.Height - 64)
 
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
@@ -35,9 +28,6 @@
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
         playbtnGameSettings.Location = New Point(Me.Width - 365, Me.Height - 195)
     End Sub
-
-
-
     Private Function validateName(name As String) As Boolean
         Dim length As Integer
         Dim valid As Boolean
@@ -49,15 +39,10 @@
         End If
         Return valid
     End Function
-
-
-
-
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         Me.Hide()
         MainMenuForm.Show()
     End Sub
-
     Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playbtnGameSettings.Click
         'validate name
         playerName = playerNameInputTxtbox.Text
@@ -105,12 +90,10 @@
             End If
         End If
 
-
         If validateName(playerName) = True Then
             playGame()
         End If
     End Sub
-
     Private Sub playGame()
         BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, isShipPlacementRandom)
         Me.Hide()
@@ -118,7 +101,6 @@
         BattleShipsGame.onFormLoad()
         playerNameInputTxtbox.Text = ""
     End Sub
-
     Private Sub timerckbx_CheckedChanged(sender As Object, e As EventArgs) Handles timerckbx.CheckedChanged
         If timerckbx.Checked = True Then
             timerValueBar.Visible = True

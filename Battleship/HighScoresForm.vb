@@ -10,7 +10,6 @@
         initialiseControlsPlacement()
         showscore()
     End Sub
-
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
@@ -29,7 +28,6 @@
         backgroundImg.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
     End Sub
-
     Private Sub showscore()
         BattleShipsGame.readHighScores()
         printHighScores()
@@ -47,13 +45,10 @@
             targetObject.Text = BattleShipsGame.arrHighScores(i).time
         Next
     End Sub
-
-
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         Me.Hide()
         MainMenuForm.Show()
     End Sub
-
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
         currentScoreArrow = BattleShipsGame.AlternateNum(currentScoreArrow)
         Dim sortbytime = False
@@ -71,7 +66,6 @@
         printHighScores()
         updateRankings(order, "score")
     End Sub
-
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
         currentTimeArrow = BattleShipsGame.AlternateNum(currentTimeArrow)
         Dim sortbytime = True

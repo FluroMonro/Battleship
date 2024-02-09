@@ -2,7 +2,6 @@
     Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         initialiseControlsPlacement()
     End Sub
-
     Private Sub initialiseControlsPlacement()
         'To place the controls in the same position relative to the custom display size of the user
 
@@ -24,26 +23,16 @@
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
     End Sub
-
-
-
-
-
-
-
-
     Private Sub playfrommainbtn_Click(sender As Object, e As EventArgs) Handles playfrommainbtn.Click
         Me.Hide()
         GameSettingsForm.Show()
         GameSettingsForm.onLoadSettings()
     End Sub
-
     Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openhsbutton.Click
         Me.Hide()
         HighScoresForm.Show()
         HighScoresForm.onLoadHighScores()
     End Sub
-
     Private Sub quitProgrambtn_Click(sender As Object, e As EventArgs) Handles quitProgrambtn.Click
         Me.Close()
     End Sub
