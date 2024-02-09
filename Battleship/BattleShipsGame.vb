@@ -46,12 +46,12 @@ Public Class BattleShipsGame
         Public Y As Integer
         Public isHit As Boolean
     End Structure
-    Public Structure singleGridLocation
+    Public Structure gridLocation
         Public X As Integer
         Public Y As Integer
     End Structure
     Public arrHighScores(10) As recHighScore
-    Public hasAhitLocation As singleGridLocation
+    Public hasAhitLocation As GridLocation
     Public opponentShip2(2) As shipGridLocations
     Public opponentShip3a(3) As shipGridLocations
     Public opponentShip3b(3) As shipGridLocations
