@@ -123,59 +123,31 @@
         End Select
     End Sub
     Private Sub updateRankings(order As String, type As String)
+        Dim rankingOrderStr As String
+        Dim targetObject As Label
+
         Select Case order
             Case "descending"
                 If type = "time" Then
-                    ranklbl1.Text = 10
-                    ranklbl2.Text = 9
-                    ranklbl3.Text = 8
-                    ranklbl4.Text = 7
-                    ranklbl5.Text = 6
-                    ranklbl6.Text = 5
-                    ranklbl7.Text = 4
-                    ranklbl8.Text = 3
-                    ranklbl9.Text = 2
-                    ranklbl10.Text = 1
+                    rankingOrderStr = "descending"
                 Else
-                    ranklbl1.Text = 1
-                    ranklbl2.Text = 2
-                    ranklbl3.Text = 3
-                    ranklbl4.Text = 4
-                    ranklbl5.Text = 5
-                    ranklbl6.Text = 6
-                    ranklbl7.Text = 7
-                    ranklbl8.Text = 8
-                    ranklbl9.Text = 9
-                    ranklbl10.Text = 10
+                    rankingOrderStr = "ascending"
                 End If
             Case "ascending"
                 If type = "time" Then
-                    ranklbl1.Text = 1
-                    ranklbl2.Text = 2
-                    ranklbl3.Text = 3
-                    ranklbl4.Text = 4
-                    ranklbl5.Text = 5
-                    ranklbl6.Text = 6
-                    ranklbl7.Text = 7
-                    ranklbl8.Text = 8
-                    ranklbl9.Text = 9
-                    ranklbl10.Text = 10
+                    rankingOrderStr = "ascending"
                 Else
-                    ranklbl1.Text = 10
-                    ranklbl2.Text = 9
-                    ranklbl3.Text = 8
-                    ranklbl4.Text = 7
-                    ranklbl5.Text = 6
-                    ranklbl6.Text = 5
-                    ranklbl7.Text = 4
-                    ranklbl8.Text = 3
-                    ranklbl9.Text = 2
-                    ranklbl10.Text = 1
+                    rankingOrderStr = "descending"
                 End If
         End Select
-    End Sub
 
-    Private Sub scorepanel_Paint(sender As Object, e As PaintEventArgs) Handles scorepanel.Paint
-
+        For i = 10 To 1 Step -1
+            targetObject = Me.rankingpanel.Controls.Item("ranklbl" + i.ToString())
+            If rankingOrderStr = "ascending" Then
+                targetObject.Text = i
+            Else
+                targetObject.Text = 11 - i
+            End If
+        Next
     End Sub
 End Class
