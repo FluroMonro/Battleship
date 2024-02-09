@@ -40,40 +40,17 @@
 
 
     Private Sub printHighScores()
-        p1namelbl.Text = BattleShipsGame.arrHighScores(1).name
-        p2namelbl.Text = BattleShipsGame.arrHighScores(2).name
-        p3namelbl.Text = BattleShipsGame.arrHighScores(3).name
-        p4namelbl.Text = BattleShipsGame.arrHighScores(4).name
-        p5namelbl.Text = BattleShipsGame.arrHighScores(5).name
-        p6namelbl.Text = BattleShipsGame.arrHighScores(6).name
-        p7namelbl.Text = BattleShipsGame.arrHighScores(7).name
-        p8namelbl.Text = BattleShipsGame.arrHighScores(8).name
-        p9namelbl.Text = BattleShipsGame.arrHighScores(9).name
-        p10namelbl.Text = BattleShipsGame.arrHighScores(10).name
+        Dim targetObj As New Label
+        For i = 1 To 10
+            targetObj = Me.Controls.Item("p" + i.ToString + "namelbl")
+            targetObj.Text = BattleShipsGame.arrHighScores(i).name
 
-        p1scorelbl.Text = BattleShipsGame.arrHighScores(1).score
-        p2scorelbl.Text = BattleShipsGame.arrHighScores(2).score
-        p3scorelbl.Text = BattleShipsGame.arrHighScores(3).score
-        p4scorelbl.Text = BattleShipsGame.arrHighScores(4).score
-        p5scorelbl.Text = BattleShipsGame.arrHighScores(5).score
-        p6scorelbl.Text = BattleShipsGame.arrHighScores(6).score
-        p7scorelbl.Text = BattleShipsGame.arrHighScores(7).score
-        p8scorelbl.Text = BattleShipsGame.arrHighScores(8).score
-        p9scorelbl.Text = BattleShipsGame.arrHighScores(9).score
-        p10scorelbl.Text = BattleShipsGame.arrHighScores(10).score
+            targetObj = Me.Controls.Item("p" + i.ToString + "scorelbl")
+            targetObj.Text = BattleShipsGame.arrHighScores(i).score
 
-        p1timelbl.Text = BattleShipsGame.arrHighScores(1).time
-        p2timelbl.Text = BattleShipsGame.arrHighScores(2).time
-        p3timelbl.Text = BattleShipsGame.arrHighScores(3).time
-        p4timelbl.Text = BattleShipsGame.arrHighScores(4).time
-        p5timelbl.Text = BattleShipsGame.arrHighScores(5).time
-        p6timelbl.Text = BattleShipsGame.arrHighScores(6).time
-        p7timelbl.Text = BattleShipsGame.arrHighScores(7).time
-        p8timelbl.Text = BattleShipsGame.arrHighScores(8).time
-        p9timelbl.Text = BattleShipsGame.arrHighScores(9).time
-        p10timelbl.Text = BattleShipsGame.arrHighScores(10).time
-
-
+            targetObj = Me.Controls.Item("p" + i.ToString + "timelbl")
+            targetObj.Text = BattleShipsGame.arrHighScores(i).time
+        Next
     End Sub
 
 
