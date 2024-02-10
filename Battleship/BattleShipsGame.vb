@@ -1469,14 +1469,24 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function randomSquare(ByRef opponentMove As gridLocation)
-        opponentMove.X = Int(Rnd() * gridSize) + 1
-        opponentMove.Y = Int(Rnd() * gridSize) + 1
+        Dim count As Integer
+        count = 1
+        Dim foundMovePos As Boolean
+        While foundMovePos = False And count < 20
+            opponentMove.X = Int(Rnd() * gridSize) + 1
+            opponentMove.Y = Int(Rnd() * gridSize) + 1
+            If playergameArray(opponentMove.X, opponentMove.Y) <> 2 AndAlso playergameArray(opponentMove.X, opponentMove.Y) <> 3 Then
+                foundMovePos = True
+            End If
+            count = count + 1
+        End While
         Return opponentMove
     End Function
     Private Function randomAdjacent(ByRef opponentMove As gridLocation)
-        Me.WindowState = FormWindowState.Minimized
         Dim foundMovePos As Boolean
-        While foundMovePos = False
+        Dim count As Integer
+        count = 1
+        While foundMovePos = False And count < 20
             opponentMoveDirection = Int(Rnd() * 4) + 1
             Select Case opponentMoveDirection
                 Case 1  'left
@@ -1511,8 +1521,13 @@ Public Class BattleShipsGame
                         foundMovePos = True
                     End If
             End Select
+            count = count + 1
         End While
-        Me.WindowState = FormWindowState.Maximized
+
+        If count = 20 Then
+            hasAHit = False
+            randomSquare(opponentMove)
+        End If
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
