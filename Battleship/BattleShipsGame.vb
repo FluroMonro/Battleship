@@ -1094,7 +1094,6 @@ Public Class BattleShipsGame
                         swapPlayer()
                     Else
                         While computerextraTurn = True
-                            MsgBox("computer extra turn...")
 
                             wait(0.3)
                             opponentmove = computerMove()
