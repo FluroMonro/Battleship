@@ -124,34 +124,49 @@ Public Class BattleShipsGame
         oppositePath = False
         NextShip = False
         opponentContinueOnCount = 1
+        alreadyLeft = False
+        alreadyRight = False
+        alreadyUp = False
+        alreadyDown = False
+        opponentMoveDirection = 0
 
         For i = 1 To 2
             opponentShip2(i).X = 0
             opponentShip2(i).Y = 0
+            opponentShip2(i).isHit = False
             playerShip2(i).X = 0
             playerShip2(i).Y = 0
+            playerShip2(i).isHit = False
         Next
         For i = 1 To 3
             opponentShip3a(i).X = 0
             opponentShip3a(i).Y = 0
+            opponentShip3a(i).isHit = False
             playerShip3a(i).X = 0
             playerShip3a(i).Y = 0
+            playerShip3a(i).isHit = False
             opponentShip3b(i).X = 0
             opponentShip3b(i).Y = 0
+            opponentShip3b(i).isHit = False
             playerShip3b(i).X = 0
             playerShip3b(i).Y = 0
+            playerShip3b(i).isHit = False
         Next
         For i = 1 To 4
             opponentShip4(i).X = 0
             opponentShip4(i).Y = 0
+            opponentShip4(i).isHit = False
             playerShip4(i).X = 0
             playerShip4(i).Y = 0
+            playerShip4(i).isHit = False
         Next
         For i = 1 To 5
             opponentShip5(i).X = 0
             opponentShip5(i).Y = 0
+            opponentShip5(i).isHit = False
             playerShip5(i).X = 0
             playerShip5(i).Y = 0
+            playerShip5(i).isHit = False
         Next
     End Sub
     Private Sub initialiseControlsPlacement()
