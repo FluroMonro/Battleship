@@ -76,6 +76,7 @@ Public Class BattleShipsGame
     Public alreadyUp As Boolean
     Public alreadyDown As Boolean
     Public opponentMoveDirection As Integer
+    Public opponentContinueOnCount As Integer
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -122,6 +123,7 @@ Public Class BattleShipsGame
         computerStage = 0
         oppositePath = False
         NextShip = False
+        opponentContinueOnCount = 1
 
         For i = 1 To 2
             opponentShip2(i).X = 0
@@ -1120,8 +1122,10 @@ Public Class BattleShipsGame
 
             If currentPlayer = 2 Then
                 previousHit = False
+                opponentContinueOnCount = 1
                 If oppositePath = True Then
                     NextShip = True
+                    oppositePath = False
                 End If
             End If
         Else
@@ -1157,6 +1161,7 @@ Public Class BattleShipsGame
                             previousHit = False
                             computerStage = 1
                         Else
+                            opponentContinueOnCount = opponentContinueOnCount + 1
                             previousHit = True
                             computerStage = 2
                         End If
@@ -1436,8 +1441,10 @@ Public Class BattleShipsGame
                         randomAdjacent(opponentMove)
                     Else
                         If previousHit = True Then
+
                             continueOnPath(opponentMove)
                         Else
+                            'Me.WindowState = FormWindowState.Minimized
                             If NextShip = True Then
                                 hasAHit = False
                                 randomSquare(opponentMove)
@@ -1467,6 +1474,7 @@ Public Class BattleShipsGame
                     opponentMove.X = opponentMove.X + 1
                 End If
         End Select
+        'Me.WindowState = FormWindowState.Maximized
         Return opponentMove
     End Function
     Private Function randomSquare(ByRef opponentMove As gridLocation)
@@ -1532,39 +1540,62 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
+        Dim validMove As Boolean
         Select Case opponentMoveDirection
             Case 1 'left
-                If hasAhitLocation.X > 1 Then
-                    opponentMove.X = hasAhitLocation.X - 1
+                If hasAhitLocation.X > 1 AndAlso playergameArray(hasAhitLocation.X - opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X - opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
+                    opponentMove.X = hasAhitLocation.X - opponentContinueOnCount
                     opponentMove.Y = hasAhitLocation.Y
+                    validMove = True
                 End If
             Case 2 'right
-                If hasAhitLocation.X < 10 Then
-                    opponentMove.X = hasAhitLocation.X + 1
+                If hasAhitLocation.X < 10 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
+                    opponentMove.X = hasAhitLocation.X + opponentContinueOnCount
                     opponentMove.Y = hasAhitLocation.Y
+                    validMove = True
                 End If
 
             Case 3 'up
-                If hasAhitLocation.Y < 10 Then
+                If hasAhitLocation.Y < 10 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 3 Then
                     opponentMove.X = hasAhitLocation.X
-                    opponentMove.Y = hasAhitLocation.Y + 1
+                    opponentMove.Y = hasAhitLocation.Y + opponentContinueOnCount
+                    validMove = True
                 End If
 
             Case 4 'down
-                If hasAhitLocation.Y > 1 Then
+                If hasAhitLocation.Y > 1 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - opponentContinueOnCount) <> 3 Then
                     opponentMove.X = hasAhitLocation.X
-                    opponentMove.Y = hasAhitLocation.Y - 1
+                    opponentMove.Y = hasAhitLocation.Y - opponentContinueOnCount
+                    validMove = True
                 End If
         End Select
+        If validMove = False Then
+            If difficulty = "Normal" Then
+                randomSquare(opponentMove)
+            Else
+                If oppositePath = True Then
+                    randomSquare(opponentMove)
+                    oppositePath = False
+                    NextShip = False
+                    hasAHit = False
+                Else
+                    swapPathDirection(opponentMove)
+                    continueOnPath(opponentMove)
+                End If
+
+            End If
+        End If
         Return opponentMove
     End Function
     Private Function swapPathDirection(ByRef opponentMove As gridLocation)
+        oppositePath = True
         Select Case opponentMoveDirection
             Case 1 : opponentMoveDirection = 2 'left -> right
             Case 2 : opponentMoveDirection = 1 'right -> left
             Case 3 : opponentMoveDirection = 4 'up -> down
             Case 4 : opponentMoveDirection = 3 'down -> up
         End Select
+        opponentContinueOnCount = 1
         Return opponentMove
     End Function
     Private Sub swapPlayer()
