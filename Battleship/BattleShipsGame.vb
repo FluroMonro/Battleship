@@ -236,6 +236,7 @@ Public Class BattleShipsGame
 
                 targetObject = Me.Controls.Item(currentplayerstr + "shipPicbox" + str)
                 targetObject.Location = New Point(100, 100)
+                targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
             Next
         Next
