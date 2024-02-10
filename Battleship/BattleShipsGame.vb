@@ -1531,11 +1531,39 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
-        MsgBox("Continue On Path")
+        Select Case opponentMoveDirection
+            Case 1 'left
+                If hasAhitLocation.X > 1 Then
+                    opponentMove.X = hasAhitLocation.X - 1
+                    opponentMove.Y = hasAhitLocation.Y
+                End If
+            Case 2 'right
+                If hasAhitLocation.X < 10 Then
+                    opponentMove.X = hasAhitLocation.X + 1
+                    opponentMove.Y = hasAhitLocation.Y
+                End If
+
+            Case 3 'up
+                If hasAhitLocation.Y < 10 Then
+                    opponentMove.X = hasAhitLocation.X
+                    opponentMove.Y = hasAhitLocation.Y + 1
+                End If
+
+            Case 4 'down
+                If hasAhitLocation.Y > 1 Then
+                    opponentMove.X = hasAhitLocation.X
+                    opponentMove.Y = hasAhitLocation.Y - 1
+                End If
+        End Select
         Return opponentMove
     End Function
     Private Function swapPathDirection(ByRef opponentMove As gridLocation)
-        MsgBox("Swap Path Direction")
+        Select Case opponentMoveDirection
+            Case 1 : opponentMoveDirection = 2 'left -> right
+            Case 2 : opponentMoveDirection = 1 'right -> left
+            Case 3 : opponentMoveDirection = 4 'up -> down
+            Case 4 : opponentMoveDirection = 3 'down -> up
+        End Select
         Return opponentMove
     End Function
     Private Sub swapPlayer()
