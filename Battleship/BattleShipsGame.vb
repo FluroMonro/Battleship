@@ -70,6 +70,12 @@ Public Class BattleShipsGame
     Public playerShip3bsunk As Boolean
     Public playerShip4sunk As Boolean
     Public playerShip5sunk As Boolean
+
+    Public alreadyLeft As Boolean
+    Public alreadyRight As Boolean
+    Public alreadyUp As Boolean
+    Public alreadyDown As Boolean
+    Public opponentMoveDirection As Integer
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
         playerName = name
         gridSize = size
@@ -1125,6 +1131,11 @@ Public Class BattleShipsGame
                 checkShipsIfHit(Move.X, Move.Y)
                 checkIfSunk()
 
+                alreadyLeft = False
+                alreadyRight = False
+                alreadyUp = False
+                alreadyDown = False
+
                 'To control the computer move
                 If currentPlayer = 2 Then
                     If hasAHit = False Then
@@ -1446,7 +1457,39 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function randomAdjacent(ByRef opponentMove As gridLocation)
-        MsgBox("Random Adjacent")
+        'Me.WindowState = FormWindowState.Minimized
+
+        opponentMoveDirection = Int(Rnd() * 4) + 1
+
+        Select Case opponentMoveDirection
+            Case 1  'left
+                If hasAhitLocation.X > 1 AndAlso alreadyLeft = False Then
+                    opponentMove.X = hasAhitLocation.X - 1
+                    opponentMove.Y = hasAhitLocation.Y
+                    alreadyLeft = True
+                End If
+
+            Case 2 'right
+                If hasAhitLocation.X < 10 AndAlso alreadyRight = False Then
+                    opponentMove.X = hasAhitLocation.X + 1
+                    opponentMove.Y = hasAhitLocation.Y
+                    alreadyRight = True
+                End If
+
+            Case 3 'up
+                If hasAhitLocation.Y < 10 AndAlso alreadyUp = False Then
+                    opponentMove.Y = hasAhitLocation.Y + 1
+                    opponentMove.X = hasAhitLocation.X
+                    alreadyUp = True
+                End If
+
+            Case 4 'down
+                If hasAhitLocation.Y > 1 AndAlso alreadyDown = False Then
+                    opponentMove.Y = hasAhitLocation.Y - 1
+                    opponentMove.X = hasAhitLocation.X
+                    alreadyDown = True
+                End If
+        End Select
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
