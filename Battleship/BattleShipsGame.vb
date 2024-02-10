@@ -47,9 +47,6 @@ Public Class BattleShipsGame
         Public Y As Integer
     End Structure
 
-    Public playerMove As gridLocation
-    Public opponentMove As gridLocation
-
     Public arrHighScores(10) As recHighScore
     Public hasAhitLocation As GridLocation
     Public opponentShip2(2) As shipGridLocations
@@ -996,7 +993,8 @@ Public Class BattleShipsGame
             Next row
         Next col
     End Sub
-    Private Sub getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
+    Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
+        Dim playerMove As gridLocation
         Dim picLocation As String
 
         If currentPlayer = 1 Then
@@ -1024,10 +1022,11 @@ Public Class BattleShipsGame
                     playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 End If
             End If
-            game()
+            game(playerMove)
         End If
-    End Sub
-    Private Sub game()
+        Return playerMove
+    End Function
+    Private Sub game(playerMove As gridLocation)
         'check
         check(playerMove, opponentgameArray)
 
@@ -1044,10 +1043,12 @@ Public Class BattleShipsGame
         Else
 
             If playerextraTurn = False Then
+                Dim opponentmove As gridLocation
                 swapPlayer()
 
                 wait(0.3)
-                computerMove()
+                'Me.WindowState = FormWindowState.Minimized
+                opponentmove = computerMove()
 
                 'check, returns whether it is game over or not
                 check(opponentMove, playergameArray)
@@ -1071,7 +1072,7 @@ Public Class BattleShipsGame
                             MsgBox("computer extra turn...")
 
                             wait(0.3)
-                            computerMove()
+                            opponentmove = computerMove()
 
                             'check, returns whether it is game over or not
                             check(opponentMove, playergameArray)
@@ -1101,7 +1102,7 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
-    Private Function check(Move As gridLocation, gameArr As Array) As Array
+    Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
 
         If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
@@ -1377,8 +1378,10 @@ Public Class BattleShipsGame
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
         End If
     End Sub
-    Private Sub computerMove()
+    Private Function computerMove()
+        Dim opponentMove As gridLocation
         Dim tempdifficulty As String
+
         tempdifficulty = difficulty
         If tempdifficulty = "Unfair" Then
             tempdifficulty = "Hard"
@@ -1386,31 +1389,31 @@ Public Class BattleShipsGame
 
         Select Case tempdifficulty
             Case "beginner"
-                randomSquare()
+                randomSquare(opponentMove)
 
             Case "Normal"
                 If hasAHit = False Then
-                    randomSquare()
+                    randomSquare(opponentMove)
                 Else
-                    randomAdjacent()
+                    randomAdjacent(opponentMove)
                 End If
 
             Case "Hard"
                 If hasAHit = False Then
-                    randomSquare()
+                    randomSquare(opponentMove)
                 Else
                     If computerStage = 1 Then
-                        randomAdjacent()
+                        randomAdjacent(opponentMove)
                     Else
                         If previousHit = True Then
-                            continueOnPath()
+                            continueOnPath(opponentMove)
                         Else
                             If NextShip = True Then
                                 hasAHit = False
-                                randomSquare()
+                                randomSquare(opponentMove)
                             Else
-                                swapPathDirection()
-                                continueOnPath()
+                                swapPathDirection(opponentMove)
+                                continueOnPath(opponentMove)
                             End If
                         End If
                     End If
@@ -1434,20 +1437,25 @@ Public Class BattleShipsGame
                     opponentMove.X = opponentMove.X + 1
                 End If
         End Select
-    End Sub
-    Private Sub randomSquare()
+        Return opponentMove
+    End Function
+    Private Function randomSquare(ByRef opponentMove As gridLocation)
         opponentMove.X = Int(Rnd() * gridSize) + 1
         opponentMove.Y = Int(Rnd() * gridSize) + 1
-    End Sub
-    Private Sub randomAdjacent()
+        Return opponentMove
+    End Function
+    Private Function randomAdjacent(ByRef opponentMove As gridLocation)
         MsgBox("Random Adjacent")
-    End Sub
-    Private Sub continueOnPath()
+        Return opponentMove
+    End Function
+    Private Function continueOnPath(ByRef opponentMove As gridLocation)
         MsgBox("Continue On Path")
-    End Sub
-    Private Sub swapPathDirection()
+        Return opponentMove
+    End Function
+    Private Function swapPathDirection(ByRef opponentMove As gridLocation)
         MsgBox("Swap Path Direction")
-    End Sub
+        Return opponentMove
+    End Function
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
