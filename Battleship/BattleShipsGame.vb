@@ -11,10 +11,6 @@ Public Class BattleShipsGame
     Dim currentPlayer As Integer
     Dim gameOver As Boolean
     Dim boardEmpty As Boolean
-    Dim playerMoveX As Integer
-    Dim PlayerMoveY As Integer
-    Dim opponentMoveX As Integer
-    Dim opponentMoveY As Integer
     Dim gridCircleSizeNum As Integer
     Public playergameArray(14, 14) As Integer
     Public playerpictureBoxArray(14, 14) As PictureBox
@@ -50,6 +46,10 @@ Public Class BattleShipsGame
         Public X As Integer
         Public Y As Integer
     End Structure
+
+    Public playerMove As gridLocation
+    Public opponentMove As gridLocation
+
     Public arrHighScores(10) As recHighScore
     Public hasAhitLocation As GridLocation
     Public opponentShip2(2) As shipGridLocations
@@ -1004,24 +1004,24 @@ Public Class BattleShipsGame
             If picLocation.Length = 3 Then
                 If picLocation(1) = "0" Then
                     'row 10
-                    playerMoveX = CInt(Strings.Left(sender.Name, 2))
-                    PlayerMoveY = CInt(Strings.Right(sender.Name, 1))
+                    playerMove.X = CInt(Strings.Left(sender.Name, 2))
+                    playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 Else
                     'col 10
                     If picLocation(2) = "0" Then
-                        playerMoveX = CInt(Strings.Left(sender.Name, 1))
-                        PlayerMoveY = CInt(Strings.Right(sender.Name, 2))
+                        playerMove.X = CInt(Strings.Left(sender.Name, 1))
+                        playerMove.Y = CInt(Strings.Right(sender.Name, 2))
                     End If
                 End If
             Else
                 If picLocation.Length = 4 Then
                     'row 10 col 10
-                    playerMoveX = CInt(Strings.Left(sender.Name, 2))
-                    PlayerMoveY = CInt(Strings.Right(sender.Name, 2))
+                    playerMove.X = CInt(Strings.Left(sender.Name, 2))
+                    playerMove.Y = CInt(Strings.Right(sender.Name, 2))
                 Else
                     'single digit row and col
-                    playerMoveX = CInt(Strings.Left(sender.Name, 1))
-                    PlayerMoveY = CInt(Strings.Right(sender.Name, 1))
+                    playerMove.X = CInt(Strings.Left(sender.Name, 1))
+                    playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 End If
             End If
             game()
@@ -1029,7 +1029,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub game()
         'check
-        check(playerMoveX, PlayerMoveY, opponentgameArray)
+        check(playerMove, opponentgameArray)
 
         'update score
         updateInGameScore(1)
@@ -1050,7 +1050,7 @@ Public Class BattleShipsGame
                 computerMove()
 
                 'check, returns whether it is game over or not
-                check(opponentMoveX, opponentMoveY, playergameArray)
+                check(opponentMove, playergameArray)
 
                 'update score
                 updateInGameScore(2)
@@ -1074,7 +1074,7 @@ Public Class BattleShipsGame
                             computerMove()
 
                             'check, returns whether it is game over or not
-                            check(opponentMoveX, opponentMoveY, playergameArray)
+                            check(opponentMove, playergameArray)
 
                             'update score
                             updateInGameScore(2)
@@ -1101,11 +1101,11 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
-    Private Function check(MoveX As Integer, MoveY As Integer, gameArr As Array) As Array
+    Private Function check(Move As gridLocation, gameArr As Array) As Array
 
-        If gameArr(MoveX, MoveY) = 0 Then
+        If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
-            gameArr(MoveX, MoveY) = 2
+            gameArr(Move.X, Move.Y) = 2
             playerextraTurn = False
             computerextraTurn = False
 
@@ -1116,19 +1116,19 @@ Public Class BattleShipsGame
                 End If
             End If
         Else
-            If gameArr(MoveX, MoveY) = 1 OrElse gameArr(MoveX, MoveY) = 4 Then
+            If gameArr(Move.X, Move.Y) = 1 OrElse gameArr(Move.X, Move.Y) = 4 Then
                 'Hit
-                gameArr(MoveX, MoveY) = 3
+                gameArr(Move.X, Move.Y) = 3
 
-                checkShipsIfHit(MoveX, MoveY)
+                checkShipsIfHit(Move.X, Move.Y)
                 checkIfSunk()
 
                 'To control the computer move
                 If currentPlayer = 2 Then
                     If hasAHit = False Then
                         hasAHit = True
-                        hasAhitLocation.X = MoveX
-                        hasAhitLocation.Y = MoveY
+                        hasAhitLocation.X = Move.X
+                        hasAhitLocation.Y = Move.Y
                         previousHit = False
                         computerStage = 1
                     Else
@@ -1420,24 +1420,24 @@ Public Class BattleShipsGame
                 For row = 1 To gridSize
                     For column = 1 To gridSize
                         If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
-                            opponentMoveX = column
-                            opponentMoveY = row
+                            opponentMove.X = column
+                            opponentMove.Y = row
                         End If
                     Next column
                 Next row
             Case Else
                 'temporary Go thru array
-                If opponentMoveX = gridSize Then
-                    opponentMoveY = opponentMoveY + 1
-                    opponentMoveX = 1
+                If opponentMove.X = gridSize Then
+                    opponentMove.Y = opponentMove.Y + 1
+                    opponentMove.X = 1
                 Else
-                    opponentMoveX = opponentMoveX + 1
+                    opponentMove.X = opponentMove.X + 1
                 End If
         End Select
     End Sub
     Private Sub randomSquare()
-        opponentMoveX = Int(Rnd() * gridSize) + 1
-        opponentMoveY = Int(Rnd() * gridSize) + 1
+        opponentMove.X = Int(Rnd() * gridSize) + 1
+        opponentMove.Y = Int(Rnd() * gridSize) + 1
     End Sub
     Private Sub randomAdjacent()
         MsgBox("Random Adjacent")
