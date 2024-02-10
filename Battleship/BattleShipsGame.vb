@@ -1138,15 +1138,27 @@ Public Class BattleShipsGame
 
                 'To control the computer move
                 If currentPlayer = 2 Then
-                    If hasAHit = False Then
-                        hasAHit = True
-                        hasAhitLocation.X = Move.X
-                        hasAhitLocation.Y = Move.Y
-                        previousHit = False
-                        computerStage = 1
-                    Else
-                        previousHit = True
-                        computerStage = 2
+                    If difficulty = "Normal" Then
+                        If hasAHit = False Then
+                            hasAHit = True
+                            hasAhitLocation.X = Move.X
+                            hasAhitLocation.Y = Move.Y
+                        Else
+                            hasAhitLocation.X = Move.X
+                            hasAhitLocation.Y = Move.Y
+                        End If
+                    End If
+                    If difficulty = "Hard" Or difficulty = "Unfair" Then
+                        If hasAHit = False Then
+                            hasAHit = True
+                            hasAhitLocation.X = Move.X
+                            hasAhitLocation.Y = Move.Y
+                            previousHit = False
+                            computerStage = 1
+                        Else
+                            previousHit = True
+                            computerStage = 2
+                        End If
                     End If
                 End If
 
@@ -1462,12 +1474,13 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function randomAdjacent(ByRef opponentMove As gridLocation)
+        Me.WindowState = FormWindowState.Minimized
         Dim foundMovePos As Boolean
         While foundMovePos = False
             opponentMoveDirection = Int(Rnd() * 4) + 1
             Select Case opponentMoveDirection
                 Case 1  'left
-                    If hasAhitLocation.X > 1 AndAlso alreadyLeft = False Then
+                    If hasAhitLocation.X > 1 AndAlso alreadyLeft = False AndAlso playergameArray(hasAhitLocation.X - 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X - 1, hasAhitLocation.Y) <> 3 Then
                         opponentMove.X = hasAhitLocation.X - 1
                         opponentMove.Y = hasAhitLocation.Y
                         alreadyLeft = True
@@ -1475,7 +1488,7 @@ Public Class BattleShipsGame
                     End If
 
                 Case 2 'right
-                    If hasAhitLocation.X < 10 AndAlso alreadyRight = False Then
+                    If hasAhitLocation.X < 10 AndAlso alreadyRight = False AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 3 Then
                         opponentMove.X = hasAhitLocation.X + 1
                         opponentMove.Y = hasAhitLocation.Y
                         alreadyRight = True
@@ -1483,7 +1496,7 @@ Public Class BattleShipsGame
                     End If
 
                 Case 3 'up
-                    If hasAhitLocation.Y < 10 AndAlso alreadyUp = False Then
+                    If hasAhitLocation.Y < 10 AndAlso alreadyUp = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 3 Then
                         opponentMove.Y = hasAhitLocation.Y + 1
                         opponentMove.X = hasAhitLocation.X
                         alreadyUp = True
@@ -1491,7 +1504,7 @@ Public Class BattleShipsGame
                     End If
 
                 Case 4 'down
-                    If hasAhitLocation.Y > 1 AndAlso alreadyDown = False Then
+                    If hasAhitLocation.Y > 1 AndAlso alreadyDown = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - 1) <> 3 Then
                         opponentMove.Y = hasAhitLocation.Y - 1
                         opponentMove.X = hasAhitLocation.X
                         alreadyDown = True
@@ -1499,7 +1512,7 @@ Public Class BattleShipsGame
                     End If
             End Select
         End While
-
+        Me.WindowState = FormWindowState.Maximized
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
