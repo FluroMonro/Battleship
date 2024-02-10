@@ -389,54 +389,52 @@ Public Class BattleShipsGame
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
                 direction = Int(Rnd() * 4) + 1
 
-                gameOver = True
-                revealships()
                 'To generate the ship of chosen length in a randomly chosen diection
                 Select Case direction
-                    'Case 1 'Down from chosen start, appears as facing Upwards
+                    Case 1 'Down from chosen start, appears as facing Upwards
 
-                    '    If isValidPlace(col, row, length, direction) = True Then
-                    '        Select Case length
-                    '            Case 2
-                    '                If gameArr(col, row - 1) = 0 Then
-                    '                    'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
-                    '                    For i = row To (row - (length - 1)) Step -1
-                    '                        gameArr(col, i) = 1
-                    '                    Next i
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col, row - 1) = 0 Then
+                                        'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
 
-                    '                    'Set the respective ship record to the same starting location
-                    '                    setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                    '                    valid = True
-                    '                End If
-                    '            Case 3
-                    '                'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
-                    '                If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 Then
-                    '                    For i = row To (row - (length - 1)) Step -1
-                    '                        gameArr(col, i) = 1
-                    '                    Next i
-                    '                    setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                    '                    valid = True
-                    '                End If
-                    '            Case 4
-                    '                'If all the other 3 squares are empty: set all 4 to be ships
-                    '                If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 Then
-                    '                    For i = row To (row - (length - 1)) Step -1
-                    '                        gameArr(col, i) = 1
-                    '                    Next i
-                    '                    setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                    '                    valid = True
-                    '                End If
-                    '            Case 5
-                    '                'If all the other 4 squares are empty: set all 5 to be ships
-                    '                If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 AndAlso gameArr(col, row - 4) = 0 Then
-                    '                    For i = row To row - (length - 1) Step -1
-                    '                        gameArr(col, i) = 1
-                    '                    Next i
-                    '                    setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                    '                    valid = True
-                    '                End If
-                    '        End Select
-                    '    End If
+                                        'Set the respective ship record to the same starting location
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 3
+                                    'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 Then
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 4
+                                    'If all the other 3 squares are empty: set all 4 to be ships
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 Then
+                                        For i = row To (row - (length - 1)) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 5
+                                    'If all the other 4 squares are empty: set all 5 to be ships
+                                    If gameArr(col, row - 1) = 0 AndAlso gameArr(col, row - 2) = 0 AndAlso gameArr(col, row - 3) = 0 AndAlso gameArr(col, row - 4) = 0 Then
+                                        For i = row To row - (length - 1) Step -1
+                                            gameArr(col, i) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                            End Select
+                        End If
                     Case 2 'Up from chosen start, appears as facing Down
                         'Repetition of Case 1 but instead with addition signs to chose the elements below the first
                         If isValidPlace(col, row, length, direction) = True Then
@@ -475,87 +473,82 @@ Public Class BattleShipsGame
                                     End If
                             End Select
                         End If
-                        '    Case 3 'Down from chosen start, appears as facing Up
-                        '        'Repetition of Case 1 and 2 but instead with subtraction signs to the row instead of the column to chose the elements above the first
-                        '        If isValidPlace(col, row, length, direction) = True Then
-                        '            Select Case length
-                        '                Case 2
-                        '                    If gameArr(col - 1, row) = 0 Then
-                        '                        For i = col To (col - (length - 1)) Step -1
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 3
-                        '                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 Then
-                        '                        For i = col To (col - (length - 1)) Step -1
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 4
-                        '                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 Then
-                        '                        For i = col To (col - (length - 1)) Step -1
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 5
-                        '                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 AndAlso gameArr(col - 4, row) = 0 Then
-                        '                        'If currentplayernum = 1 Then
-                        '                        '    Me.WindowState = FormWindowState.Minimized
-                        '                        '    currentplayernum = 1
-                        '                        'End If
-
-                        '                        For i = col To (col - (length - 1)) Step -1
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '            End Select
-                        '        End If
-                        '    Case 4 'Up from chosen start, appears as facing Down
-                        '        'Repetition of Case 3 but with addition signs to chose the elements below the first
-                        '        If isValidPlace(col, row, length, direction) = True Then
-                        '            Select Case length
-                        '                Case 2
-                        '                    If gameArr(col + 1, row) = 0 Then
-                        '                        For i = col To (col + (length - 1))
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 3
-                        '                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 Then
-                        '                        For i = col To (col + (length - 1))
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 4
-                        '                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 Then
-                        '                        For i = col To (col + (length - 1))
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '                Case 5
-                        '                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 AndAlso gameArr(col + 4, row) = 0 Then
-                        '                        For i = col To (col + (length - 1))
-                        '                            gameArr(i, row) = 1
-                        '                        Next i
-                        '                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
-                        '                        valid = True
-                        '                    End If
-                        '            End Select
-                        '        End If
+                    Case 3 'Down from chosen start, appears as facing Up
+                        'Repetition of Case 1 and 2 but instead with subtraction signs to the row instead of the column to chose the elements above the first
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col - 1, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 3
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 4
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 5
+                                    If gameArr(col - 1, row) = 0 AndAlso gameArr(col - 2, row) = 0 AndAlso gameArr(col - 3, row) = 0 AndAlso gameArr(col - 4, row) = 0 Then
+                                        For i = col To (col - (length - 1)) Step -1
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                            End Select
+                        End If
+                    Case 4 'Up from chosen start, appears as facing Down
+                        'Repetition of Case 3 but with addition signs to chose the elements below the first
+                        If isValidPlace(col, row, length, direction) = True Then
+                            Select Case length
+                                Case 2
+                                    If gameArr(col + 1, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 3
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 4
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                                Case 5
+                                    If gameArr(col + 1, row) = 0 AndAlso gameArr(col + 2, row) = 0 AndAlso gameArr(col + 3, row) = 0 AndAlso gameArr(col + 4, row) = 0 Then
+                                        For i = col To (col + (length - 1))
+                                            gameArr(i, row) = 1
+                                        Next i
+                                        setIndividualShipLocations(col, row, length, direction, currentplayernum)
+                                        valid = True
+                                    End If
+                            End Select
+                        End If
                 End Select
             End If
         End While
@@ -1007,10 +1000,10 @@ Public Class BattleShipsGame
             For row = 1 To gridSize
                 Select Case gameArray(col, row)
                     Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
-                    Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\placeholderCircle.png"
+                    'Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\placeholderCircle.png"
                     Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png"
                     Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png"
-                    Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
+                        'Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
                 End Select
             Next row
         Next col
