@@ -36,6 +36,7 @@ Public Class BattleShipsGame
         Public name As String
         Public score As Integer
         Public time As String
+        Public difficulty As String
     End Structure
     Public Structure shipGridLocations
         Public X As Integer
@@ -1487,6 +1488,7 @@ Public Class BattleShipsGame
             FileSystem.Write(1, arrHighScores(i).score)
             FileSystem.Write(1, arrHighScores(i).name)
             FileSystem.Write(1, convertTimeToInteger(arrHighScores(i).time))
+            FileSystem.Write(1, arrHighScores(i).difficulty)
         Next
         FileSystem.FileClose(1)
     End Sub
@@ -1502,9 +1504,11 @@ Public Class BattleShipsGame
             arrHighScores(i).name = fileContents
 
             FileSystem.Input(1, fileContents)
-
             fileContents = convertTimeToDisplay(CInt(fileContents))
             arrHighScores(i).time = fileContents
+
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).difficulty = fileContents
         Next
         FileSystem.FileClose(1)
     End Sub
