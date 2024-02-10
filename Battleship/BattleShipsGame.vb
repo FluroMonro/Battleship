@@ -1457,39 +1457,44 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
     Private Function randomAdjacent(ByRef opponentMove As gridLocation)
-        'Me.WindowState = FormWindowState.Minimized
+        Dim foundMovePos As Boolean
+        While foundMovePos = False
+            opponentMoveDirection = Int(Rnd() * 4) + 1
+            Select Case opponentMoveDirection
+                Case 1  'left
+                    If hasAhitLocation.X > 1 AndAlso alreadyLeft = False Then
+                        opponentMove.X = hasAhitLocation.X - 1
+                        opponentMove.Y = hasAhitLocation.Y
+                        alreadyLeft = True
+                        foundMovePos = True
+                    End If
 
-        opponentMoveDirection = Int(Rnd() * 4) + 1
+                Case 2 'right
+                    If hasAhitLocation.X < 10 AndAlso alreadyRight = False Then
+                        opponentMove.X = hasAhitLocation.X + 1
+                        opponentMove.Y = hasAhitLocation.Y
+                        alreadyRight = True
+                        foundMovePos = True
+                    End If
 
-        Select Case opponentMoveDirection
-            Case 1  'left
-                If hasAhitLocation.X > 1 AndAlso alreadyLeft = False Then
-                    opponentMove.X = hasAhitLocation.X - 1
-                    opponentMove.Y = hasAhitLocation.Y
-                    alreadyLeft = True
-                End If
+                Case 3 'up
+                    If hasAhitLocation.Y < 10 AndAlso alreadyUp = False Then
+                        opponentMove.Y = hasAhitLocation.Y + 1
+                        opponentMove.X = hasAhitLocation.X
+                        alreadyUp = True
+                        foundMovePos = True
+                    End If
 
-            Case 2 'right
-                If hasAhitLocation.X < 10 AndAlso alreadyRight = False Then
-                    opponentMove.X = hasAhitLocation.X + 1
-                    opponentMove.Y = hasAhitLocation.Y
-                    alreadyRight = True
-                End If
+                Case 4 'down
+                    If hasAhitLocation.Y > 1 AndAlso alreadyDown = False Then
+                        opponentMove.Y = hasAhitLocation.Y - 1
+                        opponentMove.X = hasAhitLocation.X
+                        alreadyDown = True
+                        foundMovePos = True
+                    End If
+            End Select
+        End While
 
-            Case 3 'up
-                If hasAhitLocation.Y < 10 AndAlso alreadyUp = False Then
-                    opponentMove.Y = hasAhitLocation.Y + 1
-                    opponentMove.X = hasAhitLocation.X
-                    alreadyUp = True
-                End If
-
-            Case 4 'down
-                If hasAhitLocation.Y > 1 AndAlso alreadyDown = False Then
-                    opponentMove.Y = hasAhitLocation.Y - 1
-                    opponentMove.X = hasAhitLocation.X
-                    alreadyDown = True
-                End If
-        End Select
         Return opponentMove
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
