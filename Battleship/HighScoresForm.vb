@@ -45,6 +45,9 @@ Public Class HighScoresForm
 
             targetObject = Me.timepanel.Controls.Item("timelbl" + i.ToString())
             targetObject.Text = BattleShipsGame.arrHighScores(i).time
+
+            targetObject = Me.difficultyPanel.Controls.Item("diflbl" + i.ToString())
+            targetObject.Text = BattleShipsGame.arrHighScores(i).difficulty
         Next
     End Sub
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click

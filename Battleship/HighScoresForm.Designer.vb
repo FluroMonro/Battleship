@@ -76,6 +76,18 @@ Partial Class HighScoresForm
         timebtn = New PictureBox()
         Titlelbl = New Label()
         subtitlelbl = New Label()
+        difficultyPanel = New Panel()
+        difficultylbl = New Label()
+        diflbl10 = New Label()
+        diflbl9 = New Label()
+        diflbl8 = New Label()
+        diflbl7 = New Label()
+        diflbl6 = New Label()
+        diflbl5 = New Label()
+        diflbl4 = New Label()
+        diflbl3 = New Label()
+        diflbl2 = New Label()
+        diflbl1 = New Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         rankingpanel.SuspendLayout()
         namepanel.SuspendLayout()
@@ -83,6 +95,7 @@ Partial Class HighScoresForm
         CType(scorebtn, ComponentModel.ISupportInitialize).BeginInit()
         timepanel.SuspendLayout()
         CType(timebtn, ComponentModel.ISupportInitialize).BeginInit()
+        difficultyPanel.SuspendLayout()
         SuspendLayout()
         ' 
         ' backgroundImg
@@ -317,7 +330,7 @@ Partial Class HighScoresForm
         rankingpanel.Controls.Add(ranklbl3)
         rankingpanel.Controls.Add(ranklbl2)
         rankingpanel.Controls.Add(ranklbl1)
-        rankingpanel.Location = New Point(417, 303)
+        rankingpanel.Location = New Point(329, 303)
         rankingpanel.Name = "rankingpanel"
         rankingpanel.Size = New Size(165, 453)
         rankingpanel.TabIndex = 29
@@ -346,7 +359,7 @@ Partial Class HighScoresForm
         namepanel.Controls.Add(namelbl4)
         namepanel.Controls.Add(namelbl2)
         namepanel.Controls.Add(namelbl3)
-        namepanel.Location = New Point(588, 303)
+        namepanel.Location = New Point(500, 303)
         namepanel.Name = "namepanel"
         namepanel.Size = New Size(165, 453)
         namepanel.TabIndex = 30
@@ -486,7 +499,7 @@ Partial Class HighScoresForm
         scorepanel.Controls.Add(scorelbl3)
         scorepanel.Controls.Add(scorelbl2)
         scorepanel.Controls.Add(scorelbl1)
-        scorepanel.Location = New Point(759, 303)
+        scorepanel.Location = New Point(671, 303)
         scorepanel.Name = "scorepanel"
         scorepanel.Size = New Size(165, 453)
         scorepanel.TabIndex = 40
@@ -627,7 +640,7 @@ Partial Class HighScoresForm
         timepanel.Controls.Add(timelbl3)
         timepanel.Controls.Add(timelbl2)
         timepanel.Controls.Add(timelbl1)
-        timepanel.Location = New Point(930, 303)
+        timepanel.Location = New Point(842, 303)
         timepanel.Name = "timepanel"
         timepanel.Size = New Size(165, 453)
         timepanel.TabIndex = 50
@@ -676,12 +689,143 @@ Partial Class HighScoresForm
         subtitlelbl.TabIndex = 52
         subtitlelbl.Text = "Highscores"
         ' 
+        ' difficultyPanel
+        ' 
+        difficultyPanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difficultyPanel.Controls.Add(difficultylbl)
+        difficultyPanel.Controls.Add(diflbl10)
+        difficultyPanel.Controls.Add(diflbl9)
+        difficultyPanel.Controls.Add(diflbl8)
+        difficultyPanel.Controls.Add(diflbl7)
+        difficultyPanel.Controls.Add(diflbl6)
+        difficultyPanel.Controls.Add(diflbl5)
+        difficultyPanel.Controls.Add(diflbl4)
+        difficultyPanel.Controls.Add(diflbl3)
+        difficultyPanel.Controls.Add(diflbl2)
+        difficultyPanel.Controls.Add(diflbl1)
+        difficultyPanel.Location = New Point(1013, 303)
+        difficultyPanel.Name = "difficultyPanel"
+        difficultyPanel.Size = New Size(165, 453)
+        difficultyPanel.TabIndex = 57
+        ' 
+        ' difficultylbl
+        ' 
+        difficultylbl.AutoSize = True
+        difficultylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        difficultylbl.Location = New Point(31, 13)
+        difficultylbl.Name = "difficultylbl"
+        difficultylbl.Size = New Size(102, 28)
+        difficultylbl.TabIndex = 40
+        difficultylbl.Text = "Difficulty"
+        difficultylbl.UseWaitCursor = True
+        ' 
+        ' diflbl10
+        ' 
+        diflbl10.AutoSize = True
+        diflbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl10.Location = New Point(56, 420)
+        diflbl10.Name = "diflbl10"
+        diflbl10.Size = New Size(28, 21)
+        diflbl10.TabIndex = 49
+        diflbl10.Text = "dif"
+        ' 
+        ' diflbl9
+        ' 
+        diflbl9.AutoSize = True
+        diflbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl9.Location = New Point(56, 380)
+        diflbl9.Name = "diflbl9"
+        diflbl9.Size = New Size(28, 21)
+        diflbl9.TabIndex = 48
+        diflbl9.Text = "dif"
+        ' 
+        ' diflbl8
+        ' 
+        diflbl8.AutoSize = True
+        diflbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl8.Location = New Point(56, 340)
+        diflbl8.Name = "diflbl8"
+        diflbl8.Size = New Size(28, 21)
+        diflbl8.TabIndex = 47
+        diflbl8.Text = "dif"
+        ' 
+        ' diflbl7
+        ' 
+        diflbl7.AutoSize = True
+        diflbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl7.Location = New Point(56, 300)
+        diflbl7.Name = "diflbl7"
+        diflbl7.Size = New Size(28, 21)
+        diflbl7.TabIndex = 46
+        diflbl7.Text = "dif"
+        ' 
+        ' diflbl6
+        ' 
+        diflbl6.AutoSize = True
+        diflbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl6.Location = New Point(56, 260)
+        diflbl6.Name = "diflbl6"
+        diflbl6.Size = New Size(28, 21)
+        diflbl6.TabIndex = 45
+        diflbl6.Text = "dif"
+        ' 
+        ' diflbl5
+        ' 
+        diflbl5.AutoSize = True
+        diflbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl5.Location = New Point(56, 220)
+        diflbl5.Name = "diflbl5"
+        diflbl5.Size = New Size(28, 21)
+        diflbl5.TabIndex = 44
+        diflbl5.Text = "dif"
+        ' 
+        ' diflbl4
+        ' 
+        diflbl4.AutoSize = True
+        diflbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl4.Location = New Point(56, 180)
+        diflbl4.Name = "diflbl4"
+        diflbl4.Size = New Size(28, 21)
+        diflbl4.TabIndex = 43
+        diflbl4.Text = "dif"
+        ' 
+        ' diflbl3
+        ' 
+        diflbl3.AutoSize = True
+        diflbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl3.Location = New Point(56, 135)
+        diflbl3.Name = "diflbl3"
+        diflbl3.Size = New Size(28, 21)
+        diflbl3.TabIndex = 42
+        diflbl3.Text = "dif"
+        ' 
+        ' diflbl2
+        ' 
+        diflbl2.AutoSize = True
+        diflbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl2.Location = New Point(56, 95)
+        diflbl2.Name = "diflbl2"
+        diflbl2.Size = New Size(28, 21)
+        diflbl2.TabIndex = 41
+        diflbl2.Text = "dif"
+        ' 
+        ' diflbl1
+        ' 
+        diflbl1.AutoSize = True
+        diflbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl1.Location = New Point(56, 55)
+        diflbl1.Name = "diflbl1"
+        diflbl1.Size = New Size(28, 21)
+        diflbl1.TabIndex = 40
+        diflbl1.Text = "dif"
+        ' 
         ' HighScoresForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(difficultyPanel)
         Controls.Add(subtitlelbl)
         Controls.Add(Titlelbl)
         Controls.Add(timepanel)
@@ -706,6 +850,8 @@ Partial Class HighScoresForm
         timepanel.ResumeLayout(False)
         timepanel.PerformLayout()
         CType(timebtn, ComponentModel.ISupportInitialize).EndInit()
+        difficultyPanel.ResumeLayout(False)
+        difficultyPanel.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -765,4 +911,16 @@ Partial Class HighScoresForm
     Friend WithEvents scorebtn As PictureBox
     Friend WithEvents timebtn As PictureBox
     Friend WithEvents namelbl1 As Label
+    Friend WithEvents difficultyPanel As Panel
+    Friend WithEvents difficultylbl As Label
+    Friend WithEvents diflbl10 As Label
+    Friend WithEvents diflbl9 As Label
+    Friend WithEvents diflbl8 As Label
+    Friend WithEvents diflbl7 As Label
+    Friend WithEvents diflbl6 As Label
+    Friend WithEvents diflbl5 As Label
+    Friend WithEvents diflbl4 As Label
+    Friend WithEvents diflbl3 As Label
+    Friend WithEvents diflbl2 As Label
+    Friend WithEvents diflbl1 As Label
 End Class
