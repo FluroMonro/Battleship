@@ -473,8 +473,8 @@ Public Class BattleShipsGame
                                     End If
                             End Select
                         End If
-                    Case 3 'Down from chosen start, appears as facing Up
-                        'Repetition of Case 1 and 2 but instead with subtraction signs to the row instead of the column to chose the elements above the first
+                    Case 3 'Left from chosen start, appears as facing right
+                        'Repetition of Case 1 and 2 but instead with subtraction signs to the row instead of the column to chose the elements to the left the first
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
@@ -511,8 +511,8 @@ Public Class BattleShipsGame
                                     End If
                             End Select
                         End If
-                    Case 4 'Up from chosen start, appears as facing Down
-                        'Repetition of Case 3 but with addition signs to chose the elements below the first
+                    Case 4 'RIght from chosen start, appears as facing left
+                        'Repetition of Case 3 but with addition signs to chose the elements to the right of the first
                         If isValidPlace(col, row, length, direction) = True Then
                             Select Case length
                                 Case 2
@@ -636,10 +636,10 @@ Public Class BattleShipsGame
 
             Select Case direction
                 'Increment the offsets appropiately for the direction of the ship
-                Case 1 : Yoffset = Yoffset - 1 'Right
-                Case 2 : Yoffset = Yoffset + 1 'Left
-                Case 3 : Xoffset = Xoffset - 1 'Up
-                Case 4 : Xoffset = Xoffset + 1 'Down
+                Case 1 : Yoffset = Yoffset - 1 'Down
+                Case 2 : Yoffset = Yoffset + 1 'Up
+                Case 3 : Xoffset = Xoffset - 1 'Left
+                Case 4 : Xoffset = Xoffset + 1 'Right
             End Select
         Next
     End Sub
@@ -651,24 +651,24 @@ Public Class BattleShipsGame
         valid = True
 
         Select Case direction
-            Case 1 'left
+            Case 1 'up
                 If row - length < 0 Then
-                    'If too close to the edge on the left side
-                    valid = False
-                End If
-            Case 2 'right
-                If row + length > gridSize Then
-                    'If too close to the edge on the right side
-                    valid = False
-                End If
-            Case 3 'up
-                If col - length < 0 Then
                     'If too close to the edge on the top side
                     valid = False
                 End If
-            Case 4 'down
-                If col + length > gridSize Then
+            Case 2 'down
+                If row + length > gridSize Then
                     'If too close to the edge on the bottom side
+                    valid = False
+                End If
+            Case 3 'left
+                If col - length < 0 Then
+                    'If too close to the edge on the left side
+                    valid = False
+                End If
+            Case 4 'right
+                If col + length > gridSize Then
+                    'If too close to the edge on the right side
                     valid = False
                 End If
         End Select
