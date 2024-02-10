@@ -1242,6 +1242,7 @@ Public Class BattleShipsGame
         If playerShip2sunk = False Then
             If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
                 MsgBox("Your ship has been sunken")
+                playershipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip2sunk = True
             End If
         End If
@@ -1261,6 +1262,7 @@ Public Class BattleShipsGame
             If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
                 playerShip3asunk = True
                 MsgBox("Your ship has been sunken")
+                playershipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
             End If
         End If
 
@@ -1277,6 +1279,7 @@ Public Class BattleShipsGame
             If playerShip3b(1).isHit = True AndAlso playerShip3b(2).isHit = True AndAlso playerShip3b(3).isHit = True Then
                 MsgBox("Your ship has been sunken")
                 playerShip3bsunk = True
+                playershipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
             End If
         End If
 
@@ -1294,6 +1297,7 @@ Public Class BattleShipsGame
         If playerShip4sunk = False Then
             If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
                 MsgBox("Your ship has been sunken")
+                playershipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip4sunk = True
             End If
         End If
@@ -1312,6 +1316,7 @@ Public Class BattleShipsGame
         If playerShip5sunk = False Then
             If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
                 MsgBox("Your ship has been sunken")
+                playershipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip5sunk = True
             End If
         End If
