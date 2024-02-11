@@ -1763,24 +1763,25 @@ Public Class BattleShipsGame
     Private Function convertTimeToDisplay(time As Integer) As String
         'Convert integer time into display time (dd:dd)
 
+        Dim newTime As String
         If time < 10 Then
             'under than 10 sec
-            time = "00:0" & CStr(time)
+            newTime = "00:0" & CStr(time)
         Else
             'between 10s and 1min
             If time < 60 Then
-                time = "00:" & CStr(time)
+                newTime = "00:" & CStr(time)
             Else
                 'between 1 and 10min
                 If time < 600 Then
-                    time = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                    newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
                 Else
                     'anything above 10min
-                    time = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                    newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
                 End If
             End If
         End If
-        Return time
+        Return newTime
     End Function
     Private Function convertTimeToInteger(time As String) As String
         'Convert display time (dd:dd) into integer time
