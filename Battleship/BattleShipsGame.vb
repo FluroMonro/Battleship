@@ -48,7 +48,7 @@ Public Class BattleShipsGame
         Public Y As Integer
     End Structure
 
-    Public arrHighScores(10) As recHighScore
+    Public arrHighScores(11) As recHighScore
     Public hasAhitLocation As GridLocation
     Public opponentShip2(2) As shipGridLocations
     Public opponentShip3a(3) As shipGridLocations
@@ -1009,6 +1009,8 @@ Public Class BattleShipsGame
         Next col
     End Sub
     Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
+        'When the picture box is clicked, the name of the picture box is used to determine the moves location on the grid
+
         Dim playerMove As gridLocation
         Dim picLocation As String
 
@@ -1037,48 +1039,58 @@ Public Class BattleShipsGame
                     playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 End If
             End If
+
+            'The players move starts each round of the game
             game(playerMove)
         End If
         Return playerMove
     End Function
     Private Sub game(playerMove As gridLocation)
-        'check
+        'Mainline of the game, started by it's call from playerMove
+
+        'check the move of the player (hit, miss, game over)
         check(playerMove, opponentgameArray)
 
-        'update score
+        'Update displayed score for the player
         updateInGameScore(1)
 
-        'display grid
+        'Update the grid to show a hit or miss
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
 
         If gameOver = True Then
             revealships()
-            determineScore()
-            'scoring()
-        Else
 
+            'Final score (player - opponent)
+            determineScore()
+
+            scoring()
+        Else
             If playerextraTurn = False Then
+                'Opponents turn
+
                 Dim opponentmove As gridLocation
                 swapPlayer()
 
+                'Give some time for the user to notice that the computer has moved
                 wait(0.3)
-                'Me.WindowState = FormWindowState.Minimized
+
+                'Fetch opponents move
                 opponentmove = computerMove()
 
-                'check, returns whether it is game over or not
-                check(opponentMove, playergameArray)
+                'check whether a hit or a miss or if game is over
+                check(opponentmove, playergameArray)
 
-                'update score
+                'Update diaplyed score for the opponent
                 updateInGameScore(2)
 
-                'display grid
+                'Display updated grid
                 assignGridImages(playergameArray, playerpictureBoxArray)
 
 
                 If gameOver = True Then
                     revealships()
                     determineScore()
-                    'scoring()
+                    scoring()
                 Else
                     If computerextraTurn = False Then
                         swapPlayer()
@@ -1089,41 +1101,49 @@ Public Class BattleShipsGame
                             opponentmove = computerMove()
 
                             'check, returns whether it is game over or not
-                            check(opponentMove, playergameArray)
+                            check(opponentmove, playergameArray)
 
                             'update score
                             updateInGameScore(2)
 
-                            'display grid
+                            'Display updated grid
                             assignGridImages(playergameArray, playerpictureBoxArray)
 
+                            'To break out of the while loop if the game has been ended
                             If gameOver = True Then
                                 computerextraTurn = False
                             End If
-
                         End While
                         If gameOver = True Then
                             revealships()
                             determineScore()
-                            'scoring()
+                            scoring()
                         Else
+                            'To wait for the players next move
                             swapPlayer()
                         End If
                     End If
                 End If
             Else
+                'To wait for the players next move
                 MsgBox("player extra turn...")
             End If
         End If
     End Sub
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
+        'Determines whether the move is a hit or a miss and what to do in either case
 
         If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
+
+            'Update the array with a miss
             gameArr(Move.X, Move.Y) = 2
+
+            'Reset extra turns
             playerextraTurn = False
             computerextraTurn = False
 
+            'Opponent move logic for Normal, Hard and Unfair modes
             If currentPlayer = 2 Then
                 previousHit = False
                 opponentContinueOnCount = 1
@@ -1134,40 +1154,43 @@ Public Class BattleShipsGame
             End If
         Else
             If gameArr(Move.X, Move.Y) = 1 OrElse gameArr(Move.X, Move.Y) = 4 Then
-                'Hit
+                'Hit: 1 as general hit, 4 as the starting point (front) of each ship
+
+                'Update the array with a hit
                 gameArr(Move.X, Move.Y) = 3
 
+                'Check if any of the individual ship records are hit, and if they are sunk
                 checkShipsIfHit(Move.X, Move.Y)
                 checkIfSunk()
 
+                'Variables used in opponents randomAdjacent function
                 alreadyLeft = False
                 alreadyRight = False
                 alreadyUp = False
                 alreadyDown = False
 
-                'To control the computer move
+                'The logic To control the computer move
                 If currentPlayer = 2 Then
-                    If difficulty = "Normal" Then
-                        If hasAHit = False Then
-                            hasAHit = True
+                    If hasAHit = False Then
+                        hasAHit = True
+                        hasAhitLocation.X = Move.X
+                        hasAhitLocation.Y = Move.Y
+
+                        'For Hard and Unfair
+                        previousHit = False
+                        computerStage = 1
+                    Else
+                        If difficulty = "Normal" Then
+                            'Move the new location of hasAhit to the current move
                             hasAhitLocation.X = Move.X
                             hasAhitLocation.Y = Move.Y
                         Else
-                            hasAhitLocation.X = Move.X
-                            hasAhitLocation.Y = Move.Y
-                        End If
-                    End If
-                    If difficulty = "Hard" Or difficulty = "Unfair" Then
-                        If hasAHit = False Then
-                            hasAHit = True
-                            hasAhitLocation.X = Move.X
-                            hasAhitLocation.Y = Move.Y
-                            previousHit = False
-                            computerStage = 1
-                        Else
-                            opponentContinueOnCount = opponentContinueOnCount + 1
-                            previousHit = True
-                            computerStage = 2
+                            If difficulty = "Hard" Or difficulty = "Unfair" Then
+                                'As distance away from hasAhitLocation increases, this counter needs to increase too
+                                opponentContinueOnCount = opponentContinueOnCount + 1
+                                previousHit = True
+                                computerStage = 2
+                            End If
                         End If
                     End If
                 End If
@@ -1208,8 +1231,9 @@ Public Class BattleShipsGame
         Next row
         Return gameArr
     End Function
-    Private Sub checkShipsIfHit(MoveX, MoveY) 'if a ship has been hit
-        For i = 1 To 2
+    Private Sub checkShipsIfHit(MoveX As Integer, MoveY As Integer) 'Check if move has hit a ship
+        'Each FOR loop is for the length of the ships
+        For i = 1 To 2 'Length 2
             If playerShip2(i).X = MoveX AndAlso playerShip2(i).Y = MoveY Then
                 playerShip2(i).isHit = True
             End If
@@ -1217,7 +1241,8 @@ Public Class BattleShipsGame
                 opponentShip2(i).isHit = True
             End If
         Next i
-        For i = 1 To 3
+
+        For i = 1 To 3 'Length 3 
             If playerShip3a(i).X = MoveX AndAlso playerShip3a(i).Y = MoveY Then
                 playerShip3a(i).isHit = True
             End If
@@ -1231,7 +1256,8 @@ Public Class BattleShipsGame
                 opponentShip3b(i).isHit = True
             End If
         Next i
-        For i = 1 To 4
+
+        For i = 1 To 4 'Length 4
             If playerShip4(i).X = MoveX AndAlso playerShip4(i).Y = MoveY Then
                 playerShip4(i).isHit = True
             End If
@@ -1239,7 +1265,8 @@ Public Class BattleShipsGame
                 opponentShip4(i).isHit = True
             End If
         Next i
-        For i = 1 To 5
+
+        For i = 1 To 5 'Length 5
             If playerShip5(i).X = MoveX AndAlso playerShip5(i).Y = MoveY Then
                 playerShip5(i).isHit = True
             End If
@@ -1344,17 +1371,26 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Function determineScore() As Integer
+        'As swap player is after determine score in game(), the current player will always be the one who had the last move, and is hence, the winner
         Dim winner = currentPlayer
-        'game ended by time, boardEmpty = False
+
+        'To check whether the game has been ended by time or by sinking all the ships
         If boardEmpty = True Then
             If winner = 1 Then
+                'Player wins
                 MsgBox("YOU WIN!")
             Else
+                'Opponent Wins
                 MsgBox("YOU LOSE!")
             End If
+
+            'Final score is playerscore - opponentscore
             score = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
         Else
+            'If ended by the timer
             MsgBox("Ended by timer")
+
+            'Go through players array and calculate how many ships the player has left and add that to the score
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
@@ -1363,6 +1399,7 @@ Public Class BattleShipsGame
                 Next column
             Next row
 
+            'Go through the opponents array and calculate how many the opponent has left and take that away from the score
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If opponentgameArray(column, row) = 1 Then
@@ -1372,8 +1409,10 @@ Public Class BattleShipsGame
             Next row
 
             If score > 0 Then
+                'If score Is positive, Then the player has more ships left than the opponent and player wins
                 MsgBox("YOU WIN!")
             Else
+                'If score Is negative, Then the opponent has more ships left than the player and player loses
                 MsgBox("YOU LOSE!")
             End If
         End If
@@ -1384,7 +1423,9 @@ Public Class BattleShipsGame
         Dim playerScore As Integer
         Dim opponentScore As Integer
 
+        'Count the number of hits and display the number
         If currentPlayer = 1 Then
+            'For the player
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If opponentgameArray(column, row) = 3 Then
@@ -1394,6 +1435,7 @@ Public Class BattleShipsGame
             Next row
             playerscoretxt.Text = playerScore
         Else
+            'For the opponenet
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If playergameArray(column, row) = 3 Then
@@ -1405,54 +1447,66 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub wait(ByVal seconds As Single)
+        'Freeze the processing the computer for 10 milliseconds until it reaches the given time
         For i As Integer = 0 To seconds * 100
+            'To allow the program to catch up instead of freezing the processing the entire time
             System.Threading.Thread.Sleep(10)
+            'Catch up with events
             Application.DoEvents()
         Next
     End Sub
-    Private Sub displayCurrentPlayer()
-        If currentPlayer = 1 Then
+    Private Sub displayCurrentPlayer()  'Choose whether to display the player or the opponents banner
+        If currentPlayer = 1 Then 'Player
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
-        ElseIf currentPlayer = 2 Then
+        ElseIf currentPlayer = 2 Then 'Opponent
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
         End If
     End Sub
     Private Function computerMove()
+        'Get the move for the computer
+
         Dim opponentMove As gridLocation
         Dim tempdifficulty As String
 
+        'As only difference between Unfair and Hard difficulties is Extra turns, they have the same processes
         tempdifficulty = difficulty
         If tempdifficulty = "Unfair" Then
             tempdifficulty = "Hard"
         End If
 
+        'What to do for each difficulty
         Select Case tempdifficulty
             Case "beginner"
                 randomSquare(opponentMove)
 
             Case "Normal"
                 If hasAHit = False Then
+                    'If there hasn't been a hit, randomly choose an avaliable square on the board
                     randomSquare(opponentMove)
                 Else
+                    'If there has been a hit, randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
                     randomAdjacent(opponentMove)
                 End If
 
             Case "Hard"
                 If hasAHit = False Then
+                    'If there hasn't been a hit, randomly choose an avaliable square on the board
                     randomSquare(opponentMove)
                 Else
+                    'If there has been a hit, computerStage will either be 1 or 2.
+                    'Computer stage is 1 (from check()) if hasAhit was false when the opponents move hit a ship of the player
+                    'Computer stage is 2 (from check()) if hasAhit was true when the opponents move hit a ship of the player
+
                     If computerStage = 1 Then
                         randomAdjacent(opponentMove)
-                    Else
-                        If previousHit = True Then
-
-                            continueOnPath(opponentMove)
-                        Else
-                            'Me.WindowState = FormWindowState.Minimized
-                            If NextShip = True Then
+                    Else 'Computer stage 2
+                        If previousHit = True Then 'Set in check(), when hasAhit = True and there is another hit
+                            continueOnPath(opponentMove) 'Follow the direction until previousHit = False
+                        Else 'previousHit = false when the computer misses
+                            If NextShip = True Then 'Set in check() if there is a miss after swapping path direction
                                 hasAHit = False
                                 randomSquare(opponentMove)
-                            Else
+                            Else 'Has followed direction to a miss, will now swap direction and continue on the other side of the initial hasAhit
                                 swapPathDirection(opponentMove)
                                 continueOnPath(opponentMove)
                             End If
@@ -1461,6 +1515,8 @@ Public Class BattleShipsGame
                 End If
 
             Case "Impossible"
+                'Go through the players array until there are no 1s or 4s left (all sunk).
+                'Will go from the end of the array to the start as will continuously set the opponents move to the last 1 or 4 (which will turn into a 3 when in check())
                 For row = 1 To gridSize
                     For column = 1 To gridSize
                         If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
@@ -1469,25 +1525,22 @@ Public Class BattleShipsGame
                         End If
                     Next column
                 Next row
-            Case Else
-                'temporary Go thru array
-                If opponentMove.X = gridSize Then
-                    opponentMove.Y = opponentMove.Y + 1
-                    opponentMove.X = 1
-                Else
-                    opponentMove.X = opponentMove.X + 1
-                End If
         End Select
-        'Me.WindowState = FormWindowState.Maximized
         Return opponentMove
     End Function
     Private Function randomSquare(ByRef opponentMove As gridLocation)
         Dim count As Integer
         count = 1
         Dim foundMovePos As Boolean
+
+        'To make sure each location has not been taken already
         While foundMovePos = False And count < 20
+            'Random locations for both X and Y
             opponentMove.X = Int(Rnd() * gridSize) + 1
             opponentMove.Y = Int(Rnd() * gridSize) + 1
+
+            'If there is a hit or a miss then it can't put it's move there, and so it will need to loop around and get another random location
+            'Ensures no second guess of a taken spot
             If playergameArray(opponentMove.X, opponentMove.Y) <> 2 AndAlso playergameArray(opponentMove.X, opponentMove.Y) <> 3 Then
                 foundMovePos = True
             End If
@@ -1499,11 +1552,20 @@ Public Class BattleShipsGame
         Dim foundMovePos As Boolean
         Dim count As Integer
         count = 1
+
+        'To ensure a valid move is chosen, bailing out at 20 (a reasonable number for random generation of 4 possible numbers)
         While foundMovePos = False And count < 20
+            'Generate a random direction (left, right, up, down)
             opponentMoveDirection = Int(Rnd() * 4) + 1
+
             Select Case opponentMoveDirection
                 Case 1  'left
                     If hasAhitLocation.X > 1 AndAlso alreadyLeft = False AndAlso playergameArray(hasAhitLocation.X - 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X - 1, hasAhitLocation.Y) <> 3 Then
+                        'if in a valid location (not to close to the edge of the board)
+                        'if it hasn't been chosen already
+                        'if it doesn't already had a hit or a miss
+
+                        'One to the left of hasAhit
                         opponentMove.X = hasAhitLocation.X - 1
                         opponentMove.Y = hasAhitLocation.Y
                         alreadyLeft = True
@@ -1512,6 +1574,7 @@ Public Class BattleShipsGame
 
                 Case 2 'right
                     If hasAhitLocation.X < 10 AndAlso alreadyRight = False AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 3 Then
+                        'One to the right of hasAhit
                         opponentMove.X = hasAhitLocation.X + 1
                         opponentMove.Y = hasAhitLocation.Y
                         alreadyRight = True
@@ -1520,6 +1583,7 @@ Public Class BattleShipsGame
 
                 Case 3 'up
                     If hasAhitLocation.Y < 10 AndAlso alreadyUp = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 3 Then
+                        'One above of hasAhit
                         opponentMove.Y = hasAhitLocation.Y + 1
                         opponentMove.X = hasAhitLocation.X
                         alreadyUp = True
@@ -1528,6 +1592,7 @@ Public Class BattleShipsGame
 
                 Case 4 'down
                     If hasAhitLocation.Y > 1 AndAlso alreadyDown = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - 1) <> 3 Then
+                        'One below hasAhit
                         opponentMove.Y = hasAhitLocation.Y - 1
                         opponentMove.X = hasAhitLocation.X
                         alreadyDown = True
@@ -1537,7 +1602,9 @@ Public Class BattleShipsGame
             count = count + 1
         End While
 
+        'If there are no valid places
         If count = 20 Then
+            'Go back to randomly guessing
             hasAHit = False
             randomSquare(opponentMove)
         End If
@@ -1545,15 +1612,23 @@ Public Class BattleShipsGame
     End Function
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
         Dim validMove As Boolean
+
+        'Uses direction randomly generated by randomAdjacent
         Select Case opponentMoveDirection
             Case 1 'left
                 If hasAhitLocation.X > 1 AndAlso playergameArray(hasAhitLocation.X - opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X - opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
+                    'if in a valid location (not to close to the edge of the board)
+                    'if it hasn't been chosen already
+                    'if it doesn't already had a hit or a miss
+
+                    'To the left of hasAhit by how many opponentContinueOnCount is (incremented in check())
                     opponentMove.X = hasAhitLocation.X - opponentContinueOnCount
                     opponentMove.Y = hasAhitLocation.Y
                     validMove = True
                 End If
             Case 2 'right
                 If hasAhitLocation.X < 10 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
+                    'To the right of hasAhit by opponentContinueOnCount
                     opponentMove.X = hasAhitLocation.X + opponentContinueOnCount
                     opponentMove.Y = hasAhitLocation.Y
                     validMove = True
@@ -1561,6 +1636,7 @@ Public Class BattleShipsGame
 
             Case 3 'up
                 If hasAhitLocation.Y < 10 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 3 Then
+                    'Above hasAhit by opponentContinueOnCount
                     opponentMove.X = hasAhitLocation.X
                     opponentMove.Y = hasAhitLocation.Y + opponentContinueOnCount
                     validMove = True
@@ -1568,30 +1644,31 @@ Public Class BattleShipsGame
 
             Case 4 'down
                 If hasAhitLocation.Y > 1 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y - opponentContinueOnCount) <> 3 Then
+                    'Below hasAhit by opponentContinueOnCount
                     opponentMove.X = hasAhitLocation.X
                     opponentMove.Y = hasAhitLocation.Y - opponentContinueOnCount
                     validMove = True
                 End If
         End Select
-        If validMove = False Then
-            If difficulty = "Normal" Then
-                randomSquare(opponentMove)
-            Else
-                If oppositePath = True Then
-                    randomSquare(opponentMove)
-                    oppositePath = False
-                    NextShip = False
-                    hasAHit = False
-                Else
-                    swapPathDirection(opponentMove)
-                    continueOnPath(opponentMove)
-                End If
 
+        If validMove = False Then
+            'If it cannot continue down a path because it is blocked
+            If oppositePath = True Then
+                'If it is already swapped direction then the ship should be sunk, so random square is called and variables are reset
+                randomSquare(opponentMove)
+                oppositePath = False
+                NextShip = False
+                hasAHit = False
+            Else
+                'if it hasn't swapped directions yet, do so and continue on path
+                swapPathDirection(opponentMove)
+                continueOnPath(opponentMove)
             End If
         End If
         Return opponentMove
     End Function
     Private Function swapPathDirection(ByRef opponentMove As gridLocation)
+        'Swap the direction of the path
         oppositePath = True
         Select Case opponentMoveDirection
             Case 1 : opponentMoveDirection = 2 'left -> right
@@ -1608,23 +1685,40 @@ Public Class BattleShipsGame
         displayCurrentPlayer()
     End Sub
     Public Function AlternateNum(num As Integer)
+        'Alternates between 1 and 2 every time it is called
         num = 2 / num
         Return num
     End Function
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+        'Exit back to the main menu
         Me.Hide()
         MainMenuForm.Show()
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
+        'Reload the page
         onFormLoad()
     End Sub
     Private Sub scoring()
+        'Subroutine in charge of the highscores
         readHighScores()
+
+        'Add in players score
+        addPlayerScoreToHighscores()
+
+        'Sort the scores
         Dim sortbytime = False
         Dim sortbyscores = True
         Dim order = "descending"
         BubbleSort(sortbyscores, sortbytime, order)
+
+        'Write the scores to the file
         WriteHighScores()
+    End Sub
+    Private Sub addPlayerScoreToHighscores()
+        arrHighScores(11).score = score
+        arrHighScores(11).name = playerName
+        arrHighScores(11).difficulty = difficulty
+        arrHighScores(11).time = "00:10"
     End Sub
     Public Sub WriteHighScores()
         Dim i As Integer
@@ -1717,11 +1811,19 @@ Public Class BattleShipsGame
             While i < Last
                 If sortByScores = True Then
                     If order = "descending" Then
+                        If arrHighScores(11).name = "ZZZZZZ" Then
+                            arrHighScores(11).score = -50
+                        End If
+
                         If arrHighScores(i).score < arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
+                        If arrHighScores(11).name = "ZZZZZZ" Then
+                            arrHighScores(11).score = 50
+                        End If
+
                         If arrHighScores(i).score > arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
@@ -1731,11 +1833,19 @@ Public Class BattleShipsGame
 
                 If sortByTime = True Then
                     If order = "descending" Then
+                        If arrHighScores(11).name = "ZZZZZZ" Then
+                            arrHighScores(11).time = "00:00"
+                        End If
+
                         If CInt(convertTimeToInteger(arrHighScores(i).time)) < CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
+                        If arrHighScores(11).name = "ZZZZZZ" Then
+                            arrHighScores(11).time = "59:59"
+                        End If
+
                         If CInt(convertTimeToInteger(arrHighScores(i).time)) > CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True

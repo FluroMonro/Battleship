@@ -9,6 +9,7 @@ Public Class HighScoresForm
         updateArrowButtonImages(True, False, "descending")
         updateRankings("ascending", "score")
 
+        initialiseLastHighscore()
         initialiseControlsPlacement()
         showscore()
     End Sub
@@ -33,6 +34,12 @@ Public Class HighScoresForm
     Private Sub showscore()
         BattleShipsGame.readHighScores()
         printHighScores()
+    End Sub
+    Private Sub initialiseLastHighscore()
+        BattleShipsGame.arrHighScores(11).name = "ZZZZZZ"
+        BattleShipsGame.arrHighScores(11).score = -17
+        BattleShipsGame.arrHighScores(11).time = "59:59"
+        BattleShipsGame.arrHighScores(11).difficulty = "None"
     End Sub
     Private Sub printHighScores()
         Dim targetObject As Label
