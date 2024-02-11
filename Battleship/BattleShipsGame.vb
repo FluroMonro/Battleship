@@ -1700,6 +1700,8 @@ Public Class BattleShipsGame
     End Sub
     Private Sub scoring()
         'Subroutine in charge of the highscores
+
+        'Read the high-scores from the hs.txt file
         readHighScores()
 
         'Add in players score
@@ -1715,13 +1717,40 @@ Public Class BattleShipsGame
         WriteHighScores()
     End Sub
     Private Sub addPlayerScoreToHighscores()
+        'Add the players score, name, difficulty and time into the 11th element of the array of records
         arrHighScores(11).score = score
         arrHighScores(11).name = playerName
         arrHighScores(11).difficulty = difficulty
         arrHighScores(11).time = "00:10"
     End Sub
+    Public Sub readHighScores()
+        'Open the hs.txt file for Input (read)
+        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
+
+        'For the top 10 in 'default' sorting
+        For i = 1 To 10
+            'score
+            Dim fileContents
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).score = fileContents
+
+            'name
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).name = fileContents
+
+            'time
+            FileSystem.Input(1, fileContents)
+            fileContents = convertTimeToDisplay(CInt(fileContents))
+            arrHighScores(i).time = fileContents
+
+            'difficulty
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).difficulty = fileContents
+        Next
+        FileSystem.FileClose(1)
+    End Sub
     Public Sub WriteHighScores()
-        Dim i As Integer
+        'Open the hs.txt file for Outpue (write)
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
         For i = 1 To 10
             FileSystem.Write(1, arrHighScores(i).score)
@@ -1731,27 +1760,9 @@ Public Class BattleShipsGame
         Next
         FileSystem.FileClose(1)
     End Sub
-    Public Sub readHighScores()
-        Dim i As Integer
-        FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
-        For i = 1 To 10
-            Dim fileContents
-            FileSystem.Input(1, fileContents)
-            arrHighScores(i).score = fileContents
+    Private Function convertTimeToDisplay(time As Integer) As String
+        'Convert integer time into display time (dd:dd)
 
-            FileSystem.Input(1, fileContents)
-            arrHighScores(i).name = fileContents
-
-            FileSystem.Input(1, fileContents)
-            fileContents = convertTimeToDisplay(CInt(fileContents))
-            arrHighScores(i).time = fileContents
-
-            FileSystem.Input(1, fileContents)
-            arrHighScores(i).difficulty = fileContents
-        Next
-        FileSystem.FileClose(1)
-    End Sub
-    Private Function convertTimeToDisplay(time) As String
         If time < 10 Then
             'under than 10 sec
             time = "00:0" & CStr(time)
@@ -1772,7 +1783,12 @@ Public Class BattleShipsGame
         Return time
     End Function
     Private Function convertTimeToInteger(time As String) As String
+        'Convert display time (dd:dd) into integer time
+
+        'subtime as integer to be added after leading 0s
         Dim subtime As String
+
+        'To make sure that 00:00 does not run (impossible time)
         If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
             If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
                 'under than 10 sec
@@ -1795,8 +1811,6 @@ Public Class BattleShipsGame
                     End If
                 End If
             End If
-        Else
-            MsgBox("Going wrong")
         End If
         Return time
     End Function
@@ -1805,25 +1819,33 @@ Public Class BattleShipsGame
         Swapped = True
         Dim Last As Integer
         Last = arrHighScores.Length - 1
+
+        'Swapped as a bailout if in order (no swaps) instead of having to keep checking
         While Swapped = True
             Swapped = False
             Dim i = 1
+            'i < last means that it once i = last, it will be in order
             While i < Last
                 If sortByScores = True Then
                     If order = "descending" Then
+
+                        'Temporary fake score as lower than possible so it can't show up as top 10 in descending
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).score = -50
                         End If
 
+                        'Swap if the current one is smaller than the one on it's right
                         If arrHighScores(i).score < arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
+                        'Temporary fake score as higher than possible so it can't show up as top 10 in ascending
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).score = 50
                         End If
 
+                        'Swap if the current one is bigger than the one on it's right
                         If arrHighScores(i).score > arrHighScores(i + 1).score Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
@@ -1833,19 +1855,23 @@ Public Class BattleShipsGame
 
                 If sortByTime = True Then
                     If order = "descending" Then
+                        'Temporary fake time as lower than possible so it can't show up as top 10
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).time = "00:00"
                         End If
 
+                        'Swap if the current one is smaller than the one on it's right
                         If CInt(convertTimeToInteger(arrHighScores(i).time)) < CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
+                        'Temporary fake score as highest possible so it can't show up as top 10 in ascending
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).time = "59:59"
                         End If
 
+                        'Swap if the current one is bigger than the one on it's right
                         If CInt(convertTimeToInteger(arrHighScores(i).time)) > CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
@@ -1858,6 +1884,7 @@ Public Class BattleShipsGame
         End While
     End Sub
     Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
+        'swap records by using a temporary value
         Dim Temp As recHighScore
         Temp = A
         A = B
