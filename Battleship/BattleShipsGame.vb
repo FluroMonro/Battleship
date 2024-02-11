@@ -174,7 +174,7 @@ Public Class BattleShipsGame
         Next i
     End Sub
     Private Sub initialiseControlsPlacement()
-        'To place the controls in the same position relative to the custom display size of the user
+        'To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
@@ -182,11 +182,11 @@ Public Class BattleShipsGame
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'To force the game to a 1528x960 window unless already that resolution in fullscreen
-        'If Me.Width <> 1528 And Me.Height <> 960 Then
-        '    Me.WindowState = FormWindowState.Normal
-        '    Me.Width = 1528
-        '    Me.Height = 960
-        'End If
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Width = 1528
+            Me.Height = 960
+        End If
 
         'Variables to be used for the placement of controls
         Dim turnsbannerWidth As Short

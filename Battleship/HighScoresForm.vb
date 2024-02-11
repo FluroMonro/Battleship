@@ -3,6 +3,8 @@ Public Class HighScoresForm
     Public currentScoreArrow
     Public currentTimeArrow
     Public Sub onLoadHighScores()
+        'Call the subroutines to intialise the form
+
         currentScoreArrow = 1
         currentTimeArrow = 2
 
@@ -14,14 +16,14 @@ Public Class HighScoresForm
         showscore()
     End Sub
     Private Sub initialiseControlsPlacement()
-        'To place the controls in the same position relative to the custom display size of the user
+        'To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
-        'Setting the placement and size relative to the screen
 
+        'Setting the placement and size of controls onto the screen
         Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
         Titlelbl.Size = New Size(336, 71)
         subtitlelbl.Location = New Point(Me.Width / 2 - (208 / 2), 200)
@@ -32,16 +34,19 @@ Public Class HighScoresForm
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
     End Sub
     Private Sub showscore()
+        'Read and print the highscore into the form
         BattleShipsGame.readHighScores()
         printHighScores()
     End Sub
     Private Sub initialiseLastHighscore()
+        'Initialise the temporary high-score for the player until they finish a game
         BattleShipsGame.arrHighScores(11).name = "ZZZZZZ"
         BattleShipsGame.arrHighScores(11).score = -17
         BattleShipsGame.arrHighScores(11).time = "59:59"
         BattleShipsGame.arrHighScores(11).difficulty = "None"
     End Sub
     Private Sub printHighScores()
+        'Match each label on the high-score form with the element and field of the array of elements
         Dim targetObject As Label
         For i = 1 To 10
             targetObject = Me.namepanel.Controls.Item("namelbl" + i.ToString())
@@ -58,6 +63,7 @@ Public Class HighScoresForm
         Next
     End Sub
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+        'Leave the hs.txt in the same order every time
         BattleShipsGame.BubbleSort(True, False, "descending")
         BattleShipsGame.WriteHighScores()
 
@@ -65,6 +71,9 @@ Public Class HighScoresForm
         MainMenuForm.Show()
     End Sub
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
+        'When the player clicks on the score arrow
+
+        'Alternate the current arrow (flip)
         currentScoreArrow = BattleShipsGame.AlternateNum(currentScoreArrow)
         Dim sortbyscores = True
         Dim sortbytime = False
@@ -75,13 +84,20 @@ Public Class HighScoresForm
         Else
             order = "ascending"
         End If
+        'Update the visuals to reflect the current array
         updateArrowButtonImages(sortbyscores, sortbytime, order)
+
+        'Sort by scores and write to the file
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
+        'print and update the rankings to reflect the order
         printHighScores()
         updateRankings(order, "score")
     End Sub
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
+        'When the player clicks on the time arrow
+
+        'Alternate the current arrow (flip)
         currentTimeArrow = BattleShipsGame.AlternateNum(currentTimeArrow)
         Dim sortbytime = True
         Dim sortbyscores = False
@@ -92,13 +108,17 @@ Public Class HighScoresForm
         Else
             order = "ascending"
         End If
+        'Update the visuals to reflect the current array
         updateArrowButtonImages(sortbyscores, sortbytime, order)
         BattleShipsGame.BubbleSort(sortbyscores, sortbytime, order)
         BattleShipsGame.WriteHighScores()
+        'print and update the rankings to reflect the order
         printHighScores()
         updateRankings(order, "time")
     End Sub
     Private Sub updateArrowButtonImages(sortbyscores As Boolean, sortBytime As Boolean, order As String)
+        'To set and update the image of the arrow to the correct image
+        'Black is for the currently sorted by item, grey for the other
         Select Case order
             Case "descending"
                 'descending
@@ -132,6 +152,7 @@ Public Class HighScoresForm
         End Select
     End Sub
     Private Sub updateRankings(order As String, type As String)
+        'To update the text of the rankings to reflect the correct order
         Dim rankingOrderStr As String
         Dim targetObject As Label
 
@@ -154,7 +175,7 @@ Public Class HighScoresForm
             targetObject = Me.rankingpanel.Controls.Item("ranklbl" + i.ToString())
             If rankingOrderStr = "ascending" Then
                 targetObject.Text = i
-            Else
+            Else '11 - i as needs to be on the opposite side of 10 from i
                 targetObject.Text = 11 - i
             End If
         Next
