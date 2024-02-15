@@ -32,6 +32,7 @@ Public Class BattleShipsGame
     Dim oppositePath As Boolean
     Dim NextShip As Boolean
     Dim duplicateShip As Boolean
+    Dim time As Integer
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -1041,6 +1042,7 @@ Public Class BattleShipsGame
             End If
 
             'The players move starts each round of the game
+            timeCount()
             game(playerMove)
         End If
         Return playerMove
@@ -1891,4 +1893,16 @@ Public Class BattleShipsGame
         A = B
         B = Temp
     End Sub
+
+    Private Function timeCount() As Integer
+        Dim timer As New Stopwatch
+        If gameOver = False Then
+            timer.Start()
+        Else
+            timer.Stop()
+        End If
+
+        time = Int(timer.ElapsedMilliseconds / 1000)
+        Return time
+    End Function
 End Class

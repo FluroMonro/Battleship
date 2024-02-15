@@ -24,6 +24,7 @@ Partial Class BattleShipsGame
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         backgroundImg = New PictureBox()
         PlayerBoardBGImg = New PictureBox()
         OpponentBoardBGImg = New PictureBox()
@@ -54,6 +55,7 @@ Partial Class BattleShipsGame
         KeyHitlbl = New Windows.Forms.Label()
         keyRedpicbox = New PictureBox()
         KeyPanel = New Panel()
+        Timer1 = New Timer(components)
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -517,4 +519,5 @@ Partial Class BattleShipsGame
     Friend WithEvents KeyHitlbl As Windows.Forms.Label
     Friend WithEvents keyRedpicbox As PictureBox
     Friend WithEvents KeyPanel As Panel
+    Friend WithEvents Timer1 As Timer
 End Class
