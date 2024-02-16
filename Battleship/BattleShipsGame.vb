@@ -1796,15 +1796,18 @@ Public Class BattleShipsGame
             Else
                 'between 1 and 10min
                 If time < 600 Then
-                    WindowState = FormWindowState.Minimized
                     If time - (Math.Floor(time / 60) * 60 = 0) Then
                         newTime = "0" & Math.Floor(time / 60) & ":" & "00"
                     Else
                         newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
                     End If
                 Else
-                        'anything above 10min
+                    'anything above 10min
+                    If time - (Math.Floor(time / 60) * 60 = 0) Then
+                        newTime = Math.Floor(time / 60) & ":" & "00"
+                    Else
                         newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                    End If
                 End If
             End If
         End If
