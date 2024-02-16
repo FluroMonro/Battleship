@@ -1426,8 +1426,7 @@ Public Class BattleShipsGame
                 MsgBox("YOU WIN!")
             Else
                 If score = 0 Then
-                    MsgBox("No Winner")
-                    HighScoresForm.initialiseLastHighscore()
+                    MsgBox("Draw: No Winner")
                 Else
                     MsgBox("YOU LOSE!")
                 End If
@@ -1813,25 +1812,29 @@ Public Class BattleShipsGame
         Dim subtime As String
 
         'To make sure that 00:00 does not run (impossible time)
-        If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
-            If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
-                'under than 10 sec
-                subtime = Mid(time, 5, 1)
-                time = "000" & subtime
-            Else
-                'between 10s and 1min
-
-                If time(0) = "0" AndAlso time(1) = "0" Then
-                    subtime = Mid(time, 4, 2)
-                    time = "00" & subtime
+        If time = "0" Then
+            time = timeLeft
+        Else
+            If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
+                If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
+                    'under than 10 sec
+                    subtime = Mid(time, 5, 1)
+                    time = "000" & subtime
                 Else
-                    If time(0) = "0" Then
-                        'between 1min and 10min
-                        subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
-                        time = "0" & subtime
+                    'between 10s and 1min
+
+                    If time(0) = "0" AndAlso time(1) = "0" Then
+                        subtime = Mid(time, 4, 2)
+                        time = "00" & subtime
                     Else
-                        'anything above 10min
-                        time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                        If time(0) = "0" Then
+                            'between 1min and 10min
+                            subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
+                            time = "0" & subtime
+                        Else
+                            'anything above 10min
+                            time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                        End If
                     End If
                 End If
             End If
@@ -1942,7 +1945,6 @@ Public Class BattleShipsGame
         Else
             If time = 0 Then
                 If formID = "Game" Then
-                    WindowState = FormWindowState.Minimized
                     gameOver = True
                     timeEnd()
                     revealships()
