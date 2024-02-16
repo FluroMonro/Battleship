@@ -13,6 +13,11 @@
         BoardSizebtn10.Checked = True
         shipPlacementRand.Checked = True
         difNorm.Checked = True
+        timerValueBar.Visible = False
+        timervalue.Visible = False
+        timerValueBar.Value = 5
+        timervalue.Text = "05:00"
+        timerckbx.Checked = False
     End Sub
     Private Sub initialiseControlsPlacement()
         ''To intialise the controls in the correct way
@@ -112,6 +117,8 @@
 
         'Only allow the game to be played when the name is valid
         If validateName(playerName) = True Then
+            initialiseControlsPlacement()
+            onLoadSettings()
             playGame()
         End If
     End Sub
