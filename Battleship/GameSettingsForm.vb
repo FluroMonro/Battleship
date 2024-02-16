@@ -101,6 +101,13 @@
             End If
         End If
 
+        If timerckbx.Checked = True Then
+            timeOptionAsCountUp = False
+            timeLeft = timerValueBar.Value
+        Else
+            timeOptionAsCountUp = True
+        End If
+
         'Only allow the game to be played when the name is valid
         If validateName(playerName) = True Then
             playGame()
@@ -111,7 +118,7 @@
         playerNameInputTxtbox.Text = ""
 
         'Update the global variables across forms
-        BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, isShipPlacementRandom)
+        BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, isShipPlacementRandom, timeOptionAsCountUp, timeLeft)
         Me.Hide()
         BattleShipsGame.Show()
         BattleShipsGame.onFormLoad()

@@ -80,15 +80,18 @@ Public Class BattleShipsGame
     Public alreadyDown As Boolean
     Public opponentMoveDirection As Integer
     Public opponentContinueOnCount As Integer
-    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean)
+    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean, timeOption As Boolean, timeSet As Integer)
         'Updating the global variables from across forms
         playerName = name
         gridSize = size
         difficulty = userDifficulty
         isShipPlacementRandom = shipPlacementOption
+        timeOptionAsCountUp = timeOption
+        timeLeft = timeSet
     End Sub
     Public Sub onFormLoad()
         gameTimer.Stop()
+        timeInitialise()
         'mainline setup
 
         initialiseControlsPlacement()
@@ -1064,6 +1067,7 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
 
         If gameOver = True Then
+            timeEnd()
             revealships()
 
             'Final score (player - opponent)
@@ -1094,6 +1098,7 @@ Public Class BattleShipsGame
 
 
                 If gameOver = True Then
+                    timeEnd()
                     revealships()
                     determineScore()
                     scoring()
@@ -1121,6 +1126,7 @@ Public Class BattleShipsGame
                             End If
                         End While
                         If gameOver = True Then
+                            timeEnd()
                             revealships()
                             determineScore()
                             scoring()
@@ -1697,11 +1703,16 @@ Public Class BattleShipsGame
     End Function
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Exit back to the main menu
+        gameOver = True
+        timeEnd()
         Me.Hide()
         MainMenuForm.Show()
+        onFormLoad()
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
+        gameOver = True
+        timeEnd()
         onFormLoad()
     End Sub
     Private Sub scoring()
@@ -1727,7 +1738,7 @@ Public Class BattleShipsGame
         arrHighScores(11).score = score
         arrHighScores(11).name = playerName
         arrHighScores(11).difficulty = difficulty
-        arrHighScores(11).time = "00:10"
+        arrHighScores(11).time = time
     End Sub
     Public Sub readHighScores()
         'Open the hs.txt file for Input (read)
@@ -1897,9 +1908,16 @@ Public Class BattleShipsGame
         A = B
         B = Temp
     End Sub
+    Private Sub timeInitialise()
+        gameTimer.Interval = 1000
+        If timeOptionAsCountUp = False Then
+            time = timeLeft
+            displayTime = convertTimeToDisplay(time)
+        End If
+        timelbl.Text = displayTime
+    End Sub
 
     Private Sub timeStart()
-        gameTimer.Interval = 1000
         If gameOver = False Then
             gameTimer.Start()
         End If
@@ -1908,11 +1926,25 @@ Public Class BattleShipsGame
     Private Sub timeEnd()
         If gameOver = True Then
             gameTimer.Stop()
+            time = 0
+            displayTime = ""
         End If
     End Sub
     Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
-        time = time + 1
-        displayTime = convertTimeToDisplay(time + 1)
-        timelbl.Text = displaytime
+        If timeOptionAsCountUp = True Then
+            time = time + 1
+        Else
+            If time = 0 Then
+                timeEnd()
+                revealships()
+                determineScore()
+                scoring()
+            Else
+                time = time - 1
+            End If
+        End If
+
+        displayTime = convertTimeToDisplay(time)
+        timelbl.Text = displayTime
     End Sub
 End Class
