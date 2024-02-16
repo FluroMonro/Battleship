@@ -1419,7 +1419,7 @@ Public Class BattleShipsGame
             'Go through the opponents array and calculate how many the opponent has left and take that away from the score
             For row = 1 To gridSize
                 For column = 1 To gridSize
-                    If opponentgameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                    If opponentgameArray(column, row) = 1 OrElse opponentgameArray(column, row) = 4 Then
                         score = score - 1
                     End If
                 Next column
@@ -1955,13 +1955,11 @@ Public Class BattleShipsGame
         End If
         timelbl.Text = displayTime
     End Sub
-
     Private Sub timeStart()
         If gameOver = False Then
             gameTimer.Start()
         End If
     End Sub
-
     Private Sub timeEnd()
         If gameOver = True Then
             gameTimer.Stop()
@@ -1969,11 +1967,6 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
-        If time = 3 Then
-            time = 3597
-        End If
-
-
         If timeOptionAsCountUp = True Then
             time = time + 1
             If time = 3599 Then
