@@ -130,7 +130,7 @@ Partial Class HighScoresForm
         ' 
         namelbl3.AutoSize = True
         namelbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl3.Location = New Point(63, 135)
+        namelbl3.Location = New Point(44, 135)
         namelbl3.Name = "namelbl3"
         namelbl3.Size = New Size(62, 21)
         namelbl3.TabIndex = 10
@@ -140,7 +140,7 @@ Partial Class HighScoresForm
         ' 
         namelbl2.AutoSize = True
         namelbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl2.Location = New Point(63, 95)
+        namelbl2.Location = New Point(44, 95)
         namelbl2.Name = "namelbl2"
         namelbl2.Size = New Size(62, 21)
         namelbl2.TabIndex = 11
@@ -250,7 +250,7 @@ Partial Class HighScoresForm
         ' 
         namelbl4.AutoSize = True
         namelbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl4.Location = New Point(63, 175)
+        namelbl4.Location = New Point(44, 175)
         namelbl4.Name = "namelbl4"
         namelbl4.Size = New Size(62, 21)
         namelbl4.TabIndex = 22
@@ -260,7 +260,7 @@ Partial Class HighScoresForm
         ' 
         namelbl5.AutoSize = True
         namelbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl5.Location = New Point(63, 215)
+        namelbl5.Location = New Point(44, 215)
         namelbl5.Name = "namelbl5"
         namelbl5.Size = New Size(62, 21)
         namelbl5.TabIndex = 23
@@ -270,7 +270,7 @@ Partial Class HighScoresForm
         ' 
         namelbl6.AutoSize = True
         namelbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl6.Location = New Point(63, 257)
+        namelbl6.Location = New Point(44, 257)
         namelbl6.Name = "namelbl6"
         namelbl6.Size = New Size(62, 21)
         namelbl6.TabIndex = 24
@@ -280,7 +280,7 @@ Partial Class HighScoresForm
         ' 
         namelbl7.AutoSize = True
         namelbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl7.Location = New Point(63, 300)
+        namelbl7.Location = New Point(44, 300)
         namelbl7.Name = "namelbl7"
         namelbl7.Size = New Size(62, 21)
         namelbl7.TabIndex = 25
@@ -290,7 +290,7 @@ Partial Class HighScoresForm
         ' 
         namelbl8.AutoSize = True
         namelbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl8.Location = New Point(63, 340)
+        namelbl8.Location = New Point(44, 340)
         namelbl8.Name = "namelbl8"
         namelbl8.Size = New Size(62, 21)
         namelbl8.TabIndex = 26
@@ -300,7 +300,7 @@ Partial Class HighScoresForm
         ' 
         namelbl9.AutoSize = True
         namelbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl9.Location = New Point(63, 380)
+        namelbl9.Location = New Point(44, 380)
         namelbl9.Name = "namelbl9"
         namelbl9.Size = New Size(62, 21)
         namelbl9.TabIndex = 27
@@ -310,7 +310,7 @@ Partial Class HighScoresForm
         ' 
         namelbl10.AutoSize = True
         namelbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl10.Location = New Point(63, 420)
+        namelbl10.Location = New Point(44, 420)
         namelbl10.Name = "namelbl10"
         namelbl10.Size = New Size(71, 21)
         namelbl10.TabIndex = 28
@@ -361,14 +361,14 @@ Partial Class HighScoresForm
         namepanel.Controls.Add(namelbl3)
         namepanel.Location = New Point(500, 303)
         namepanel.Name = "namepanel"
-        namepanel.Size = New Size(165, 453)
+        namepanel.Size = New Size(174, 453)
         namepanel.TabIndex = 30
         ' 
         ' namelbl1
         ' 
         namelbl1.AutoSize = True
         namelbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl1.Location = New Point(63, 55)
+        namelbl1.Location = New Point(44, 55)
         namelbl1.Name = "namelbl1"
         namelbl1.Size = New Size(66, 21)
         namelbl1.TabIndex = 29
@@ -378,7 +378,7 @@ Partial Class HighScoresForm
         ' 
         namelbl.AutoSize = True
         namelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        namelbl.Location = New Point(48, 9)
+        namelbl.Location = New Point(29, 9)
         namelbl.Name = "namelbl"
         namelbl.Size = New Size(77, 28)
         namelbl.TabIndex = 23
