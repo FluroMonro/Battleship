@@ -48,6 +48,7 @@ Partial Class GameSettingsForm
         difImpos = New RadioButton()
         timerckbx = New CheckBox()
         timerValueBar = New TrackBar()
+        timervalue = New Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
@@ -379,12 +380,27 @@ Partial Class GameSettingsForm
         timerValueBar.Value = 5
         timerValueBar.Visible = False
         ' 
+        ' timervalue
+        ' 
+        timervalue.AutoSize = True
+        timervalue.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timervalue.FlatStyle = FlatStyle.Flat
+        timervalue.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        timervalue.ForeColor = Color.Black
+        timervalue.Location = New Point(461, 595)
+        timervalue.Name = "timervalue"
+        timervalue.Size = New Size(56, 25)
+        timervalue.TabIndex = 28
+        timervalue.Text = "00:00"
+        timervalue.Visible = False
+        ' 
         ' GameSettingsForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(timervalue)
         Controls.Add(timerValueBar)
         Controls.Add(timerckbx)
         Controls.Add(Panel3)
@@ -436,4 +452,5 @@ Partial Class GameSettingsForm
     Friend WithEvents timerckbx As CheckBox
     Friend WithEvents timerValueBar As TrackBar
     Friend WithEvents difImpos As RadioButton
+    Friend WithEvents timervalue As Label
 End Class

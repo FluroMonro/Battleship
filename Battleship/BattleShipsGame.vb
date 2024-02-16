@@ -1782,7 +1782,7 @@ Public Class BattleShipsGame
         Next
         FileSystem.FileClose(1)
     End Sub
-    Private Function convertTimeToDisplay(time As Integer) As String
+    Public Function convertTimeToDisplay(time As Integer) As String
         'Convert integer time into display time (dd:dd)
 
         Dim newTime As String
@@ -1796,10 +1796,15 @@ Public Class BattleShipsGame
             Else
                 'between 1 and 10min
                 If time < 600 Then
-                    newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                    WindowState = FormWindowState.Minimized
+                    If time - (Math.Floor(time / 60) * 60 = 0) Then
+                        newTime = "0" & Math.Floor(time / 60) & ":" & "00"
+                    Else
+                        newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                    End If
                 Else
-                    'anything above 10min
-                    newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                        'anything above 10min
+                        newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
                 End If
             End If
         End If

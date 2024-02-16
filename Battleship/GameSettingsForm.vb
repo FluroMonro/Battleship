@@ -1,5 +1,6 @@
 ﻿Public Class GameSettingsForm
     Dim playerName As String
+    Dim timerNumValue As Integer
     Private Sub GameSettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         initialiseControlsPlacement()
         onLoadSettings()
@@ -104,7 +105,7 @@
 
         If timerckbx.Checked = True Then
             timeOptionAsCountUp = False
-            timeLeft = timerValueBar.Value
+            timeLeft = timerNumValue
         Else
             timeOptionAsCountUp = True
         End If
@@ -128,8 +129,15 @@
         'When the check box for the timer is checked show the value bar
         If timerckbx.Checked = True Then
             timerValueBar.Visible = True
+            timervalue.Visible = True
         Else
             timerValueBar.Visible = False
+            timervalue.Visible = False
         End If
+    End Sub
+
+    Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
+        timerNumValue = timerValueBar.Value * 60
+        timervalue.Text = BattleShipsGame.convertTimeToDisplay(timerNumValue)
     End Sub
 End Class
