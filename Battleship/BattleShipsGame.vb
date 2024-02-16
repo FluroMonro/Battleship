@@ -1069,12 +1069,14 @@ Public Class BattleShipsGame
 
         If gameOver = True Then
             timeEnd()
+
             revealships()
 
             'Final score (player - opponent)
             determineScore()
 
             scoring()
+            time = 0
         Else
             If playerextraTurn = False Then
                 'Opponents turn
@@ -1103,6 +1105,7 @@ Public Class BattleShipsGame
                     revealships()
                     determineScore()
                     scoring()
+                    time = 0
                 Else
                     If computerextraTurn = False Then
                         swapPlayer()
@@ -1131,6 +1134,7 @@ Public Class BattleShipsGame
                             revealships()
                             determineScore()
                             scoring()
+                            time = 0
                         Else
                             'To wait for the players next move
                             swapPlayer()
@@ -1710,6 +1714,7 @@ Public Class BattleShipsGame
         'Exit back to the main menu
         gameOver = True
         timeEnd()
+        time = 0
         Me.Hide()
         MainMenuForm.Show()
         onFormLoad()
@@ -1718,6 +1723,7 @@ Public Class BattleShipsGame
         'Reload the page
         gameOver = True
         timeEnd()
+        time = 0
         onFormLoad()
     End Sub
     Private Sub scoring()
@@ -1786,34 +1792,38 @@ Public Class BattleShipsGame
         'Convert integer time into display time (dd:dd)
 
         Dim newTime As String
-        If time < 10 Then
-            'under than 10 sec
-            newTime = "00:0" & CStr(time)
+        If time >= 3599 Then
+            newTime = "59:59"
         Else
-            'between 10s and 1min
-            If time < 60 Then
-                newTime = "00:" & CStr(time)
+            If time < 10 Then
+                'under than 10 sec
+                newTime = "00:0" & CStr(time)
             Else
-                'between 1 and 10min
-                If time < 600 Then
-                    If time - (Math.Floor(time / 60) * 60) = 0 Then
-                        newTime = "0" & Math.Floor(time / 60) & ":" & "00"
-                    Else
-                        If time - (Math.Floor(time / 60) * 60) < 10 Then
-                            newTime = "0" & Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
-                        Else
-                            newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
-                        End If
-                    End If
+                'between 10s and 1min
+                If time < 60 Then
+                    newTime = "00:" & CStr(time)
                 Else
-                    'anything above 10min
-                    If time - (Math.Floor(time / 60) * 60) = 0 Then
-                        newTime = Math.Floor(time / 60) & ":" & "00"
-                    Else
-                        If time - (Math.Floor(time / 60) * 60) < 10 Then
-                            newTime = Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
+                    'between 1 and 10min
+                    If time < 600 Then
+                        If time - (Math.Floor(time / 60) * 60) = 0 Then
+                            newTime = "0" & Math.Floor(time / 60) & ":" & "00"
                         Else
-                            newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                            If time - (Math.Floor(time / 60) * 60) < 10 Then
+                                newTime = "0" & Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
+                            Else
+                                newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                            End If
+                        End If
+                    Else
+                        'anything above 10min
+                        If time - (Math.Floor(time / 60) * 60) = 0 Then
+                            newTime = Math.Floor(time / 60) & ":" & "00"
+                        Else
+                            If time - (Math.Floor(time / 60) * 60) < 10 Then
+                                newTime = Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
+                            Else
+                                newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                            End If
                         End If
                     End If
                 End If
@@ -1831,25 +1841,29 @@ Public Class BattleShipsGame
         If time = "0" Then
             time = timeLeft
         Else
-            If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
-                If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
-                    'under than 10 sec
-                    subtime = Mid(time, 5, 1)
-                    time = "000" & subtime
-                Else
-                    'between 10s and 1min
-
-                    If time(0) = "0" AndAlso time(1) = "0" Then
-                        subtime = Mid(time, 4, 2)
-                        time = "00" & subtime
+            If time = "3599" Then
+                time = 3599
+            Else
+                If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
+                    If time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" Then
+                        'under than 10 sec
+                        subtime = Mid(time, 5, 1)
+                        time = "000" & subtime
                     Else
-                        If time(0) = "0" Then
-                            'between 1min and 10min
-                            subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
-                            time = "0" & subtime
+                        'between 10s and 1min
+
+                        If time(0) = "0" AndAlso time(1) = "0" Then
+                            subtime = Mid(time, 4, 2)
+                            time = "00" & subtime
                         Else
-                            'anything above 10min
-                            time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                            If time(0) = "0" Then
+                                'between 1min and 10min
+                                subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
+                                time = "0" & subtime
+                            Else
+                                'anything above 10min
+                                time = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                            End If
                         End If
                     End If
                 End If
@@ -1951,13 +1965,12 @@ Public Class BattleShipsGame
     Private Sub timeEnd()
         If gameOver = True Then
             gameTimer.Stop()
-            time = 0
             displayTime = ""
         End If
     End Sub
     Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
         If time = 3 Then
-            time = 3590
+            time = 3597
         End If
 
 
@@ -1970,6 +1983,7 @@ Public Class BattleShipsGame
                     revealships()
                     determineScore()
                     scoring()
+                    time = 0
                 End If
             End If
         Else
@@ -1980,6 +1994,7 @@ Public Class BattleShipsGame
                     revealships()
                     determineScore()
                     scoring()
+                    time = 0
                 End If
             Else
                 time = time - 1
