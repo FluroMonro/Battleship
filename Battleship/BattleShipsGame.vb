@@ -1796,17 +1796,25 @@ Public Class BattleShipsGame
             Else
                 'between 1 and 10min
                 If time < 600 Then
-                    If time - (Math.Floor(time / 60) * 60 = 0) Then
+                    If time - (Math.Floor(time / 60) * 60) = 0 Then
                         newTime = "0" & Math.Floor(time / 60) & ":" & "00"
                     Else
-                        newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                        If time - (Math.Floor(time / 60) * 60) < 10 Then
+                            newTime = "0" & Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
+                        Else
+                            newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                        End If
                     End If
                 Else
                     'anything above 10min
-                    If time - (Math.Floor(time / 60) * 60 = 0) Then
+                    If time - (Math.Floor(time / 60) * 60) = 0 Then
                         newTime = Math.Floor(time / 60) & ":" & "00"
                     Else
-                        newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                        If time - (Math.Floor(time / 60) * 60) < 10 Then
+                            newTime = Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
+                        Else
+                            newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                        End If
                     End If
                 End If
             End If
@@ -1948,8 +1956,22 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
+        If time = 3 Then
+            time = 3590
+        End If
+
+
         If timeOptionAsCountUp = True Then
             time = time + 1
+            If time = 3599 Then
+                If formID = "Game" Then
+                    gameOver = True
+                    timeEnd()
+                    revealships()
+                    determineScore()
+                    scoring()
+                End If
+            End If
         Else
             If time = 0 Then
                 If formID = "Game" Then
