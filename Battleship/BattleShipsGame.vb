@@ -1,5 +1,6 @@
 ﻿Imports System.Diagnostics.PerformanceData
 Imports System.Drawing.Text
+Imports System.Reflection.Emit
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.Intrinsics.Arm
 Imports System.Security.Cryptography.X509Certificates
@@ -33,6 +34,7 @@ Public Class BattleShipsGame
     Dim NextShip As Boolean
     Dim duplicateShip As Boolean
     Dim time As Integer
+    Dim displayTime As String
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -50,7 +52,7 @@ Public Class BattleShipsGame
     End Structure
 
     Public arrHighScores(11) As recHighScore
-    Public hasAhitLocation As GridLocation
+    Public hasAhitLocation As gridLocation
     Public opponentShip2(2) As shipGridLocations
     Public opponentShip3a(3) As shipGridLocations
     Public opponentShip3b(3) As shipGridLocations
@@ -86,6 +88,7 @@ Public Class BattleShipsGame
         isShipPlacementRandom = shipPlacementOption
     End Sub
     Public Sub onFormLoad()
+        gameTimer.Stop()
         'mainline setup
 
         initialiseControlsPlacement()
@@ -1040,9 +1043,10 @@ Public Class BattleShipsGame
                     playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 End If
             End If
+            timeStart()
+
 
             'The players move starts each round of the game
-            timeCount()
             game(playerMove)
         End If
         Return playerMove
@@ -1894,15 +1898,21 @@ Public Class BattleShipsGame
         B = Temp
     End Sub
 
-    Private Function timeCount() As Integer
-        Dim timer As New Stopwatch
+    Private Sub timeStart()
+        gameTimer.Interval = 1000
         If gameOver = False Then
-            timer.Start()
-        Else
-            timer.Stop()
+            gameTimer.Start()
         End If
+    End Sub
 
-        time = Int(timer.ElapsedMilliseconds / 1000)
-        Return time
-    End Function
+    Private Sub timeEnd()
+        If gameOver = True Then
+            gameTimer.Stop()
+        End If
+    End Sub
+    Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
+        time = time + 1
+        displayTime = convertTimeToDisplay(time + 1)
+        timelbl.Text = displaytime
+    End Sub
 End Class

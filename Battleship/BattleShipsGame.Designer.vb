@@ -55,6 +55,7 @@ Partial Class BattleShipsGame
         KeyHitlbl = New Windows.Forms.Label()
         keyRedpicbox = New PictureBox()
         KeyPanel = New Panel()
+        gameTimer = New Timer(components)
         Timer1 = New Timer(components)
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -430,6 +431,10 @@ Partial Class BattleShipsGame
         KeyPanel.Size = New Size(136, 157)
         KeyPanel.TabIndex = 35
         ' 
+        ' gameTimer
+        ' 
+        gameTimer.Enabled = True
+        ' 
         ' BattleShipsGame
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -519,5 +524,6 @@ Partial Class BattleShipsGame
     Friend WithEvents KeyHitlbl As Windows.Forms.Label
     Friend WithEvents keyRedpicbox As PictureBox
     Friend WithEvents KeyPanel As Panel
+    Friend WithEvents gameTimer As Timer
     Friend WithEvents Timer1 As Timer
 End Class
