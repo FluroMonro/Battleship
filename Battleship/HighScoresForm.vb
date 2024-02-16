@@ -3,6 +3,8 @@ Public Class HighScoresForm
     Public currentScoreArrow
     Public currentTimeArrow
     Public Sub onLoadHighScores()
+        formID = "HighScores"
+
         'Call the subroutines to intialise the form
 
         currentScoreArrow = 1
@@ -38,7 +40,7 @@ Public Class HighScoresForm
         BattleShipsGame.readHighScores()
         printHighScores()
     End Sub
-    Private Sub initialiseLastHighscore()
+    Public Sub initialiseLastHighscore()
         'Initialise the temporary high-score for the player until they finish a game
         BattleShipsGame.arrHighScores(11).name = "ZZZZZZ"
         BattleShipsGame.arrHighScores(11).score = -17

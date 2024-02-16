@@ -7,4 +7,5 @@
     Public timeSpent As Integer
     Public isShipPlacementRandom As Boolean
     Public difficulty As String
+    Public formID As String
 End Module

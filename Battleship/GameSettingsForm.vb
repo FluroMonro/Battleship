@@ -5,6 +5,7 @@
         onLoadSettings()
     End Sub
     Public Sub onLoadSettings()
+        formID = "GameSettings"
         'Initialise the control parameters
         playerNameInputTxtbox.Text = ""
         playernamewarninglbl.Visible = False

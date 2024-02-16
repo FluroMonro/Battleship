@@ -88,6 +88,7 @@ Public Class BattleShipsGame
         isShipPlacementRandom = shipPlacementOption
         timeOptionAsCountUp = timeOption
         timeLeft = timeSet
+        formID = "Game"
     End Sub
     Public Sub onFormLoad()
         gameTimer.Stop()
@@ -1414,7 +1415,7 @@ Public Class BattleShipsGame
             'Go through the opponents array and calculate how many the opponent has left and take that away from the score
             For row = 1 To gridSize
                 For column = 1 To gridSize
-                    If opponentgameArray(column, row) = 1 Then
+                    If opponentgameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
                         score = score - 1
                     End If
                 Next column
@@ -1424,8 +1425,13 @@ Public Class BattleShipsGame
                 'If score Is positive, Then the player has more ships left than the opponent and player wins
                 MsgBox("YOU WIN!")
             Else
+                If score = 0 Then
+                    MsgBox("No Winner")
+                    HighScoresForm.initialiseLastHighscore()
+                Else
+                    MsgBox("YOU LOSE!")
+                End If
                 'If score Is negative, Then the opponent has more ships left than the player and player loses
-                MsgBox("YOU LOSE!")
             End If
         End If
         MsgBox(score)
@@ -1935,10 +1941,14 @@ Public Class BattleShipsGame
             time = time + 1
         Else
             If time = 0 Then
-                timeEnd()
-                revealships()
-                determineScore()
-                scoring()
+                If formID = "Game" Then
+                    WindowState = FormWindowState.Minimized
+                    gameOver = True
+                    timeEnd()
+                    revealships()
+                    determineScore()
+                    scoring()
+                End If
             Else
                 time = time - 1
             End If

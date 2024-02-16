@@ -2,6 +2,7 @@
     Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'When the game is played
         initialiseControlsPlacement()
+        formID = "MainMenu"
     End Sub
     Private Sub initialiseControlsPlacement()
         'To intialise the controls in the correct way
