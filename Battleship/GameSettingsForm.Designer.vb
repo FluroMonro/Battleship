@@ -391,7 +391,7 @@ Partial Class GameSettingsForm
         timervalue.Name = "timervalue"
         timervalue.Size = New Size(56, 25)
         timervalue.TabIndex = 28
-        timervalue.Text = "05:00"
+        timervalue.Text = "02:30"
         timervalue.Visible = False
         ' 
         ' GameSettingsForm

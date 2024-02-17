@@ -16,7 +16,7 @@
         timerValueBar.Visible = False
         timervalue.Visible = False
         timerValueBar.Value = 5
-        timervalue.Text = "05:00"
+        timervalue.Text = "02:30"
         timerckbx.Checked = False
     End Sub
     Private Sub initialiseControlsPlacement()
@@ -144,7 +144,7 @@
     End Sub
 
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
-        timerNumValue = timerValueBar.Value * 60
+        timerNumValue = timerValueBar.Value * 30
         timervalue.Text = BattleShipsGame.convertTimeToDisplay(timerNumValue)
     End Sub
 End Class
