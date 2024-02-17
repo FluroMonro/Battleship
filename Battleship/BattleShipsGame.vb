@@ -94,6 +94,8 @@ Public Class BattleShipsGame
         gameTimer.Stop()
         timeInitialise()
         'mainline setup
+        updateInGameScore(1)
+        updateInGameScore(2)
 
         initialiseControlsPlacement()
         initialiseVariables()
