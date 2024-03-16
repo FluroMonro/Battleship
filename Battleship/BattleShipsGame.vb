@@ -35,6 +35,8 @@ Public Class BattleShipsGame
     Dim duplicateShip As Boolean
     Dim time As Integer
     Dim displayTime As String
+    Dim missCount As Integer
+    Dim HitCount As Integer
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -236,6 +238,7 @@ Public Class BattleShipsGame
         TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
 
         KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
+        StatsPanel.Location = New Point(Me.Width / 5, Me.Height / 18)
 
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
         backgroundImg.Location = New Point(0, 0)
@@ -1063,8 +1066,9 @@ Public Class BattleShipsGame
         'check the move of the player (hit, miss, game over)
         check(playerMove, opponentgameArray)
 
-        'Update displayed score for the player
+        'Update displayed score and stats for the player
         updateInGameScore(1)
+        updateGameStats()
 
         'Update the grid to show a hit or miss
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
@@ -1095,8 +1099,9 @@ Public Class BattleShipsGame
                 'check whether a hit or a miss or if game is over
                 check(opponentmove, playergameArray)
 
-                'Update diaplyed score for the opponent
+                'Update diaplyed score and stats for the opponent
                 updateInGameScore(2)
+                updateGameStats()
 
                 'Display updated grid
                 assignGridImages(playergameArray, playerpictureBoxArray)
@@ -1120,8 +1125,9 @@ Public Class BattleShipsGame
                             'check, returns whether it is game over or not
                             check(opponentmove, playergameArray)
 
-                            'update score
+                            'update score and stats
                             updateInGameScore(2)
+                            updateGameStats()
 
                             'Display updated grid
                             assignGridImages(playergameArray, playerpictureBoxArray)
@@ -1154,7 +1160,9 @@ Public Class BattleShipsGame
 
         If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
-
+            If currentPlayer = 1 Then
+                missCount = missCount + 1
+            End If
             'Update the array with a miss
             gameArr(Move.X, Move.Y) = 2
 
@@ -1174,6 +1182,9 @@ Public Class BattleShipsGame
         Else
             If gameArr(Move.X, Move.Y) = 1 OrElse gameArr(Move.X, Move.Y) = 4 Then
                 'Hit: 1 as general hit, 4 as the starting point (front) of each ship
+                If currentPlayer = 1 Then
+                    HitCount = HitCount + 1
+                End If
 
                 'Update the array with a hit
                 gameArr(Move.X, Move.Y) = 3
@@ -1941,6 +1952,13 @@ Public Class BattleShipsGame
             End While
             Last = Last - 1
         End While
+    End Sub
+    Private Sub updateGameStats()
+        Dim accuracy As String
+        accuracy = CStr(CInt((HitCount / (missCount + HitCount)) * 100)) & "%"
+        accuracyCounttxt.Text = accuracy
+        hitCounttxt.Text = HitCount
+        missCounttxt.Text = missCount
     End Sub
     Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
         'swap records by using a temporary value

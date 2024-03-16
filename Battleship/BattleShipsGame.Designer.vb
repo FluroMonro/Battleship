@@ -57,6 +57,15 @@ Partial Class BattleShipsGame
         KeyPanel = New Panel()
         gameTimer = New Timer(components)
         Timer1 = New Timer(components)
+        Label1 = New Windows.Forms.Label()
+        StatsPanel = New Panel()
+        accuracyCounttxt = New Windows.Forms.Label()
+        hitCounttxt = New Windows.Forms.Label()
+        missCounttxt = New Windows.Forms.Label()
+        Accuracylbl = New Windows.Forms.Label()
+        hitCountlbl = New Windows.Forms.Label()
+        missCountLbl = New Windows.Forms.Label()
+        Statslbl = New Windows.Forms.Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -74,6 +83,7 @@ Partial Class BattleShipsGame
         CType(keyBluepicbox, ComponentModel.ISupportInitialize).BeginInit()
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).BeginInit()
         KeyPanel.SuspendLayout()
+        StatsPanel.SuspendLayout()
         SuspendLayout()
         ' 
         ' backgroundImg
@@ -435,12 +445,115 @@ Partial Class BattleShipsGame
         ' 
         gameTimer.Enabled = True
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(280, 237)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(0, 15)
+        Label1.TabIndex = 36
+        ' 
+        ' StatsPanel
+        ' 
+        StatsPanel.BackColor = Color.FromArgb(CByte(175), CByte(215), CByte(240))
+        StatsPanel.BackgroundImageLayout = ImageLayout.None
+        StatsPanel.Controls.Add(accuracyCounttxt)
+        StatsPanel.Controls.Add(hitCounttxt)
+        StatsPanel.Controls.Add(missCounttxt)
+        StatsPanel.Controls.Add(Accuracylbl)
+        StatsPanel.Controls.Add(hitCountlbl)
+        StatsPanel.Controls.Add(missCountLbl)
+        StatsPanel.Controls.Add(Statslbl)
+        StatsPanel.Location = New Point(220, 45)
+        StatsPanel.Name = "StatsPanel"
+        StatsPanel.Size = New Size(168, 189)
+        StatsPanel.TabIndex = 36
+        ' 
+        ' accuracyCounttxt
+        ' 
+        accuracyCounttxt.AutoSize = True
+        accuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        accuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracyCounttxt.Location = New Point(119, 138)
+        accuracyCounttxt.Name = "accuracyCounttxt"
+        accuracyCounttxt.Size = New Size(15, 19)
+        accuracyCounttxt.TabIndex = 38
+        accuracyCounttxt.Text = "-"
+        ' 
+        ' hitCounttxt
+        ' 
+        hitCounttxt.AutoSize = True
+        hitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        hitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        hitCounttxt.Location = New Point(119, 102)
+        hitCounttxt.Name = "hitCounttxt"
+        hitCounttxt.Size = New Size(17, 19)
+        hitCounttxt.TabIndex = 37
+        hitCounttxt.Text = "0"
+        ' 
+        ' missCounttxt
+        ' 
+        missCounttxt.AutoSize = True
+        missCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        missCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        missCounttxt.Location = New Point(119, 56)
+        missCounttxt.Name = "missCounttxt"
+        missCounttxt.Size = New Size(17, 19)
+        missCounttxt.TabIndex = 36
+        missCounttxt.Text = "0"
+        ' 
+        ' Accuracylbl
+        ' 
+        Accuracylbl.AutoSize = True
+        Accuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Accuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        Accuracylbl.Location = New Point(25, 138)
+        Accuracylbl.Name = "Accuracylbl"
+        Accuracylbl.Size = New Size(66, 19)
+        Accuracylbl.TabIndex = 35
+        Accuracylbl.Text = "Accuracy:"
+        ' 
+        ' hitCountlbl
+        ' 
+        hitCountlbl.AutoSize = True
+        hitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        hitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        hitCountlbl.Location = New Point(25, 102)
+        hitCountlbl.Name = "hitCountlbl"
+        hitCountlbl.Size = New Size(36, 19)
+        hitCountlbl.TabIndex = 34
+        hitCountlbl.Text = "Hits:"
+        ' 
+        ' missCountLbl
+        ' 
+        missCountLbl.AutoSize = True
+        missCountLbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        missCountLbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        missCountLbl.Location = New Point(25, 56)
+        missCountLbl.Name = "missCountLbl"
+        missCountLbl.Size = New Size(53, 19)
+        missCountLbl.TabIndex = 32
+        missCountLbl.Text = "Misses:"
+        ' 
+        ' Statslbl
+        ' 
+        Statslbl.AutoSize = True
+        Statslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Statslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        Statslbl.Location = New Point(15, 12)
+        Statslbl.Name = "Statslbl"
+        Statslbl.Size = New Size(47, 21)
+        Statslbl.TabIndex = 31
+        Statslbl.Text = "Stats"
+        ' 
         ' BattleShipsGame
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(StatsPanel)
+        Controls.Add(Label1)
         Controls.Add(KeyPanel)
         Controls.Add(playershipPicbox5)
         Controls.Add(playershipPicbox4)
@@ -490,6 +603,8 @@ Partial Class BattleShipsGame
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).EndInit()
         KeyPanel.ResumeLayout(False)
         KeyPanel.PerformLayout()
+        StatsPanel.ResumeLayout(False)
+        StatsPanel.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -526,4 +641,13 @@ Partial Class BattleShipsGame
     Friend WithEvents KeyPanel As Panel
     Friend WithEvents gameTimer As Timer
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents StatsPanel As Panel
+    Friend WithEvents missCounttxt As Windows.Forms.Label
+    Friend WithEvents Accuracylbl As Windows.Forms.Label
+    Friend WithEvents hitCountlbl As Windows.Forms.Label
+    Friend WithEvents missCountLbl As Windows.Forms.Label
+    Friend WithEvents Statslbl As Windows.Forms.Label
+    Friend WithEvents accuracyCounttxt As Windows.Forms.Label
+    Friend WithEvents hitCounttxt As Windows.Forms.Label
 End Class
