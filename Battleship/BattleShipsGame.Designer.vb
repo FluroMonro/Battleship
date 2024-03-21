@@ -59,6 +59,10 @@ Partial Class BattleShipsGame
         Timer1 = New Timer(components)
         Label1 = New Windows.Forms.Label()
         StatsPanel = New Panel()
+        shipsLeftCounttxt = New Windows.Forms.Label()
+        shipsHitCounttxt = New Windows.Forms.Label()
+        shipsleftlbl = New Windows.Forms.Label()
+        shiphitlbl = New Windows.Forms.Label()
         accuracyCounttxt = New Windows.Forms.Label()
         hitCounttxt = New Windows.Forms.Label()
         missCounttxt = New Windows.Forms.Label()
@@ -457,6 +461,10 @@ Partial Class BattleShipsGame
         ' 
         StatsPanel.BackColor = Color.FromArgb(CByte(175), CByte(215), CByte(240))
         StatsPanel.BackgroundImageLayout = ImageLayout.None
+        StatsPanel.Controls.Add(shipsLeftCounttxt)
+        StatsPanel.Controls.Add(shipsHitCounttxt)
+        StatsPanel.Controls.Add(shipsleftlbl)
+        StatsPanel.Controls.Add(shiphitlbl)
         StatsPanel.Controls.Add(accuracyCounttxt)
         StatsPanel.Controls.Add(hitCounttxt)
         StatsPanel.Controls.Add(missCounttxt)
@@ -466,8 +474,52 @@ Partial Class BattleShipsGame
         StatsPanel.Controls.Add(Statslbl)
         StatsPanel.Location = New Point(220, 45)
         StatsPanel.Name = "StatsPanel"
-        StatsPanel.Size = New Size(168, 189)
+        StatsPanel.Size = New Size(168, 268)
         StatsPanel.TabIndex = 36
+        ' 
+        ' shipsLeftCounttxt
+        ' 
+        shipsLeftCounttxt.AutoSize = True
+        shipsLeftCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsLeftCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsLeftCounttxt.Location = New Point(119, 210)
+        shipsLeftCounttxt.Name = "shipsLeftCounttxt"
+        shipsLeftCounttxt.Size = New Size(17, 19)
+        shipsLeftCounttxt.TabIndex = 42
+        shipsLeftCounttxt.Text = "0"
+        ' 
+        ' shipsHitCounttxt
+        ' 
+        shipsHitCounttxt.AutoSize = True
+        shipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsHitCounttxt.Location = New Point(119, 174)
+        shipsHitCounttxt.Name = "shipsHitCounttxt"
+        shipsHitCounttxt.Size = New Size(17, 19)
+        shipsHitCounttxt.TabIndex = 41
+        shipsHitCounttxt.Text = "0"
+        ' 
+        ' shipsleftlbl
+        ' 
+        shipsleftlbl.AutoSize = True
+        shipsleftlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsleftlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsleftlbl.Location = New Point(25, 210)
+        shipsleftlbl.Name = "shipsleftlbl"
+        shipsleftlbl.Size = New Size(71, 19)
+        shipsleftlbl.TabIndex = 40
+        shipsleftlbl.Text = "Ships Left:"
+        ' 
+        ' shiphitlbl
+        ' 
+        shiphitlbl.AutoSize = True
+        shiphitlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shiphitlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shiphitlbl.Location = New Point(25, 174)
+        shiphitlbl.Name = "shiphitlbl"
+        shiphitlbl.Size = New Size(66, 19)
+        shiphitlbl.TabIndex = 39
+        shiphitlbl.Text = "Ships Hit:"
         ' 
         ' accuracyCounttxt
         ' 
@@ -542,9 +594,9 @@ Partial Class BattleShipsGame
         Statslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
         Statslbl.Location = New Point(15, 12)
         Statslbl.Name = "Statslbl"
-        Statslbl.Size = New Size(47, 21)
+        Statslbl.Size = New Size(99, 21)
         Statslbl.TabIndex = 31
-        Statslbl.Text = "Stats"
+        Statslbl.Text = "Player Stats"
         ' 
         ' BattleShipsGame
         ' 
@@ -650,4 +702,8 @@ Partial Class BattleShipsGame
     Friend WithEvents Statslbl As Windows.Forms.Label
     Friend WithEvents accuracyCounttxt As Windows.Forms.Label
     Friend WithEvents hitCounttxt As Windows.Forms.Label
+    Friend WithEvents shiphitlbl As Windows.Forms.Label
+    Friend WithEvents shipsleftlbl As Windows.Forms.Label
+    Friend WithEvents shipsLeftCounttxt As Windows.Forms.Label
+    Friend WithEvents shipsHitCounttxt As Windows.Forms.Label
 End Class

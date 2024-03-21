@@ -37,6 +37,8 @@ Public Class BattleShipsGame
     Dim displayTime As String
     Dim missCount As Integer
     Dim HitCount As Integer
+    Dim shipSunkCount As Integer
+    Dim shipHitListCount As Integer
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -184,6 +186,7 @@ Public Class BattleShipsGame
             playerShip5(i).Y = 0
             playerShip5(i).isHit = False
         Next i
+        shipHitListCount = 17
     End Sub
     Private Sub initialiseControlsPlacement()
         'To intialise the controls in the correct way
@@ -1315,6 +1318,7 @@ Public Class BattleShipsGame
                 opponentShip2sunk = True
                 opponentshipPicbox2.Visible = True
                 opponentshipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                shipSunkCount = shipSunkCount + 1
             End If
         End If
 
@@ -1326,7 +1330,6 @@ Public Class BattleShipsGame
             End If
         End If
 
-
         'Length 3
         If opponentShip3asunk = False Then
             If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
@@ -1334,6 +1337,7 @@ Public Class BattleShipsGame
                 opponentShip3asunk = True
                 opponentshipPicbox3a.Visible = True
                 opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                shipSunkCount = shipSunkCount + 1
             End If
         End If
 
@@ -1351,6 +1355,7 @@ Public Class BattleShipsGame
                 opponentShip3bsunk = True
                 opponentshipPicbox3b.Visible = True
                 opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                shipSunkCount = shipSunkCount + 1
             End If
         End If
 
@@ -1370,6 +1375,7 @@ Public Class BattleShipsGame
                 opponentshipPicbox4.Visible = True
                 opponentshipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip4sunk = True
+                shipSunkCount = shipSunkCount + 1
             End If
         End If
 
@@ -1389,6 +1395,7 @@ Public Class BattleShipsGame
                 opponentshipPicbox5.Visible = True
                 opponentshipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip5sunk = True
+                shipSunkCount = shipSunkCount + 1
             End If
         End If
 
@@ -1959,6 +1966,8 @@ Public Class BattleShipsGame
         accuracyCounttxt.Text = accuracy
         hitCounttxt.Text = HitCount
         missCounttxt.Text = missCount
+        shipsHitCounttxt.Text = shipSunkCount
+        shipsLeftCounttxt.Text = shipHitListCount - shipSunkCount
     End Sub
     Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
         'swap records by using a temporary value
