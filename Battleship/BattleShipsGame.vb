@@ -35,10 +35,14 @@ Public Class BattleShipsGame
     Dim duplicateShip As Boolean
     Dim time As Integer
     Dim displayTime As String
-    Dim missCount As Integer
-    Dim HitCount As Integer
-    Dim shipSunkCount As Integer
-    Dim shipHitListCount As Integer
+    Dim playerMissCount As Integer
+    Dim playerHitCount As Integer
+    Dim opponentMissCount As Integer
+    Dim opponentHitCount As Integer
+    Dim playershipSunkCount As Integer
+    Dim playershipHitListCount As Integer
+    Dim opponentshipSunkCount As Integer
+    Dim opponentshipHitListCount As Integer
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -186,7 +190,8 @@ Public Class BattleShipsGame
             playerShip5(i).Y = 0
             playerShip5(i).isHit = False
         Next i
-        shipHitListCount = 17
+        playershipHitListCount = 17
+        opponentshipHitListCount = 17
     End Sub
     Private Sub initialiseControlsPlacement()
         'To intialise the controls in the correct way
@@ -241,7 +246,7 @@ Public Class BattleShipsGame
         TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
 
         KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
-        StatsPanel.Location = New Point(Me.Width / 5, Me.Height / 18)
+        playerStatspnl.Location = New Point(Me.Width / 5, Me.Height / 18)
 
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
         backgroundImg.Location = New Point(0, 0)
@@ -287,7 +292,9 @@ Public Class BattleShipsGame
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
             Next length
-        Next player
+        Next
+
+        'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
         gameOver = False
@@ -1071,7 +1078,7 @@ Public Class BattleShipsGame
 
         'Update displayed score and stats for the player
         updateInGameScore(1)
-        updateGameStats()
+        updateGameStats(playerHitCount, playerMissCount, 1)
 
         'Update the grid to show a hit or miss
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
@@ -1104,7 +1111,7 @@ Public Class BattleShipsGame
 
                 'Update diaplyed score and stats for the opponent
                 updateInGameScore(2)
-                updateGameStats()
+                updateGameStats(opponentHitCount, opponentMissCount, 2)
 
                 'Display updated grid
                 assignGridImages(playergameArray, playerpictureBoxArray)
@@ -1130,7 +1137,7 @@ Public Class BattleShipsGame
 
                             'update score and stats
                             updateInGameScore(2)
-                            updateGameStats()
+                            updateGameStats(opponentHitCount, opponentMissCount, 2)
 
                             'Display updated grid
                             assignGridImages(playergameArray, playerpictureBoxArray)
@@ -1164,7 +1171,9 @@ Public Class BattleShipsGame
         If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
             If currentPlayer = 1 Then
-                missCount = missCount + 1
+                playerMissCount = playerMissCount + 1
+            Else
+                opponentMissCount = opponentMissCount + 1
             End If
             'Update the array with a miss
             gameArr(Move.X, Move.Y) = 2
@@ -1186,7 +1195,9 @@ Public Class BattleShipsGame
             If gameArr(Move.X, Move.Y) = 1 OrElse gameArr(Move.X, Move.Y) = 4 Then
                 'Hit: 1 as general hit, 4 as the starting point (front) of each ship
                 If currentPlayer = 1 Then
-                    HitCount = HitCount + 1
+                    playerHitCount = playerHitCount + 1
+                Else
+                    opponentHitCount = opponentHitCount + 1
                 End If
 
                 'Update the array with a hit
@@ -1318,7 +1329,7 @@ Public Class BattleShipsGame
                 opponentShip2sunk = True
                 opponentshipPicbox2.Visible = True
                 opponentshipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                shipSunkCount = shipSunkCount + 1
+                playershipSunkCount = playershipSunkCount + 1
             End If
         End If
 
@@ -1327,6 +1338,7 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip2sunk = True
+                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1337,7 +1349,7 @@ Public Class BattleShipsGame
                 opponentShip3asunk = True
                 opponentshipPicbox3a.Visible = True
                 opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                shipSunkCount = shipSunkCount + 1
+                playershipSunkCount = playershipSunkCount + 1
             End If
         End If
 
@@ -1346,6 +1358,7 @@ Public Class BattleShipsGame
                 playerShip3asunk = True
                 MsgBox("Your ship has been sunken")
                 playershipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1355,7 +1368,7 @@ Public Class BattleShipsGame
                 opponentShip3bsunk = True
                 opponentshipPicbox3b.Visible = True
                 opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                shipSunkCount = shipSunkCount + 1
+                playershipSunkCount = playershipSunkCount + 1
             End If
         End If
 
@@ -1364,6 +1377,7 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playerShip3bsunk = True
                 playershipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
+                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1375,7 +1389,7 @@ Public Class BattleShipsGame
                 opponentshipPicbox4.Visible = True
                 opponentshipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip4sunk = True
-                shipSunkCount = shipSunkCount + 1
+                playershipSunkCount = playershipSunkCount + 1
             End If
         End If
 
@@ -1384,6 +1398,7 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip4sunk = True
+                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1395,7 +1410,7 @@ Public Class BattleShipsGame
                 opponentshipPicbox5.Visible = True
                 opponentshipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip5sunk = True
-                shipSunkCount = shipSunkCount + 1
+                playershipSunkCount = playershipSunkCount + 1
             End If
         End If
 
@@ -1404,6 +1419,7 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip5sunk = True
+                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
     End Sub
@@ -1960,14 +1976,23 @@ Public Class BattleShipsGame
             Last = Last - 1
         End While
     End Sub
-    Private Sub updateGameStats()
+    Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
-        accuracy = CStr(CInt((HitCount / (missCount + HitCount)) * 100)) & "%"
-        accuracyCounttxt.Text = accuracy
-        hitCounttxt.Text = HitCount
-        missCounttxt.Text = missCount
-        shipsHitCounttxt.Text = shipSunkCount
-        shipsLeftCounttxt.Text = shipHitListCount - shipSunkCount
+        accuracy = CStr(CInt((hitcount / (misscount + hitcount)) * 100)) & "%"
+        If playernum = 1 Then
+            playerAccuracyCounttxt.Text = accuracy
+            playerhitCounttxt.Text = hitcount
+            playerMissCounttxt.Text = misscount
+            playerShipsHitCounttxt.Text = playershipSunkCount
+            playerShipsLeftCounttxt.Text = playershipHitListCount - playershipSunkCount
+        Else
+            opponentAccuracyCounttxt.Text = accuracy
+            opponentShipsHitCounttxt.Text = hitcount
+            opponentShipsMissCounttxt.Text = misscount
+            opponentShipsHitCounttxt.Text = playershipSunkCount
+            opponentShipsHitCounttxt.Text = playershipHitListCount - playershipSunkCount
+        End If
+
     End Sub
     Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
         'swap records by using a temporary value

@@ -58,18 +58,26 @@ Partial Class BattleShipsGame
         gameTimer = New Timer(components)
         Timer1 = New Timer(components)
         Label1 = New Windows.Forms.Label()
-        StatsPanel = New Panel()
-        shipsLeftCounttxt = New Windows.Forms.Label()
-        shipsHitCounttxt = New Windows.Forms.Label()
-        shipsleftlbl = New Windows.Forms.Label()
-        shiphitlbl = New Windows.Forms.Label()
-        accuracyCounttxt = New Windows.Forms.Label()
-        hitCounttxt = New Windows.Forms.Label()
-        missCounttxt = New Windows.Forms.Label()
-        Accuracylbl = New Windows.Forms.Label()
-        hitCountlbl = New Windows.Forms.Label()
-        missCountLbl = New Windows.Forms.Label()
-        Statslbl = New Windows.Forms.Label()
+        playerStatspnl = New Panel()
+        playerShipsLeftCounttxt = New Windows.Forms.Label()
+        playerShipsHitCounttxt = New Windows.Forms.Label()
+        shipsLeftlbl = New Windows.Forms.Label()
+        shipHitlbl = New Windows.Forms.Label()
+        playerAccuracyCounttxt = New Windows.Forms.Label()
+        playerHitCounttxt = New Windows.Forms.Label()
+        playerMissCounttxt = New Windows.Forms.Label()
+        playerAccuracylbl = New Windows.Forms.Label()
+        playerHitCountlbl = New Windows.Forms.Label()
+        playerMissCountLbl = New Windows.Forms.Label()
+        PlayerStatslbl = New Windows.Forms.Label()
+        opponentStatspnl = New Panel()
+        opponentAccuracyCounttxt = New Windows.Forms.Label()
+        opponentShipsHitCounttxt = New Windows.Forms.Label()
+        opponentShipsMissCounttxt = New Windows.Forms.Label()
+        opponentAccuracylbl = New Windows.Forms.Label()
+        opponentHitCountlbl = New Windows.Forms.Label()
+        opponentMissCountlbl = New Windows.Forms.Label()
+        opponentStatslbl = New Windows.Forms.Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -87,7 +95,8 @@ Partial Class BattleShipsGame
         CType(keyBluepicbox, ComponentModel.ISupportInitialize).BeginInit()
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).BeginInit()
         KeyPanel.SuspendLayout()
-        StatsPanel.SuspendLayout()
+        playerStatspnl.SuspendLayout()
+        opponentStatspnl.SuspendLayout()
         SuspendLayout()
         ' 
         ' backgroundImg
@@ -457,146 +466,239 @@ Partial Class BattleShipsGame
         Label1.Size = New Size(0, 15)
         Label1.TabIndex = 36
         ' 
-        ' StatsPanel
+        ' playerStatspnl
         ' 
-        StatsPanel.BackColor = Color.FromArgb(CByte(175), CByte(215), CByte(240))
-        StatsPanel.BackgroundImageLayout = ImageLayout.None
-        StatsPanel.Controls.Add(shipsLeftCounttxt)
-        StatsPanel.Controls.Add(shipsHitCounttxt)
-        StatsPanel.Controls.Add(shipsleftlbl)
-        StatsPanel.Controls.Add(shiphitlbl)
-        StatsPanel.Controls.Add(accuracyCounttxt)
-        StatsPanel.Controls.Add(hitCounttxt)
-        StatsPanel.Controls.Add(missCounttxt)
-        StatsPanel.Controls.Add(Accuracylbl)
-        StatsPanel.Controls.Add(hitCountlbl)
-        StatsPanel.Controls.Add(missCountLbl)
-        StatsPanel.Controls.Add(Statslbl)
-        StatsPanel.Location = New Point(220, 45)
-        StatsPanel.Name = "StatsPanel"
-        StatsPanel.Size = New Size(168, 268)
-        StatsPanel.TabIndex = 36
+        playerStatspnl.BackColor = Color.FromArgb(CByte(175), CByte(215), CByte(240))
+        playerStatspnl.BackgroundImageLayout = ImageLayout.None
+        playerStatspnl.Controls.Add(playerShipsLeftCounttxt)
+        playerStatspnl.Controls.Add(playerShipsHitCounttxt)
+        playerStatspnl.Controls.Add(shipsLeftlbl)
+        playerStatspnl.Controls.Add(shipHitlbl)
+        playerStatspnl.Controls.Add(playerAccuracyCounttxt)
+        playerStatspnl.Controls.Add(playerHitCounttxt)
+        playerStatspnl.Controls.Add(playerMissCounttxt)
+        playerStatspnl.Controls.Add(playerAccuracylbl)
+        playerStatspnl.Controls.Add(playerHitCountlbl)
+        playerStatspnl.Controls.Add(playerMissCountLbl)
+        playerStatspnl.Controls.Add(PlayerStatslbl)
+        playerStatspnl.Location = New Point(220, 45)
+        playerStatspnl.Name = "playerStatspnl"
+        playerStatspnl.Size = New Size(168, 268)
+        playerStatspnl.TabIndex = 36
         ' 
-        ' shipsLeftCounttxt
+        ' playerShipsLeftCounttxt
         ' 
-        shipsLeftCounttxt.AutoSize = True
-        shipsLeftCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipsLeftCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        shipsLeftCounttxt.Location = New Point(119, 210)
-        shipsLeftCounttxt.Name = "shipsLeftCounttxt"
-        shipsLeftCounttxt.Size = New Size(17, 19)
-        shipsLeftCounttxt.TabIndex = 42
-        shipsLeftCounttxt.Text = "0"
+        playerShipsLeftCounttxt.AutoSize = True
+        playerShipsLeftCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipsLeftCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerShipsLeftCounttxt.Location = New Point(119, 210)
+        playerShipsLeftCounttxt.Name = "playerShipsLeftCounttxt"
+        playerShipsLeftCounttxt.Size = New Size(17, 19)
+        playerShipsLeftCounttxt.TabIndex = 42
+        playerShipsLeftCounttxt.Text = "0"
         ' 
-        ' shipsHitCounttxt
+        ' playerShipsHitCounttxt
         ' 
-        shipsHitCounttxt.AutoSize = True
-        shipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        shipsHitCounttxt.Location = New Point(119, 174)
-        shipsHitCounttxt.Name = "shipsHitCounttxt"
-        shipsHitCounttxt.Size = New Size(17, 19)
-        shipsHitCounttxt.TabIndex = 41
-        shipsHitCounttxt.Text = "0"
+        playerShipsHitCounttxt.AutoSize = True
+        playerShipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerShipsHitCounttxt.Location = New Point(119, 174)
+        playerShipsHitCounttxt.Name = "playerShipsHitCounttxt"
+        playerShipsHitCounttxt.Size = New Size(17, 19)
+        playerShipsHitCounttxt.TabIndex = 41
+        playerShipsHitCounttxt.Text = "0"
         ' 
-        ' shipsleftlbl
+        ' shipsLeftlbl
         ' 
-        shipsleftlbl.AutoSize = True
-        shipsleftlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipsleftlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        shipsleftlbl.Location = New Point(25, 210)
-        shipsleftlbl.Name = "shipsleftlbl"
-        shipsleftlbl.Size = New Size(71, 19)
-        shipsleftlbl.TabIndex = 40
-        shipsleftlbl.Text = "Ships Left:"
+        shipsLeftlbl.AutoSize = True
+        shipsLeftlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsLeftlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsLeftlbl.Location = New Point(25, 210)
+        shipsLeftlbl.Name = "shipsLeftlbl"
+        shipsLeftlbl.Size = New Size(71, 19)
+        shipsLeftlbl.TabIndex = 40
+        shipsLeftlbl.Text = "Ships Left:"
         ' 
-        ' shiphitlbl
+        ' shipHitlbl
         ' 
-        shiphitlbl.AutoSize = True
-        shiphitlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shiphitlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        shiphitlbl.Location = New Point(25, 174)
-        shiphitlbl.Name = "shiphitlbl"
-        shiphitlbl.Size = New Size(66, 19)
-        shiphitlbl.TabIndex = 39
-        shiphitlbl.Text = "Ships Hit:"
+        shipHitlbl.AutoSize = True
+        shipHitlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipHitlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipHitlbl.Location = New Point(25, 174)
+        shipHitlbl.Name = "shipHitlbl"
+        shipHitlbl.Size = New Size(66, 19)
+        shipHitlbl.TabIndex = 39
+        shipHitlbl.Text = "Ships Hit:"
         ' 
-        ' accuracyCounttxt
+        ' playerAccuracyCounttxt
         ' 
-        accuracyCounttxt.AutoSize = True
-        accuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        accuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracyCounttxt.Location = New Point(119, 138)
-        accuracyCounttxt.Name = "accuracyCounttxt"
-        accuracyCounttxt.Size = New Size(15, 19)
-        accuracyCounttxt.TabIndex = 38
-        accuracyCounttxt.Text = "-"
+        playerAccuracyCounttxt.AutoSize = True
+        playerAccuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerAccuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerAccuracyCounttxt.Location = New Point(119, 138)
+        playerAccuracyCounttxt.Name = "playerAccuracyCounttxt"
+        playerAccuracyCounttxt.Size = New Size(15, 19)
+        playerAccuracyCounttxt.TabIndex = 38
+        playerAccuracyCounttxt.Text = "-"
         ' 
-        ' hitCounttxt
+        ' playerHitCounttxt
         ' 
-        hitCounttxt.AutoSize = True
-        hitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        hitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        hitCounttxt.Location = New Point(119, 102)
-        hitCounttxt.Name = "hitCounttxt"
-        hitCounttxt.Size = New Size(17, 19)
-        hitCounttxt.TabIndex = 37
-        hitCounttxt.Text = "0"
+        playerHitCounttxt.AutoSize = True
+        playerHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerHitCounttxt.Location = New Point(119, 93)
+        playerHitCounttxt.Name = "playerHitCounttxt"
+        playerHitCounttxt.Size = New Size(17, 19)
+        playerHitCounttxt.TabIndex = 37
+        playerHitCounttxt.Text = "0"
         ' 
-        ' missCounttxt
+        ' playerMissCounttxt
         ' 
-        missCounttxt.AutoSize = True
-        missCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        missCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        missCounttxt.Location = New Point(119, 56)
-        missCounttxt.Name = "missCounttxt"
-        missCounttxt.Size = New Size(17, 19)
-        missCounttxt.TabIndex = 36
-        missCounttxt.Text = "0"
+        playerMissCounttxt.AutoSize = True
+        playerMissCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerMissCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerMissCounttxt.Location = New Point(119, 56)
+        playerMissCounttxt.Name = "playerMissCounttxt"
+        playerMissCounttxt.Size = New Size(17, 19)
+        playerMissCounttxt.TabIndex = 36
+        playerMissCounttxt.Text = "0"
         ' 
-        ' Accuracylbl
+        ' playerAccuracylbl
         ' 
-        Accuracylbl.AutoSize = True
-        Accuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Accuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        Accuracylbl.Location = New Point(25, 138)
-        Accuracylbl.Name = "Accuracylbl"
-        Accuracylbl.Size = New Size(66, 19)
-        Accuracylbl.TabIndex = 35
-        Accuracylbl.Text = "Accuracy:"
+        playerAccuracylbl.AutoSize = True
+        playerAccuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerAccuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerAccuracylbl.Location = New Point(24, 138)
+        playerAccuracylbl.Name = "playerAccuracylbl"
+        playerAccuracylbl.Size = New Size(66, 19)
+        playerAccuracylbl.TabIndex = 35
+        playerAccuracylbl.Text = "Accuracy:"
         ' 
-        ' hitCountlbl
+        ' playerHitCountlbl
         ' 
-        hitCountlbl.AutoSize = True
-        hitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        hitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        hitCountlbl.Location = New Point(25, 102)
-        hitCountlbl.Name = "hitCountlbl"
-        hitCountlbl.Size = New Size(36, 19)
-        hitCountlbl.TabIndex = 34
-        hitCountlbl.Text = "Hits:"
+        playerHitCountlbl.AutoSize = True
+        playerHitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerHitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerHitCountlbl.Location = New Point(24, 93)
+        playerHitCountlbl.Name = "playerHitCountlbl"
+        playerHitCountlbl.Size = New Size(36, 19)
+        playerHitCountlbl.TabIndex = 34
+        playerHitCountlbl.Text = "Hits:"
         ' 
-        ' missCountLbl
+        ' playerMissCountLbl
         ' 
-        missCountLbl.AutoSize = True
-        missCountLbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        missCountLbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        missCountLbl.Location = New Point(25, 56)
-        missCountLbl.Name = "missCountLbl"
-        missCountLbl.Size = New Size(53, 19)
-        missCountLbl.TabIndex = 32
-        missCountLbl.Text = "Misses:"
+        playerMissCountLbl.AutoSize = True
+        playerMissCountLbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerMissCountLbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerMissCountLbl.Location = New Point(25, 56)
+        playerMissCountLbl.Name = "playerMissCountLbl"
+        playerMissCountLbl.Size = New Size(53, 19)
+        playerMissCountLbl.TabIndex = 32
+        playerMissCountLbl.Text = "Misses:"
         ' 
-        ' Statslbl
+        ' PlayerStatslbl
         ' 
-        Statslbl.AutoSize = True
-        Statslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Statslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
-        Statslbl.Location = New Point(15, 12)
-        Statslbl.Name = "Statslbl"
-        Statslbl.Size = New Size(99, 21)
-        Statslbl.TabIndex = 31
-        Statslbl.Text = "Player Stats"
+        PlayerStatslbl.AutoSize = True
+        PlayerStatslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        PlayerStatslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        PlayerStatslbl.Location = New Point(15, 12)
+        PlayerStatslbl.Name = "PlayerStatslbl"
+        PlayerStatslbl.Size = New Size(99, 21)
+        PlayerStatslbl.TabIndex = 31
+        PlayerStatslbl.Text = "Player Stats"
+        ' 
+        ' opponentStatspnl
+        ' 
+        opponentStatspnl.BackColor = Color.FromArgb(CByte(175), CByte(215), CByte(240))
+        opponentStatspnl.BackgroundImageLayout = ImageLayout.None
+        opponentStatspnl.Controls.Add(opponentAccuracyCounttxt)
+        opponentStatspnl.Controls.Add(opponentShipsHitCounttxt)
+        opponentStatspnl.Controls.Add(opponentShipsMissCounttxt)
+        opponentStatspnl.Controls.Add(opponentAccuracylbl)
+        opponentStatspnl.Controls.Add(opponentHitCountlbl)
+        opponentStatspnl.Controls.Add(opponentMissCountlbl)
+        opponentStatspnl.Controls.Add(opponentStatslbl)
+        opponentStatspnl.Location = New Point(1022, 561)
+        opponentStatspnl.Name = "opponentStatspnl"
+        opponentStatspnl.Size = New Size(168, 190)
+        opponentStatspnl.TabIndex = 43
+        ' 
+        ' opponentAccuracyCounttxt
+        ' 
+        opponentAccuracyCounttxt.AutoSize = True
+        opponentAccuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentAccuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentAccuracyCounttxt.Location = New Point(119, 147)
+        opponentAccuracyCounttxt.Name = "opponentAccuracyCounttxt"
+        opponentAccuracyCounttxt.Size = New Size(15, 19)
+        opponentAccuracyCounttxt.TabIndex = 38
+        opponentAccuracyCounttxt.Text = "-"
+        ' 
+        ' opponentShipsHitCounttxt
+        ' 
+        opponentShipsHitCounttxt.AutoSize = True
+        opponentShipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentShipsHitCounttxt.Location = New Point(119, 102)
+        opponentShipsHitCounttxt.Name = "opponentShipsHitCounttxt"
+        opponentShipsHitCounttxt.Size = New Size(17, 19)
+        opponentShipsHitCounttxt.TabIndex = 37
+        opponentShipsHitCounttxt.Text = "0"
+        ' 
+        ' opponentShipsMissCounttxt
+        ' 
+        opponentShipsMissCounttxt.AutoSize = True
+        opponentShipsMissCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipsMissCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentShipsMissCounttxt.Location = New Point(119, 56)
+        opponentShipsMissCounttxt.Name = "opponentShipsMissCounttxt"
+        opponentShipsMissCounttxt.Size = New Size(17, 19)
+        opponentShipsMissCounttxt.TabIndex = 36
+        opponentShipsMissCounttxt.Text = "0"
+        ' 
+        ' opponentAccuracylbl
+        ' 
+        opponentAccuracylbl.AutoSize = True
+        opponentAccuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentAccuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentAccuracylbl.Location = New Point(25, 147)
+        opponentAccuracylbl.Name = "opponentAccuracylbl"
+        opponentAccuracylbl.Size = New Size(66, 19)
+        opponentAccuracylbl.TabIndex = 35
+        opponentAccuracylbl.Text = "Accuracy:"
+        ' 
+        ' opponentHitCountlbl
+        ' 
+        opponentHitCountlbl.AutoSize = True
+        opponentHitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentHitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentHitCountlbl.Location = New Point(25, 101)
+        opponentHitCountlbl.Name = "opponentHitCountlbl"
+        opponentHitCountlbl.Size = New Size(36, 19)
+        opponentHitCountlbl.TabIndex = 34
+        opponentHitCountlbl.Text = "Hits:"
+        ' 
+        ' opponentMissCountlbl
+        ' 
+        opponentMissCountlbl.AutoSize = True
+        opponentMissCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentMissCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentMissCountlbl.Location = New Point(25, 56)
+        opponentMissCountlbl.Name = "opponentMissCountlbl"
+        opponentMissCountlbl.Size = New Size(53, 19)
+        opponentMissCountlbl.TabIndex = 32
+        opponentMissCountlbl.Text = "Misses:"
+        ' 
+        ' opponentStatslbl
+        ' 
+        opponentStatslbl.AutoSize = True
+        opponentStatslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentStatslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        opponentStatslbl.Location = New Point(15, 12)
+        opponentStatslbl.Name = "opponentStatslbl"
+        opponentStatslbl.Size = New Size(128, 21)
+        opponentStatslbl.TabIndex = 31
+        opponentStatslbl.Text = "Opponent Stats"
         ' 
         ' BattleShipsGame
         ' 
@@ -604,7 +706,8 @@ Partial Class BattleShipsGame
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(StatsPanel)
+        Controls.Add(opponentStatspnl)
+        Controls.Add(playerStatspnl)
         Controls.Add(Label1)
         Controls.Add(KeyPanel)
         Controls.Add(playershipPicbox5)
@@ -655,8 +758,10 @@ Partial Class BattleShipsGame
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).EndInit()
         KeyPanel.ResumeLayout(False)
         KeyPanel.PerformLayout()
-        StatsPanel.ResumeLayout(False)
-        StatsPanel.PerformLayout()
+        playerStatspnl.ResumeLayout(False)
+        playerStatspnl.PerformLayout()
+        opponentStatspnl.ResumeLayout(False)
+        opponentStatspnl.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -694,16 +799,24 @@ Partial Class BattleShipsGame
     Friend WithEvents gameTimer As Timer
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Label1 As Windows.Forms.Label
-    Friend WithEvents StatsPanel As Panel
-    Friend WithEvents missCounttxt As Windows.Forms.Label
-    Friend WithEvents Accuracylbl As Windows.Forms.Label
-    Friend WithEvents hitCountlbl As Windows.Forms.Label
-    Friend WithEvents missCountLbl As Windows.Forms.Label
-    Friend WithEvents Statslbl As Windows.Forms.Label
-    Friend WithEvents accuracyCounttxt As Windows.Forms.Label
-    Friend WithEvents hitCounttxt As Windows.Forms.Label
-    Friend WithEvents shiphitlbl As Windows.Forms.Label
-    Friend WithEvents shipsleftlbl As Windows.Forms.Label
-    Friend WithEvents shipsLeftCounttxt As Windows.Forms.Label
-    Friend WithEvents shipsHitCounttxt As Windows.Forms.Label
+    Friend WithEvents playerStatspnl As Panel
+    Friend WithEvents playerMissCounttxt As Windows.Forms.Label
+    Friend WithEvents playerAccuracylbl As Windows.Forms.Label
+    Friend WithEvents playerHitCountlbl As Windows.Forms.Label
+    Friend WithEvents playerMissCountLbl As Windows.Forms.Label
+    Friend WithEvents PlayerStatslbl As Windows.Forms.Label
+    Friend WithEvents playerAccuracyCounttxt As Windows.Forms.Label
+    Friend WithEvents playerHitCounttxt As Windows.Forms.Label
+    Friend WithEvents shipHitlbl As Windows.Forms.Label
+    Friend WithEvents shipsLeftlbl As Windows.Forms.Label
+    Friend WithEvents playerShipsLeftCounttxt As Windows.Forms.Label
+    Friend WithEvents playerShipsHitCounttxt As Windows.Forms.Label
+    Friend WithEvents opponentStatspnl As Panel
+    Friend WithEvents opponentAccuracyCounttxt As Windows.Forms.Label
+    Friend WithEvents opponentShipsHitCounttxt As Windows.Forms.Label
+    Friend WithEvents opponentShipsMissCounttxt As Windows.Forms.Label
+    Friend WithEvents opponentAccuracylbl As Windows.Forms.Label
+    Friend WithEvents opponentHitCountlbl As Windows.Forms.Label
+    Friend WithEvents opponentMissCountlbl As Windows.Forms.Label
+    Friend WithEvents opponentStatslbl As Windows.Forms.Label
 End Class
