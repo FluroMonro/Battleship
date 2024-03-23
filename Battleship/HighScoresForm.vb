@@ -64,14 +64,7 @@ Public Class HighScoresForm
             targetObject.Text = BattleShipsGame.arrHighScores(i).difficulty
         Next
     End Sub
-    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
-        'Leave the hs.txt in the same order every time
-        BattleShipsGame.BubbleSort(True, False, "descending")
-        BattleShipsGame.WriteHighScores()
 
-        Me.Hide()
-        MainMenuForm.Show()
-    End Sub
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
         'When the player clicks on the score arrow
 
@@ -181,5 +174,30 @@ Public Class HighScoresForm
                 targetObject.Text = 11 - i
             End If
         Next
+    End Sub
+    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+        'Leave the hs.txt in the same order every time
+        BattleShipsGame.BubbleSort(True, False, "descending")
+        BattleShipsGame.WriteHighScores()
+
+        Me.Hide()
+        MainMenuForm.Show()
+    End Sub
+
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
+        EnterOverSmallButton("backtomainbtn")
+    End Sub
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
+        ExitOverSmallButton("backtomainbtn")
+    End Sub
+    Public Sub EnterOverSmallButton(buttonName As String)
+        Dim targetObject As Button
+        targetObject = Me.Controls.Item(buttonName)
+        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonPurple.png")
+    End Sub
+    Public Sub ExitOverSmallButton(buttonName As String)
+        Dim targetObject As Button
+        targetObject = Me.Controls.Item(buttonName)
+        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonBlue.png")
     End Sub
 End Class
