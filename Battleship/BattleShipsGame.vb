@@ -1758,12 +1758,25 @@ Public Class BattleShipsGame
         MainMenuForm.Show()
         onFormLoad()
     End Sub
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
+        'Me.WindowState = WindowState.Minimized
+        HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
+    End Sub
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
+        HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
+    End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
         gameOver = True
         timeEnd()
         time = 0
         onFormLoad()
+    End Sub
+    Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
+        HighScoresForm.EnterOverSmallButton("resetbtn", Me)
+    End Sub
+    Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
+        HighScoresForm.ExitOverSmallButton("resetbtn", Me)
     End Sub
     Private Sub scoring()
         'Subroutine in charge of the highscores

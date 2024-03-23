@@ -185,19 +185,19 @@ Public Class HighScoresForm
     End Sub
 
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        EnterOverSmallButton("backtomainbtn")
+        EnterOverSmallButton("backtomainbtn", Me)
     End Sub
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        ExitOverSmallButton("backtomainbtn")
+        ExitOverSmallButton("backtomainbtn", Me)
     End Sub
-    Public Sub EnterOverSmallButton(buttonName As String)
+    Public Sub EnterOverSmallButton(buttonName As String, formName As Form)
         Dim targetObject As Button
-        targetObject = Me.Controls.Item(buttonName)
+        targetObject = formName.Controls.Item(buttonName)
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonPurple.png")
     End Sub
-    Public Sub ExitOverSmallButton(buttonName As String)
+    Public Sub ExitOverSmallButton(buttonName As String, formName As Form)
         Dim targetObject As Button
-        targetObject = Me.Controls.Item(buttonName)
+        targetObject = formName.Controls.Item(buttonName)
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonBlue.png")
     End Sub
 End Class
