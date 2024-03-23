@@ -1084,6 +1084,7 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
 
         If gameOver = True Then
+            Me.WindowState = WindowState.Minimized
             timeEnd()
 
             revealships()
@@ -1118,6 +1119,7 @@ Public Class BattleShipsGame
 
 
                 If gameOver = True Then
+                    Me.WindowState = WindowState.Minimized
                     timeEnd()
                     revealships()
                     determineScore()
@@ -1148,6 +1150,7 @@ Public Class BattleShipsGame
                             End If
                         End While
                         If gameOver = True Then
+                            Me.WindowState = WindowState.Minimized
                             timeEnd()
                             revealships()
                             determineScore()

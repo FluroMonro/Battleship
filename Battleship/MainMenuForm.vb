@@ -41,4 +41,32 @@
         'When the Quit button is pressed
         Me.Close()
     End Sub
+    Private Sub playfrommainbtn_Enter(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseEnter
+        EnterOverBigButton("playfrommainbtn")
+    End Sub
+    Private Sub playfrommainbtn_Leave(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseLeave
+        ExitOverBigButton("playfrommainbtn")
+    End Sub
+    Private Sub openhsbutton_Enter(sender As Object, e As EventArgs) Handles openhsbutton.MouseEnter
+        EnterOverBigButton("openhsbutton")
+    End Sub
+    Private Sub openhsbutton_Leave(sender As Object, e As EventArgs) Handles openhsbutton.MouseLeave
+        ExitOverBigButton("openhsbutton")
+    End Sub
+    Private Sub quitProgrambtn_Enter(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseEnter
+        EnterOverBigButton("quitProgrambtn")
+    End Sub
+    Private Sub quitProgrambtn_Leave(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseLeave
+        ExitOverBigButton("quitProgrambtn")
+    End Sub
+    Private Sub EnterOverBigButton(buttonName As String)
+        Dim targetObject As Button
+        targetObject = Me.Controls.Item(buttonName)
+        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonPurple.png")
+    End Sub
+    Private Sub ExitOverBigButton(buttonName As String)
+        Dim targetObject As Button
+        targetObject = Me.Controls.Item(buttonName)
+        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonBlue.png")
+    End Sub
 End Class
