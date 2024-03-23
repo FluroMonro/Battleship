@@ -41,8 +41,6 @@ Public Class BattleShipsGame
     Dim opponentHitCount As Integer
     Dim playershipSunkCount As Integer
     Dim playershipHitListCount As Integer
-    Dim opponentshipSunkCount As Integer
-    Dim opponentshipHitListCount As Integer
     Public Structure recHighScore
         Public name As String
         Public score As Integer
@@ -190,8 +188,7 @@ Public Class BattleShipsGame
             playerShip5(i).Y = 0
             playerShip5(i).isHit = False
         Next i
-        playershipHitListCount = 17
-        opponentshipHitListCount = 17
+        playershipHitListCount = 5
     End Sub
     Private Sub initialiseControlsPlacement()
         'To intialise the controls in the correct way
@@ -1341,7 +1338,6 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip2sunk = True
-                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1361,7 +1357,6 @@ Public Class BattleShipsGame
                 playerShip3asunk = True
                 MsgBox("Your ship has been sunken")
                 playershipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1380,7 +1375,6 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playerShip3bsunk = True
                 playershipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
-                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1401,7 +1395,6 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip4sunk = True
-                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
 
@@ -1422,7 +1415,6 @@ Public Class BattleShipsGame
                 MsgBox("Your ship has been sunken")
                 playershipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip5sunk = True
-                opponentshipSunkCount = opponentshipSunkCount + 1
             End If
         End If
     End Sub
