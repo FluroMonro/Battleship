@@ -526,9 +526,9 @@ Partial Class BattleShipsGame
         shipHitlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         shipHitlbl.Location = New Point(25, 170)
         shipHitlbl.Name = "shipHitlbl"
-        shipHitlbl.Size = New Size(75, 21)
+        shipHitlbl.Size = New Size(90, 21)
         shipHitlbl.TabIndex = 39
-        shipHitlbl.Text = "Ships Hit:"
+        shipHitlbl.Text = "Ships Sunk:"
         ' 
         ' playerAccuracyCounttxt
         ' 
