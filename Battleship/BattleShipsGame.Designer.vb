@@ -483,17 +483,17 @@ Partial Class BattleShipsGame
         playerStatspnl.Controls.Add(PlayerStatslbl)
         playerStatspnl.Location = New Point(220, 45)
         playerStatspnl.Name = "playerStatspnl"
-        playerStatspnl.Size = New Size(168, 268)
+        playerStatspnl.Size = New Size(214, 306)
         playerStatspnl.TabIndex = 36
         ' 
         ' playerShipsLeftCounttxt
         ' 
         playerShipsLeftCounttxt.AutoSize = True
         playerShipsLeftCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerShipsLeftCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerShipsLeftCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         playerShipsLeftCounttxt.Location = New Point(119, 210)
         playerShipsLeftCounttxt.Name = "playerShipsLeftCounttxt"
-        playerShipsLeftCounttxt.Size = New Size(17, 19)
+        playerShipsLeftCounttxt.Size = New Size(19, 21)
         playerShipsLeftCounttxt.TabIndex = 42
         playerShipsLeftCounttxt.Text = "0"
         ' 
@@ -501,10 +501,10 @@ Partial Class BattleShipsGame
         ' 
         playerShipsHitCounttxt.AutoSize = True
         playerShipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerShipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerShipsHitCounttxt.Location = New Point(119, 174)
+        playerShipsHitCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerShipsHitCounttxt.Location = New Point(119, 170)
         playerShipsHitCounttxt.Name = "playerShipsHitCounttxt"
-        playerShipsHitCounttxt.Size = New Size(17, 19)
+        playerShipsHitCounttxt.Size = New Size(19, 21)
         playerShipsHitCounttxt.TabIndex = 41
         playerShipsHitCounttxt.Text = "0"
         ' 
@@ -512,10 +512,10 @@ Partial Class BattleShipsGame
         ' 
         shipsLeftlbl.AutoSize = True
         shipsLeftlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipsLeftlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsLeftlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         shipsLeftlbl.Location = New Point(25, 210)
         shipsLeftlbl.Name = "shipsLeftlbl"
-        shipsLeftlbl.Size = New Size(71, 19)
+        shipsLeftlbl.Size = New Size(81, 21)
         shipsLeftlbl.TabIndex = 40
         shipsLeftlbl.Text = "Ships Left:"
         ' 
@@ -523,10 +523,10 @@ Partial Class BattleShipsGame
         ' 
         shipHitlbl.AutoSize = True
         shipHitlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipHitlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        shipHitlbl.Location = New Point(25, 174)
+        shipHitlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shipHitlbl.Location = New Point(25, 170)
         shipHitlbl.Name = "shipHitlbl"
-        shipHitlbl.Size = New Size(66, 19)
+        shipHitlbl.Size = New Size(75, 21)
         shipHitlbl.TabIndex = 39
         shipHitlbl.Text = "Ships Hit:"
         ' 
@@ -534,10 +534,10 @@ Partial Class BattleShipsGame
         ' 
         playerAccuracyCounttxt.AutoSize = True
         playerAccuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerAccuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerAccuracyCounttxt.Location = New Point(119, 138)
+        playerAccuracyCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerAccuracyCounttxt.Location = New Point(119, 130)
         playerAccuracyCounttxt.Name = "playerAccuracyCounttxt"
-        playerAccuracyCounttxt.Size = New Size(15, 19)
+        playerAccuracyCounttxt.Size = New Size(16, 21)
         playerAccuracyCounttxt.TabIndex = 38
         playerAccuracyCounttxt.Text = "-"
         ' 
@@ -545,10 +545,10 @@ Partial Class BattleShipsGame
         ' 
         playerHitCounttxt.AutoSize = True
         playerHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerHitCounttxt.Location = New Point(119, 93)
+        playerHitCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerHitCounttxt.Location = New Point(119, 90)
         playerHitCounttxt.Name = "playerHitCounttxt"
-        playerHitCounttxt.Size = New Size(17, 19)
+        playerHitCounttxt.Size = New Size(19, 21)
         playerHitCounttxt.TabIndex = 37
         playerHitCounttxt.Text = "0"
         ' 
@@ -556,10 +556,10 @@ Partial Class BattleShipsGame
         ' 
         playerMissCounttxt.AutoSize = True
         playerMissCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerMissCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerMissCounttxt.Location = New Point(119, 56)
+        playerMissCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerMissCounttxt.Location = New Point(119, 50)
         playerMissCounttxt.Name = "playerMissCounttxt"
-        playerMissCounttxt.Size = New Size(17, 19)
+        playerMissCounttxt.Size = New Size(19, 21)
         playerMissCounttxt.TabIndex = 36
         playerMissCounttxt.Text = "0"
         ' 
@@ -567,10 +567,10 @@ Partial Class BattleShipsGame
         ' 
         playerAccuracylbl.AutoSize = True
         playerAccuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerAccuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerAccuracylbl.Location = New Point(24, 138)
+        playerAccuracylbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerAccuracylbl.Location = New Point(24, 130)
         playerAccuracylbl.Name = "playerAccuracylbl"
-        playerAccuracylbl.Size = New Size(66, 19)
+        playerAccuracylbl.Size = New Size(75, 21)
         playerAccuracylbl.TabIndex = 35
         playerAccuracylbl.Text = "Accuracy:"
         ' 
@@ -578,10 +578,10 @@ Partial Class BattleShipsGame
         ' 
         playerHitCountlbl.AutoSize = True
         playerHitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerHitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerHitCountlbl.Location = New Point(24, 93)
+        playerHitCountlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerHitCountlbl.Location = New Point(24, 90)
         playerHitCountlbl.Name = "playerHitCountlbl"
-        playerHitCountlbl.Size = New Size(36, 19)
+        playerHitCountlbl.Size = New Size(40, 21)
         playerHitCountlbl.TabIndex = 34
         playerHitCountlbl.Text = "Hits:"
         ' 
@@ -589,10 +589,10 @@ Partial Class BattleShipsGame
         ' 
         playerMissCountLbl.AutoSize = True
         playerMissCountLbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playerMissCountLbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playerMissCountLbl.Location = New Point(25, 56)
+        playerMissCountLbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        playerMissCountLbl.Location = New Point(25, 50)
         playerMissCountLbl.Name = "playerMissCountLbl"
-        playerMissCountLbl.Size = New Size(53, 19)
+        playerMissCountLbl.Size = New Size(60, 21)
         playerMissCountLbl.TabIndex = 32
         playerMissCountLbl.Text = "Misses:"
         ' 
@@ -600,10 +600,10 @@ Partial Class BattleShipsGame
         ' 
         PlayerStatslbl.AutoSize = True
         PlayerStatslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        PlayerStatslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        PlayerStatslbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         PlayerStatslbl.Location = New Point(15, 12)
         PlayerStatslbl.Name = "PlayerStatslbl"
-        PlayerStatslbl.Size = New Size(99, 21)
+        PlayerStatslbl.Size = New Size(124, 28)
         PlayerStatslbl.TabIndex = 31
         PlayerStatslbl.Text = "Player Stats"
         ' 
@@ -620,17 +620,17 @@ Partial Class BattleShipsGame
         opponentStatspnl.Controls.Add(opponentStatslbl)
         opponentStatspnl.Location = New Point(1022, 561)
         opponentStatspnl.Name = "opponentStatspnl"
-        opponentStatspnl.Size = New Size(168, 190)
+        opponentStatspnl.Size = New Size(188, 179)
         opponentStatspnl.TabIndex = 43
         ' 
         ' opponentAccuracyCounttxt
         ' 
         opponentAccuracyCounttxt.AutoSize = True
         opponentAccuracyCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentAccuracyCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentAccuracyCounttxt.Location = New Point(119, 147)
+        opponentAccuracyCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentAccuracyCounttxt.Location = New Point(119, 130)
         opponentAccuracyCounttxt.Name = "opponentAccuracyCounttxt"
-        opponentAccuracyCounttxt.Size = New Size(15, 19)
+        opponentAccuracyCounttxt.Size = New Size(16, 21)
         opponentAccuracyCounttxt.TabIndex = 38
         opponentAccuracyCounttxt.Text = "-"
         ' 
@@ -638,10 +638,10 @@ Partial Class BattleShipsGame
         ' 
         opponentShipsHitCounttxt.AutoSize = True
         opponentShipsHitCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentShipsHitCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentShipsHitCounttxt.Location = New Point(119, 102)
+        opponentShipsHitCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentShipsHitCounttxt.Location = New Point(119, 90)
         opponentShipsHitCounttxt.Name = "opponentShipsHitCounttxt"
-        opponentShipsHitCounttxt.Size = New Size(17, 19)
+        opponentShipsHitCounttxt.Size = New Size(19, 21)
         opponentShipsHitCounttxt.TabIndex = 37
         opponentShipsHitCounttxt.Text = "0"
         ' 
@@ -649,10 +649,10 @@ Partial Class BattleShipsGame
         ' 
         opponentShipsMissCounttxt.AutoSize = True
         opponentShipsMissCounttxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentShipsMissCounttxt.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentShipsMissCounttxt.Location = New Point(119, 56)
+        opponentShipsMissCounttxt.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentShipsMissCounttxt.Location = New Point(119, 50)
         opponentShipsMissCounttxt.Name = "opponentShipsMissCounttxt"
-        opponentShipsMissCounttxt.Size = New Size(17, 19)
+        opponentShipsMissCounttxt.Size = New Size(19, 21)
         opponentShipsMissCounttxt.TabIndex = 36
         opponentShipsMissCounttxt.Text = "0"
         ' 
@@ -660,10 +660,10 @@ Partial Class BattleShipsGame
         ' 
         opponentAccuracylbl.AutoSize = True
         opponentAccuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentAccuracylbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentAccuracylbl.Location = New Point(25, 147)
+        opponentAccuracylbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentAccuracylbl.Location = New Point(25, 130)
         opponentAccuracylbl.Name = "opponentAccuracylbl"
-        opponentAccuracylbl.Size = New Size(66, 19)
+        opponentAccuracylbl.Size = New Size(75, 21)
         opponentAccuracylbl.TabIndex = 35
         opponentAccuracylbl.Text = "Accuracy:"
         ' 
@@ -671,10 +671,10 @@ Partial Class BattleShipsGame
         ' 
         opponentHitCountlbl.AutoSize = True
         opponentHitCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentHitCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentHitCountlbl.Location = New Point(25, 101)
+        opponentHitCountlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentHitCountlbl.Location = New Point(25, 90)
         opponentHitCountlbl.Name = "opponentHitCountlbl"
-        opponentHitCountlbl.Size = New Size(36, 19)
+        opponentHitCountlbl.Size = New Size(40, 21)
         opponentHitCountlbl.TabIndex = 34
         opponentHitCountlbl.Text = "Hits:"
         ' 
@@ -682,10 +682,10 @@ Partial Class BattleShipsGame
         ' 
         opponentMissCountlbl.AutoSize = True
         opponentMissCountlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentMissCountlbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        opponentMissCountlbl.Location = New Point(25, 56)
+        opponentMissCountlbl.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        opponentMissCountlbl.Location = New Point(25, 50)
         opponentMissCountlbl.Name = "opponentMissCountlbl"
-        opponentMissCountlbl.Size = New Size(53, 19)
+        opponentMissCountlbl.Size = New Size(60, 21)
         opponentMissCountlbl.TabIndex = 32
         opponentMissCountlbl.Text = "Misses:"
         ' 
@@ -693,10 +693,10 @@ Partial Class BattleShipsGame
         ' 
         opponentStatslbl.AutoSize = True
         opponentStatslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentStatslbl.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        opponentStatslbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         opponentStatslbl.Location = New Point(15, 12)
         opponentStatslbl.Name = "opponentStatslbl"
-        opponentStatslbl.Size = New Size(128, 21)
+        opponentStatslbl.Size = New Size(159, 28)
         opponentStatslbl.TabIndex = 31
         opponentStatslbl.Text = "Opponent Stats"
         ' 
