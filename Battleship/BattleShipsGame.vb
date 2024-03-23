@@ -2005,8 +2005,6 @@ Public Class BattleShipsGame
             opponentAccuracyCounttxt.Text = accuracy
             opponentShipsHitCounttxt.Text = hitcount
             opponentShipsMissCounttxt.Text = misscount
-            opponentShipsHitCounttxt.Text = playershipSunkCount
-            opponentShipsHitCounttxt.Text = playershipHitListCount - playershipSunkCount
         End If
 
     End Sub
