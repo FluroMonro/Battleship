@@ -52,10 +52,23 @@
         End If
         Return valid
     End Function
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
+        HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
+    End Sub
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
+        HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
+    End Sub
+
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'When Exit button is clicked
         Me.Hide()
         MainMenuForm.Show()
+    End Sub
+    Private Sub playbtnGameSettings_Enter(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseEnter
+        HighScoresForm.EnterOverSmallButton("playbtnGameSettings", Me)
+    End Sub
+    Private Sub playbtnGameSettings_Leave(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseLeave
+        HighScoresForm.ExitOverSmallButton("playbtnGameSettings", Me)
     End Sub
     Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playbtnGameSettings.Click
         'When the Play button is clicked
