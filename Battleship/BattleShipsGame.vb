@@ -363,6 +363,8 @@ Public Class BattleShipsGame
 
                         'Adding the option to click and send to getPlayerMove function
                         AddHandler picbox.Click, AddressOf getPlayerMove
+                        AddHandler picbox.MouseEnter, AddressOf mouseEnterGridCircle
+                        AddHandler picbox.MouseLeave, AddressOf mouseExitGridCircle
                     End If
                 End If
                 'Image presentation
@@ -1020,10 +1022,10 @@ Public Class BattleShipsGame
             For row = 1 To gridSize
                 Select Case gameArray(col, row)
                     Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
-                    'Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\placeholderCircle.png"
+                    Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
                     Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png"
                     Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png"
-                        'Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
+                    Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
                 End Select
             Next row
         Next col
@@ -1770,6 +1772,30 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("resetbtn", Me)
     End Sub
+    Private Sub mouseEnterGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
+        Dim picbox As PictureBox
+        picbox = sender
+        If picbox.ImageLocation = (Application.StartupPath & "\pictures\TransparentCircle.png") Then
+            picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
+        Else
+            If picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" Then
+                picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircleHidden.png"
+            End If
+        End If
+    End Sub
+    Private Sub mouseExitGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
+        Dim picbox As PictureBox
+        picbox = sender
+        If picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png" Then
+            picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
+        Else
+            If picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircleHidden.png" Then
+                picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
+            End If
+        End If
+    End Sub
+
+
     Private Sub scoring()
         'Subroutine in charge of the highscores
 
