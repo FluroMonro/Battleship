@@ -1063,9 +1063,10 @@ Public Class BattleShipsGame
             End If
             timeStart()
 
-
-            'The players move starts each round of the game
-            game(playerMove)
+            If opponentgameArray(playerMove.X, playerMove.Y) = 0 Or opponentgameArray(playerMove.X, playerMove.Y) = 1 Then
+                'The players move starts each round of the game
+                game(playerMove)
+            End If
         End If
         Return playerMove
     End Function
