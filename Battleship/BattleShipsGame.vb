@@ -189,6 +189,13 @@ Public Class BattleShipsGame
             playerShip5(i).isHit = False
         Next i
         playershipHitListCount = 5
+        Dim playerMissCount = 0
+        Dim playerHitCount = 0
+        Dim opponentMissCount = 0
+        Dim opponentHitCount = 0
+        Dim playershipSunkCount = 0
+        updateGameStats(playerHitCount, playerMissCount, 1)
+        updateGameStats(opponentHitCount, opponentMissCount, 2)
     End Sub
     Private Sub initialiseControlsPlacement()
         'To intialise the controls in the correct way
@@ -290,9 +297,6 @@ Public Class BattleShipsGame
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
             Next length
         Next
-
-        playerAccuracyCounttxt.Text = "-"
-        opponentAccuracyCounttxt.Text = "-"
 
         'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
 
@@ -2017,10 +2021,15 @@ Public Class BattleShipsGame
     End Sub
     Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
-        accuracy = CStr(CInt((hitcount / (misscount + hitcount)) * 100)) & "%"
+        If misscount = 0 AndAlso hitcount = 0 Then
+            accuracy = "-"
+        Else
+            accuracy = CStr(CInt((hitcount / (misscount + hitcount)) * 100)) & "%"
+        End If
+
         If playernum = 1 Then
             playerAccuracyCounttxt.Text = accuracy
-            playerhitCounttxt.Text = hitcount
+            playerHitCounttxt.Text = hitcount
             playerMissCounttxt.Text = misscount
             playerShipsHitCounttxt.Text = playershipSunkCount
             playerShipsLeftCounttxt.Text = playershipHitListCount - playershipSunkCount
