@@ -21,7 +21,7 @@
         openhsbutton.Size = New Size(250, 50)
         quitProgrambtn.Location = New Point(Me.Width / 2 - (250 / 2), 625)
         quitProgrambtn.Size = New Size(250, 50)
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
+        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsMainMenuBackground.png"
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
     End Sub

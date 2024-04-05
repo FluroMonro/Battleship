@@ -291,6 +291,9 @@ Public Class BattleShipsGame
             Next length
         Next
 
+        playerAccuracyCounttxt.Text = "-"
+        opponentAccuracyCounttxt.Text = "-"
+
         'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
@@ -316,7 +319,7 @@ Public Class BattleShipsGame
             For col = 1 To gridSize
                 Dim picbox = New PictureBox
                 'Data
-                picbox.Name = col & row
+                picbox.Name = col & "_" & row
                 picbox.Parent = picBoard
                 pictureBoxArray(col, row) = picbox
                 picbox.BringToFront()
@@ -1018,6 +1021,7 @@ Public Class BattleShipsGame
         Dim col As Integer
         Dim row As Integer
 
+
         For col = 1 To gridSize
             For row = 1 To gridSize
                 Select Case gameArray(col, row)
@@ -1030,40 +1034,40 @@ Public Class BattleShipsGame
             Next row
         Next col
     End Sub
+
     Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
         'When the picture box is clicked, the name of the picture box is used to determine the moves location on the grid
-
         Dim playerMove As gridLocation
         Dim picLocation As String
 
         If currentPlayer = 1 Then
             picLocation = sender.Name
-            If picLocation.Length = 3 Then
-                If picLocation(1) = "0" Then
-                    'row 10
+            If picLocation.Length = 4 Then
+                'c_rr' or 'cc_r'
+                If picLocation(1) = "_" Then
+                    'One digit column, two digit row ('c_rr')
+                    playerMove.X = CInt(Strings.Left(sender.Name, 1))
+                    playerMove.Y = CInt(Strings.Right(sender.Name, 2))
+                Else
+                    'Two digit column, one digit row ('cc_r')
                     playerMove.X = CInt(Strings.Left(sender.Name, 2))
                     playerMove.Y = CInt(Strings.Right(sender.Name, 1))
-                Else
-                    'col 10
-                    If picLocation(2) = "0" Then
-                        playerMove.X = CInt(Strings.Left(sender.Name, 1))
-                        playerMove.Y = CInt(Strings.Right(sender.Name, 2))
-                    End If
                 End If
+
             Else
-                If picLocation.Length = 4 Then
-                    'row 10 col 10
+                If picLocation.Length = 5 Then
+                    'cc_rr'
                     playerMove.X = CInt(Strings.Left(sender.Name, 2))
                     playerMove.Y = CInt(Strings.Right(sender.Name, 2))
                 Else
-                    'single digit row and col
+                    'c_r'
                     playerMove.X = CInt(Strings.Left(sender.Name, 1))
                     playerMove.Y = CInt(Strings.Right(sender.Name, 1))
                 End If
             End If
             timeStart()
 
-            If opponentgameArray(playerMove.X, playerMove.Y) = 0 Or opponentgameArray(playerMove.X, playerMove.Y) = 1 Then
+            If opponentgameArray(playerMove.X, playerMove.Y) = 0 Or opponentgameArray(playerMove.X, playerMove.Y) = 1 Or opponentgameArray(playerMove.X, playerMove.Y) = 4 Then
                 'The players move starts each round of the game
                 game(playerMove)
             End If
@@ -1628,7 +1632,7 @@ Public Class BattleShipsGame
                     End If
 
                 Case 2 'right
-                    If hasAhitLocation.X < 10 AndAlso alreadyRight = False AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 3 Then
+                    If hasAhitLocation.X < gridSize AndAlso alreadyRight = False AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + 1, hasAhitLocation.Y) <> 3 Then
                         'One to the right of hasAhit
                         opponentMove.X = hasAhitLocation.X + 1
                         opponentMove.Y = hasAhitLocation.Y
@@ -1637,7 +1641,7 @@ Public Class BattleShipsGame
                     End If
 
                 Case 3 'up
-                    If hasAhitLocation.Y < 10 AndAlso alreadyUp = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 3 Then
+                    If hasAhitLocation.Y < gridSize AndAlso alreadyUp = False AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + 1) <> 3 Then
                         'One above of hasAhit
                         opponentMove.Y = hasAhitLocation.Y + 1
                         opponentMove.X = hasAhitLocation.X
@@ -1682,7 +1686,7 @@ Public Class BattleShipsGame
                     validMove = True
                 End If
             Case 2 'right
-                If hasAhitLocation.X < 10 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
+                If hasAhitLocation.X < gridSize AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 2 AndAlso playergameArray(hasAhitLocation.X + opponentContinueOnCount, hasAhitLocation.Y) <> 3 Then
                     'To the right of hasAhit by opponentContinueOnCount
                     opponentMove.X = hasAhitLocation.X + opponentContinueOnCount
                     opponentMove.Y = hasAhitLocation.Y
@@ -1690,7 +1694,7 @@ Public Class BattleShipsGame
                 End If
 
             Case 3 'up
-                If hasAhitLocation.Y < 10 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 3 Then
+                If hasAhitLocation.Y < gridSize AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 2 AndAlso playergameArray(hasAhitLocation.X, hasAhitLocation.Y + opponentContinueOnCount) <> 3 Then
                     'Above hasAhit by opponentContinueOnCount
                     opponentMove.X = hasAhitLocation.X
                     opponentMove.Y = hasAhitLocation.Y + opponentContinueOnCount
