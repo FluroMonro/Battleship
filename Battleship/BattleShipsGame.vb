@@ -1539,7 +1539,7 @@ Public Class BattleShipsGame
 
         'What to do for each difficulty
         Select Case tempdifficulty
-            Case "beginner"
+            Case "Beginner"
                 randomSquare(opponentMove)
 
             Case "Normal"
