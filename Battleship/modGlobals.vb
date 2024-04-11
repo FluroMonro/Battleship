@@ -8,4 +8,7 @@
     Public isShipPlacementRandom As Boolean
     Public difficulty As String
     Public formID As String
+    Public endScore As Integer
+    Public isWin As Boolean
+    Public endTime As String
 End Module

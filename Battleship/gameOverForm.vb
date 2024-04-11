@@ -5,7 +5,12 @@
     End Sub
     Private Sub onLoadsettings()
         formID = "gameOverForm"
+        Dim playerscore As Integer
+        Dim playerTime As String
 
+
+        playerscore = endScore
+        playerTime = endTime
     End Sub
     Public Sub initialiseControlsPlacement()
         Me.WindowState = FormWindowState.Maximized
@@ -13,7 +18,6 @@
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'Setting the placement and size of controls on the form
-
 
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)

@@ -1125,14 +1125,8 @@ Public Class BattleShipsGame
                 'Display updated grid
                 assignGridImages(playergameArray, playerpictureBoxArray)
 
-
                 If gameOver = True Then
-                    Me.WindowState = WindowState.Minimized
-                    timeEnd()
-                    revealships()
-                    determineScore()
-                    scoring()
-                    time = 0
+                    gameIsOver()
                 Else
                     If computerextraTurn = False Then
                         swapPlayer()
@@ -1158,12 +1152,7 @@ Public Class BattleShipsGame
                             End If
                         End While
                         If gameOver = True Then
-                            Me.WindowState = WindowState.Minimized
-                            timeEnd()
-                            revealships()
-                            determineScore()
-                            scoring()
-                            time = 0
+                            gameIsOver()
                         Else
                             'To wait for the players next move
                             swapPlayer()
@@ -1176,6 +1165,23 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
+    Private Sub gameIsOver()
+        Me.WindowState = WindowState.Minimized
+        timeEnd()
+        revealships()
+        determineScore()
+        scoring()
+        showgameOverForm()
+
+        time = 0
+    End Sub
+    Private Sub showgameOverForm()
+        Me.Hide()
+        endTime = time
+        endScore = score
+        gameOverForm.Show()
+    End Sub
+
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
         'Determines whether the move is a hit or a miss and what to do in either case
 
