@@ -32,6 +32,7 @@ Partial Class gameOverForm
         timelbl = New Label()
         Label8 = New Label()
         backtomainbtn = New Button()
+        drawlbl = New Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -60,9 +61,10 @@ Partial Class gameOverForm
         ' 
         youwinlbl.AutoSize = True
         youwinlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        youwinlbl.Location = New Point(745, 416)
+        youwinlbl.Font = New Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point)
+        youwinlbl.Location = New Point(719, 350)
         youwinlbl.Name = "youwinlbl"
-        youwinlbl.Size = New Size(54, 15)
+        youwinlbl.Size = New Size(90, 28)
         youwinlbl.TabIndex = 10
         youwinlbl.Text = "You Win!"
         ' 
@@ -70,9 +72,10 @@ Partial Class gameOverForm
         ' 
         computerwinslbl.AutoSize = True
         computerwinslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        computerwinslbl.Location = New Point(716, 385)
+        computerwinslbl.Font = New Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point)
+        computerwinslbl.Location = New Point(687, 350)
         computerwinslbl.Name = "computerwinslbl"
-        computerwinslbl.Size = New Size(93, 15)
+        computerwinslbl.Size = New Size(154, 28)
         computerwinslbl.TabIndex = 11
         computerwinslbl.Text = "Computer Wins!"
         ' 
@@ -81,18 +84,18 @@ Partial Class gameOverForm
         scorelbl.AutoSize = True
         scorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         scorelbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        scorelbl.Location = New Point(594, 606)
+        scorelbl.Location = New Point(687, 583)
         scorelbl.Name = "scorelbl"
-        scorelbl.Size = New Size(100, 25)
+        scorelbl.Size = New Size(60, 25)
         scorelbl.TabIndex = 12
-        scorelbl.Text = "Your Score:"
+        scorelbl.Text = "Score:"
         ' 
         ' scoretxt
         ' 
         scoretxt.AutoSize = True
         scoretxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         scoretxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        scoretxt.Location = New Point(700, 606)
+        scoretxt.Location = New Point(787, 583)
         scoretxt.Name = "scoretxt"
         scoretxt.Size = New Size(22, 25)
         scoretxt.TabIndex = 13
@@ -103,7 +106,7 @@ Partial Class gameOverForm
         timetxt.AutoSize = True
         timetxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         timetxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        timetxt.Location = New Point(878, 606)
+        timetxt.Location = New Point(785, 521)
         timetxt.Name = "timetxt"
         timetxt.Size = New Size(56, 25)
         timetxt.TabIndex = 15
@@ -114,11 +117,11 @@ Partial Class gameOverForm
         timelbl.AutoSize = True
         timelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         timelbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl.Location = New Point(782, 606)
+        timelbl.Location = New Point(687, 521)
         timelbl.Name = "timelbl"
-        timelbl.Size = New Size(90, 25)
+        timelbl.Size = New Size(54, 25)
         timelbl.TabIndex = 14
-        timelbl.Text = "Your Time"
+        timelbl.Text = "Time:"
         ' 
         ' Label8
         ' 
@@ -146,12 +149,24 @@ Partial Class gameOverForm
         backtomainbtn.Text = "EXIT"
         backtomainbtn.UseVisualStyleBackColor = False
         ' 
+        ' drawlbl
+        ' 
+        drawlbl.AutoSize = True
+        drawlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        drawlbl.Font = New Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point)
+        drawlbl.Location = New Point(680, 350)
+        drawlbl.Name = "drawlbl"
+        drawlbl.Size = New Size(169, 28)
+        drawlbl.TabIndex = 18
+        drawlbl.Text = "Draw! No Winner!"
+        ' 
         ' gameOverForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 921)
+        Controls.Add(drawlbl)
         Controls.Add(backtomainbtn)
         Controls.Add(Label8)
         Controls.Add(timetxt)
@@ -178,4 +193,5 @@ Partial Class gameOverForm
     Friend WithEvents timelbl As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents backtomainbtn As Button
+    Friend WithEvents drawlbl As Label
 End Class

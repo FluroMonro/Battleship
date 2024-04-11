@@ -9,6 +9,6 @@
     Public difficulty As String
     Public formID As String
     Public endScore As Integer
-    Public isWin As Boolean
+    Public gameOutcome As String
     Public endTime As String
 End Module

@@ -1169,6 +1169,7 @@ Public Class BattleShipsGame
         Me.Hide()
         endTime = convertTimeToDisplay(time)
         endScore = score
+        gameOverForm.onLoadsettings()
         gameOverForm.Show()
     End Sub
 
@@ -1433,10 +1434,10 @@ Public Class BattleShipsGame
         If boardEmpty = True Then
             If winner = 1 Then
                 'Player wins
-                isWin = True
+                gameOutcome = "Win"
             Else
                 'Opponent Wins
-                isWin = False
+                gameOutcome = "Lose"
             End If
 
             'Final score is playerscore - opponentscore
@@ -1465,12 +1466,12 @@ Public Class BattleShipsGame
 
             If score > 0 Then
                 'If score Is positive, Then the player has more ships left than the opponent and player wins
-                isWin = True
+                gameOutcome = "Win"
             Else
                 If score = 0 Then
-                    MsgBox("Draw: No Winner")
+                    gameOutcome = "Draw"
                 Else
-                    isWin = False
+                    gameOutcome = "Lose"
                 End If
                 'If score Is negative, Then the opponent has more ships left than the player and player loses
             End If

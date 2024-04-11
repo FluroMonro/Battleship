@@ -1,20 +1,21 @@
 ﻿Public Class gameOverForm
+
     Private Sub gameOverForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        initialiseControlsPlacement()
-        onLoadSettings()
+        onLoadsettings()
     End Sub
-    Private Sub onLoadsettings()
+    Public Sub onLoadsettings()
         formID = "gameOverForm"
         Dim playerscore As Integer
         Dim playerTime As String
-
-
+        Dim outcomeOfGame As String
+        outcomeOfGame = gameOutcome
         playerscore = endScore
         playerTime = endTime
         scoretxt.Text = endScore
         timetxt.Text = endTime
+        initialiseControlsPlacement(outcomeOfGame)
     End Sub
-    Public Sub initialiseControlsPlacement()
+    Public Sub initialiseControlsPlacement(outcomeOfGame As String)
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
@@ -26,12 +27,25 @@
         backgroundImg.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
 
-        If isWin = True Then
+        If outcomeOfGame = "Win" Then
             youwinlbl.Visible = True
+            scorelbl.Visible = True
+            scoretxt.Visible = True
             computerwinslbl.Visible = False
+            drawlbl.Visible = False
         Else
-            computerwinslbl.Visible = True
             youwinlbl.Visible = False
+            scorelbl.Visible = False
+            scoretxt.Visible = False
+
+            If outcomeOfGame = "Lose" Then
+                computerwinslbl.Visible = True
+                drawlbl.Visible = False
+            Else
+                computerwinslbl.Visible = False
+                drawlbl.Visible = True
+            End If
+
         End If
     End Sub
 
