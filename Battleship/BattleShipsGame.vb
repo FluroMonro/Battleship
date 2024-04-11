@@ -1166,18 +1166,17 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub gameIsOver()
-        Me.WindowState = WindowState.Minimized
+        'Me.WindowState = WindowState.Minimized
         timeEnd()
         revealships()
         determineScore()
         scoring()
         showgameOverForm()
-
         time = 0
     End Sub
     Private Sub showgameOverForm()
         Me.Hide()
-        endTime = time
+        endTime = convertTimeToDisplay(time)
         endScore = score
         gameOverForm.Show()
     End Sub
@@ -1776,10 +1775,12 @@ Public Class BattleShipsGame
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
-        gameOver = True
-        timeEnd()
-        time = 0
-        onFormLoad()
+        'gameOver = True
+        'timeEnd()
+        'time = 0
+        'onFormLoad()
+
+        gameIsOver()
     End Sub
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
@@ -1834,7 +1835,7 @@ Public Class BattleShipsGame
         arrHighScores(11).score = score
         arrHighScores(11).name = playerName
         arrHighScores(11).difficulty = difficulty
-        arrHighScores(11).time = time
+        arrHighScores(11).time = convertTimeToDisplay(time)
     End Sub
     Public Sub readHighScores()
         'Open the hs.txt file for Input (read)

@@ -11,6 +11,8 @@
 
         playerscore = endScore
         playerTime = endTime
+        scoretxt.Text = endScore
+        timetxt.Text = endTime
     End Sub
     Public Sub initialiseControlsPlacement()
         Me.WindowState = FormWindowState.Maximized
@@ -23,6 +25,14 @@
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+
+        If isWin = True Then
+            youwinlbl.Visible = True
+            computerwinslbl.Visible = False
+        Else
+            computerwinslbl.Visible = True
+            youwinlbl.Visible = False
+        End If
     End Sub
 
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
