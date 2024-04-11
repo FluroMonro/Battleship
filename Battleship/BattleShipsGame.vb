@@ -1092,16 +1092,7 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
 
         If gameOver = True Then
-            Me.WindowState = WindowState.Minimized
-            timeEnd()
-
-            revealships()
-
-            'Final score (player - opponent)
-            determineScore()
-
-            scoring()
-            time = 0
+            gameIsOver()
         Else
             If playerextraTurn = False Then
                 'Opponents turn
@@ -1442,10 +1433,10 @@ Public Class BattleShipsGame
         If boardEmpty = True Then
             If winner = 1 Then
                 'Player wins
-                MsgBox("YOU WIN!")
+                isWin = True
             Else
                 'Opponent Wins
-                MsgBox("YOU LOSE!")
+                isWin = False
             End If
 
             'Final score is playerscore - opponentscore
@@ -1474,17 +1465,16 @@ Public Class BattleShipsGame
 
             If score > 0 Then
                 'If score Is positive, Then the player has more ships left than the opponent and player wins
-                MsgBox("YOU WIN!")
+                isWin = True
             Else
                 If score = 0 Then
                     MsgBox("Draw: No Winner")
                 Else
-                    MsgBox("YOU LOSE!")
+                    isWin = False
                 End If
                 'If score Is negative, Then the opponent has more ships left than the player and player loses
             End If
         End If
-        MsgBox(score)
         Return score
     End Function
     Private Sub updateInGameScore(currentPlayer As Integer)
