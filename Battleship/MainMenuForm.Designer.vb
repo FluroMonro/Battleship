@@ -28,6 +28,7 @@ Partial Class MainMenuForm
         playfrommainbtn = New Button()
         openhsbutton = New Button()
         quitProgrambtn = New Button()
+        Button1 = New Button()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -104,12 +105,30 @@ Partial Class MainMenuForm
         quitProgrambtn.Text = "QUIT"
         quitProgrambtn.UseVisualStyleBackColor = False
         ' 
+        ' Button1
+        ' 
+        Button1.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
+        Button1.BackgroundImageLayout = ImageLayout.Stretch
+        Button1.FlatAppearance.BorderColor = Color.Lime
+        Button1.FlatAppearance.BorderSize = 0
+        Button1.FlatStyle = FlatStyle.Flat
+        Button1.Font = New Font("Arial", 20F, FontStyle.Bold, GraphicsUnit.Point)
+        Button1.ForeColor = SystemColors.ButtonHighlight
+        Button1.Location = New Point(132, 396)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(250, 50)
+        Button1.TabIndex = 5
+        Button1.Text = "QUIT"
+        Button1.UseVisualStyleBackColor = False
+        ' 
         ' MainMenuForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(Button1)
         Controls.Add(quitProgrambtn)
         Controls.Add(openhsbutton)
         Controls.Add(playfrommainbtn)
@@ -130,4 +149,5 @@ Partial Class MainMenuForm
     Friend WithEvents playfrommainbtn As Button
     Friend WithEvents openhsbutton As Button
     Friend WithEvents quitProgrambtn As Button
+    Friend WithEvents Button1 As Button
 End Class
