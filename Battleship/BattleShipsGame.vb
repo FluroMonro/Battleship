@@ -99,11 +99,8 @@ Public Class BattleShipsGame
     Public Sub onFormLoad()
         gameTimer.Stop()
         timeInitialise()
-        'mainline setup
-        updateInGameScore(1)
-        updateInGameScore(2)
 
-        initialiseControlsPlacement()
+        initialiseFormControls()
         initialiseVariables()
 
         'reset the boards before generating a new
@@ -123,6 +120,16 @@ Public Class BattleShipsGame
         assignGridImages(playergameArray, playerpictureBoxArray)
     End Sub
     Private Sub initialiseVariables()
+        Dim playerMissCount = 0
+        Dim playerHitCount = 0
+        Dim opponentMissCount = 0
+        Dim opponentHitCount = 0
+        Dim playershipSunkCount = 0
+        ' WindowState = WindowState.Minimized
+        updateGameStats(playerHitCount, playerMissCount, 1)
+        updateGameStats(opponentHitCount, opponentMissCount, 2)
+        ' WindowState = WindowState.Maximized
+
         'Initialise all the global variable
         currentPlayer = 1
         opponentShip2sunk = False
@@ -189,15 +196,9 @@ Public Class BattleShipsGame
             playerShip5(i).isHit = False
         Next i
         playershipHitListCount = 5
-        Dim playerMissCount = 0
-        Dim playerHitCount = 0
-        Dim opponentMissCount = 0
-        Dim opponentHitCount = 0
-        Dim playershipSunkCount = 0
-        updateGameStats(playerHitCount, playerMissCount, 1)
-        updateGameStats(opponentHitCount, opponentMissCount, 2)
+
     End Sub
-    Private Sub initialiseControlsPlacement()
+    Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user
@@ -1025,7 +1026,6 @@ Public Class BattleShipsGame
         Dim col As Integer
         Dim row As Integer
 
-
         For col = 1 To gridSize
             For row = 1 To gridSize
                 Select Case gameArray(col, row)
@@ -1038,7 +1038,6 @@ Public Class BattleShipsGame
             Next row
         Next col
     End Sub
-
     Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
         'When the picture box is clicked, the name of the picture box is used to determine the moves location on the grid
         Dim playerMove As gridLocation
@@ -1162,8 +1161,19 @@ Public Class BattleShipsGame
         revealships()
         determineScore()
         scoring()
+
+        If time = 0 OrElse time = 3599 Then
+            time = timeLeft
+        Else
+            time = 0
+        End If
+
         showgameOverForm()
-        time = 0
+
+        playerMissCount = 0
+        playerHitCount = 0
+        opponentMissCount = 0
+        opponentHitCount = 0
     End Sub
     Private Sub showgameOverForm()
         Me.Hide()
@@ -1172,7 +1182,6 @@ Public Class BattleShipsGame
         gameOverForm.onLoadsettings()
         gameOverForm.Show()
     End Sub
-
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
         'Determines whether the move is a hit or a miss and what to do in either case
 
@@ -1444,7 +1453,6 @@ Public Class BattleShipsGame
             score = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
         Else
             'If ended by the timer
-            MsgBox("Ended by timer")
 
             'Go through players array and calculate how many ships the player has left and add that to the score
             For row = 1 To gridSize
@@ -1750,9 +1758,7 @@ Public Class BattleShipsGame
     End Function
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Exit back to the main menu
-        gameOver = True
-        timeEnd()
-        time = 0
+        gameIsOver()
         Me.Hide()
         MainMenuForm.Show()
         onFormLoad()
@@ -1801,8 +1807,6 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
-
-
     Private Sub scoring()
         'Subroutine in charge of the highscores
 
@@ -2019,6 +2023,8 @@ Public Class BattleShipsGame
     End Sub
     Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
+        MsgBox(hitcount)
+        MsgBox(misscount)
         If misscount = 0 AndAlso hitcount = 0 Then
             accuracy = "-"
         Else
@@ -2069,23 +2075,13 @@ Public Class BattleShipsGame
             time = time + 1
             If time = 3599 Then
                 If formID = "Game" Then
-                    gameOver = True
-                    timeEnd()
-                    revealships()
-                    determineScore()
-                    scoring()
-                    time = 0
+                    gameIsOver()
                 End If
             End If
         Else
             If time = 0 Then
                 If formID = "Game" Then
-                    gameOver = True
-                    timeEnd()
-                    revealships()
-                    determineScore()
-                    scoring()
-                    time = 0
+                    gameIsOver()
                 End If
             Else
                 time = time - 1

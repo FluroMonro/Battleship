@@ -2,24 +2,13 @@
     Dim playerName As String
     Dim timerNumValue As Integer
     Private Sub GameSettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        initialiseControlsPlacement()
         onLoadSettings()
     End Sub
     Public Sub onLoadSettings()
         formID = "GameSettings"
-        'Initialise the control parameters
-        playerNameInputTxtbox.Text = ""
-        playernamewarninglbl.Visible = False
-        BoardSizebtn10.Checked = True
-        shipPlacementRand.Checked = True
-        difNorm.Checked = True
-        timerValueBar.Visible = False
-        timervalue.Visible = False
-        timerValueBar.Value = 5
-        timervalue.Text = "02:30"
-        timerckbx.Checked = False
+        initialiseFormControls()
     End Sub
-    Private Sub initialiseControlsPlacement()
+    Private Sub initialiseFormControls()
         ''To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user
@@ -36,6 +25,18 @@
         backgroundImg.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
         playbtnGameSettings.Location = New Point(Me.Width - 365, Me.Height - 195)
+
+        'Initialise the control parameters
+        playerNameInputTxtbox.Text = ""
+        playernamewarninglbl.Visible = False
+        BoardSizebtn10.Checked = True
+        shipPlacementRand.Checked = True
+        difNorm.Checked = True
+        timerValueBar.Visible = False
+        timervalue.Visible = False
+        timerValueBar.Value = 5
+        timervalue.Text = "02:30"
+        timerckbx.Checked = False
     End Sub
     Private Function validateName(name As String) As Boolean
         'Validate the name the user has given
@@ -130,7 +131,7 @@
 
         'Only allow the game to be played when the name is valid
         If validateName(playerName) = True Then
-            initialiseControlsPlacement()
+            initialiseFormControls()
             onLoadSettings()
             playGame()
         End If

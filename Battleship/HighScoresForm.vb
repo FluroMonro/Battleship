@@ -14,10 +14,10 @@ Public Class HighScoresForm
         updateRankings("ascending", "score")
 
         initialiseLastHighscore()
-        initialiseControlsPlacement()
+        initialiseFormControls()
         showscore()
     End Sub
-    Private Sub initialiseControlsPlacement()
+    Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user

@@ -1,10 +1,10 @@
 ﻿Public Class MainMenuForm
     Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'When the game is played
-        initialiseControlsPlacement()
+        initialiseFormControls()
         formID = "MainMenu"
     End Sub
-    Private Sub initialiseControlsPlacement()
+    Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
 
         'To initialise the screen size as the fullscreen display size of the user
@@ -28,8 +28,8 @@
     Private Sub playfrommainbtn_Click(sender As Object, e As EventArgs) Handles playfrommainbtn.Click
         'When the Play button is pressed
         Me.Hide()
-        GameSettingsForm.Show()
         GameSettingsForm.onLoadSettings()
+        GameSettingsForm.Show()
     End Sub
     Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openhsbutton.Click
         'When the High-score button is pressed

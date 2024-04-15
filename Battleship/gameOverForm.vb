@@ -11,11 +11,10 @@
         outcomeOfGame = gameOutcome
         playerscore = endScore
         playerTime = endTime
-        scoretxt.Text = endScore
-        timetxt.Text = endTime
-        initialiseControlsPlacement(outcomeOfGame)
+
+        initialiseFormControls(outcomeOfGame)
     End Sub
-    Public Sub initialiseControlsPlacement(outcomeOfGame As String)
+    Public Sub initialiseFormControls(outcomeOfGame As String)
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
@@ -26,6 +25,8 @@
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        scoretxt.Text = endScore
+        timetxt.Text = endTime
 
         If outcomeOfGame = "Win" Then
             youwinlbl.Visible = True
