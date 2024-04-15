@@ -1092,6 +1092,7 @@ Public Class BattleShipsGame
 
         If gameOver = True Then
             gameIsOver()
+            showgameOverForm()
         Else
             If playerextraTurn = False Then
                 'Opponents turn
@@ -1117,6 +1118,7 @@ Public Class BattleShipsGame
 
                 If gameOver = True Then
                     gameIsOver()
+                    showgameOverForm()
                 Else
                     If computerextraTurn = False Then
                         swapPlayer()
@@ -1143,6 +1145,7 @@ Public Class BattleShipsGame
                         End While
                         If gameOver = True Then
                             gameIsOver()
+                            showgameOverForm()
                         Else
                             'To wait for the players next move
                             swapPlayer()
@@ -1167,8 +1170,6 @@ Public Class BattleShipsGame
         Else
             time = 0
         End If
-
-        showgameOverForm()
 
         playerMissCount = 0
         playerHitCount = 0
@@ -1772,12 +1773,9 @@ Public Class BattleShipsGame
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
-        'gameOver = True
-        'timeEnd()
-        'time = 0
-        'onFormLoad()
 
         gameIsOver()
+        onFormLoad()
     End Sub
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
@@ -2023,8 +2021,6 @@ Public Class BattleShipsGame
     End Sub
     Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
-        MsgBox(hitcount)
-        MsgBox(misscount)
         If misscount = 0 AndAlso hitcount = 0 Then
             accuracy = "-"
         Else
@@ -2076,12 +2072,14 @@ Public Class BattleShipsGame
             If time = 3599 Then
                 If formID = "Game" Then
                     gameIsOver()
+                    showgameOverForm()
                 End If
             End If
         Else
             If time = 0 Then
                 If formID = "Game" Then
                     gameIsOver()
+                    showgameOverForm()
                 End If
             Else
                 time = time - 1
