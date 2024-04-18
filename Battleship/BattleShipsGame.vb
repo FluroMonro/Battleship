@@ -1169,7 +1169,6 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub gameIsOverWithResult()
-        'Me.WindowState = WindowState.Minimized
         timeEnd()
         revealships()
         determineScore()
