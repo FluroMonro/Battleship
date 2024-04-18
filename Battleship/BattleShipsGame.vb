@@ -1091,7 +1091,7 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
 
         If gameOver = True Then
-            gameIsOver()
+            gameIsOverWithResult()
             showgameOverForm()
         Else
             If playerextraTurn = False Then
@@ -1117,7 +1117,7 @@ Public Class BattleShipsGame
                 assignGridImages(playergameArray, playerpictureBoxArray)
 
                 If gameOver = True Then
-                    gameIsOver()
+                    gameIsOverWithResult()
                     showgameOverForm()
                 Else
                     If computerextraTurn = False Then
@@ -1144,7 +1144,7 @@ Public Class BattleShipsGame
                             End If
                         End While
                         If gameOver = True Then
-                            gameIsOver()
+                            gameIsOverWithResult()
                             showgameOverForm()
                         Else
                             'To wait for the players next move
@@ -1158,7 +1158,16 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
-    Private Sub gameIsOver()
+    Private Sub gameIsOverNoResult()
+        timeEnd()
+        playerMissCount = 0
+        playerHitCount = 0
+        opponentMissCount = 0
+        opponentHitCount = 0
+        time = 0
+        score = 0
+    End Sub
+    Private Sub gameIsOverWithResult()
         'Me.WindowState = WindowState.Minimized
         timeEnd()
         revealships()
@@ -1167,8 +1176,6 @@ Public Class BattleShipsGame
 
         If time = 0 OrElse time = 3599 Then
             time = timeLeft
-        Else
-            time = 0
         End If
 
         playerMissCount = 0
@@ -1182,6 +1189,7 @@ Public Class BattleShipsGame
         endScore = score
         gameOverForm.onLoadsettings()
         gameOverForm.Show()
+        time = 0
     End Sub
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
         'Determines whether the move is a hit or a miss and what to do in either case
@@ -1759,7 +1767,7 @@ Public Class BattleShipsGame
     End Function
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Exit back to the main menu
-        gameIsOver()
+        gameIsOverNoResult()
         Me.Hide()
         MainMenuForm.Show()
         onFormLoad()
@@ -1774,8 +1782,15 @@ Public Class BattleShipsGame
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
 
-        gameIsOver()
+        gameIsOverNoResult()
+
+        If timeOptionAsCountUp = True Then
+            displayTime = ""
+            timelbl.Text = displayTime
+        End If
+
         onFormLoad()
+
     End Sub
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
@@ -2071,14 +2086,14 @@ Public Class BattleShipsGame
             time = time + 1
             If time = 3599 Then
                 If formID = "Game" Then
-                    gameIsOver()
+                    gameIsOverWithResult()
                     showgameOverForm()
                 End If
             End If
         Else
             If time = 0 Then
                 If formID = "Game" Then
-                    gameIsOver()
+                    gameIsOverWithResult()
                     showgameOverForm()
                 End If
             Else
