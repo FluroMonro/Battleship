@@ -1781,7 +1781,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
-
+        resetbtn.Enabled = False
         gameIsOverNoResult()
 
         If timeOptionAsCountUp = True Then
@@ -1790,7 +1790,8 @@ Public Class BattleShipsGame
         End If
 
         onFormLoad()
-
+        wait(2)
+        resetbtn.Enabled = True
     End Sub
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
