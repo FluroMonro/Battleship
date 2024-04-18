@@ -1092,7 +1092,6 @@ Public Class BattleShipsGame
 
         If gameOver = True Then
             gameIsOverWithResult()
-            showgameOverForm()
         Else
             If playerextraTurn = False Then
                 'Opponents turn
@@ -1118,7 +1117,6 @@ Public Class BattleShipsGame
 
                 If gameOver = True Then
                     gameIsOverWithResult()
-                    showgameOverForm()
                 Else
                     If computerextraTurn = False Then
                         swapPlayer()
@@ -1145,7 +1143,6 @@ Public Class BattleShipsGame
                         End While
                         If gameOver = True Then
                             gameIsOverWithResult()
-                            showgameOverForm()
                         Else
                             'To wait for the players next move
                             swapPlayer()
@@ -1166,6 +1163,10 @@ Public Class BattleShipsGame
         opponentHitCount = 0
         time = 0
         score = 0
+        If timeOptionAsCountUp = True Then
+            displayTime = ""
+            timelbl.Text = displayTime
+        End If
     End Sub
     Private Sub gameIsOverWithResult()
         'Me.WindowState = WindowState.Minimized
@@ -1182,6 +1183,7 @@ Public Class BattleShipsGame
         playerHitCount = 0
         opponentMissCount = 0
         opponentHitCount = 0
+        showgameOverForm()
     End Sub
     Private Sub showgameOverForm()
         Me.Hide()
@@ -1783,12 +1785,6 @@ Public Class BattleShipsGame
         'Reload the page
         resetbtn.Enabled = False
         gameIsOverNoResult()
-
-        If timeOptionAsCountUp = True Then
-            displayTime = ""
-            timelbl.Text = displayTime
-        End If
-
         onFormLoad()
         wait(2)
         resetbtn.Enabled = True
@@ -2088,14 +2084,12 @@ Public Class BattleShipsGame
             If time = 3599 Then
                 If formID = "Game" Then
                     gameIsOverWithResult()
-                    showgameOverForm()
                 End If
             End If
         Else
             If time = 0 Then
                 If formID = "Game" Then
                     gameIsOverWithResult()
-                    showgameOverForm()
                 End If
             Else
                 time = time - 1
