@@ -1021,6 +1021,10 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object)
+        WindowState = FormWindowState.Minimized
+
+
+
         'Updates and changes the picture depending on the value of the 
         Dim col As Integer
         Dim row As Integer
@@ -1028,18 +1032,14 @@ Public Class BattleShipsGame
             For row = 1 To gridSize
                 Select Case gameArray(col, row)
                     Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
-                    Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
-                        resizeAndMoveImageWithinPicbox(pictureBoxArray(col, row), 1, gridCircleSizeNum, "noDirection")
-                    Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png"
-                        resizeAndMoveImageWithinPicbox(pictureBoxArray(col, row), 1, gridCircleSizeNum, "noDirection")
-                    Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png"
-                        resizeAndMoveImageWithinPicbox(pictureBoxArray(col, row), 1, gridCircleSizeNum, "noDirection")
-                    Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
-                        resizeAndMoveImageWithinPicbox(pictureBoxArray(col, row), 1, gridCircleSizeNum, "noDirection")
+                    Case Else : updateImagekeepCorrectSize(pictureBoxArray(col, row), gameArray(col, row), gridCircleSizeNum)
                 End Select
             Next row
         Next col
+        WindowState = FormWindowState.Maximized
     End Sub
+
+
     Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
         'When the picture box is clicked, the name of the picture box is used to determine the moves location on the grid
         Dim playerMove As gridLocation
@@ -2200,8 +2200,6 @@ Public Class BattleShipsGame
                 rotateImage90(targetship, targetship.Height, targetship.Width)
                 rotateImage90(targetship, targetship.Height, targetship.Width)
         End Select
-        wait(1)
-        WindowState = FormWindowState.Minimized
         Dim count As Integer
         count = shipLength
         parentgridbox.SizeMode = PictureBoxSizeMode.Normal
@@ -2229,9 +2227,6 @@ Public Class BattleShipsGame
                 parentgridbox = targetgridbox
             End If
         Next count
-
-        WindowState = FormWindowState.Maximized
-
         'targetship.BackColor = Color.Transparent
         'targetship.BringToFront()
         'targetship.Location = New Point(0, 0)
@@ -2267,9 +2262,56 @@ Public Class BattleShipsGame
             Xloc = radius * (count - 1)
             Yloc = 0
         Else
-            Xloc = 0
-            Yloc = radius * (count - 1)
+            If direction = "up" OrElse direction = "down" Then
+                Xloc = 0
+                Yloc = radius * (count - 1)
+                picbox.Load(picbox.ImageLocation)
+            End If
         End If
+        Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
+        Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
+        Dim g As Graphics = Graphics.FromImage(new_b)
+
+        g.DrawImage(b, Xloc, Yloc, radius, radius) 'Moves and scales the picture
+        g.Save()
+
+        picbox.Image = new_b
+    End Sub
+    Private Sub updateImagekeepCorrectSize(picbox As PictureBox, arrayValue As Integer, radius As Integer)
+        Dim Xloc As Integer
+        Dim Yloc As Integer
+
+        If picbox.Image.Width - radius = 0 AndAlso picbox.Image.Height - radius = 0 Then
+            'No movement
+        Else
+            If picbox.Image.Width - radius = 0 Then
+                'If only y stretch
+                Yloc = picbox.Image.Height - radius
+            Else
+                If picbox.Image.Height - radius = 0 Then
+                    'If only x stretch
+                    Xloc = picbox.Image.Width - radius
+                End If
+            End If
+        End If
+
+        Select Case arrayValue
+            Case 1
+                'hidden
+                picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
+            Case 2
+                'miss
+                picbox.ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png"
+            Case 3
+                'hit
+                picbox.ImageLocation = Application.StartupPath & "\pictures\RedCircle.png"
+            Case 4
+                'hidden front of ship
+                picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
+        End Select
+        picbox.Load(picbox.ImageLocation)
+
+
         Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
         Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
         Dim g As Graphics = Graphics.FromImage(new_b)
