@@ -446,7 +446,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd()) + 4
+                direction = Int(Rnd()) + 1
                 'direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
@@ -470,24 +470,24 @@ Public Class BattleShipsGame
                         Case 2
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 Then
                                 'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                                 'Set the respective ship record to the same starting location
                             End If
                         Case 3
                             'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
 
                             End If
                         Case 4
                             'If all the other 3 squares are empty: set all 4 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                         Case 5
                             'If all the other 4 squares are empty: set all 5 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 AndAlso gameArr(col + (4 * signedIndicatorX), row + (4 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                     End Select
                 End If
@@ -501,47 +501,50 @@ Public Class BattleShipsGame
 
         Return gameArr
     End Function
-    Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
+    Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
         Dim X As Integer
         Dim Y As Integer
         Dim RowOrColumn As Integer
         Dim i As Integer
 
-
-        If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
-            RowOrColumn = row
-        Else
-            RowOrColumn = col
-        End If
-
-        If directionShipFacing = "right" Then
-            For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1))) Step -1
-
-                If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
-                    X = col
-                    Y = i
-                Else
+        Select Case directionShipFacing
+            Case "right"
+                RowOrColumn = col
+                For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1))) Step -1
                     X = i
                     Y = row
-                End If
 
-                gameArr(X, Y) = 1
-            Next i
-        Else
-            For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1)))
+                    gameArr(X, Y) = 1
+                Next i
 
-                If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
-                    X = col
-                    Y = i
-                Else
+
+            Case "left"
+                RowOrColumn = col
+                For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1)))
                     X = i
                     Y = row
-                End If
 
-                gameArr(X, Y) = 1
-            Next i
-        End If
+                    gameArr(X, Y) = 1
+                Next i
 
+            Case "up"
+                RowOrColumn = row
+                For i = RowOrColumn To (RowOrColumn + (signedIndicatorY * (length - 1))) Step -1
+                    X = col
+                    Y = i
+
+                    gameArr(X, Y) = 1
+                Next i
+
+            Case "down"
+                RowOrColumn = row
+                For i = RowOrColumn To (RowOrColumn + (signedIndicatorY * (length - 1)))
+                    X = col
+                    Y = i
+
+                    gameArr(X, Y) = 1
+                Next i
+        End Select
         setIndividualShipLocations(col, row, length, directionShipFacing, currentplayernum)
         Return True
     End Function
@@ -1908,10 +1911,27 @@ Public Class BattleShipsGame
                     targetgridbox.BackColor = Color.Transparent
                     parentgridbox = targetgridbox
                 Next count
-
-
-
             Case "left"
+                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
+                originalParent.Size = New Size(Xscale, Yscale)
+                originalParent.BackColor = Color.Transparent
+                parentgridbox = originalParent
+                For count = (shipLength - 1) To 1 Step -1
+                    If currentplayernum = 1 Then
+                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    Else
+                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    End If
+                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
+                    targetgridbox.Size = New Size(Xscale, Yscale)
+                    targetgridbox.Parent = parentgridbox
+                    targetgridbox.BringToFront()
+                    targetgridbox.Location = New Point(0, 0)
+                    targetgridbox.BackColor = Color.Transparent
+                    parentgridbox = targetgridbox
+                Next count
+            Case "up"
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
                 originalParent.Size = New Size(Xscale, Yscale)
                 originalParent.BackColor = Color.Transparent
@@ -1983,7 +2003,7 @@ Public Class BattleShipsGame
                 Yloc = 0
             Case "up"
                 Xloc = 0
-                Yloc = radius * (count - 1)
+                Yloc = radius * count - 1
             Case "down"
                 Xloc = 0
                 Yloc = radius * (count - 1)
