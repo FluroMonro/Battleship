@@ -111,6 +111,8 @@ Public Class BattleShipsGame
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
         generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
 
+
+
         'generate the 2D array: gameArray randomly (both computer and Player)
         generateGameArr(opponentgameArray, 2)
         generateGameArr(playergameArray, 1)
@@ -118,9 +120,6 @@ Public Class BattleShipsGame
         'Assign the correct grid images for the picture box array to be represent the game array
         assignGridImages(opponentgameArray, opponentpictureBoxArray)
         assignGridImages(playergameArray, playerpictureBoxArray)
-
-
-
     End Sub
     Private Sub initialiseVariables()
         Dim playerMissCount = 0
@@ -262,10 +261,12 @@ Public Class BattleShipsGame
         'Variables used for setting target object to be able to automate and loop controls 
         Dim duplicateShip As Boolean
         Dim targetObject As PictureBox
-        Dim str As String
+        Dim shippicstr As String
         Dim currentplayerstr As String
-
         'For both player and opponent
+
+        'MsgBox(opponentShipPicbox2.Parent.Name)
+
         For player = 1 To 2
             If player = 1 Then
                 currentplayerstr = "player"
@@ -280,30 +281,55 @@ Public Class BattleShipsGame
 
             'Ships picture boxes
             For length = 2 To 5
-                str = length.ToString
+                shippicstr = length.ToString
                 If length = 3 Then
-                    str = "3a"
-                    duplicateShip = True
+                    If duplicateShip = False Then
+                        shippicstr = "3a"
+                        duplicateShip = True
+                    End If
                 End If
-                If duplicateShip = True Then
-                    str = "3b"
-                    duplicateShip = False
+                If length = 4 Then
+                    If duplicateShip = True Then
+                        shippicstr = "3b"
+                        duplicateShip = False
+                        length = length - 1
+                    End If
                 End If
 
-                targetObject = Me.Controls.Item(currentplayerstr + "shipPicbox" + str)
+                Dim shipstr As String
+                Dim targetship
+                Dim targetpicboxArr
+                shipstr = currentplayerstr & "Ship" & shippicstr
+                targetship = CallByName(Me, shipstr, vbGet)
+                targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
+
+                targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
+                If targetObject Is Nothing Then
+                    targetObject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
+                    Dim count = 0
+                    Do
+                        targetObject = targetObject.GetChildAtPoint(New Point(0, 0), 0)
+                        count = count + 1
+                    Loop Until targetObject Is Nothing
+
+                    targetObject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
+                    For i = 1 To (count - 1)
+                        targetObject = targetObject.GetChildAtPoint(New Point(0, 0), 0)
+                    Next i
+                End If
                 targetObject.Location = New Point(100, 100)
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
+                targetObject.Parent = Me
+                'targetObject.Dispose()
             Next length
         Next
-        'Me.WindowState = WindowState.Minimized
 
         'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
 
         'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
-        'gameOver = True
+
         'revealships()
-        gameOver = False
     End Sub
     Private Sub resetGameArray(array As Array)
         'resets the entire array to all 0s
@@ -400,7 +426,6 @@ Public Class BattleShipsGame
         End If
     End Sub
     Private Function generateShips(gameArr As Array, length As Integer, currentplayernum As Integer) As Array
-        WindowState = FormWindowState.Minimized
 
         'Declare local variables
         Dim valid As Boolean
@@ -445,24 +470,24 @@ Public Class BattleShipsGame
                         Case 2
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 Then
                                 'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentPlayer)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
                                 'Set the respective ship record to the same starting location
                             End If
                         Case 3
                             'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + signedIndicatorX, row + (2 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentPlayer)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
 
                             End If
                         Case 4
                             'If all the other 3 squares are empty: set all 4 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + signedIndicatorX, row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + signedIndicatorX, row + (3 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentPlayer)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                         Case 5
                             'If all the other 4 squares are empty: set all 5 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + signedIndicatorX, row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + signedIndicatorX, row + (3 * signedIndicatorY)) = 0 AndAlso gameArr(col + signedIndicatorX, row + (4 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentPlayer)
+                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                     End Select
                 End If
@@ -474,9 +499,8 @@ Public Class BattleShipsGame
 
         'Assign the ships with each picture box
         assignShips(gameArr, currentplayernum, length, directionShipFacing, col, row)
-        'WindowState = FormWindowState.Maximized
-        Return gameArr
 
+        Return gameArr
     End Function
     Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
         Dim temp1 As Integer
@@ -582,12 +606,13 @@ Public Class BattleShipsGame
             End If
 
             Select Case direction
-                'Increment the offsets appropiately for the direction of the ship
-                Case "down" : Yoffset = Yoffset - 1
-                Case "up" : Yoffset = Yoffset + 1
-                Case "left" : Xoffset = Xoffset - 1
-                Case "right" : Xoffset = Xoffset + 1
+                    'Increment the offsets appropiately for the direction of the ship
+                Case "up" : Yoffset = Yoffset - 1
+                Case "down" : Yoffset = Yoffset + 1
+                Case "right" : Xoffset = Xoffset - 1
+                Case "left" : Xoffset = Xoffset + 1
             End Select
+
         Next
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
@@ -667,8 +692,10 @@ Public Class BattleShipsGame
 
         'Generate each assigned picture in it's correct location
         displayShipLocations(column, row, length, direction, currentplayernum)
+
     End Sub
     Private Sub assignShipImages(picboard As PictureBox)
+
         'Assign each ship picturebox with the correct picture
         Select Case picboard.Name
             Case opponentShipPicbox2.Name : opponentShipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
@@ -853,8 +880,6 @@ Public Class BattleShipsGame
 
         gameTimer.Stop()
         timeInitialise()
-        initialiseVariables()
-
     End Sub
     Private Sub gameIsOverWithResult()
         timeEnd()
@@ -1462,7 +1487,7 @@ Public Class BattleShipsGame
 
     End Sub
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        'Me.WindowState = WindowState.Minimized
+
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
@@ -1470,6 +1495,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
+        wait(2)
         resetbtn.Enabled = False
         gameIsOverNoResult()
         onFormLoad()
@@ -1794,8 +1820,6 @@ Public Class BattleShipsGame
         'overall parent must be highest count
         'aka back to front
 
-        'WindowState = FormWindowState.Minimized
-
         Dim X As Integer
         Dim Y As Integer
         Dim Xscale As Integer
@@ -1809,12 +1833,6 @@ Public Class BattleShipsGame
         Dim targetship As PictureBox
 
         gridcirclesize = gridCircleSizeNum
-        Select Case direction
-            Case 1 : direction = "up"
-            Case 2 : direction = "down"
-            Case 3 : direction = "right"
-            Case 4 : direction = "left"
-        End Select
 
         If currentplayernum = 1 Then
             playerstring = "player"
@@ -1893,7 +1911,6 @@ Public Class BattleShipsGame
             targetship = Me.Controls.Item(playerstring & "ShipPicbox" & shipLength)
         End If
 
-
         assignShipImages(targetship)
         targetship.Load(targetship.ImageLocation)
 
@@ -1911,14 +1928,12 @@ Public Class BattleShipsGame
                 rotateImage90(targetship)
         End Select
 
-
         targetship.Parent = targetgridbox
         targetship.Size = targetgridbox.Size
         targetship.BackColor = Color.Transparent
         targetship.BringToFront()
         targetship.Location = New Point(0, 0)
 
-        ' WindowState = FormWindowState.Maximized
     End Sub
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
         picbox.Load(picbox.ImageLocation)
