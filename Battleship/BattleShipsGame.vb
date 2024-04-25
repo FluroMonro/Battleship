@@ -498,7 +498,7 @@ Public Class BattleShipsGame
         gameArr(col, row) = 4
         'Assign the ships with each picture box
         assignShips(gameArr, currentplayernum, length, directionShipFacing, col, row)
-
+        revealships()
         Return gameArr
     End Function
     Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
@@ -1084,7 +1084,7 @@ Public Class BattleShipsGame
         'Length 2
         If opponentShip2sunk = False Then
             If opponentShip2(1).isHit = True AndAlso opponentShip2(2).isHit = True Then
-                MsgBox("You sunk a ship")
+                MsgBox("You sunk the opponents 2 length ship")
                 opponentShip2sunk = True
                 opponentShipPicbox2.Visible = True
                 playershipSunkCount = playershipSunkCount + 1
@@ -1093,7 +1093,7 @@ Public Class BattleShipsGame
 
         If playerShip2sunk = False Then
             If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
-                MsgBox("Your ship has been sunken")
+                MsgBox("Your 2 length ship has been sunk")
                 playerShip2sunk = True
             End If
         End If
@@ -1101,7 +1101,7 @@ Public Class BattleShipsGame
         'Length 3
         If opponentShip3asunk = False Then
             If opponentShip3a(1).isHit = True AndAlso opponentShip3a(2).isHit = True AndAlso opponentShip3a(3).isHit = True Then
-                MsgBox("You sunk a ship")
+                MsgBox("You sunk the opponents 3 length ship")
                 opponentShip3asunk = True
                 opponentShipPicbox3a.Visible = True
                 playershipSunkCount = playershipSunkCount + 1
@@ -1111,13 +1111,13 @@ Public Class BattleShipsGame
         If playerShip3asunk = False Then
             If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
                 playerShip3asunk = True
-                MsgBox("Your ship has been sunken")
+                MsgBox("Your 3 length ship has been sunk")
             End If
         End If
 
         If opponentShip3bsunk = False Then
             If opponentShip3b(1).isHit = True AndAlso opponentShip3b(2).isHit = True AndAlso opponentShip3b(3).isHit = True Then
-                MsgBox("You sunk a ship")
+                MsgBox("You sunk the opponents 3 length ship")
                 opponentShip3bsunk = True
                 opponentShipPicbox3b.Visible = True
                 playershipSunkCount = playershipSunkCount + 1
@@ -1126,7 +1126,7 @@ Public Class BattleShipsGame
 
         If playerShip3bsunk = False Then
             If playerShip3b(1).isHit = True AndAlso playerShip3b(2).isHit = True AndAlso playerShip3b(3).isHit = True Then
-                MsgBox("Your ship has been sunken")
+                MsgBox("Your 3 length ship has been sunk")
                 playerShip3bsunk = True
             End If
         End If
@@ -1135,7 +1135,7 @@ Public Class BattleShipsGame
         'Length 4
         If opponentShip4sunk = False Then
             If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
-                MsgBox("You sunk a ship")
+                MsgBox("You sunk the opponents 4 length shipp")
                 opponentShipPicbox4.Visible = True
                 opponentShip4sunk = True
                 playershipSunkCount = playershipSunkCount + 1
@@ -1144,7 +1144,7 @@ Public Class BattleShipsGame
 
         If playerShip4sunk = False Then
             If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
-                MsgBox("Your ship has been sunken")
+                MsgBox("Your 4 length ship has been sunken")
                 playerShip4sunk = True
             End If
         End If
@@ -1153,7 +1153,7 @@ Public Class BattleShipsGame
         'Length 5
         If opponentShip5sunk = False Then
             If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
-                MsgBox("You sunk a ship")
+                MsgBox("You sunk the opponents 5 length ship")
                 opponentShipPicbox5.Visible = True
                 opponentShip5sunk = True
                 playershipSunkCount = playershipSunkCount + 1
@@ -1162,7 +1162,7 @@ Public Class BattleShipsGame
 
         If playerShip5sunk = False Then
             If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
-                MsgBox("Your ship has been sunken")
+                MsgBox("Your 5 length ship has been sunken")
                 playerShip5sunk = True
             End If
         End If
@@ -2062,10 +2062,10 @@ Public Class BattleShipsGame
         End If
 
         Select Case arrayValue
-            Case 1 : picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png" 'hidden
+            Case 1 : picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden
             Case 2 : picbox.ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png" 'miss
             Case 3 : picbox.ImageLocation = Application.StartupPath & "\pictures\RedCircle.png" 'hit
-            Case 4 : picbox.ImageLocation = Application.StartupPath & "\pictures\placeHolderCircle.png" 'hidden front of ship
+            Case 4 : picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden front of ship
         End Select
         picbox.Load(picbox.ImageLocation)
 
