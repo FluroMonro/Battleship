@@ -3,6 +3,7 @@ Imports System.Drawing.Text
 Imports System.Reflection.Emit
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.Intrinsics.Arm
+Imports System.Security
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Security.Permissions
 Imports System.Threading
@@ -408,7 +409,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
-
+        WindowState = FormWindowState.Minimized
         If isShipPlacementRandom = True Then
             generateShips(gameArr, 2, player)
             generateShips(gameArr, 3, player)
@@ -421,6 +422,7 @@ Public Class BattleShipsGame
                 MsgBox("own choice shipPlacement")
             End If
         End If
+
     End Sub
     Private Function generateShips(gameArr As Array, length As Integer, currentplayernum As Integer) As Array
 
@@ -444,7 +446,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd()) + 3
+                direction = Int(Rnd()) + 4
                 'direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
@@ -512,21 +514,34 @@ Public Class BattleShipsGame
             RowOrColumn = col
         End If
 
-        For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1))) Step -1
+        If directionShipFacing = "right" Then
+            For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1))) Step -1
 
-            If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
-                X = col
-                Y = i
-            Else
-                X = i
-                Y = row
-            End If
+                If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
+                    X = col
+                    Y = i
+                Else
+                    X = i
+                    Y = row
+                End If
 
-            gameArr(X, Y) = 1
-            If playergameArray(3, 3) = 1 AndAlso length = 3 Then
-                length = 3
-            End If
-        Next i
+                gameArr(X, Y) = 1
+            Next i
+        Else
+            For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1)))
+
+                If directionShipFacing = "up" OrElse directionShipFacing = "down" Then
+                    X = col
+                    Y = i
+                Else
+                    X = i
+                    Y = row
+                End If
+
+                gameArr(X, Y) = 1
+            Next i
+        End If
+
         setIndividualShipLocations(col, row, length, directionShipFacing, currentplayernum)
         Return True
     End Function
@@ -1069,7 +1084,6 @@ Public Class BattleShipsGame
                 MsgBox("You sunk a ship")
                 opponentShip2sunk = True
                 opponentShipPicbox2.Visible = True
-                opponentShipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playershipSunkCount = playershipSunkCount + 1
             End If
         End If
@@ -1077,7 +1091,6 @@ Public Class BattleShipsGame
         If playerShip2sunk = False Then
             If playerShip2(1).isHit = True AndAlso playerShip2(2).isHit = True Then
                 MsgBox("Your ship has been sunken")
-                playerShipPicbox2.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip2sunk = True
             End If
         End If
@@ -1088,7 +1101,6 @@ Public Class BattleShipsGame
                 MsgBox("You sunk a ship")
                 opponentShip3asunk = True
                 opponentShipPicbox3a.Visible = True
-                opponentShipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playershipSunkCount = playershipSunkCount + 1
             End If
         End If
@@ -1097,7 +1109,6 @@ Public Class BattleShipsGame
             If playerShip3a(1).isHit = True AndAlso playerShip3a(2).isHit = True AndAlso playerShip3a(3).isHit = True Then
                 playerShip3asunk = True
                 MsgBox("Your ship has been sunken")
-                playerShipPicbox3a.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
             End If
         End If
 
@@ -1106,7 +1117,6 @@ Public Class BattleShipsGame
                 MsgBox("You sunk a ship")
                 opponentShip3bsunk = True
                 opponentShipPicbox3b.Visible = True
-                opponentShipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playershipSunkCount = playershipSunkCount + 1
             End If
         End If
@@ -1115,7 +1125,6 @@ Public Class BattleShipsGame
             If playerShip3b(1).isHit = True AndAlso playerShip3b(2).isHit = True AndAlso playerShip3b(3).isHit = True Then
                 MsgBox("Your ship has been sunken")
                 playerShip3bsunk = True
-                playerShipPicbox3b.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
             End If
         End If
 
@@ -1125,7 +1134,6 @@ Public Class BattleShipsGame
             If opponentShip4(1).isHit = True AndAlso opponentShip4(2).isHit = True AndAlso opponentShip4(3).isHit = True AndAlso opponentShip4(4).isHit = True Then
                 MsgBox("You sunk a ship")
                 opponentShipPicbox4.Visible = True
-                opponentShipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip4sunk = True
                 playershipSunkCount = playershipSunkCount + 1
             End If
@@ -1134,7 +1142,6 @@ Public Class BattleShipsGame
         If playerShip4sunk = False Then
             If playerShip4(1).isHit = True AndAlso playerShip4(2).isHit = True AndAlso playerShip4(3).isHit = True AndAlso playerShip4(4).isHit = True Then
                 MsgBox("Your ship has been sunken")
-                playerShipPicbox4.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip4sunk = True
             End If
         End If
@@ -1145,7 +1152,6 @@ Public Class BattleShipsGame
             If opponentShip5(1).isHit = True AndAlso opponentShip5(2).isHit = True AndAlso opponentShip5(3).isHit = True AndAlso opponentShip5(4).isHit = True AndAlso opponentShip5(5).isHit = True Then
                 MsgBox("You sunk a ship")
                 opponentShipPicbox5.Visible = True
-                opponentShipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 opponentShip5sunk = True
                 playershipSunkCount = playershipSunkCount + 1
             End If
@@ -1154,7 +1160,6 @@ Public Class BattleShipsGame
         If playerShip5sunk = False Then
             If playerShip5(1).isHit = True AndAlso playerShip5(2).isHit = True AndAlso playerShip5(3).isHit = True AndAlso playerShip5(4).isHit = True AndAlso playerShip5(5).isHit = True Then
                 MsgBox("Your ship has been sunken")
-                playerShipPicbox5.BackColor = Color.FromArgb(CByte(225), CByte(112), CByte(112))
                 playerShip5sunk = True
             End If
         End If
@@ -1833,6 +1838,8 @@ Public Class BattleShipsGame
         Dim highestLayerParent As PictureBox
         Dim originalParent As PictureBox
 
+        WindowState = FormWindowState.Minimized
+
         gridcirclesize = gridCircleSizeNum
 
         If currentplayernum = 1 Then
@@ -1876,27 +1883,55 @@ Public Class BattleShipsGame
         Dim count As Integer
         count = shipLength
         originalParent.SizeMode = PictureBoxSizeMode.Normal
-        resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
-        originalParent.Size = New Size(Xscale, Yscale)
-        originalParent.BackColor = Color.Transparent
-        originalParent.Location = originalParent.Location - New Point(X, Y)
 
-        parentgridbox = originalParent
-        For count = 1 To (shipLength - 1)
-            If currentplayernum = 1 Then
-                targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-            Else
-                targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-            End If
-            targetgridbox.SizeMode = PictureBoxSizeMode.Normal
-            resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
-            targetgridbox.Size = New Size(Xscale, Yscale)
-            targetgridbox.Parent = parentgridbox
-            targetgridbox.BringToFront()
-            targetgridbox.Location = New Point(0, 0)
-            targetgridbox.BackColor = Color.Transparent
-            parentgridbox = targetgridbox
-        Next count
+
+        Select Case direction
+            Case "right"
+                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
+                originalParent.Size = New Size(Xscale, Yscale)
+                originalParent.BackColor = Color.Transparent
+                originalParent.Location = originalParent.Location - New Point(X, Y)
+                parentgridbox = originalParent
+
+                For count = 1 To (shipLength - 1)
+                    If currentplayernum = 1 Then
+                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    Else
+                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    End If
+                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
+                    targetgridbox.Size = New Size(Xscale, Yscale)
+                    targetgridbox.Parent = parentgridbox
+                    targetgridbox.BringToFront()
+                    targetgridbox.Location = New Point(0, 0)
+                    targetgridbox.BackColor = Color.Transparent
+                    parentgridbox = targetgridbox
+                Next count
+
+
+
+            Case "left"
+                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
+                originalParent.Size = New Size(Xscale, Yscale)
+                originalParent.BackColor = Color.Transparent
+                parentgridbox = originalParent
+                For count = (shipLength - 1) To 1 Step -1
+                    If currentplayernum = 1 Then
+                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    Else
+                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    End If
+                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
+                    targetgridbox.Size = New Size(Xscale, Yscale)
+                    targetgridbox.Parent = parentgridbox
+                    targetgridbox.BringToFront()
+                    targetgridbox.Location = New Point(0, 0)
+                    targetgridbox.BackColor = Color.Transparent
+                    parentgridbox = targetgridbox
+                Next count
+        End Select
 
         'Ships
         If shipLength = 3 Then
@@ -1939,16 +1974,24 @@ Public Class BattleShipsGame
         Dim Xloc As Integer
         Dim Yloc As Integer
 
-        If direction = "right" OrElse direction = "left" Then
-            Xloc = radius * (count - 1)
-            Yloc = 0
-        Else
-            If direction = "up" OrElse direction = "down" Then
+        Select Case direction
+            Case "right"
+                Xloc = radius * (count - 1)
+                Yloc = 0
+            Case "left"
+                Xloc = radius * count
+                Yloc = 0
+            Case "up"
                 Xloc = 0
                 Yloc = radius * (count - 1)
-                picbox.Load(picbox.ImageLocation)
-            End If
-        End If
+            Case "down"
+                Xloc = 0
+                Yloc = radius * (count - 1)
+            Case "noMovement"
+                Xloc = 0
+                Yloc = 0
+        End Select
+        
         Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
         Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
         Dim g As Graphics = Graphics.FromImage(new_b)
