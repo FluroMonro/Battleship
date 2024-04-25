@@ -39,16 +39,16 @@ Partial Class BattleShipsGame
         opponentscoretxt = New Windows.Forms.Label()
         backtomainbtn = New Button()
         resetbtn = New Button()
-        opponentshipPicbox2 = New PictureBox()
-        opponentshipPicbox3a = New PictureBox()
-        opponentshipPicbox3b = New PictureBox()
-        opponentshipPicbox4 = New PictureBox()
-        opponentshipPicbox5 = New PictureBox()
-        playershipPicbox5 = New PictureBox()
-        playershipPicbox4 = New PictureBox()
-        playershipPicbox3b = New PictureBox()
-        playershipPicbox3a = New PictureBox()
-        playershipPicbox2 = New PictureBox()
+        opponentShipPicbox2 = New PictureBox()
+        opponentShipPicbox3a = New PictureBox()
+        opponentShipPicbox3b = New PictureBox()
+        opponentShipPicbox4 = New PictureBox()
+        opponentShipPicbox5 = New PictureBox()
+        playerShipPicbox5 = New PictureBox()
+        playerShipPicbox4 = New PictureBox()
+        playerShipPicbox3b = New PictureBox()
+        playerShipPicbox3a = New PictureBox()
+        playerShipPicbox2 = New PictureBox()
         keyBluepicbox = New PictureBox()
         keytitlelbl = New Windows.Forms.Label()
         Keymisslbl = New Windows.Forms.Label()
@@ -78,25 +78,27 @@ Partial Class BattleShipsGame
         opponentHitCountlbl = New Windows.Forms.Label()
         opponentMissCountlbl = New Windows.Forms.Label()
         opponentStatslbl = New Windows.Forms.Label()
+        PictureBox1 = New PictureBox()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(TurnsBannerPic, ComponentModel.ISupportInitialize).BeginInit()
-        CType(opponentshipPicbox2, ComponentModel.ISupportInitialize).BeginInit()
-        CType(opponentshipPicbox3a, ComponentModel.ISupportInitialize).BeginInit()
-        CType(opponentshipPicbox3b, ComponentModel.ISupportInitialize).BeginInit()
-        CType(opponentshipPicbox4, ComponentModel.ISupportInitialize).BeginInit()
-        CType(opponentshipPicbox5, ComponentModel.ISupportInitialize).BeginInit()
-        CType(playershipPicbox5, ComponentModel.ISupportInitialize).BeginInit()
-        CType(playershipPicbox4, ComponentModel.ISupportInitialize).BeginInit()
-        CType(playershipPicbox3b, ComponentModel.ISupportInitialize).BeginInit()
-        CType(playershipPicbox3a, ComponentModel.ISupportInitialize).BeginInit()
-        CType(playershipPicbox2, ComponentModel.ISupportInitialize).BeginInit()
+        CType(opponentShipPicbox2, ComponentModel.ISupportInitialize).BeginInit()
+        CType(opponentShipPicbox3a, ComponentModel.ISupportInitialize).BeginInit()
+        CType(opponentShipPicbox3b, ComponentModel.ISupportInitialize).BeginInit()
+        CType(opponentShipPicbox4, ComponentModel.ISupportInitialize).BeginInit()
+        CType(opponentShipPicbox5, ComponentModel.ISupportInitialize).BeginInit()
+        CType(playerShipPicbox5, ComponentModel.ISupportInitialize).BeginInit()
+        CType(playerShipPicbox4, ComponentModel.ISupportInitialize).BeginInit()
+        CType(playerShipPicbox3b, ComponentModel.ISupportInitialize).BeginInit()
+        CType(playerShipPicbox3a, ComponentModel.ISupportInitialize).BeginInit()
+        CType(playerShipPicbox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(keyBluepicbox, ComponentModel.ISupportInitialize).BeginInit()
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).BeginInit()
         KeyPanel.SuspendLayout()
         playerStatspnl.SuspendLayout()
         opponentStatspnl.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' backgroundImg
@@ -276,115 +278,115 @@ Partial Class BattleShipsGame
         resetbtn.Text = "RESET"
         resetbtn.UseVisualStyleBackColor = False
         ' 
-        ' opponentshipPicbox2
+        ' opponentShipPicbox2
         ' 
-        opponentshipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentshipPicbox2.Image = My.Resources.Resources.BattleShip2
-        opponentshipPicbox2.Location = New Point(83, 131)
-        opponentshipPicbox2.Name = "opponentshipPicbox2"
-        opponentshipPicbox2.Size = New Size(100, 50)
-        opponentshipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
-        opponentshipPicbox2.TabIndex = 20
-        opponentshipPicbox2.TabStop = False
+        opponentShipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipPicbox2.Image = My.Resources.Resources.BattleShip2
+        opponentShipPicbox2.Location = New Point(83, 163)
+        opponentShipPicbox2.Name = "opponentShipPicbox2"
+        opponentShipPicbox2.Size = New Size(100, 50)
+        opponentShipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
+        opponentShipPicbox2.TabIndex = 20
+        opponentShipPicbox2.TabStop = False
         ' 
-        ' opponentshipPicbox3a
+        ' opponentShipPicbox3a
         ' 
-        opponentshipPicbox3a.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentshipPicbox3a.Image = My.Resources.Resources.BattleShip3
-        opponentshipPicbox3a.Location = New Point(23, 615)
-        opponentshipPicbox3a.Name = "opponentshipPicbox3a"
-        opponentshipPicbox3a.Size = New Size(100, 50)
-        opponentshipPicbox3a.SizeMode = PictureBoxSizeMode.StretchImage
-        opponentshipPicbox3a.TabIndex = 21
-        opponentshipPicbox3a.TabStop = False
+        opponentShipPicbox3a.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipPicbox3a.Image = My.Resources.Resources.BattleShip3
+        opponentShipPicbox3a.Location = New Point(23, 615)
+        opponentShipPicbox3a.Name = "opponentShipPicbox3a"
+        opponentShipPicbox3a.Size = New Size(100, 50)
+        opponentShipPicbox3a.SizeMode = PictureBoxSizeMode.StretchImage
+        opponentShipPicbox3a.TabIndex = 21
+        opponentShipPicbox3a.TabStop = False
         ' 
-        ' opponentshipPicbox3b
+        ' opponentShipPicbox3b
         ' 
-        opponentshipPicbox3b.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentshipPicbox3b.Image = My.Resources.Resources.BattleShip3
-        opponentshipPicbox3b.Location = New Point(23, 690)
-        opponentshipPicbox3b.Name = "opponentshipPicbox3b"
-        opponentshipPicbox3b.Size = New Size(100, 50)
-        opponentshipPicbox3b.SizeMode = PictureBoxSizeMode.StretchImage
-        opponentshipPicbox3b.TabIndex = 22
-        opponentshipPicbox3b.TabStop = False
+        opponentShipPicbox3b.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipPicbox3b.Image = My.Resources.Resources.BattleShip3
+        opponentShipPicbox3b.Location = New Point(23, 690)
+        opponentShipPicbox3b.Name = "opponentShipPicbox3b"
+        opponentShipPicbox3b.Size = New Size(100, 50)
+        opponentShipPicbox3b.SizeMode = PictureBoxSizeMode.StretchImage
+        opponentShipPicbox3b.TabIndex = 22
+        opponentShipPicbox3b.TabStop = False
         ' 
-        ' opponentshipPicbox4
+        ' opponentShipPicbox4
         ' 
-        opponentshipPicbox4.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentshipPicbox4.Image = My.Resources.Resources.BattleShip4
-        opponentshipPicbox4.Location = New Point(124, 783)
-        opponentshipPicbox4.Name = "opponentshipPicbox4"
-        opponentshipPicbox4.Size = New Size(100, 50)
-        opponentshipPicbox4.SizeMode = PictureBoxSizeMode.StretchImage
-        opponentshipPicbox4.TabIndex = 23
-        opponentshipPicbox4.TabStop = False
+        opponentShipPicbox4.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipPicbox4.Image = My.Resources.Resources.BattleShip4
+        opponentShipPicbox4.Location = New Point(124, 783)
+        opponentShipPicbox4.Name = "opponentShipPicbox4"
+        opponentShipPicbox4.Size = New Size(100, 50)
+        opponentShipPicbox4.SizeMode = PictureBoxSizeMode.StretchImage
+        opponentShipPicbox4.TabIndex = 23
+        opponentShipPicbox4.TabStop = False
         ' 
-        ' opponentshipPicbox5
+        ' opponentShipPicbox5
         ' 
-        opponentshipPicbox5.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        opponentshipPicbox5.Image = My.Resources.Resources.BattleShip5
-        opponentshipPicbox5.Location = New Point(155, 701)
-        opponentshipPicbox5.Name = "opponentshipPicbox5"
-        opponentshipPicbox5.Size = New Size(100, 50)
-        opponentshipPicbox5.SizeMode = PictureBoxSizeMode.StretchImage
-        opponentshipPicbox5.TabIndex = 24
-        opponentshipPicbox5.TabStop = False
+        opponentShipPicbox5.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        opponentShipPicbox5.Image = My.Resources.Resources.BattleShip5
+        opponentShipPicbox5.Location = New Point(155, 701)
+        opponentShipPicbox5.Name = "opponentShipPicbox5"
+        opponentShipPicbox5.Size = New Size(100, 50)
+        opponentShipPicbox5.SizeMode = PictureBoxSizeMode.StretchImage
+        opponentShipPicbox5.TabIndex = 24
+        opponentShipPicbox5.TabStop = False
         ' 
-        ' playershipPicbox5
+        ' playerShipPicbox5
         ' 
-        playershipPicbox5.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playershipPicbox5.Image = My.Resources.Resources.BattleShip5
-        playershipPicbox5.Location = New Point(83, 131)
-        playershipPicbox5.Name = "playershipPicbox5"
-        playershipPicbox5.Size = New Size(100, 50)
-        playershipPicbox5.SizeMode = PictureBoxSizeMode.StretchImage
-        playershipPicbox5.TabIndex = 29
-        playershipPicbox5.TabStop = False
+        playerShipPicbox5.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipPicbox5.Image = My.Resources.Resources.BattleShip5
+        playerShipPicbox5.Location = New Point(83, 163)
+        playerShipPicbox5.Name = "playerShipPicbox5"
+        playerShipPicbox5.Size = New Size(100, 50)
+        playerShipPicbox5.SizeMode = PictureBoxSizeMode.StretchImage
+        playerShipPicbox5.TabIndex = 29
+        playerShipPicbox5.TabStop = False
         ' 
-        ' playershipPicbox4
+        ' playerShipPicbox4
         ' 
-        playershipPicbox4.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playershipPicbox4.Image = My.Resources.Resources.BattleShip4
-        playershipPicbox4.Location = New Point(83, 131)
-        playershipPicbox4.Name = "playershipPicbox4"
-        playershipPicbox4.Size = New Size(100, 50)
-        playershipPicbox4.SizeMode = PictureBoxSizeMode.StretchImage
-        playershipPicbox4.TabIndex = 28
-        playershipPicbox4.TabStop = False
+        playerShipPicbox4.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipPicbox4.Image = My.Resources.Resources.BattleShip4
+        playerShipPicbox4.Location = New Point(83, 163)
+        playerShipPicbox4.Name = "playerShipPicbox4"
+        playerShipPicbox4.Size = New Size(100, 50)
+        playerShipPicbox4.SizeMode = PictureBoxSizeMode.StretchImage
+        playerShipPicbox4.TabIndex = 28
+        playerShipPicbox4.TabStop = False
         ' 
-        ' playershipPicbox3b
+        ' playerShipPicbox3b
         ' 
-        playershipPicbox3b.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playershipPicbox3b.Image = My.Resources.Resources.BattleShip3
-        playershipPicbox3b.Location = New Point(83, 131)
-        playershipPicbox3b.Name = "playershipPicbox3b"
-        playershipPicbox3b.Size = New Size(100, 50)
-        playershipPicbox3b.SizeMode = PictureBoxSizeMode.StretchImage
-        playershipPicbox3b.TabIndex = 27
-        playershipPicbox3b.TabStop = False
+        playerShipPicbox3b.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipPicbox3b.Image = My.Resources.Resources.BattleShip3
+        playerShipPicbox3b.Location = New Point(83, 163)
+        playerShipPicbox3b.Name = "playerShipPicbox3b"
+        playerShipPicbox3b.Size = New Size(100, 50)
+        playerShipPicbox3b.SizeMode = PictureBoxSizeMode.StretchImage
+        playerShipPicbox3b.TabIndex = 27
+        playerShipPicbox3b.TabStop = False
         ' 
-        ' playershipPicbox3a
+        ' playerShipPicbox3a
         ' 
-        playershipPicbox3a.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playershipPicbox3a.Image = My.Resources.Resources.BattleShip3
-        playershipPicbox3a.Location = New Point(83, 131)
-        playershipPicbox3a.Name = "playershipPicbox3a"
-        playershipPicbox3a.Size = New Size(100, 50)
-        playershipPicbox3a.SizeMode = PictureBoxSizeMode.StretchImage
-        playershipPicbox3a.TabIndex = 26
-        playershipPicbox3a.TabStop = False
+        playerShipPicbox3a.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipPicbox3a.Image = My.Resources.Resources.BattleShip3
+        playerShipPicbox3a.Location = New Point(83, 163)
+        playerShipPicbox3a.Name = "playerShipPicbox3a"
+        playerShipPicbox3a.Size = New Size(100, 50)
+        playerShipPicbox3a.SizeMode = PictureBoxSizeMode.StretchImage
+        playerShipPicbox3a.TabIndex = 26
+        playerShipPicbox3a.TabStop = False
         ' 
-        ' playershipPicbox2
+        ' playerShipPicbox2
         ' 
-        playershipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playershipPicbox2.Image = My.Resources.Resources.BattleShip2
-        playershipPicbox2.Location = New Point(83, 131)
-        playershipPicbox2.Name = "playershipPicbox2"
-        playershipPicbox2.Size = New Size(100, 50)
-        playershipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
-        playershipPicbox2.TabIndex = 25
-        playershipPicbox2.TabStop = False
+        playerShipPicbox2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerShipPicbox2.Image = My.Resources.Resources.BattleShip2
+        playerShipPicbox2.Location = New Point(83, 163)
+        playerShipPicbox2.Name = "playerShipPicbox2"
+        playerShipPicbox2.Size = New Size(100, 50)
+        playerShipPicbox2.SizeMode = PictureBoxSizeMode.StretchImage
+        playerShipPicbox2.TabIndex = 25
+        playerShipPicbox2.TabStop = False
         ' 
         ' keyBluepicbox
         ' 
@@ -700,26 +702,36 @@ Partial Class BattleShipsGame
         opponentStatslbl.TabIndex = 31
         opponentStatslbl.Text = "Opponent Stats"
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(255))
+        PictureBox1.Location = New Point(165, 201)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(5, 5)
+        PictureBox1.TabIndex = 44
+        PictureBox1.TabStop = False
+        ' 
         ' BattleShipsGame
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
+        Controls.Add(PictureBox1)
         Controls.Add(opponentStatspnl)
         Controls.Add(playerStatspnl)
         Controls.Add(Label1)
         Controls.Add(KeyPanel)
-        Controls.Add(playershipPicbox5)
-        Controls.Add(playershipPicbox4)
-        Controls.Add(playershipPicbox3b)
-        Controls.Add(playershipPicbox3a)
-        Controls.Add(playershipPicbox2)
-        Controls.Add(opponentshipPicbox5)
-        Controls.Add(opponentshipPicbox4)
-        Controls.Add(opponentshipPicbox3b)
-        Controls.Add(opponentshipPicbox3a)
-        Controls.Add(opponentshipPicbox2)
+        Controls.Add(playerShipPicbox5)
+        Controls.Add(playerShipPicbox4)
+        Controls.Add(playerShipPicbox3b)
+        Controls.Add(playerShipPicbox3a)
+        Controls.Add(playerShipPicbox2)
+        Controls.Add(opponentShipPicbox5)
+        Controls.Add(opponentShipPicbox4)
+        Controls.Add(opponentShipPicbox3b)
+        Controls.Add(opponentShipPicbox3a)
+        Controls.Add(opponentShipPicbox2)
         Controls.Add(resetbtn)
         Controls.Add(opponentscoretxt)
         Controls.Add(opponentscorelbl)
@@ -744,16 +756,16 @@ Partial Class BattleShipsGame
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).EndInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).EndInit()
         CType(TurnsBannerPic, ComponentModel.ISupportInitialize).EndInit()
-        CType(opponentshipPicbox2, ComponentModel.ISupportInitialize).EndInit()
-        CType(opponentshipPicbox3a, ComponentModel.ISupportInitialize).EndInit()
-        CType(opponentshipPicbox3b, ComponentModel.ISupportInitialize).EndInit()
-        CType(opponentshipPicbox4, ComponentModel.ISupportInitialize).EndInit()
-        CType(opponentshipPicbox5, ComponentModel.ISupportInitialize).EndInit()
-        CType(playershipPicbox5, ComponentModel.ISupportInitialize).EndInit()
-        CType(playershipPicbox4, ComponentModel.ISupportInitialize).EndInit()
-        CType(playershipPicbox3b, ComponentModel.ISupportInitialize).EndInit()
-        CType(playershipPicbox3a, ComponentModel.ISupportInitialize).EndInit()
-        CType(playershipPicbox2, ComponentModel.ISupportInitialize).EndInit()
+        CType(opponentShipPicbox2, ComponentModel.ISupportInitialize).EndInit()
+        CType(opponentShipPicbox3a, ComponentModel.ISupportInitialize).EndInit()
+        CType(opponentShipPicbox3b, ComponentModel.ISupportInitialize).EndInit()
+        CType(opponentShipPicbox4, ComponentModel.ISupportInitialize).EndInit()
+        CType(opponentShipPicbox5, ComponentModel.ISupportInitialize).EndInit()
+        CType(playerShipPicbox5, ComponentModel.ISupportInitialize).EndInit()
+        CType(playerShipPicbox4, ComponentModel.ISupportInitialize).EndInit()
+        CType(playerShipPicbox3b, ComponentModel.ISupportInitialize).EndInit()
+        CType(playerShipPicbox3a, ComponentModel.ISupportInitialize).EndInit()
+        CType(playerShipPicbox2, ComponentModel.ISupportInitialize).EndInit()
         CType(keyBluepicbox, ComponentModel.ISupportInitialize).EndInit()
         CType(keyRedpicbox, ComponentModel.ISupportInitialize).EndInit()
         KeyPanel.ResumeLayout(False)
@@ -762,6 +774,7 @@ Partial Class BattleShipsGame
         playerStatspnl.PerformLayout()
         opponentStatspnl.ResumeLayout(False)
         opponentStatspnl.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -780,16 +793,16 @@ Partial Class BattleShipsGame
     Friend WithEvents opponentscoretxt As Windows.Forms.Label
     Friend WithEvents backtomainbtn As Button
     Friend WithEvents resetbtn As Button
-    Friend WithEvents opponentshipPicbox2 As PictureBox
-    Friend WithEvents opponentshipPicbox3a As PictureBox
-    Friend WithEvents opponentshipPicbox3b As PictureBox
-    Friend WithEvents opponentshipPicbox4 As PictureBox
-    Friend WithEvents opponentshipPicbox5 As PictureBox
-    Friend WithEvents playershipPicbox5 As PictureBox
-    Friend WithEvents playershipPicbox4 As PictureBox
-    Friend WithEvents playershipPicbox3b As PictureBox
-    Friend WithEvents playershipPicbox3a As PictureBox
-    Friend WithEvents playershipPicbox2 As PictureBox
+    Friend WithEvents opponentShipPicbox2 As PictureBox
+    Friend WithEvents opponentShipPicbox3a As PictureBox
+    Friend WithEvents opponentShipPicbox3b As PictureBox
+    Friend WithEvents opponentShipPicbox4 As PictureBox
+    Friend WithEvents opponentShipPicbox5 As PictureBox
+    Friend WithEvents playerShipPicbox5 As PictureBox
+    Friend WithEvents playerShipPicbox4 As PictureBox
+    Friend WithEvents playerShipPicbox3b As PictureBox
+    Friend WithEvents playerShipPicbox3a As PictureBox
+    Friend WithEvents playerShipPicbox2 As PictureBox
     Friend WithEvents keyBluepicbox As PictureBox
     Friend WithEvents keytitlelbl As Windows.Forms.Label
     Friend WithEvents Keymisslbl As Windows.Forms.Label
@@ -819,4 +832,5 @@ Partial Class BattleShipsGame
     Friend WithEvents opponentHitCountlbl As Windows.Forms.Label
     Friend WithEvents opponentMissCountlbl As Windows.Forms.Label
     Friend WithEvents opponentStatslbl As Windows.Forms.Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
