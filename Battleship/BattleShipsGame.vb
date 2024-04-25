@@ -446,7 +446,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd()) + 1
+                direction = Int(Rnd()) + 2
                 'direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
@@ -1951,6 +1951,27 @@ Public Class BattleShipsGame
                     targetgridbox.BackColor = Color.Transparent
                     parentgridbox = targetgridbox
                 Next count
+            Case "down"
+                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
+                originalParent.Size = New Size(Xscale, Yscale)
+                originalParent.BackColor = Color.Transparent
+                originalParent.Location = originalParent.Location - New Point(X, Y)
+                parentgridbox = originalParent
+                For count = 1 To (shipLength - 1)
+                    If currentplayernum = 1 Then
+                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    Else
+                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
+                    End If
+                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+                    resizeAndMoveImageWithinPicbox(targetgridbox, shipLength - count, gridCircleSizeNum, direction)
+                    targetgridbox.Size = New Size(Xscale, Yscale)
+                    targetgridbox.Parent = parentgridbox
+                    targetgridbox.BringToFront()
+                    targetgridbox.Location = New Point(0, 0)
+                    targetgridbox.BackColor = Color.Transparent
+                    parentgridbox = targetgridbox
+                Next count
         End Select
 
         'Ships
@@ -2003,10 +2024,10 @@ Public Class BattleShipsGame
                 Yloc = 0
             Case "up"
                 Xloc = 0
-                Yloc = radius * count - 1
+                Yloc = radius * (count - 1)
             Case "down"
                 Xloc = 0
-                Yloc = radius * (count - 1)
+                Yloc = radius * count - radius
             Case "noMovement"
                 Xloc = 0
                 Yloc = 0
