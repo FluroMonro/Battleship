@@ -24,6 +24,7 @@
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsMainMenuBackground.png"
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
+        backgroundImg.Load(backgroundImg.ImageLocation)
     End Sub
     Private Sub playfrommainbtn_Click(sender As Object, e As EventArgs) Handles playfrommainbtn.Click
         'When the Play button is pressed

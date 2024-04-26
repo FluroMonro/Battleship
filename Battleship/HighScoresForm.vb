@@ -33,6 +33,7 @@ Public Class HighScoresForm
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
+        backgroundImg.Load(backgroundImg.ImageLocation)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
     End Sub
     Private Sub showscore()

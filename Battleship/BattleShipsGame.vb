@@ -222,12 +222,18 @@ Public Class BattleShipsGame
         turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - 40
         boardSizes = turnsbannerYLoc - ((turnsbannerHeight / 2) - 9)
 
+        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
+        backgroundImg.Location = New Point(0, 0)
+        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundImg.Load(backgroundImg.ImageLocation)
+
         'Setting the placement and size of controls on the form
         backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
         resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
 
         OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
         PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
+
 
         timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
         timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
@@ -252,9 +258,7 @@ Public Class BattleShipsGame
         KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
         playerStatspnl.Location = New Point(Me.Width / 5, Me.Height / 18)
 
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
-        backgroundImg.Location = New Point(0, 0)
-        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
+
 
         'Setting the size of the grid circle to be dependent on the boardSize (minus it's border) and divided by how many elements the grid is
         'Ability to adjust the sizes of the grid and to have corresponding changes to the size of each circle
