@@ -270,8 +270,6 @@ Public Class BattleShipsGame
         Dim currentplayerstr As String
         'For both player and opponent
 
-        'MsgBox(opponentShipPicbox2.Parent.Name)
-
         For player = 1 To 2
             If player = 1 Then
                 currentplayerstr = "player"
@@ -302,25 +300,13 @@ Public Class BattleShipsGame
                 End If
 
                 Dim shipstr As String
-                Dim targetship
-                Dim targetpicboxArr
+
                 shipstr = currentplayerstr & "Ship" & shippicstr
-                targetship = CallByName(Me, shipstr, vbGet)
-                targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
+
 
                 targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
                 If targetObject Is Nothing Then
-                    targetObject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
-                    Dim count = 0
-                    Do
-                        targetObject = targetObject.GetChildAtPoint(New Point(0, 0), 0)
-                        count = count + 1
-                    Loop Until targetObject Is Nothing
-
-                    targetObject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
-                    For i = 1 To (count - 1)
-                        targetObject = targetObject.GetChildAtPoint(New Point(0, 0), 0)
-                    Next i
+                    targetObject = deparentShip(targetObject, length, shipstr, currentplayerstr)
                 End If
                 targetObject.Location = New Point(100, 100)
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
@@ -335,6 +321,27 @@ Public Class BattleShipsGame
 
         'revealships()
     End Sub
+    Private Function deparentShip(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
+        Dim targetship
+        Dim targetpicboxArr
+
+        targetship = CallByName(Me, shipstr, vbGet)
+        targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
+
+
+        targetobject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
+        Dim count = 0
+        Do
+            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
+            count = count + 1
+        Loop Until targetobject Is Nothing
+
+        targetobject = targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0)
+        For i = 1 To (count - 1)
+            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
+        Next i
+        Return targetobject
+    End Function
     Private Sub resetGameArray(array As Array)
         'resets the entire array to all 0s
         Dim row, col As Integer
@@ -413,7 +420,6 @@ Public Class BattleShipsGame
     End Sub
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
-        WindowState = FormWindowState.Minimized
         If isShipPlacementRandom = True Then
             generateShips(gameArr, 2, player)
             generateShips(gameArr, 3, player)
@@ -450,8 +456,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd()) + 2
-                'direction = Int(Rnd() * 4) + 1
+                direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
                 Select Case direction
@@ -1844,8 +1849,6 @@ Public Class BattleShipsGame
         Dim targetship As PictureBox
         Dim highestLayerParent As PictureBox
         Dim originalParent As PictureBox
-
-        WindowState = FormWindowState.Minimized
 
         gridcirclesize = gridCircleSizeNum
 
