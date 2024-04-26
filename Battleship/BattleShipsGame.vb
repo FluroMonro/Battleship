@@ -456,7 +456,8 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd() * 4) + 1
+                direction = Int(Rnd()) + 1
+                'direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
                 Select Case direction
@@ -2031,7 +2032,7 @@ Public Class BattleShipsGame
                 Yloc = 0
             Case "up"
                 Xloc = 0
-                Yloc = radius * (count - 1)
+                Yloc = radius * count
             Case "down"
                 Xloc = 0
                 Yloc = radius * count - radius
@@ -2069,10 +2070,10 @@ Public Class BattleShipsGame
         End If
 
         Select Case arrayValue
-            Case 1 : picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden
+            Case 1 : picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden
             Case 2 : picbox.ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png" 'miss
             Case 3 : picbox.ImageLocation = Application.StartupPath & "\pictures\RedCircle.png" 'hit
-            Case 4 : picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden front of ship
+            Case 4 : picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden front of ship
         End Select
         picbox.Load(picbox.ImageLocation)
 
