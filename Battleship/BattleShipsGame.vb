@@ -2,6 +2,7 @@
 Imports System.Drawing.Text
 Imports System.Reflection.Emit
 Imports System.Runtime.CompilerServices
+Imports System.Runtime.InteropServices
 Imports System.Runtime.Intrinsics.Arm
 Imports System.Security
 Imports System.Security.Cryptography.X509Certificates
@@ -306,7 +307,7 @@ Public Class BattleShipsGame
 
                 targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
                 If targetObject Is Nothing Then
-                    targetObject = deparentShip(targetObject, length, shipstr, currentplayerstr)
+                    targetObject = referenceShipFromParents(targetObject, length, shipstr, currentplayerstr)
                 End If
                 targetObject.Location = New Point(100, 100)
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
@@ -321,7 +322,7 @@ Public Class BattleShipsGame
 
         'revealships()
     End Sub
-    Private Function deparentShip(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
+    Private Function referenceShipFromParents(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
         Dim targetship
         Dim targetpicboxArr
 
@@ -456,8 +457,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                direction = Int(Rnd()) + 1
-                'direction = Int(Rnd() * 4) + 1
+                direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
                 Select Case direction
@@ -1841,17 +1841,12 @@ Public Class BattleShipsGame
         Dim Y As Integer
         Dim Xscale As Integer
         Dim Yscale As Integer
-        Dim gridcirclesize
         Dim XOffset As Integer
         Dim YOffset As Integer
         Dim playerstring As String
         Dim parentgridbox As PictureBox
-        Dim targetgridbox As PictureBox
         Dim targetship As PictureBox
-        Dim highestLayerParent As PictureBox
         Dim originalParent As PictureBox
-
-        gridcirclesize = gridCircleSizeNum
 
         If currentplayernum = 1 Then
             playerstring = "player"
@@ -1861,127 +1856,50 @@ Public Class BattleShipsGame
             originalParent = opponentpictureBoxArray(col, row)
         End If
 
-        Select Case direction
-            Case "right"
-                X = gridcirclesize * (shipLength - 1)
-                Y = 0
-                Xscale = gridcirclesize * shipLength
-                Yscale = gridcirclesize
-                XOffset = -1
-                YOffset = 0
-            Case "left"
-                'X = -gridcirclesize * (shipLength - 1)
-                Y = 0
-                Xscale = gridcirclesize * shipLength
-                Yscale = gridcirclesize
-                XOffset = 1
-                YOffset = 0
-            Case "down"
-                X = 0
-                Y = gridcirclesize * (shipLength - 1)
-                Xscale = gridcirclesize
-                Yscale = gridcirclesize * shipLength
-                XOffset = 0
-                YOffset = 1
-            Case "up"
-                X = 0
-                'Y = -gridcirclesize * (shipLength - 1)
-                Xscale = gridcirclesize
-                Yscale = gridcirclesize * shipLength
-                XOffset = 0
-                YOffset = -1
-        End Select
         Dim count As Integer
         count = shipLength
         originalParent.SizeMode = PictureBoxSizeMode.Normal
 
-
         Select Case direction
             Case "right"
+                X = gridCircleSizeNum * (shipLength - 1)
+                Xscale = gridCircleSizeNum * shipLength
+                Yscale = gridCircleSizeNum
+                XOffset = -1
+                YOffset = 0
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
-                originalParent.Size = New Size(Xscale, Yscale)
-                originalParent.BackColor = Color.Transparent
                 originalParent.Location = originalParent.Location - New Point(X, Y)
-                parentgridbox = originalParent
-
-                For count = 1 To (shipLength - 1)
-                    If currentplayernum = 1 Then
-                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    Else
-                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    End If
-                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
-                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
-                    targetgridbox.Size = New Size(Xscale, Yscale)
-                    targetgridbox.Parent = parentgridbox
-                    targetgridbox.BringToFront()
-                    targetgridbox.Location = New Point(0, 0)
-                    targetgridbox.BackColor = Color.Transparent
-                    parentgridbox = targetgridbox
-                Next count
             Case "left"
+                Xscale = gridCircleSizeNum * shipLength
+                Yscale = gridCircleSizeNum
+                XOffset = 1
+                YOffset = 0
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
-                originalParent.Size = New Size(Xscale, Yscale)
-                originalParent.BackColor = Color.Transparent
-                parentgridbox = originalParent
-                For count = (shipLength - 1) To 1 Step -1
-                    If currentplayernum = 1 Then
-                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    Else
-                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    End If
-                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
-                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
-                    targetgridbox.Size = New Size(Xscale, Yscale)
-                    targetgridbox.Parent = parentgridbox
-                    targetgridbox.BringToFront()
-                    targetgridbox.Location = New Point(0, 0)
-                    targetgridbox.BackColor = Color.Transparent
-                    parentgridbox = targetgridbox
-                Next count
-            Case "up"
-                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
-                originalParent.Size = New Size(Xscale, Yscale)
-                originalParent.BackColor = Color.Transparent
-                parentgridbox = originalParent
-                For count = (shipLength - 1) To 1 Step -1
-                    If currentplayernum = 1 Then
-                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    Else
-                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    End If
-                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
-                    resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
-                    targetgridbox.Size = New Size(Xscale, Yscale)
-                    targetgridbox.Parent = parentgridbox
-                    targetgridbox.BringToFront()
-                    targetgridbox.Location = New Point(0, 0)
-                    targetgridbox.BackColor = Color.Transparent
-                    parentgridbox = targetgridbox
-                Next count
             Case "down"
+                Y = gridCircleSizeNum * (shipLength - 1)
+                Xscale = gridCircleSizeNum
+                Yscale = gridCircleSizeNum * shipLength
+                XOffset = 0
+                YOffset = 1
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
-                originalParent.Size = New Size(Xscale, Yscale)
-                originalParent.BackColor = Color.Transparent
                 originalParent.Location = originalParent.Location - New Point(X, Y)
-                parentgridbox = originalParent
-                For count = 1 To (shipLength - 1)
-                    If currentplayernum = 1 Then
-                        targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    Else
-                        targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (YOffset * count))
-                    End If
-                    targetgridbox.SizeMode = PictureBoxSizeMode.Normal
-                    resizeAndMoveImageWithinPicbox(targetgridbox, shipLength - count, gridCircleSizeNum, direction)
-                    targetgridbox.Size = New Size(Xscale, Yscale)
-                    targetgridbox.Parent = parentgridbox
-                    targetgridbox.BringToFront()
-                    targetgridbox.Location = New Point(0, 0)
-                    targetgridbox.BackColor = Color.Transparent
-                    parentgridbox = targetgridbox
-                Next count
+            Case "up"
+                Xscale = gridCircleSizeNum
+                Yscale = gridCircleSizeNum * shipLength
+                XOffset = 0
+                YOffset = -1
+                resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
         End Select
 
+        originalParent.Size = New Size(Xscale, Yscale)
+        originalParent.BackColor = Color.Transparent
+        parentgridbox = originalParent
+
+        If direction = "right" OrElse direction = "down" Then
+            rightAndDown(shipLength, currentplayernum, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+        Else
+            leftAndUp(shipLength, currentplayernum, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+        End If
         'Ships
         If shipLength = 3 Then
             If duplicateShip = False Then
@@ -2015,8 +1933,51 @@ Public Class BattleShipsGame
         targetship.BackColor = Color.Transparent
         targetship.BringToFront()
         targetship.Location = New Point(0, 0)
-        'WindowState = FormWindowState.Maximized
     End Sub
+    Private Sub rightAndDown(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+        Dim newCount As Integer
+        Dim targetgridbox As PictureBox
+        For count = 1 To (shipLength - 1)
+            If currentPlayerNum = 1 Then
+                targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+            Else
+                targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+            End If
+            targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+            If direction = "down" Then
+                newCount = shipLength - count
+            Else
+                newCount = count
+            End If
+            resizeAndMoveImageWithinPicbox(targetgridbox, newCount, gridCircleSizeNum, direction)
+            targetgridbox.Size = New Size(Xscale, Yscale)
+            targetgridbox.Parent = parentgridbox
+            targetgridbox.BringToFront()
+            targetgridbox.Location = New Point(0, 0)
+            targetgridbox.BackColor = Color.Transparent
+            parentgridbox = targetgridbox
+        Next count
+    End Sub
+
+    Private Sub leftAndUp(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+        Dim targetgridbox As PictureBox
+        For count = (shipLength - 1) To 1 Step -1
+            If currentPlayerNum = 1 Then
+                targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+            Else
+                targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+            End If
+            targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+            resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
+            targetgridbox.Size = New Size(Xscale, Yscale)
+            targetgridbox.Parent = parentgridbox
+            targetgridbox.BringToFront()
+            targetgridbox.Location = New Point(0, 0)
+            targetgridbox.BackColor = Color.Transparent
+            parentgridbox = targetgridbox
+        Next count
+    End Sub
+
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
         'WindowState = FormWindowState.Minimized
         picbox.Load(picbox.ImageLocation)
@@ -2040,7 +2001,7 @@ Public Class BattleShipsGame
                 Xloc = 0
                 Yloc = 0
         End Select
-        
+
         Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
         Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
         Dim g As Graphics = Graphics.FromImage(new_b)

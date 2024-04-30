@@ -78,7 +78,6 @@ Partial Class BattleShipsGame
         opponentHitCountlbl = New Windows.Forms.Label()
         opponentMissCountlbl = New Windows.Forms.Label()
         opponentStatslbl = New Windows.Forms.Label()
-        PictureBox1 = New PictureBox()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(PlayerBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
         CType(OpponentBoardBGImg, ComponentModel.ISupportInitialize).BeginInit()
@@ -98,7 +97,6 @@ Partial Class BattleShipsGame
         KeyPanel.SuspendLayout()
         playerStatspnl.SuspendLayout()
         opponentStatspnl.SuspendLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' backgroundImg
@@ -702,22 +700,12 @@ Partial Class BattleShipsGame
         opponentStatslbl.TabIndex = 31
         opponentStatslbl.Text = "Opponent Stats"
         ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(255))
-        PictureBox1.Location = New Point(165, 201)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(5, 5)
-        PictureBox1.TabIndex = 44
-        PictureBox1.TabStop = False
-        ' 
         ' BattleShipsGame
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(PictureBox1)
         Controls.Add(opponentStatspnl)
         Controls.Add(playerStatspnl)
         Controls.Add(Label1)
@@ -774,7 +762,6 @@ Partial Class BattleShipsGame
         playerStatspnl.PerformLayout()
         opponentStatspnl.ResumeLayout(False)
         opponentStatspnl.PerformLayout()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -832,5 +819,4 @@ Partial Class BattleShipsGame
     Friend WithEvents opponentHitCountlbl As Windows.Forms.Label
     Friend WithEvents opponentMissCountlbl As Windows.Forms.Label
     Friend WithEvents opponentStatslbl As Windows.Forms.Label
-    Friend WithEvents PictureBox1 As PictureBox
 End Class
