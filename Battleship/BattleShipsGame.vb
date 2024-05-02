@@ -109,8 +109,8 @@ Public Class BattleShipsGame
         generateGameArr(playergameArray, 1)
 
         'Assign the correct grid images for the picture box array to be represent the game array
-        assignGridImages(opponentgameArray, opponentpictureBoxArray)
-        assignGridImages(playergameArray, playerpictureBoxArray)
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, "opponent")
+        assignGridImages(playergameArray, playerpictureBoxArray, "player")
 
         currentPlayer = 1
     End Sub
@@ -446,6 +446,7 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
+                'direction = Int(Rnd()) + 3
                 direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
@@ -707,8 +708,9 @@ Public Class BattleShipsGame
         End Select
 
         'Generate each assigned picture in it's correct location
-        displayShipLocations(column, row, length, direction, currentplayernum)
-
+        If currentplayernum = 1 Then
+            displayShipLocations(column, row, length, direction, currentplayernum)
+        End If
     End Sub
     Private Sub assignShipImages(picboard As PictureBox)
 
@@ -750,54 +752,75 @@ Public Class BattleShipsGame
             opponentShipPicbox5.Visible = False
         End If
     End Sub
-    Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object)
+    Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object, playerStr As String)
         'Updates and changes the picture depending on the value of the 
         Dim col As Integer
         Dim row As Integer
         For col = 1 To gridSize
             For row = 1 To gridSize
-                Select Case gameArray(col, row)
-                    Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
-                    Case Else : updateImageKeepCorrectSize(pictureBoxArray(col, row), gameArray(col, row), gridCircleSizeNum)
-                End Select
+
+                If playerStr = "opponent" Then
+                    Select Case gameArray(col, row)
+                        Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
+                        Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden
+                        Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png" 'miss
+                        Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png" 'hit
+                        Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden front of ship
+                    End Select
+
+                Else
+                    Select Case gameArray(col, row)
+                        Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
+                        Case Else : updateImageKeepCorrectSize(pictureBoxArray(col, row), gameArray(col, row), gridCircleSizeNum)
+                    End Select
+                End If
             Next row
         Next col
     End Sub
-    Private Function getPlayerMove(ByVal sender As Object, ByVal e As EventArgs)
-        'When the picture box is clicked, the name of the picture box is used to determine the moves location on the grid
+    Private Function getPlayerMove(ByVal sender As PictureBox, ByVal e As EventArgs)
+        'When the picture box is clicked, the name of the picture box is used to determine the moves location on the 
 
         Dim playerMove As gridLocation
+        Dim correctGridSquare As Boolean
         Dim picLocation As String
+        picLocation = sender.Name
+
+        playerMove = getPlayerMoveFromPicboxName(sender, picLocation)
+
+
         If currentPlayer = 1 Then
-            picLocation = sender.Name
-            If picLocation.Length = 4 Then
-                'c_rr' or 'cc_r'
-                If picLocation(1) = "_" Then
-                    'One digit column, two digit row ('c_rr')
-                    playerMove.X = CInt(Strings.Left(sender.Name, 1))
-                    playerMove.Y = CInt(Strings.Right(sender.Name, 2))
-                Else
-                    'Two digit column, one digit row ('cc_r')
-                    playerMove.X = CInt(Strings.Left(sender.Name, 2))
-                    playerMove.Y = CInt(Strings.Right(sender.Name, 1))
-                End If
-
-            Else
-                If picLocation.Length = 5 Then
-                    'cc_rr'
-                    playerMove.X = CInt(Strings.Left(sender.Name, 2))
-                    playerMove.Y = CInt(Strings.Right(sender.Name, 2))
-                Else
-                    'c_r'
-                    playerMove.X = CInt(Strings.Left(sender.Name, 1))
-                    playerMove.Y = CInt(Strings.Right(sender.Name, 1))
-                End If
-            End If
-            timeStart()
-
-            If opponentgameArray(playerMove.X, playerMove.Y) = 0 Or opponentgameArray(playerMove.X, playerMove.Y) = 1 Or opponentgameArray(playerMove.X, playerMove.Y) = 4 Then
-                'The players move starts each round of the game
+            If opponentgameArray(playerMove.X, playerMove.Y) = 1 Or opponentgameArray(playerMove.X, playerMove.Y) = 4 Or opponentgameArray(playerMove.X, playerMove.Y) = 0 Then
+                timeStart()
                 game(playerMove)
+            End If
+            'The players move starts each round of the game
+        End If
+
+        Return playerMove
+    End Function
+    Public Function getPlayerMoveFromPicboxName(sender As PictureBox, piclocation As String) As gridLocation
+        Dim playerMove As gridLocation
+        If piclocation.Length = 4 Then
+            'c_rr' or 'cc_r'
+            If piclocation(1) = "_" Then
+                'One digit column, two digit row ('c_rr')
+                playerMove.X = CInt(Strings.Left(sender.Name, 1))
+                playerMove.Y = CInt(Strings.Right(sender.Name, 2))
+            Else
+                'Two digit column, one digit row ('cc_r')
+                playerMove.X = CInt(Strings.Left(sender.Name, 2))
+                playerMove.Y = CInt(Strings.Right(sender.Name, 1))
+            End If
+
+        Else
+            If piclocation.Length = 5 Then
+                'cc_rr'
+                playerMove.X = CInt(Strings.Left(sender.Name, 2))
+                playerMove.Y = CInt(Strings.Right(sender.Name, 2))
+            Else
+                'c_r'
+                playerMove.X = CInt(Strings.Left(sender.Name, 1))
+                playerMove.Y = CInt(Strings.Right(sender.Name, 1))
             End If
         End If
         Return playerMove
@@ -813,7 +836,7 @@ Public Class BattleShipsGame
         updateGameStats(playerHitCount, playerMissCount, 1)
 
         'Update the grid to show a hit or miss
-        assignGridImages(opponentgameArray, opponentpictureBoxArray)
+        assignGridImages(opponentgameArray, opponentpictureBoxArray, "opponent")
 
         If gameOver = True Then
             gameIsOverWithResult()
@@ -837,7 +860,7 @@ Public Class BattleShipsGame
                 updateGameStats(opponentHitCount, opponentMissCount, 2)
 
                 'Display updated grid
-                assignGridImages(playergameArray, playerpictureBoxArray)
+                assignGridImages(playergameArray, playerpictureBoxArray, "player")
 
                 If gameOver = True Then
                     gameIsOverWithResult()
@@ -858,7 +881,7 @@ Public Class BattleShipsGame
                             updateGameStats(opponentHitCount, opponentMissCount, 2)
 
                             'Display updated grid
-                            assignGridImages(playergameArray, playerpictureBoxArray)
+                            assignGridImages(playergameArray, playerpictureBoxArray, "player")
 
                             'To break out of the while loop if the game has been ended
                             If gameOver = True Then
@@ -958,7 +981,7 @@ Public Class BattleShipsGame
                 gameArr(Move.X, Move.Y) = 3
 
                 'Check if any of the individual ship records are hit, and if they are sunk
-                checkShipsIfHit(Move.X, Move.Y)
+                checkShipsIfHit(Move.X, Move.Y, AlternateNum(currentPlayer))
                 checkIfSunk()
 
                 'Variables used in opponents randomAdjacent function
@@ -1029,26 +1052,31 @@ Public Class BattleShipsGame
         Next row
         Return gameArr
     End Function
-    Private Sub checkShipsIfHit(MoveX As Integer, MoveY As Integer) 'Check if move has hit a ship
+    Private Sub checkShipsIfHit(MoveX As Integer, MoveY As Integer, playerNum As Integer) 'Check if move has hit a ship
         Dim targetpicboxArr(,) As PictureBox
         Dim shipPicboxStr As String
         Dim shipStr As String
         Dim targetShip() As shipGridLocations
         Dim length As Integer
-        If currentPlayer = 2 Then
+        If playerNum = 1 Then
             targetpicboxArr = playerpictureBoxArray
             shipStr = "playerShip"
+            shipPicboxStr = GetShipFromParent(targetpicboxArr(MoveX, MoveY)).Name
+
+            If Strings.Right(shipPicboxStr, 1) = "a" Or Strings.Right(shipPicboxStr, 1) = "b" Then
+                shipStr = shipStr + Strings.Right(shipPicboxStr, 2)
+                length = 3
+            Else
+                shipStr = shipStr + Strings.Right(shipPicboxStr, 1)
+                length = CInt(Strings.Right(shipPicboxStr, 1))
+            End If
         Else
-            targetpicboxArr = opponentpictureBoxArray
-            shipStr = "opponentShip"
-        End If
-        shipPicboxStr = GetShipFromParent(targetpicboxArr(MoveX, MoveY)).Name
-        If Strings.Right(shipPicboxStr, 1) = "a" Or Strings.Right(shipPicboxStr, 1) = "b" Then
-            shipStr = shipStr + Strings.Right(shipPicboxStr, 2)
-            length = 3
-        Else
-            shipStr = shipStr + Strings.Right(shipPicboxStr, 1)
-            length = CInt(Strings.Right(shipPicboxStr, 1))
+            shipStr = getShipFromMoves(MoveX, MoveY)
+            If Strings.Right(shipStr, 1) = "a" Or Strings.Right(shipStr, 1) = "b" Then
+                length = 3
+            Else
+                shipStr = shipStr + Strings.Right(shipStr, 1)
+            End If
         End If
 
         targetShip = CallByName(Me, shipStr, vbGet)
@@ -1059,24 +1087,79 @@ Public Class BattleShipsGame
             End If
         Next
     End Sub
+    Private Function getShipFromMoves(MoveX As Integer, MoveY As Integer) As String
+        Dim lengthstr As String
+        Dim shipstr As String
+        Dim correctShip As String
+        Dim hasBeenHit As Boolean
+        Dim targetship() As shipGridLocations
+        Dim isDuplicateShip As Boolean
+
+        Do
+            For length = 2 To 5
+                lengthstr = length.ToString
+                shipstr = "opponentShip" & length
+
+                If length = 4 AndAlso isDuplicateShip = True Then
+                    length = 3
+                End If
+                Select Case length
+                    Case 3
+                        If isDuplicateShip = False Then
+                            shipstr = "opponentShip3a"
+                            isDuplicateShip = True
+                        Else
+                            shipstr = "opponentShip3b"
+                            isDuplicateShip = False
+                        End If
+                End Select
+
+                targetship = CallByName(Me, shipstr, vbGet)
+
+                For i = 1 To length
+                    If targetship(i).X = MoveX AndAlso targetship(i).Y = MoveY Then
+                        hasBeenHit = True
+                        correctShip = shipstr
+                    End If
+                Next
+            Next
+        Loop Until hasBeenHit = True
+
+        Return correctShip
+    End Function
     Private Sub checkIfSunk()
         'If a ship has been sunk
-
+        WindowState = FormWindowState.Minimized
         Dim lengthstr As String
         Dim playerstr As String
         Dim shipstr As String
         Dim targetShip() As shipGridLocations
         Dim targetShipPicbox As PictureBox
+        Dim targetShipPicboxStr As String
         Dim duplicateShip As Boolean
+        Dim sunkArrStr As String
+        Dim targetShipSunkArr() As Boolean
+        Dim targetPicboxArr(,) As PictureBox
+        Dim countOfShip
+        Dim parentBoard As PictureBox
+
         For playerNum = 1 To 2
             For length = 2 To 5
                 lengthstr = length.ToString
 
                 If playerNum = 1 Then
                     playerstr = "player"
+                    sunkArrStr = "playerShipSunkArr"
+                    targetPicboxArr = playerpictureBoxArray
+                    parentBoard = Controls.Item("PlayerBoardBGImg")
                 Else
                     playerstr = "opponent"
+                    targetShipPicboxStr = playerstr & "ShipPicbox" & lengthstr
+                    sunkArrStr = "opponentShipSunkArr"
+                    targetPicboxArr = opponentpictureBoxArray
+                    parentBoard = Controls.Item("OpponentBoardBGImg")
                 End If
+
                 shipstr = playerstr & "Ship" & length
                 If length = 4 AndAlso duplicateShip = True Then
                     length = 3
@@ -1091,17 +1174,26 @@ Public Class BattleShipsGame
                             duplicateShip = False
                         End If
                 End Select
-                If playerShipSunkArr(length) = False Then
+
+                targetShipSunkArr = CallByName(Me, sunkArrStr, vbGet)
+                If targetShipSunkArr(length) = False Then
                     targetShip = CallByName(Me, shipstr, vbGet)
 
-                    targetShipPicbox = referenceShipFromParents(targetShipPicbox, length, shipstr, playerstr)
+                    If playerstr = "player" Then
+                        targetShipPicbox = referenceShipFromParents(targetShipPicbox, length, shipstr, playerstr)
+                    Else
+                        targetShipPicbox = Me.Controls.Item(targetShipPicboxStr)
+                    End If
 
                     Dim shipSunk As Boolean
                     shipSunk = True
                     For count = 1 To length
                         If targetShip(count).isHit = False Then
                             shipSunk = False
+                        Else
+                            countOfShip = count
                         End If
+
                     Next
 
                     If shipSunk = True Then
@@ -1113,6 +1205,12 @@ Public Class BattleShipsGame
                         End If
                         playerShipSunkArr(length) = True
                         targetShipPicbox.Visible = True
+                        targetShipPicbox.Parent = parentBoard
+                        targetShipPicbox.BringToFront()
+                        targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
+                        MsgBox(targetShipPicbox.Location.ToString)
+                        MsgBox(targetShipPicbox.Parent.Name)
+                        'targetshipPicbox.size = new size()
                     End If
                 End If
             Next
@@ -1790,9 +1888,6 @@ Public Class BattleShipsGame
         If currentplayernum = 1 Then
             playerstring = "player"
             originalParent = playerpictureBoxArray(col, row)
-        Else
-            playerstring = "opponent"
-            originalParent = opponentpictureBoxArray(col, row)
         End If
 
         Dim count As Integer
