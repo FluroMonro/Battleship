@@ -287,8 +287,7 @@ Public Class BattleShipsGame
                 Dim shipstr As String
 
                 shipstr = currentplayerstr & "Ship" & shippicstr
-
-
+                'Me.WindowState = FormWindowState.Minimized
                 targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
                 If targetObject Is Nothing Then
                     targetObject = referenceShipFromParents(targetObject, length, shipstr, currentplayerstr)
@@ -446,7 +445,6 @@ Public Class BattleShipsGame
             'To check if the randomly generated location is empty
             If gameArr(col, row) = 0 Then
                 'Generate a random diretion between 1 and 4 (left, right, up, down)
-                'direction = Int(Rnd()) + 3
                 direction = Int(Rnd() * 4) + 1
 
                 'To generate the ship of chosen length in a randomly chosen diection
@@ -761,11 +759,11 @@ Public Class BattleShipsGame
 
                 If playerStr = "opponent" Then
                     Select Case gameArray(col, row)
-                        Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
-                        Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden
+                        Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
+                        Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden
                         Case 2 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png" 'miss
                         Case 3 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\RedCircle.png" 'hit
-                        Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden front of ship
+                        Case 4 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden front of ship
                     End Select
 
                 Else
@@ -982,7 +980,7 @@ Public Class BattleShipsGame
 
                 'Check if any of the individual ship records are hit, and if they are sunk
                 checkShipsIfHit(Move.X, Move.Y, AlternateNum(currentPlayer))
-                checkIfSunk()
+                checkIfSunk(AlternateNum(currentPlayer))
 
                 'Variables used in opponents randomAdjacent function
                 alreadyLeft = False
@@ -1075,7 +1073,7 @@ Public Class BattleShipsGame
             If Strings.Right(shipStr, 1) = "a" Or Strings.Right(shipStr, 1) = "b" Then
                 length = 3
             Else
-                shipStr = shipStr + Strings.Right(shipStr, 1)
+                length = CInt(Strings.Right(shipStr, 1))
             End If
         End If
 
@@ -1127,10 +1125,8 @@ Public Class BattleShipsGame
 
         Return correctShip
     End Function
-    Private Sub checkIfSunk()
+    Private Sub checkIfSunk(playerNum As Integer)
         'If a ship has been sunk
-        WindowState = FormWindowState.Minimized
-        Dim lengthstr As String
         Dim playerstr As String
         Dim shipstr As String
         Dim targetShip() As shipGridLocations
@@ -1142,80 +1138,127 @@ Public Class BattleShipsGame
         Dim targetPicboxArr(,) As PictureBox
         Dim countOfShip
         Dim parentBoard As PictureBox
+        Dim shipDirection As String
+        Dim Xscale As Integer
+        Dim Yscale As Integer
 
-        For playerNum = 1 To 2
-            For length = 2 To 5
-                lengthstr = length.ToString
+        For length = 2 To 5
+            If playerNum = 1 Then
+                playerstr = "player"
+                sunkArrStr = "playerShipSunkArr"
+                targetPicboxArr = playerpictureBoxArray
+                parentBoard = Controls.Item("PlayerBoardBGImg")
+            Else
+                playerstr = "opponent"
+                targetShipPicboxStr = playerstr & "ShipPicbox" & length
+                sunkArrStr = "opponentShipSunkArr"
+                targetPicboxArr = opponentpictureBoxArray
+                parentBoard = Controls.Item("OpponentBoardBGImg")
+            End If
 
-                If playerNum = 1 Then
-                    playerstr = "player"
-                    sunkArrStr = "playerShipSunkArr"
-                    targetPicboxArr = playerpictureBoxArray
-                    parentBoard = Controls.Item("PlayerBoardBGImg")
-                Else
-                    playerstr = "opponent"
-                    targetShipPicboxStr = playerstr & "ShipPicbox" & lengthstr
-                    sunkArrStr = "opponentShipSunkArr"
-                    targetPicboxArr = opponentpictureBoxArray
-                    parentBoard = Controls.Item("OpponentBoardBGImg")
-                End If
-
-                shipstr = playerstr & "Ship" & length
-                If length = 4 AndAlso duplicateShip = True Then
-                    length = 3
-                End If
-                Select Case length
-                    Case 3
-                        If duplicateShip = False Then
-                            shipstr = shipstr & "a"
-                            duplicateShip = True
-                        Else
-                            shipstr = playerstr & "Ship3b"
-                            duplicateShip = False
-                        End If
-                End Select
-
-                targetShipSunkArr = CallByName(Me, sunkArrStr, vbGet)
-                If targetShipSunkArr(length) = False Then
-                    targetShip = CallByName(Me, shipstr, vbGet)
-
-                    If playerstr = "player" Then
-                        targetShipPicbox = referenceShipFromParents(targetShipPicbox, length, shipstr, playerstr)
+            shipstr = playerstr & "Ship" & length
+            If length = 4 AndAlso duplicateShip = True Then
+                length = 3
+            End If
+            Select Case length
+                Case 3
+                    If duplicateShip = False Then
+                        shipstr = shipstr & "a"
+                        targetShipPicboxStr = playerstr & "ShipPicbox" & length & "a"
+                        duplicateShip = True
                     Else
-                        targetShipPicbox = Me.Controls.Item(targetShipPicboxStr)
+                        shipstr = playerstr & "Ship3b"
+                        targetShipPicboxStr = playerstr & "ShipPicbox" & length & "b"
+                        duplicateShip = False
                     End If
+            End Select
 
-                    Dim shipSunk As Boolean
-                    shipSunk = True
-                    For count = 1 To length
-                        If targetShip(count).isHit = False Then
-                            shipSunk = False
-                        Else
-                            countOfShip = count
-                        End If
+            targetShipSunkArr = CallByName(Me, sunkArrStr, vbGet)
+            If targetShipSunkArr(length) = False Then
+                targetShip = CallByName(Me, shipstr, vbGet)
 
-                    Next
-
-                    If shipSunk = True Then
-                        If playerstr = "player" Then
-                            MsgBox("Your " & length & " length ship has been sunk")
-                            playershipSunkCount = playershipSunkCount + 1
-                        Else
-                            MsgBox("You sunk the opponents " & length & " length ship")
-                        End If
-                        playerShipSunkArr(length) = True
-                        targetShipPicbox.Visible = True
-                        targetShipPicbox.Parent = parentBoard
-                        targetShipPicbox.BringToFront()
-                        targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
-                        MsgBox(targetShipPicbox.Location.ToString)
-                        MsgBox(targetShipPicbox.Parent.Name)
-                        'targetshipPicbox.size = new size()
-                    End If
+                If playerstr = "player" Then
+                    targetShipPicbox = referenceShipFromParents(targetShipPicbox, length, shipstr, playerstr)
+                Else
+                    targetShipPicbox = Me.Controls.Item(targetShipPicboxStr)
                 End If
-            Next
+
+                Dim shipSunk As Boolean
+                shipSunk = True
+                For count = 1 To length
+                    If targetShip(count).isHit = False Then
+                        shipSunk = False
+                    Else
+                        countOfShip = count
+                    End If
+
+                Next
+
+                If shipSunk = True Then
+                    WindowState = FormWindowState.Minimized
+                    If playerstr = "player" Then
+                        MsgBox("Your " & length & " length ship has been sunk")
+                        playershipSunkCount = playershipSunkCount + 1
+                    Else
+                        MsgBox("You sunk the opponents " & length & " length ship")
+                    End If
+                    playerShipSunkArr(length) = True
+                    targetShipPicbox.Visible = True
+                    targetShipPicbox.Parent = parentBoard
+                    targetShipPicbox.BringToFront()
+                    targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
+                    targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
+                    targetShipPicbox.Load(targetShipPicbox.ImageLocation)
+
+                    shipDirection = findDirectionFromShipGridLocs(targetShip, length)
+                    Select Case shipDirection
+                        Case "right"
+                            Xscale = gridCircleSizeNum * length
+                            Yscale = gridCircleSizeNum
+                            targetShipPicbox.Location = targetShipPicbox.Location - New Point(((length - 1) * gridCircleSizeNum), 0)
+                        Case "left"
+                            Xscale = gridCircleSizeNum * length
+                            Yscale = gridCircleSizeNum
+                            rotateImage90(targetShipPicbox)
+                            rotateImage90(targetShipPicbox)
+                        Case "up"
+                            Xscale = gridCircleSizeNum
+                            Yscale = gridCircleSizeNum * length
+                            rotateImage90(targetShipPicbox)
+                            rotateImage90(targetShipPicbox)
+                            rotateImage90(targetShipPicbox)
+                            targetShipPicbox.Location = targetShipPicbox.Location - New Point(0, ((length - 1) * gridCircleSizeNum))
+                        Case "down"
+                            Xscale = gridCircleSizeNum
+                            Yscale = gridCircleSizeNum * length
+                            rotateImage90(targetShipPicbox)
+                    End Select
+
+                    targetShipPicbox.Size = New Size(Xscale, Yscale)
+                End If
+            End If
         Next
     End Sub
+    Public Function findDirectionFromShipGridLocs(targetShip() As shipGridLocations, length As Integer) As String
+        Dim direction As String
+        If (targetShip(length).X) - 1 = targetShip(length - 1).X Then
+            direction = "right"
+        Else
+            If (targetShip(length).X) + 1 = targetShip(length - 1).X Then
+                direction = "left"
+            Else
+                If (targetShip(length).Y) - 1 = targetShip(length - 1).Y Then
+                    direction = "down"
+                Else
+                    If (targetShip(length).Y) + 1 = targetShip(length - 1).Y Then
+                        direction = "up"
+                    End If
+                End If
+            End If
+        End If
+        MsgBox(direction)
+        Return direction
+    End Function
     Private Function determineScore() As Integer
         'As swap player is after determine score in game(), the current player will always be the one who had the last move, and is hence, the winner
         Dim winner = currentPlayer
