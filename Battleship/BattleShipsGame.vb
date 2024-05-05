@@ -934,7 +934,7 @@ Public Class BattleShipsGame
     End Sub
     Private Sub showgameOverForm()
         Me.Hide()
-        endTime = convertTimeToDisplay(time)
+        endTime = convertStringIntegerTimeToDisplayTime(time)
         endScore = score
         gameOverForm.onLoadsettings()
         gameOverForm.Show()
@@ -1664,7 +1664,7 @@ Public Class BattleShipsGame
         arrHighScores(11).score = score
         arrHighScores(11).name = playerName
         arrHighScores(11).difficulty = difficulty
-        arrHighScores(11).time = convertTimeToDisplay(time)
+        arrHighScores(11).time = convertStringIntegerTimeToDisplayTime(time)
     End Sub
     Public Sub readHighScores()
         'Open the hs.txt file for Input (read)
@@ -1683,7 +1683,7 @@ Public Class BattleShipsGame
 
             'time
             FileSystem.Input(1, fileContents)
-            fileContents = convertTimeToDisplay(CInt(fileContents))
+            fileContents = convertStringIntegerTimeToDisplayTime(CInt(fileContents))
             arrHighScores(i).time = fileContents
 
             'difficulty
@@ -1698,12 +1698,12 @@ Public Class BattleShipsGame
         For i = 1 To 10
             FileSystem.Write(1, arrHighScores(i).score)
             FileSystem.Write(1, arrHighScores(i).name)
-            FileSystem.Write(1, convertTimeToInteger(arrHighScores(i).time))
+            FileSystem.Write(1, convertDisplayTimeToIntegerStringTime(arrHighScores(i).time))
             FileSystem.Write(1, arrHighScores(i).difficulty)
         Next
         FileSystem.FileClose(1)
     End Sub
-    Public Function convertTimeToDisplay(time As Integer) As String '23 lines long
+    Public Function convertStringIntegerTimeToDisplayTime(time As Integer) As String '23 lines long
         'Convert integer time into display time (dd:dd)
 
         Dim newTime As String
@@ -1727,16 +1727,20 @@ Public Class BattleShipsGame
         End Select
         Return newTime
     End Function
-    Private Function convertTimeToInteger(time As String) As String  '13 lines shorter than old 
-        'Convert display time (dd:dd) into integer time
+    Private Function convertDisplayTimeToIntegerStringTime(time As String) As String
+        'Convert display time (dd:dd) into a sting representing integer time (dddd)
 
         'subtime as integer to be added after leading 0s
         Dim subtime As String
-        Dim newtime As Integer
-
+        Dim newtime As String
         Select Case time
-            Case "0" : newtime = timeLeft 'To make sure that 00:00 does not run (impossible time)
-            Case "3599" : newtime = 3599
+            Case "00:00" : newtime = timeLeft 'To make sure that 00:00 does not run (impossible time)
+                Select Case newtime.Length
+                    Case 1 : newtime = "000" & newtime
+                    Case 2 : newtime = "00" & newtime
+                    Case 3 : newtime = "0" & newtime
+                End Select
+            Case "59:59" : newtime = "3599"
             Case Else
                 If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
                     Select Case True
@@ -1802,7 +1806,7 @@ Public Class BattleShipsGame
                         End If
 
                         'Swap if the current one is smaller than the one on it's right
-                        If CInt(convertTimeToInteger(arrHighScores(i).time)) < CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
+                        If CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i).time)) < CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
@@ -1813,7 +1817,7 @@ Public Class BattleShipsGame
                         End If
 
                         'Swap if the current one is bigger than the one on it's right
-                        If CInt(convertTimeToInteger(arrHighScores(i).time)) > CInt(convertTimeToInteger(arrHighScores(i + 1).time)) Then
+                        If CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i).time)) > CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i + 1).time)) Then
                             Swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
@@ -1855,7 +1859,7 @@ Public Class BattleShipsGame
         gameTimer.Interval = 1000
         If timeOptionAsCountUp = False Then
             time = timeLeft
-            displayTime = convertTimeToDisplay(time)
+            displayTime = convertStringIntegerTimeToDisplayTime(time)
         End If
         timelbl.Text = displayTime
     End Sub
@@ -1888,7 +1892,7 @@ Public Class BattleShipsGame
             End If
         End If
 
-        displayTime = convertTimeToDisplay(time)
+        displayTime = convertStringIntegerTimeToDisplayTime(time)
         timelbl.Text = displayTime
     End Sub
     Private Sub displayShipLocations(col As Integer, row As Integer, shipLength As Integer, direction As String, currentplayernum As Integer)

@@ -160,6 +160,6 @@
 
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
         timerNumValue = timerValueBar.Value * 30
-        timervalue.Text = BattleShipsGame.convertTimeToDisplay(timerNumValue)
+        timervalue.Text = BattleShipsGame.convertStringIntegerTimeToDisplayTime(timerNumValue)
     End Sub
 End Class
