@@ -1141,7 +1141,8 @@ Public Class BattleShipsGame
         Dim shipDirection As String
         Dim Xscale As Integer
         Dim Yscale As Integer
-
+        Dim newLength As Integer
+         WindowState = FormWindowState.Minimized
         For length = 2 To 5
             If playerNum = 1 Then
                 playerstr = "player"
@@ -1165,16 +1166,19 @@ Public Class BattleShipsGame
                     If duplicateShip = False Then
                         shipstr = shipstr & "a"
                         targetShipPicboxStr = playerstr & "ShipPicbox" & length & "a"
+                        newLength = 3
                         duplicateShip = True
                     Else
                         shipstr = playerstr & "Ship3b"
                         targetShipPicboxStr = playerstr & "ShipPicbox" & length & "b"
+                        newLength = 1
                         duplicateShip = False
                     End If
+                Case Else : newLength = length
             End Select
 
             targetShipSunkArr = CallByName(Me, sunkArrStr, vbGet)
-            If targetShipSunkArr(length) = False Then
+            If targetShipSunkArr(newLength) = False Then
                 targetShip = CallByName(Me, shipstr, vbGet)
 
                 If playerstr = "player" Then
@@ -1194,16 +1198,16 @@ Public Class BattleShipsGame
 
                 Next
 
-                If targetShipSunkArr(length) = False Then
+                If targetShipSunkArr(newLength) = False Then
                     If shipSunk = True Then
-                        WindowState = FormWindowState.Minimized
+
                         If playerstr = "player" Then
                             MsgBox("Your " & length & " length ship has been sunk")
                             playershipSunkCount = playershipSunkCount + 1
                         Else
                             MsgBox("You sunk the opponents " & length & " length ship")
                         End If
-                        targetShipSunkArr(length) = True
+                        targetShipSunkArr(newLength) = True
                         targetShipPicbox.Visible = True
                         targetShipPicbox.Parent = parentBoard
                         targetShipPicbox.BringToFront()
@@ -1236,6 +1240,7 @@ Public Class BattleShipsGame
                         End Select
 
                         targetShipPicbox.Size = New Size(Xscale, Yscale)
+                        shipSunk = False
                     End If
                 End If
             End If
