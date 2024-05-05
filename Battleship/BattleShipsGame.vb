@@ -1194,47 +1194,49 @@ Public Class BattleShipsGame
 
                 Next
 
-                If shipSunk = True Then
-                    WindowState = FormWindowState.Minimized
-                    If playerstr = "player" Then
-                        MsgBox("Your " & length & " length ship has been sunk")
-                        playershipSunkCount = playershipSunkCount + 1
-                    Else
-                        MsgBox("You sunk the opponents " & length & " length ship")
+                If targetShipSunkArr(length) = False Then
+                    If shipSunk = True Then
+                        WindowState = FormWindowState.Minimized
+                        If playerstr = "player" Then
+                            MsgBox("Your " & length & " length ship has been sunk")
+                            playershipSunkCount = playershipSunkCount + 1
+                        Else
+                            MsgBox("You sunk the opponents " & length & " length ship")
+                        End If
+                        targetShipSunkArr(length) = True
+                        targetShipPicbox.Visible = True
+                        targetShipPicbox.Parent = parentBoard
+                        targetShipPicbox.BringToFront()
+                        targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
+                        targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
+                        targetShipPicbox.Load(targetShipPicbox.ImageLocation)
+
+                        shipDirection = findDirectionFromShipGridLocs(targetShip, length)
+                        Select Case shipDirection
+                            Case "right"
+                                Xscale = gridCircleSizeNum * length
+                                Yscale = gridCircleSizeNum
+                                targetShipPicbox.Location = targetShipPicbox.Location - New Point(((length - 1) * gridCircleSizeNum), 0)
+                            Case "left"
+                                Xscale = gridCircleSizeNum * length
+                                Yscale = gridCircleSizeNum
+                                rotateImage90(targetShipPicbox)
+                                rotateImage90(targetShipPicbox)
+                            Case "up"
+                                Xscale = gridCircleSizeNum
+                                Yscale = gridCircleSizeNum * length
+                                rotateImage90(targetShipPicbox)
+                                rotateImage90(targetShipPicbox)
+                                rotateImage90(targetShipPicbox)
+                                targetShipPicbox.Location = targetShipPicbox.Location - New Point(0, ((length - 1) * gridCircleSizeNum))
+                            Case "down"
+                                Xscale = gridCircleSizeNum
+                                Yscale = gridCircleSizeNum * length
+                                rotateImage90(targetShipPicbox)
+                        End Select
+
+                        targetShipPicbox.Size = New Size(Xscale, Yscale)
                     End If
-                    playerShipSunkArr(length) = True
-                    targetShipPicbox.Visible = True
-                    targetShipPicbox.Parent = parentBoard
-                    targetShipPicbox.BringToFront()
-                    targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
-                    targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
-                    targetShipPicbox.Load(targetShipPicbox.ImageLocation)
-
-                    shipDirection = findDirectionFromShipGridLocs(targetShip, length)
-                    Select Case shipDirection
-                        Case "right"
-                            Xscale = gridCircleSizeNum * length
-                            Yscale = gridCircleSizeNum
-                            targetShipPicbox.Location = targetShipPicbox.Location - New Point(((length - 1) * gridCircleSizeNum), 0)
-                        Case "left"
-                            Xscale = gridCircleSizeNum * length
-                            Yscale = gridCircleSizeNum
-                            rotateImage90(targetShipPicbox)
-                            rotateImage90(targetShipPicbox)
-                        Case "up"
-                            Xscale = gridCircleSizeNum
-                            Yscale = gridCircleSizeNum * length
-                            rotateImage90(targetShipPicbox)
-                            rotateImage90(targetShipPicbox)
-                            rotateImage90(targetShipPicbox)
-                            targetShipPicbox.Location = targetShipPicbox.Location - New Point(0, ((length - 1) * gridCircleSizeNum))
-                        Case "down"
-                            Xscale = gridCircleSizeNum
-                            Yscale = gridCircleSizeNum * length
-                            rotateImage90(targetShipPicbox)
-                    End Select
-
-                    targetShipPicbox.Size = New Size(Xscale, Yscale)
                 End If
             End If
         Next
