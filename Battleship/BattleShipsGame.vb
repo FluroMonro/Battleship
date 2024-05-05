@@ -1202,9 +1202,9 @@ Public Class BattleShipsGame
 
                         If playerstr = "player" Then
                             MsgBox("Your " & length & " length ship has been sunk")
-                            playershipSunkCount = playershipSunkCount + 1
                         Else
                             MsgBox("You sunk the opponents " & length & " length ship")
+                            playershipSunkCount = playershipSunkCount + 1
                         End If
                         targetShipSunkArr(newLength) = True
 
