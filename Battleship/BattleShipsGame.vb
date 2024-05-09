@@ -115,11 +115,20 @@ Public Class BattleShipsGame
         currentPlayer = 1
     End Sub
     Private Sub initialiseVariables()
-        Dim playerMissCount = 0
-        Dim playerHitCount = 0
-        Dim opponentMissCount = 0
-        Dim opponentHitCount = 0
-        Dim playershipSunkCount = 0
+        Dim playerMissCount As Integer
+        Dim playerHitCount As Integer
+        Dim opponentMissCount As Integer
+        Dim opponentHitCount As Integer
+        Dim playershipSunkCount As Integer
+        Dim i As Integer
+
+        playerMissCount = 0
+        playerHitCount = 0
+        opponentMissCount = 0
+        opponentHitCount = 0
+        playershipSunkCount = 0
+        i = 0
+
         updateGameStats(playerHitCount, playerMissCount, 1)
         updateGameStats(opponentHitCount, opponentMissCount, 2)
 
@@ -182,7 +191,6 @@ Public Class BattleShipsGame
             playerShip5(i).isHit = False
         Next i
         playershipHitListCount = 5
-
     End Sub
     Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
@@ -253,6 +261,8 @@ Public Class BattleShipsGame
         Dim targetObject As PictureBox
         Dim shippicstr As String
         Dim currentplayerstr As String
+        Dim player As Integer
+        player = 0
         'For both player and opponent
 
         For player = 1 To 2
@@ -297,7 +307,7 @@ Public Class BattleShipsGame
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
                 targetObject.Parent = Me
             Next length
-        Next
+        Next player
 
         'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
 
@@ -318,8 +328,13 @@ Public Class BattleShipsGame
     End Function
     Public Function GetShipFromParent(parentPicbox As PictureBox)
         Dim targetobject As PictureBox
+        Dim i As Integer
+        Dim count As Integer
+
         targetobject = parentPicbox
-        Dim count = 0
+        i = 0
+        count = 0
+
         Do
             targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
             count = count + 1
@@ -333,7 +348,13 @@ Public Class BattleShipsGame
     End Function
     Private Sub resetGameArray(array As Array)
         'resets the entire array to all 0s
-        Dim row, col As Integer
+
+        Dim row As Integer
+        Dim col As Integer
+
+        row = 0
+        col = 0
+
         For col = 1 To gridSize
             For row = 1 To gridSize
                 array(col, row) = 0
@@ -345,6 +366,9 @@ Public Class BattleShipsGame
 
         Dim col As Integer
         Dim row As Integer
+
+        col = 0
+        row = 0
 
         For row = 1 To gridSize
             For col = 1 To gridSize
@@ -505,6 +529,11 @@ Public Class BattleShipsGame
         Dim RowOrColumn As Integer
         Dim i As Integer
 
+        X = 0
+        Y = 0
+        RowOrColumn = 0
+        i = 0
+
         Select Case directionShipFacing
             Case "right"
                 RowOrColumn = col
@@ -553,6 +582,13 @@ Public Class BattleShipsGame
         Dim Yoffset As Integer
         Dim playerDuplicateship As Boolean
         Dim opponentDuplicateship As Boolean
+        Dim elementCount As Integer
+
+        Xoffset = 0
+        Yoffset = 0
+        playerDuplicateship = False
+        opponentDuplicateship = False
+        elementCount = 0
 
         'If the first element of the player's first 3 length ship is 0, then neither of the 3 length ships has been set
         If playerShip3a(1).X = 0 AndAlso playerShip3a(1).Y = 0 Then
@@ -627,8 +663,7 @@ Public Class BattleShipsGame
                 Case "right" : Xoffset = Xoffset - 1
                 Case "left" : Xoffset = Xoffset + 1
             End Select
-
-        Next
+        Next elementCount
     End Sub
     Private Function isValidPlace(col, row, length, direction) As Boolean
         'To check if the ship is not on an edge of the board that will cause an error
@@ -810,6 +845,9 @@ Public Class BattleShipsGame
     Private Sub rightAndDown(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim newCount As Integer
         Dim targetgridbox As PictureBox
+        Dim count As Integer
+        count = 0
+
         For count = 1 To (shipLength - 1)
             If currentPlayerNum = 1 Then
                 targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
@@ -828,6 +866,8 @@ Public Class BattleShipsGame
     End Sub
     Private Sub leftAndUp(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim targetgridbox As PictureBox
+        Dim count As Integer
+        count = 0
         For count = (shipLength - 1) To 1 Step -1
             If currentPlayerNum = 1 Then
                 targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
@@ -928,7 +968,6 @@ Public Class BattleShipsGame
     End Sub
     Private Sub rotateImage90(picbox As PictureBox)
         'To rotate the image 90 degrees and scale it correctly
-        wait(0.01)
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
@@ -954,6 +993,9 @@ Public Class BattleShipsGame
         'Updates and changes the picture depending on the value of the 
         Dim col As Integer
         Dim row As Integer
+        col = 0
+        row = 0
+
         For col = 1 To gridSize
             For row = 1 To gridSize
 
@@ -1240,6 +1282,12 @@ Public Class BattleShipsGame
         'Determine if there are still battleships left to hit
         gameOver = True
         boardEmpty = True
+
+        Dim row As Integer
+        Dim column As Integer
+        row = 0
+        column = 0
+
         For row = 1 To gridSize
             For column = 1 To gridSize
                 If gameArr(column, row) = 1 OrElse gameArr(column, row) = 4 Then
@@ -1256,6 +1304,9 @@ Public Class BattleShipsGame
         Dim shipStr As String
         Dim targetShip() As shipGridLocations
         Dim length As Integer
+        Dim i As Integer
+        i = 0
+
         If playerNum = 1 Then
             targetpicboxArr = playerpictureBoxArray
             shipStr = "playerShip"
@@ -1283,7 +1334,7 @@ Public Class BattleShipsGame
             If targetShip(i).X = MoveX AndAlso targetShip(i).Y = MoveY Then
                 targetShip(i).isHit = True
             End If
-        Next
+        Next i
     End Sub
     Private Function getShipFromMoves(MoveX As Integer, MoveY As Integer) As String
         Dim lengthstr As String
@@ -1292,6 +1343,10 @@ Public Class BattleShipsGame
         Dim hasBeenHit As Boolean
         Dim targetship() As shipGridLocations
         Dim isDuplicateShip As Boolean
+        Dim length As Integer
+        Dim i As Integer
+        length = 0
+        i = 0
 
         Do
             For length = 2 To 5
@@ -1319,8 +1374,8 @@ Public Class BattleShipsGame
                         hasBeenHit = True
                         correctShip = shipstr
                     End If
-                Next
-            Next
+                Next i
+            Next length
         Loop Until hasBeenHit = True
 
         Return correctShip
@@ -1336,12 +1391,17 @@ Public Class BattleShipsGame
         Dim sunkArrStr As String
         Dim targetShipSunkArr() As Boolean
         Dim targetPicboxArr(,) As PictureBox
-        Dim countOfShip
+        Dim countOfShip As Integer
         Dim parentBoard As PictureBox
         Dim shipDirection As String
         Dim Xscale As Integer
         Dim Yscale As Integer
         Dim newLength As Integer
+        Dim length As Integer
+        Dim count As Integer
+        length = 0
+        count = 0
+
         For length = 2 To 5
             If playerNum = 1 Then
                 playerstr = "player"
@@ -1394,20 +1454,15 @@ Public Class BattleShipsGame
                     Else
                         countOfShip = count
                     End If
-
-                Next
+                Next count
 
                 If shipSunk = True Then
-
+                    targetShipSunkArr(newLength) = True
                     If playerstr = "player" Then
                         MsgBox("Your " & length & " length ship has been sunk")
                     Else
                         MsgBox("You sunk the opponents " & length & " length ship")
                         playershipSunkCount = playershipSunkCount + 1
-                    End If
-                    targetShipSunkArr(newLength) = True
-
-                    If playerstr = "opponent" Then
                         targetShipPicbox.Visible = True
                         targetShipPicbox.Parent = parentBoard
                         targetShipPicbox.BringToFront()
@@ -1440,11 +1495,10 @@ Public Class BattleShipsGame
                         End Select
 
                         targetShipPicbox.Size = New Size(Xscale, Yscale)
-                        shipSunk = False
                     End If
                 End If
             End If
-        Next
+        Next length
     End Sub
     Public Function findDirectionFromShipGridLocs(targetShip() As shipGridLocations, length As Integer) As String
         Dim direction As String
@@ -1485,6 +1539,11 @@ Public Class BattleShipsGame
             'If ended by the timer
 
             'Go through players array and calculate how many ships the player has left and add that to the score
+            Dim row As Integer
+            Dim column As Integer
+            row = 0
+            column = 0
+
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
@@ -1519,6 +1578,10 @@ Public Class BattleShipsGame
     Private Sub updateInGameScore(currentPlayer As Integer)
         Dim playerScore As Integer
         Dim opponentScore As Integer
+        Dim row As Integer
+        Dim column As Integer
+        row = 0
+        column = 0
 
         'Count the number of hits and display the number
         If currentPlayer = 1 Then
@@ -1545,12 +1608,16 @@ Public Class BattleShipsGame
     End Sub
     Private Sub wait(ByVal seconds As Single)
         'Freeze the processing the computer for 10 milliseconds until it reaches the given time
-        For i As Integer = 0 To seconds * 100
+
+        Dim i As Integer
+        i = 0
+
+        For i = 0 To seconds * 100
             'To allow the program to catch up instead of freezing the processing the entire time
             System.Threading.Thread.Sleep(10)
             'Catch up with events
             Application.DoEvents()
-        Next
+        Next i
     End Sub
     Private Sub displayCurrentPlayer()  'Choose whether to display the player or the opponents banner
         If currentPlayer = 1 Then 'Player
@@ -1561,6 +1628,11 @@ Public Class BattleShipsGame
     End Sub
     Private Function computerMove()
         'Get the move for the computer
+        Dim row As Integer
+        Dim column As Integer
+        row = 0
+        column = 0
+
 
         Dim opponentMove As gridLocation
         Dim tempdifficulty As String
@@ -1614,6 +1686,7 @@ Public Class BattleShipsGame
             Case "Impossible"
                 'Go through the players array until there are no 1s or 4s left (all sunk).
                 'Will go from the end of the array to the start as will continuously set the opponents move to the last 1 or 4 (which will turn into a 3 when in check())
+
                 For row = 1 To gridSize
                     For column = 1 To gridSize
                         If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
@@ -1865,6 +1938,9 @@ Public Class BattleShipsGame
         arrHighScores(11).time = convertStringIntegerTimeToDisplayTime(time)
     End Sub
     Public Sub readHighScores()
+        Dim i As Integer
+        i = 0
+
         'Open the hs.txt file for Input (read)
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Input)
 
@@ -1887,10 +1963,13 @@ Public Class BattleShipsGame
             'difficulty
             FileSystem.Input(1, fileContents)
             arrHighScores(i).difficulty = fileContents
-        Next
+        Next i
         FileSystem.FileClose(1)
     End Sub
     Public Sub WriteHighScores()
+        Dim i As Integer
+        i = 0
+
         'Open the hs.txt file for Outpue (write)
         FileSystem.FileOpen(1, "hs.txt", OpenMode.Output)
         For i = 1 To 10
@@ -1898,7 +1977,7 @@ Public Class BattleShipsGame
             FileSystem.Write(1, arrHighScores(i).name)
             FileSystem.Write(1, convertDisplayTimeToIntegerStringTime(arrHighScores(i).time))
             FileSystem.Write(1, arrHighScores(i).difficulty)
-        Next
+        Next i
         FileSystem.FileClose(1)
     End Sub
     Public Function convertStringIntegerTimeToDisplayTime(time As Integer) As String '23 lines long
