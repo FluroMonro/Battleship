@@ -1922,10 +1922,7 @@ Public Class BattleShipsGame
         addPlayerScoreToHighscores()
 
         'Sort the scores
-        Dim sortbytime = False
-        Dim sortbyscores = True
-        Dim order = "descending"
-        BubbleSort(sortbyscores, sortbytime, order)
+        BubbleSort(True, True)
 
         'Write the scores to the file
         WriteHighScores()
@@ -2036,7 +2033,7 @@ Public Class BattleShipsGame
         End Select
         Return newtime
     End Function
-    Public Sub BubbleSort(sortByScores As Boolean, sortByTime As Boolean, order As String)
+    Public Sub BubbleSort(isTypeScore As Boolean, orderAsDescending As Boolean)
         Dim Swapped As Boolean
         Swapped = True
         Dim Last As Integer
@@ -2048,8 +2045,8 @@ Public Class BattleShipsGame
             Dim i = 1
             'i < last means that it once i = last, it will be in order
             While i < Last
-                If sortByScores = True Then
-                    If order = "descending" Then
+                If isTypeScore = True Then
+                    If orderAsDescending = True Then
 
                         'Temporary fake score as lower than possible so it can't show up as top 10 in descending
                         If arrHighScores(11).name = "ZZZZZZ" Then
@@ -2073,10 +2070,9 @@ Public Class BattleShipsGame
                             Swapped = True
                         End If
                     End If
-                End If
 
-                If sortByTime = True Then
-                    If order = "descending" Then
+                Else
+                    If orderAsDescending = True Then
                         'Temporary fake time as lower than possible so it can't show up as top 10
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).time = "00:00"

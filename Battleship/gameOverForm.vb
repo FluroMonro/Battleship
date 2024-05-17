@@ -7,6 +7,7 @@
     Private Sub gameOverForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         onLoadsettings()
     End Sub
+
     ''' <summary>
     ''' Subroutine which sets initialises the variable holding the outcome of the game and passes it into initialiseFormControls()
     ''' </summary>
@@ -17,6 +18,7 @@
 
         initialiseFormControls(outcomeOfGame)
     End Sub
+
     ''' <summary>
     ''' Subroutine which initialises the placement, sizes, images, text etc. of the controls on the form
     ''' </summary>
@@ -56,6 +58,7 @@
 
         End If
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving on the button
     ''' </summary>
@@ -64,6 +67,7 @@
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving off the button
     ''' </summary>
@@ -72,6 +76,7 @@
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
+
     ''' <summary>
     ''' Subroutine which takes the user to the main menu form.
     ''' </summary>

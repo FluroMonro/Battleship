@@ -9,6 +9,7 @@
         initialiseFormControls()
         formID = "MainMenu"
     End Sub
+
     ''' <summary>
     ''' Initialises all the controls on the form in the correct locations and sizes.
     ''' </summary>
@@ -34,6 +35,7 @@
         backgroundImg.Location = New Point(0, 0)
         backgroundImg.Load(backgroundImg.ImageLocation)
     End Sub
+
     ''' <summary>
     ''' Subroutine which takes the user to the GameSettings form.
     ''' </summary>
@@ -45,6 +47,7 @@
         GameSettingsForm.onLoadSettings()
         GameSettingsForm.Show()
     End Sub
+
     ''' <summary>
     ''' Subroutine which takes the user to the Highscores form.
     ''' </summary>
@@ -56,6 +59,7 @@
         HighScoresForm.Show()
         HighScoresForm.onLoadHighScores()
     End Sub
+
     ''' <summary>
     ''' Subroutine which takes the user to the Highscores form.
     ''' </summary>
@@ -65,6 +69,7 @@
         'When the Quit button is pressed
         Me.Close()
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
     ''' </summary>
@@ -73,6 +78,7 @@
     Private Sub playfrommainbtn_Enter(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseEnter
         EnterOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
     ''' </summary>
@@ -81,6 +87,7 @@
     Private Sub playfrommainbtn_Leave(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseLeave
         ExitOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
     ''' </summary>
@@ -89,6 +96,7 @@
     Private Sub openhsbutton_Enter(sender As Object, e As EventArgs) Handles openhsbutton.MouseEnter
         EnterOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
     ''' </summary>
@@ -97,6 +105,7 @@
     Private Sub openhsbutton_Leave(sender As Object, e As EventArgs) Handles openhsbutton.MouseLeave
         ExitOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
     ''' </summary>
@@ -105,6 +114,7 @@
     Private Sub quitProgrambtn_Enter(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseEnter
         EnterOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
     ''' </summary>
@@ -113,6 +123,7 @@
     Private Sub quitProgrambtn_Leave(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseLeave
         ExitOverBigButton(sender)
     End Sub
+
     ''' <summary>
     ''' Subroutine which switches the button's image out for the purple image (for hover)
     ''' </summary>
@@ -120,6 +131,7 @@
     Private Sub EnterOverBigButton(targetButton As Button)
         targetButton.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonPurple.png")
     End Sub
+
     ''' <summary>
     ''' Subroutine which switches the button's image out for the blue image (back to normal)
     ''' </summary>
