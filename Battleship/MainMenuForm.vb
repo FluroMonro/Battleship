@@ -1,9 +1,17 @@
 ﻿Public Class MainMenuForm
+    ''' <summary>
+    '''  subroutine called upon the form's load to call the subroutine to initialise controls
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'When the game is played
         initialiseFormControls()
         formID = "MainMenu"
     End Sub
+    ''' <summary>
+    ''' Initialises all the controls on the form in the correct locations and sizes.
+    ''' </summary>
     Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
 
@@ -26,48 +34,97 @@
         backgroundImg.Location = New Point(0, 0)
         backgroundImg.Load(backgroundImg.ImageLocation)
     End Sub
+    ''' <summary>
+    ''' Subroutine which takes the user to the GameSettings form.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playfrommainbtn_Click(sender As Object, e As EventArgs) Handles playfrommainbtn.Click
         'When the Play button is pressed
         Me.Hide()
         GameSettingsForm.onLoadSettings()
         GameSettingsForm.Show()
     End Sub
+    ''' <summary>
+    ''' Subroutine which takes the user to the Highscores form.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openhsbutton.Click
         'When the High-score button is pressed
         Me.Hide()
         HighScoresForm.Show()
         HighScoresForm.onLoadHighScores()
     End Sub
+    ''' <summary>
+    ''' Subroutine which takes the user to the Highscores form.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub quitProgrambtn_Click(sender As Object, e As EventArgs) Handles quitProgrambtn.Click
         'When the Quit button is pressed
         Me.Close()
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playfrommainbtn_Enter(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseEnter
-        EnterOverBigButton("playfrommainbtn")
+        EnterOverBigButton(sender)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playfrommainbtn_Leave(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseLeave
-        ExitOverBigButton("playfrommainbtn")
+        ExitOverBigButton(sender)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub openhsbutton_Enter(sender As Object, e As EventArgs) Handles openhsbutton.MouseEnter
-        EnterOverBigButton("openhsbutton")
+        EnterOverBigButton(sender)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub openhsbutton_Leave(sender As Object, e As EventArgs) Handles openhsbutton.MouseLeave
-        ExitOverBigButton("openhsbutton")
+        ExitOverBigButton(sender)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverBigButton() upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub quitProgrambtn_Enter(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseEnter
-        EnterOverBigButton("quitProgrambtn")
+        EnterOverBigButton(sender)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverBigButton() upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub quitProgrambtn_Leave(sender As Object, e As EventArgs) Handles quitProgrambtn.MouseLeave
-        ExitOverBigButton("quitProgrambtn")
+        ExitOverBigButton(sender)
     End Sub
-    Private Sub EnterOverBigButton(buttonName As String)
-        Dim targetObject As Button
-        targetObject = Me.Controls.Item(buttonName)
-        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonPurple.png")
+    ''' <summary>
+    ''' Subroutine which switches the button's image out for the purple image (for hover)
+    ''' </summary>
+    ''' <param name="targetButton">The button the user has hovered over</param>
+    Private Sub EnterOverBigButton(targetButton As Button)
+        targetButton.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonPurple.png")
     End Sub
-    Private Sub ExitOverBigButton(buttonName As String)
-        Dim targetObject As Button
-        targetObject = Me.Controls.Item(buttonName)
-        targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonBlue.png")
+    ''' <summary>
+    ''' Subroutine which switches the button's image out for the blue image (back to normal)
+    ''' </summary>
+    ''' <param name="targetButton">The button the user has hovered over</param>
+    Private Sub ExitOverBigButton(targetButton As Button)
+        targetButton.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonBlue.png")
     End Sub
 End Class
