@@ -259,8 +259,6 @@ Public Class BattleShipsGame
         KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
         playerStatspnl.Location = New Point(Me.Width / 5, Me.Height / 18)
 
-
-
         'Setting the size of the grid circle to be dependent on the boardSize (minus it's border) and divided by how many elements the grid is
         'Ability to adjust the sizes of the grid and to have corresponding changes to the size of each circle
         gridCircleSizeNum = (boardSizes - 30) / gridSize
@@ -316,12 +314,6 @@ Public Class BattleShipsGame
                 targetObject.Parent = Me
             Next length
         Next player
-
-        'opponentStatspnl.Location = New Point(boardSizes + Me.Width / 3, Me.Height / 3 + boardSizes)
-
-        'will hide the opponents ships if gameOver = false and the players ship until they have been positioned
-
-        'revealships()
     End Sub
 
 
@@ -1936,16 +1928,22 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine switches between the value of 1 and 2 each time to swap players after each turn
+    ''' Alternates and displays
+    ''' </summary>
     Private Sub swapPlayer()
-        'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
         displayCurrentPlayer()
     End Sub
 
-
+    ''' <summary>
+    ''' Function returns an integer that alternates between a 1 and a 2 each time it is called
+    ''' Example: AlternateNum(2) = 1
+    ''' </summary>
+    ''' <param name="num">An integer, either 1 or 2</param>
+    ''' <returns>An integer of either 1 or 2: opposite to the passed in value</returns>
     Public Function AlternateNum(num As Integer)
-        'Alternates between 1 and 2 every time it is called
         num = 2 / num
         Return num
     End Function
@@ -2019,10 +2017,11 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine in charge of the highscores
+    ''' The mainline of scoring
+    ''' </summary>
     Private Sub scoring()
-        'Subroutine in charge of the highscores
-
         'Read the high-scores from the hs.txt file
         readHighScores()
 
@@ -2036,16 +2035,21 @@ Public Class BattleShipsGame
         WriteHighScores()
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine that adds the players score, name, difficulty and time into the 11th element of the array of records
+    ''' </summary>
     Private Sub addPlayerScoreToHighscores()
-        'Add the players score, name, difficulty and time into the 11th element of the array of records
+        'To overwrite the temporary 11th element created in the highscores form with the user's info
         arrHighScores(11).score = score
         arrHighScores(11).name = playerName
         arrHighScores(11).difficulty = difficulty
         arrHighScores(11).time = convertStringIntegerTimeToDisplayTime(time)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine reads the highscores from a text file
+    ''' Inputs the contents into the first 10 elements of the highscores records
+    ''' </summary>
     Public Sub readHighScores()
         Dim i As Integer
         i = 0
@@ -2076,7 +2080,9 @@ Public Class BattleShipsGame
         FileSystem.FileClose(1)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine writes each element a field a time into a text file
+    ''' </summary>
     Public Sub WriteHighScores()
         Dim i As Integer
         i = 0
@@ -2222,15 +2228,23 @@ Public Class BattleShipsGame
         End While
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine updates the game stats on the form controls
+    ''' Example of use: updateGameStats(4,2,2)
+    ''' </summary>
+    ''' <param name="hitcount">Integer number of accurate shots (a hit)</param>
+    ''' <param name="misscount">Integer number of inaccurate shots (a miss)</param>
+    ''' <param name="playernum">Integer representation of the current player: either 1 for player or 2 for opponent</param>
     Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
-        If misscount = 0 AndAlso hitcount = 0 Then
+        If misscount = 0 AndAlso hitcount = 0 Then 'Undefined accuracy (0/0 not defined)
             accuracy = "-"
         Else
+            'Calculating the percentage average of hit:shot ratio and converting it to a string
             accuracy = CStr(CInt((hitcount / (misscount + hitcount)) * 100)) & "%"
         End If
 
+        'Updating the statistics onto the form labels
         If playernum = 1 Then
             playerAccuracyCounttxt.Text = accuracy
             playerHitCounttxt.Text = hitcount
