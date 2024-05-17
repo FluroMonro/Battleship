@@ -126,16 +126,18 @@
 
     ''' <summary>
     ''' Subroutine which switches the button's image out for the purple image (for hover)
+    ''' Example of use: EnterOverBigButton(exitbtn)
     ''' </summary>
-    ''' <param name="targetButton">The button the user has hovered over</param>
+    ''' <param name="targetButton">The button control the user has hovered over</param>
     Private Sub EnterOverBigButton(targetButton As Button)
         targetButton.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonPurple.png")
     End Sub
 
     ''' <summary>
     ''' Subroutine which switches the button's image out for the blue image (back to normal)
+    ''' Example of use: ExitOverBigButton(exitbtn)
     ''' </summary>
-    ''' <param name="targetButton">The button the user has hovered over</param>
+    ''' <param name="targetButton">The button control the user has hovered over</param>
     Private Sub ExitOverBigButton(targetButton As Button)
         targetButton.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\ButtonBlue.png")
     End Sub

@@ -79,6 +79,8 @@ Public Class BattleShipsGame
     Public alreadyDown As Boolean
     Public opponentMoveDirection As Integer
     Public opponentContinueOnCount As Integer
+
+
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean, timeOption As Boolean, timeSet As Integer)
         'Updating the global variables from across forms
         playerName = name
@@ -89,6 +91,8 @@ Public Class BattleShipsGame
         timeLeft = timeSet
         formID = "Game"
     End Sub
+
+
     Public Sub onFormLoad()
         gameTimer.Stop()
         timeInitialise()
@@ -114,6 +118,8 @@ Public Class BattleShipsGame
 
         currentPlayer = 1
     End Sub
+
+
     Private Sub initialiseVariables()
         Dim playerMissCount As Integer
         Dim playerHitCount As Integer
@@ -192,6 +198,8 @@ Public Class BattleShipsGame
         Next i
         playershipHitListCount = 5
     End Sub
+
+
     Private Sub initialiseFormControls()
         'To intialise the controls in the correct way
 
@@ -315,6 +323,8 @@ Public Class BattleShipsGame
 
         'revealships()
     End Sub
+
+
     Private Function referenceShipFromParents(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
         Dim targetship
         Dim targetpicboxArr
@@ -326,6 +336,8 @@ Public Class BattleShipsGame
 
         Return targetobject
     End Function
+
+
     Public Function GetShipFromParent(parentPicbox As PictureBox)
         Dim targetobject As PictureBox
         Dim i As Integer
@@ -346,6 +358,8 @@ Public Class BattleShipsGame
         Next i
         Return targetobject
     End Function
+
+
     Private Sub resetGameArray(array As Array)
         'resets the entire array to all 0s
 
@@ -361,6 +375,8 @@ Public Class BattleShipsGame
             Next row
         Next col
     End Sub
+
+
     Public Sub generatePicture(pictureBoxArray As Array, picBoard As Object, currentPlayer As Integer)
         'generates grid of pictures
 
@@ -431,6 +447,8 @@ Public Class BattleShipsGame
             Next col
         Next row
     End Sub
+
+
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
         If isShipPlacementRandom = True Then
@@ -447,6 +465,8 @@ Public Class BattleShipsGame
         End If
 
     End Sub
+
+
     Private Function generateShips(gameArr As Array, length As Integer, currentplayernum As Integer) As Array
 
         'Declare local variables
@@ -523,6 +543,8 @@ Public Class BattleShipsGame
         revealships()
         Return gameArr
     End Function
+
+
     Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
         Dim X As Integer
         Dim Y As Integer
@@ -575,6 +597,8 @@ Public Class BattleShipsGame
         setIndividualShipLocations(col, row, length, directionShipFacing, currentplayernum)
         Return True
     End Function
+
+
     Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, direction As String, currentplayernum As Integer)
         'to set storage of the individual ships
 
@@ -665,6 +689,8 @@ Public Class BattleShipsGame
             End Select
         Next elementCount
     End Sub
+
+
     Private Function isValidPlace(col, row, length, direction) As Boolean
         'To check if the ship is not on an edge of the board that will cause an error
 
@@ -696,6 +722,8 @@ Public Class BattleShipsGame
         End Select
         Return valid
     End Function
+
+
     Private Sub assignShips(gameArr As Array, currentplayernum As Integer, length As Integer, direction As String, column As Integer, row As Integer)
         'Assign each picture box to the correct object on the form with regards to length and player
 
@@ -745,6 +773,8 @@ Public Class BattleShipsGame
             displayShipLocations(column, row, length, direction, currentplayernum)
         End If
     End Sub
+
+
     Private Sub displayShipLocations(col As Integer, row As Integer, shipLength As Integer, direction As String, currentplayernum As Integer)
         'overall parent must be highest count
         'aka back to front
@@ -842,6 +872,8 @@ Public Class BattleShipsGame
         targetship.BringToFront()
         targetship.Location = New Point(0, 0)
     End Sub
+
+
     Private Sub rightAndDown(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim newCount As Integer
         Dim targetgridbox As PictureBox
@@ -864,6 +896,8 @@ Public Class BattleShipsGame
             parentgridbox = targetgridbox
         Next count
     End Sub
+
+
     Private Sub leftAndUp(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim targetgridbox As PictureBox
         Dim count As Integer
@@ -884,6 +918,8 @@ Public Class BattleShipsGame
             parentgridbox = targetgridbox
         Next count
     End Sub
+
+
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
         picbox.Load(picbox.ImageLocation)
         Dim Xloc As Integer
@@ -915,6 +951,8 @@ Public Class BattleShipsGame
 
         picbox.Image = new_b
     End Sub
+
+
     Private Sub updateImageKeepCorrectSize(picbox As PictureBox, arrayValue As Integer, radius As Integer)
         Dim Xloc As Integer
         Dim Yloc As Integer
@@ -950,6 +988,8 @@ Public Class BattleShipsGame
 
         picbox.Image = new_b
     End Sub
+
+
     Private Sub assignShipImages(picboard As PictureBox)
 
         'Assign each ship picturebox with the correct picture
@@ -966,12 +1006,16 @@ Public Class BattleShipsGame
             Case playerShipPicbox5.Name : playerShipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
         End Select
     End Sub
+
+
     Private Sub rotateImage90(picbox As PictureBox)
         'To rotate the image 90 degrees and scale it correctly
         Dim bmp As Bitmap = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
     End Sub
+
+
     Private Sub revealships()
         If gameOver = True Then
             'show opponents Ships
@@ -989,6 +1033,8 @@ Public Class BattleShipsGame
             opponentShipPicbox5.Visible = False
         End If
     End Sub
+
+
     Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object, playerStr As String)
         'Updates and changes the picture depending on the value of the 
         Dim col As Integer
@@ -1017,6 +1063,8 @@ Public Class BattleShipsGame
             Next row
         Next col
     End Sub
+
+
     Private Function getPlayerMove(ByVal sender As PictureBox, ByVal e As EventArgs)
         'When the picture box is clicked, the name of the picture box is used to determine the moves location on the 
 
@@ -1038,6 +1086,8 @@ Public Class BattleShipsGame
 
         Return playerMove
     End Function
+
+
     Public Function getPlayerMoveFromPicboxName(sender As PictureBox, piclocation As String) As gridLocation
         Dim playerMove As gridLocation
         If piclocation.Length = 4 Then
@@ -1065,6 +1115,8 @@ Public Class BattleShipsGame
         End If
         Return playerMove
     End Function
+
+
     Private Sub game(playerMove As gridLocation)
         'Mainline of the game, started by it's call from playerMove
 
@@ -1142,6 +1194,8 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
+
+
     Private Sub gameIsOverNoResult()
         timeEnd()
         playerMissCount = 0
@@ -1158,6 +1212,8 @@ Public Class BattleShipsGame
         gameTimer.Stop()
         timeInitialise()
     End Sub
+
+
     Private Sub gameIsOverWithResult()
         timeEnd()
         revealships()
@@ -1174,6 +1230,8 @@ Public Class BattleShipsGame
         opponentHitCount = 0
         showgameOverForm()
     End Sub
+
+
     Private Sub showgameOverForm()
         Me.Hide()
         endTime = convertStringIntegerTimeToDisplayTime(time)
@@ -1182,6 +1240,8 @@ Public Class BattleShipsGame
         gameOverForm.Show()
         time = 0
     End Sub
+
+
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
         'Determines whether the move is a hit or a miss and what to do in either case
 
@@ -1298,6 +1358,8 @@ Public Class BattleShipsGame
         Next row
         Return gameArr
     End Function
+
+
     Private Sub checkShipsIfHit(MoveX As Integer, MoveY As Integer, playerNum As Integer) 'Check if move has hit a ship
         Dim targetpicboxArr(,) As PictureBox
         Dim shipPicboxStr As String
@@ -1336,6 +1398,8 @@ Public Class BattleShipsGame
             End If
         Next i
     End Sub
+
+
     Private Function getShipFromMoves(MoveX As Integer, MoveY As Integer) As String
         Dim lengthstr As String
         Dim shipstr As String
@@ -1380,6 +1444,8 @@ Public Class BattleShipsGame
 
         Return correctShip
     End Function
+
+
     Private Sub checkIfSunk(playerNum As Integer)
         'If a ship has been sunk
         Dim playerstr As String
@@ -1500,6 +1566,8 @@ Public Class BattleShipsGame
             End If
         Next length
     End Sub
+
+
     Public Function findDirectionFromShipGridLocs(targetShip() As shipGridLocations, length As Integer) As String
         Dim direction As String
         If (targetShip(length).X) - 1 = targetShip(length - 1).X Then
@@ -1519,6 +1587,8 @@ Public Class BattleShipsGame
         End If
         Return direction
     End Function
+
+
     Private Function determineScore() As Integer
         'As swap player is after determine score in game(), the current player will always be the one who had the last move, and is hence, the winner
         Dim winner = currentPlayer
@@ -1575,6 +1645,8 @@ Public Class BattleShipsGame
         End If
         Return score
     End Function
+
+
     Private Sub updateInGameScore(currentPlayer As Integer)
         Dim playerScore As Integer
         Dim opponentScore As Integer
@@ -1606,6 +1678,8 @@ Public Class BattleShipsGame
             opponentscoretxt.Text = opponentScore
         End If
     End Sub
+
+
     Private Sub wait(ByVal seconds As Single)
         'Freeze the processing the computer for 10 milliseconds until it reaches the given time
 
@@ -1619,6 +1693,8 @@ Public Class BattleShipsGame
             Application.DoEvents()
         Next i
     End Sub
+
+
     Private Sub displayCurrentPlayer()  'Choose whether to display the player or the opponents banner
         If currentPlayer = 1 Then 'Player
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
@@ -1626,6 +1702,8 @@ Public Class BattleShipsGame
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
         End If
     End Sub
+
+
     Private Function computerMove()
         'Get the move for the computer
         Dim row As Integer
@@ -1698,6 +1776,8 @@ Public Class BattleShipsGame
         End Select
         Return opponentMove
     End Function
+
+
     Private Function randomSquare(ByRef opponentMove As gridLocation)
         Dim count As Integer
         count = 1
@@ -1718,6 +1798,8 @@ Public Class BattleShipsGame
         End While
         Return opponentMove
     End Function
+
+
     Private Function randomAdjacent(ByRef opponentMove As gridLocation)
         Dim foundMovePos As Boolean
         Dim count As Integer
@@ -1780,6 +1862,8 @@ Public Class BattleShipsGame
         End If
         Return opponentMove
     End Function
+
+
     Private Function continueOnPath(ByRef opponentMove As gridLocation)
         Dim validMove As Boolean
 
@@ -1837,6 +1921,8 @@ Public Class BattleShipsGame
         End If
         Return opponentMove
     End Function
+
+
     Private Function swapPathDirection(ByRef opponentMove As gridLocation)
         'Swap the direction of the path
         oppositePath = True
@@ -1849,29 +1935,41 @@ Public Class BattleShipsGame
         opponentContinueOnCount = 1
         Return opponentMove
     End Function
+
+
     Private Sub swapPlayer()
         'switches between the value of 1 and 2 each time to swap players after each turn
         currentPlayer = AlternateNum(currentPlayer)
         displayCurrentPlayer()
     End Sub
+
+
     Public Function AlternateNum(num As Integer)
         'Alternates between 1 and 2 every time it is called
         num = 2 / num
         Return num
     End Function
+
+
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Exit back to the main menu
         gameIsOverNoResult()
         Me.Hide()
         MainMenuForm.Show()
     End Sub
+
+
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
 
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
+
+
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
+
+
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
         resetbtn.Enabled = False
@@ -1880,12 +1978,18 @@ Public Class BattleShipsGame
         wait(2)
         resetbtn.Enabled = True
     End Sub
+
+
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
     End Sub
+
+
     Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("resetbtn", Me)
     End Sub
+
+
     Private Sub mouseEnterGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim picbox As PictureBox
         picbox = sender
@@ -1899,6 +2003,8 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
+
+
     Private Sub mouseExitGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim picbox As PictureBox
         picbox = sender
@@ -1912,6 +2018,8 @@ Public Class BattleShipsGame
             End If
         End If
     End Sub
+
+
     Private Sub scoring()
         'Subroutine in charge of the highscores
 
@@ -1927,6 +2035,8 @@ Public Class BattleShipsGame
         'Write the scores to the file
         WriteHighScores()
     End Sub
+
+
     Private Sub addPlayerScoreToHighscores()
         'Add the players score, name, difficulty and time into the 11th element of the array of records
         arrHighScores(11).score = score
@@ -1934,6 +2044,8 @@ Public Class BattleShipsGame
         arrHighScores(11).difficulty = difficulty
         arrHighScores(11).time = convertStringIntegerTimeToDisplayTime(time)
     End Sub
+
+
     Public Sub readHighScores()
         Dim i As Integer
         i = 0
@@ -1963,6 +2075,8 @@ Public Class BattleShipsGame
         Next i
         FileSystem.FileClose(1)
     End Sub
+
+
     Public Sub WriteHighScores()
         Dim i As Integer
         i = 0
@@ -1977,6 +2091,8 @@ Public Class BattleShipsGame
         Next i
         FileSystem.FileClose(1)
     End Sub
+
+
     Public Function convertStringIntegerTimeToDisplayTime(time As Integer) As String '23 lines long
         'Convert integer time into display time (dd:dd)
 
@@ -2001,6 +2117,8 @@ Public Class BattleShipsGame
         End Select
         Return newTime
     End Function
+
+
     Private Function convertDisplayTimeToIntegerStringTime(time As String) As String
         'Convert display time (dd:dd) into a sting representing integer time (dddd)
 
@@ -2033,6 +2151,8 @@ Public Class BattleShipsGame
         End Select
         Return newtime
     End Function
+
+
     Public Sub BubbleSort(isTypeScore As Boolean, orderAsDescending As Boolean)
         Dim Swapped As Boolean
         Swapped = True
@@ -2101,6 +2221,8 @@ Public Class BattleShipsGame
             Last = Last - 1
         End While
     End Sub
+
+
     Private Sub updateGameStats(hitcount As Integer, misscount As Integer, playernum As Integer)
         Dim accuracy As String
         If misscount = 0 AndAlso hitcount = 0 Then
@@ -2121,50 +2243,80 @@ Public Class BattleShipsGame
             opponentShipsMissCounttxt.Text = misscount
         End If
     End Sub
-    Private Sub Swap(ByRef A As recHighScore, ByRef B As recHighScore)
+
+    ''' <summary>
+    ''' Subroutine swaps two arbitary records of recHighScore
+    ''' To be used in bubblesorting
+    ''' Example of use:  swap(arrHighScores(1), arrHighScores(2))
+    ''' </summary>
+    ''' <param name="A">An arbitary record to be swapped</param>
+    ''' <param name="B">A different arbitary record to be swapped</param>
+    Private Sub swap(ByRef A As recHighScore, ByRef B As recHighScore)
         'swap records by using a temporary value
         Dim Temp As recHighScore
         Temp = A
         A = B
         B = Temp
     End Sub
+
+    ''' <summary>
+    ''' Subroutine which intialises the timer and the interval of its tick
+    ''' </summary>
     Private Sub timeInitialise()
-        gameTimer.Interval = 1000
+        gameTimer.Interval = 1000 '1000milliseconds = 1 second
         If timeOptionAsCountUp = False Then
+            'Time left is the time on the timer the user chose in the game Settings form
             time = timeLeft
             displayTime = convertStringIntegerTimeToDisplayTime(time)
         End If
         timelbl.Text = displayTime
     End Sub
+
+    ''' <summary>
+    ''' Subroutine starts the timer if the game is NOT over
+    ''' </summary>
     Private Sub timeStart()
         If gameOver = False Then
             gameTimer.Start()
         End If
     End Sub
+
+    ''' <summary>
+    ''' Subroutine ends the timer if the game is over and resets the displayTime to be ""
+    ''' </summary>
     Private Sub timeEnd()
         If gameOver = True Then
             gameTimer.Stop()
             displayTime = ""
         End If
     End Sub
+
+    ''' <summary>
+    ''' Subroutine is called every second (tick)
+    ''' Displays the time on the control label
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub gametimer_Tick(sender As Object, e As EventArgs) Handles gameTimer.Tick
         If timeOptionAsCountUp = True Then
+            'Count up
             time = time + 1
-            If time = 3599 Then
+            If time = 3599 Then 'If the hour limit is reached: gameOver
                 If formID = "Game" Then
                     gameIsOverWithResult()
                 End If
             End If
         Else
-            If time = 0 Then
+            If time = 0 Then 'If the timer has run out
                 If formID = "Game" Then
                     gameIsOverWithResult()
                 End If
-            Else
+            Else 'Count down
                 time = time - 1
             End If
         End If
 
+        'display time on form
         displayTime = convertStringIntegerTimeToDisplayTime(time)
         timelbl.Text = displayTime
     End Sub

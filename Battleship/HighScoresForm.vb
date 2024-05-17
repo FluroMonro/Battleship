@@ -103,6 +103,7 @@ Public Class HighScoresForm
     ''' <summary>
     ''' Subroutine changes the ordering of the scores depending on which arrow has been clicked.
     ''' Writing the high scores is done each time to ensure the rankings are preserved each time.
+    ''' Example of use: changeOrdering(True)
     ''' </summary>
     ''' <param name="isTypeScore">A boolean which will either be True if sorting by score or False if sorting by time</param>
     Private Sub changeOrdering(isTypeScore As Boolean)
@@ -135,6 +136,7 @@ Public Class HighScoresForm
     ''' <summary>
     ''' Subroutine sets and updates the image of the arrow to the correct image
     ''' Black image for the currently sorted by item, grey is for the other (unselected)
+    ''' Example of use: updateArrowButtonImages(True, True)
     ''' </summary>
     ''' <param name="isTypeScore">A boolean which will either be True if sorting by score or False if sorting by time</param>
     ''' <param name="isOrderDescending">A Boolean which will either be True for a descending order or False for an ascending order</param>
@@ -182,6 +184,7 @@ Public Class HighScoresForm
 
     ''' <summary>
     ''' Subroutine updates the text of the rankings to reflect the correct order
+    ''' Example of use: updateRankings(True, True)
     ''' </summary>
     ''' <param name="isTypeScore">A boolean which will either be True if sorting by score or False if sorting by time</param>
     ''' <param name="isOrderDescending">A Boolean which will either be True for a descending order or False for an ascending order</param>
@@ -248,6 +251,7 @@ Public Class HighScoresForm
 
     ''' <summary>
     ''' Subroutine which switches the button's image out for the purple image (for hover)
+    ''' Example of use: EnterOverSmallButton("exitbtn", Me)
     ''' </summary>
     ''' <param name="buttonName">The name of the button that has called this subroutine </param>
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>
@@ -259,6 +263,7 @@ Public Class HighScoresForm
 
     ''' <summary>
     ''' Subroutine which switches the button's image out for the blue image (back to normal)
+    ''' Example of use: ExitOverSmallButton("exitbtn", Me)
     ''' </summary>
     ''' <param name="buttonName">The name of the button that has called this subroutine </param>
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>

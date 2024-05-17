@@ -21,9 +21,11 @@
 
     ''' <summary>
     ''' Subroutine which initialises the placement, sizes, images, text etc. of the controls on the form
+    ''' These controls are dependant on the outcome of the game (what is shown and what it hidden)
+    ''' Example of use: initialiseFormControls("Win")
     ''' </summary>
     ''' <param name="outcomeOfGame">Who won the game. Determines what is shown on the form.</param>
-    Public Sub initialiseFormControls(outcomeOfGame As String)
+    Private Sub initialiseFormControls(outcomeOfGame As String)
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
         Me.Height = Screen.PrimaryScreen.Bounds.Height
