@@ -1,23 +1,23 @@
 ﻿Imports System.Runtime
 Public Class HighScoresForm
-    Public currentScoreArrow
-    Public currentTimeArrow
+    Public currentScoreArrowActive As Boolean
+    Public currentTimeArrowActive As Boolean
     ''' <summary>
     ''' Subroutine which initialises variables and calls the other subroutines to initialise the form correctly.
     ''' </summary>
     Public Sub onLoadHighScores()
         formID = "HighScores"
 
+        currentScoreArrowActive = True
+        currentTimeArrowActive = False
+
         'Call the subroutines to intialise the form
+        initialiseFormControls()
+        initialiseLastHighscore()
 
-        currentScoreArrow = 1
-        currentTimeArrow = 2
-
+        'Make sure the form is displaying correctly for descending and sorting by scores.
         updateArrowButtonImages(True, True)
         updateRankings(True, True)
-
-        initialiseLastHighscore()
-        initialiseFormControls()
 
         'Read and print the highscore into the form
         BattleShipsGame.readHighScores()
@@ -25,11 +25,9 @@ Public Class HighScoresForm
     End Sub
 
     ''' <summary>
-    ''' Initialises all the controls on the form in the correct locations and sizes.
+    ''' Subroutine initialises all the controls on the form in the correct locations and sizes.
     ''' </summary>
     Private Sub initialiseFormControls()
-        'To intialise the controls in the correct way
-
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
@@ -48,13 +46,12 @@ Public Class HighScoresForm
     End Sub
 
     ''' <summary>
-    ''' Initialises the player's high-score temporarily as the lowest possible (to not show on the form).
+    ''' Subroutine initialises the player's high-score temporarily as the lowest possible (to not show on the form).
     ''' </summary>
     Public Sub initialiseLastHighscore()
-        'Initialise the temporary high-score for the player until they finish a game
-        BattleShipsGame.arrHighScores(11).name = "ZZZZZZ"
-        BattleShipsGame.arrHighScores(11).score = -17
-        BattleShipsGame.arrHighScores(11).time = "59:59"
+        BattleShipsGame.arrHighScores(11).name = "ZZZZZZ" 'A player is not likely to use this as their name.
+        BattleShipsGame.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
+        BattleShipsGame.arrHighScores(11).time = "59:59" 'The highest possible time
         BattleShipsGame.arrHighScores(11).difficulty = "None"
     End Sub
 
@@ -63,7 +60,7 @@ Public Class HighScoresForm
     ''' </summary>
     Private Sub printHighScores()
         Dim targetObject As Label
-        For i = 1 To 10
+        For i = 1 To 10 'i = the ranking
             targetObject = Me.namepanel.Controls.Item("namelbl" + i.ToString())
             targetObject.Text = BattleShipsGame.arrHighScores(i).name
 
@@ -85,7 +82,7 @@ Public Class HighScoresForm
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
         'Alternate the current arrow (flip)
-        currentScoreArrow = BattleShipsGame.AlternateNum(currentScoreArrow)
+        currentScoreArrowActive = flipBoolean(currentScoreArrowActive)
         changeOrdering(True)
     End Sub
 
@@ -96,7 +93,7 @@ Public Class HighScoresForm
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
         'Alternate the current arrow (flip)
-        currentTimeArrow = BattleShipsGame.AlternateNum(currentTimeArrow)
+        currentTimeArrowActive = flipBoolean(currentTimeArrowActive)
         changeOrdering(False)
     End Sub
 
@@ -109,15 +106,16 @@ Public Class HighScoresForm
     Private Sub changeOrdering(isTypeScore As Boolean)
         Dim isOrderDescending As Boolean
 
+        'Set the order from the arrow that has been clicked and update the rankings
         If isTypeScore = True Then
-            If currentScoreArrow = 1 Then
+            If currentScoreArrowActive = True Then
                 isOrderDescending = True
             Else
                 isOrderDescending = False
             End If
             updateRankings(isOrderDescending, True)
         Else
-            If currentTimeArrow = 1 Then
+            If currentTimeArrowActive = True Then
                 isOrderDescending = True
             Else
                 isOrderDescending = False
@@ -134,7 +132,7 @@ Public Class HighScoresForm
     End Sub
 
     ''' <summary>
-    ''' Subroutine sets and updates the image of the arrow to the correct image
+    ''' Subroutine sets and updates the image of the arrow to the correctly coloured and oriented image
     ''' Black image for the currently sorted by item, grey is for the other (unselected)
     ''' Example of use: updateArrowButtonImages(True, True)
     ''' </summary>
@@ -142,38 +140,40 @@ Public Class HighScoresForm
     ''' <param name="isOrderDescending">A Boolean which will either be True for a descending order or False for an ascending order</param>
     Private Sub updateArrowButtonImages(isTypeScore As Boolean, isOrderDescending As Boolean)
         If isOrderDescending = True Then
-            'descending
             If isTypeScore = False Then
+                'descending and sorting by time
                 timebtn.ImageLocation = Application.StartupPath & "\Pictures\blackdownArrow.png"
 
-                If currentScoreArrow = 1 Then
+                If currentScoreArrowActive = True Then
                     scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
                 Else
                     scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
                 End If
             Else
+                'descending and sorting by score
                 scorebtn.ImageLocation = Application.StartupPath & "\Pictures\blackdownArrow.png"
 
-                If currentTimeArrow = 1 Then
+                If currentTimeArrowActive = True Then
                     timebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
                 Else
                     timebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
                 End If
             End If
         Else
-            'ascending
             If isTypeScore = False Then
+                'ascending and sorting by time
                 timebtn.ImageLocation = Application.StartupPath & "\Pictures\blackupArrow.png"
 
-                If currentScoreArrow = 1 Then
+                If currentScoreArrowActive = True Then
                     scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
                 Else
                     scorebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
                 End If
             Else
+                'ascending and sorting by score
                 scorebtn.ImageLocation = Application.StartupPath & "\Pictures\blackupArrow.png"
 
-                If currentTimeArrow = 1 Then
+                If currentTimeArrowActive = True Then
                     timebtn.ImageLocation = Application.StartupPath & "\Pictures\greydownArrow.png"
                 Else
                     timebtn.ImageLocation = Application.StartupPath & "\Pictures\greyupArrow.png"
@@ -211,19 +211,20 @@ Public Class HighScoresForm
             targetObject = Me.rankingpanel.Controls.Item("ranklbl" + i.ToString())
             If rankingOrderStr = "ascending" Then
                 targetObject.Text = i
-            Else '11 - i as needs to be on the opposite side of 10 from i
+            Else '11 - i as each ranking needs to be on the opposite side of 10 from i
                 targetObject.Text = 11 - i
             End If
         Next
     End Sub
 
     ''' <summary>
-    ''' Subroutine which takes the user to the main menu form.
+    ''' Subroutine which preserves the highscores in descending and sorting by scores to be read the same way each time.
+    ''' Takes the user to the main menu form.
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
-        'Leave the hs.txt in the same order every time
+        'Leaves the hs.txt in the same order every time
         BattleShipsGame.BubbleSort(True, True)
         BattleShipsGame.WriteHighScores()
 
@@ -257,7 +258,7 @@ Public Class HighScoresForm
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>
     Public Sub EnterOverSmallButton(buttonName As String, formID As Form)
         Dim targetObject As Button
-        targetObject = formID.Controls.Item(buttonName)
+        targetObject = formID.Controls.Item(buttonName) 'Gets the control on the form with the name
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonPurple.png")
     End Sub
 
@@ -269,7 +270,22 @@ Public Class HighScoresForm
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>
     Public Sub ExitOverSmallButton(buttonName As String, formID As Form)
         Dim targetObject As Button
-        targetObject = formID.Controls.Item(buttonName)
+        targetObject = formID.Controls.Item(buttonName) 'Gets the control on the form with the name
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonBlue.png")
     End Sub
+
+    ''' <summary>
+    ''' Function flips a boolean value
+    ''' Example of use: flipBoolean(True) = False
+    ''' </summary>
+    ''' <param name="bool">An arbitary Boolean</param>
+    ''' <returns>A boolean of the opposite value than the value passed in</returns>
+    Private Function flipBoolean(bool As Boolean) As Boolean
+        If bool = True Then
+            bool = False
+        Else
+            bool = True
+        End If
+        Return bool
+    End Function
 End Class

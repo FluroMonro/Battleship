@@ -199,10 +199,10 @@ Public Class BattleShipsGame
         playershipHitListCount = 5
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine Initialises all the controls on the form in the correct locations and sizes and images
+    ''' </summary>
     Private Sub initialiseFormControls()
-        'To intialise the controls in the correct way
-
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
         Me.Size = New Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height)
