@@ -1808,7 +1808,7 @@ Public Class BattleShipsGame
                                 hasAHit = False
                                 randomSquare(opponentMove)
                             Else 'Has followed direction to a miss, will now swap direction and continue on the other side of the initial hasAhit
-                                swapPathDirection(opponentMove)
+                                swapPathDirection()
                                 continueOnPath(opponentMove)
                             End If
                         End If
@@ -1969,7 +1969,7 @@ Public Class BattleShipsGame
                 hasAHit = False
             Else
                 'if it hasn't swapped directions yet, do so and continue on path
-                swapPathDirection(opponentMove)
+                swapPathDirection()
                 continueOnPath(opponentMove)
             End If
         End If
@@ -1979,9 +1979,7 @@ Public Class BattleShipsGame
     ''' <summary>
     ''' Function swaps the direction path 
     ''' </summary>
-    ''' <param name="opponentMove"></param>
-    ''' <returns></returns>
-    Private Function swapPathDirection(ByRef opponentMove As gridLocation)
+    Private Sub swapPathDirection()
         'Swap the direction of the path
         oppositePath = True
         Select Case opponentMoveDirection
@@ -1991,8 +1989,7 @@ Public Class BattleShipsGame
             Case 4 : opponentMoveDirection = 3 'down -> up
         End Select
         opponentContinueOnCount = 1
-        Return opponentMove
-    End Function
+    End Sub
 
     ''' <summary>
     ''' Subroutine switches between the value of 1 and 2 each time to swap players after each turn
