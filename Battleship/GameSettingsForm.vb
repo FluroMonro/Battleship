@@ -1,16 +1,28 @@
 ﻿Public Class GameSettingsForm
     Dim playerName As String
     Dim timerNumValue As Integer
+
+    ''' <summary>
+    '''  subroutine called upon the form's load to call the subroutine which calls the subroutine to initialise controls.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub GameSettingsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         onLoadSettings()
     End Sub
+
+    ''' <summary>
+    ''' Subroutine calls the subroutine to initialse the form controls and sets the formID to reflect the form
+    ''' </summary>
     Public Sub onLoadSettings()
         formID = "GameSettings"
         initialiseFormControls()
     End Sub
-    Private Sub initialiseFormControls()
-        ''To intialise the controls in the correct way
 
+    ''' <summary>
+    ''' Subroutine initialises all the controls on the form in the correct locations and sizes and with the correct images.
+    ''' </summary
+    Private Sub initialiseFormControls()
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
         Me.Width = Screen.PrimaryScreen.Bounds.Width
@@ -38,9 +50,14 @@
         timervalue.Text = "02:30"
         timerckbx.Checked = False
     End Sub
-    Private Function validateName(name As String) As Boolean
-        'Validate the name the user has given
 
+    ''' <summary>
+    ''' Function determines if the name the user has provided is valid: if the name is between 3 and 16 characters long.
+    ''' Example of use: validateName("John") = True
+    ''' </summary>
+    ''' <param name="name">A string representing the players name: Eg. "John"</param>
+    ''' <returns>Returns whether the name is valid</returns>
+    Private Function validateName(name As String) As Boolean
         Dim length As Integer
         Dim valid As Boolean
         length = name.Length
@@ -53,24 +70,60 @@
         End If
         Return valid
     End Function
+
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
+
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
 
+    ''' <summary>
+    ''' Subroutine which takes the user to the main menu form.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'When Exit button is clicked
         Me.Hide()
         MainMenuForm.Show()
     End Sub
+
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Enter(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseEnter
         HighScoresForm.EnterOverSmallButton("playbtnGameSettings", Me)
     End Sub
+
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Leave(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseLeave
         HighScoresForm.ExitOverSmallButton("playbtnGameSettings", Me)
     End Sub
+
+    ''' <summary>
+    ''' Subroutine takes the information the user has given on the game settings form and sets the global variables to reflect this.
+    ''' Does not allow the player to play the game until they have a valid name.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playbtnGameSettings.Click
         'When the Play button is clicked
 
@@ -115,6 +168,7 @@
             End If
         End If
 
+        'Get the chosen time option
         If timerckbx.Checked = True Then
             timeOptionAsCountUp = False
             timeLeft = timerNumValue
@@ -129,8 +183,12 @@
             playGame()
         End If
     End Sub
+
+    ''' <summary>
+    ''' Subroutine takes the user to the Game form.
+    ''' </summary>
     Private Sub playGame()
-        'Clear the input field for the name
+        'Clear the input field for the name (for next reload)
         playerNameInputTxtbox.Text = ""
 
         'Update the global variables across forms
@@ -139,6 +197,12 @@
         BattleShipsGame.Show()
         BattleShipsGame.onFormLoad()
     End Sub
+
+    ''' <summary>
+    ''' Subroutine shows or hides the timer value bar depending on whether the timer check box is ticked.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timerckbx_CheckedChanged(sender As Object, e As EventArgs) Handles timerckbx.CheckedChanged
         'When the check box for the timer is checked show the value bar
         If timerckbx.Checked = True Then
@@ -150,6 +214,11 @@
         End If
     End Sub
 
+    ''' <summary>
+    ''' Subroutine changes the text of the timer value label to reflect the time chosen on the timer value bar.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
         timerNumValue = timerValueBar.Value * 30
         timervalue.Text = BattleShipsGame.convertStringIntegerTimeToDisplayTime(timerNumValue)
