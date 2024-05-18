@@ -1561,6 +1561,11 @@ Public Class BattleShipsGame
 
                 If shipSunk = True Then
                     targetShipSunkArr(newLength) = True
+                    If currentPlayer = 2 Then
+                        NextShip = True
+                        oppositePath = False
+                    End If
+
                     If playerstr = "player" Then
                         MsgBox("Your " & length & " length ship has been sunk")
                     Else
@@ -1759,7 +1764,6 @@ Public Class BattleShipsGame
         row = 0
         column = 0
 
-
         Dim opponentMove As gridLocation
         Dim tempdifficulty As String
 
@@ -1784,8 +1788,10 @@ Public Class BattleShipsGame
                 End If
 
             Case "Hard"
-                If hasAHit = False Then
+                If hasAHit = False OrElse NextShip = True Then
                     'If there hasn't been a hit, randomly choose an avaliable square on the board
+                    hasAHit = False
+                    NextShip = False
                     randomSquare(opponentMove)
                 Else
                     'If there has been a hit, computerStage will either be 1 or 2.
@@ -1970,7 +1976,11 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
 
-
+    ''' <summary>
+    ''' Function swaps the direction path 
+    ''' </summary>
+    ''' <param name="opponentMove"></param>
+    ''' <returns></returns>
     Private Function swapPathDirection(ByRef opponentMove As gridLocation)
         'Swap the direction of the path
         oppositePath = True
@@ -2257,7 +2267,12 @@ Public Class BattleShipsGame
         Return newtime
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine sorts the array of records 'highscores' into an order determined by the user.
+    ''' Example of use: BubbleSort(True, True)
+    ''' </summary>
+    ''' <param name="isTypeScore">A boolean representing whether to sort by the score field or by the time field of the record</param>
+    ''' <param name="orderAsDescending">A boolean determining whether to sort in ascending or descending order</param>
     Public Sub BubbleSort(isTypeScore As Boolean, orderAsDescending As Boolean)
         Dim Swapped As Boolean
         Swapped = True
