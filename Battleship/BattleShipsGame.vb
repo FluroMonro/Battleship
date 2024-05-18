@@ -98,10 +98,11 @@ Public Class BattleShipsGame
         timeOptionAsCountUp = timeOption
         timeLeft = timeSet
         formID = "Game"
-        MsgBox(timeLeft)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine is the mainline for the intialisation of the form and to get the game ready to play.
+    ''' </summary>
     Public Sub onFormLoad()
         gameTimer.Stop()
         timeInitialise()
@@ -109,9 +110,9 @@ Public Class BattleShipsGame
         initialiseFormControls()
         initialiseVariables()
 
-        'reset the boards before generating a new
-        resetGameArray(opponentgameArray)
-        resetGameArray(playergameArray)
+        'reset the boards before generating a new board
+        opponentgameArray = resetGameArray(opponentgameArray)
+        playergameArray = resetGameArray(playergameArray)
 
         'Generate the array of picture boxes that represents the game array 
         generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
@@ -128,7 +129,9 @@ Public Class BattleShipsGame
         currentPlayer = 1
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine initialises all the public variables
+    ''' </summary>
     Private Sub initialiseVariables()
         Dim playerMissCount As Integer
         Dim playerHitCount As Integer
@@ -360,10 +363,13 @@ Public Class BattleShipsGame
         Return targetobject
     End Function
 
-
-    Private Sub resetGameArray(array As Array)
-        'resets the entire array to all 0s
-
+    ''' <summary>
+    ''' Function sets all the elements in the array to be 0 (empty)
+    ''' Example of use: playerGameArr = resetGameArray(playerGameArr)
+    ''' </summary>
+    ''' <param name="array">A 2D array</param>
+    ''' <returns>The array after being reset to 0</returns>
+    Private Function resetGameArray(array As Array) As Array
         Dim row As Integer
         Dim col As Integer
 
@@ -375,7 +381,8 @@ Public Class BattleShipsGame
                 array(col, row) = 0
             Next row
         Next col
-    End Sub
+        Return array
+    End Function
 
 
     Public Sub generatePicture(pictureBoxArray As Array, picBoard As Object, currentPlayer As Integer)
@@ -449,15 +456,19 @@ Public Class BattleShipsGame
         Next row
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine calls generateShips for each ship
+    ''' Example of use: generateGameArr(playerGameArr, 1)
+    ''' </summary>
+    ''' <param name="gameArr">The empty 2D array that will be populated with the locations of the ships.</param>
+    ''' <param name="player">An integer representation of the player. Eg. 1: the player, 2: the opponent</param>
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
         generateShips(gameArr, 2, player)
-            generateShips(gameArr, 3, player)
-            generateShips(gameArr, 3, player)
-            generateShips(gameArr, 4, player)
-            generateShips(gameArr, 5, player)
-            wait(0.2)
+        generateShips(gameArr, 3, player)
+        generateShips(gameArr, 3, player)
+        generateShips(gameArr, 4, player)
+        generateShips(gameArr, 5, player)
     End Sub
 
 
@@ -501,7 +512,7 @@ Public Class BattleShipsGame
                         signedIndicatorX = 1
                         signedIndicatorY = 0
                 End Select
-                If isValidPlace(col, row, length, direction) = True Then
+                If isValidPlace(col, row, length, directionShipFacing) = True Then
                     Select Case length
                         Case 2
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 Then
@@ -684,31 +695,38 @@ Public Class BattleShipsGame
         Next elementCount
     End Sub
 
-
-    Private Function isValidPlace(col, row, length, direction) As Boolean
-        'To check if the ship is not on an edge of the board that will cause an error
-
+    ''' <summary>
+    ''' Function determines whether the a ship can be placed in the position that has been randomly generated
+    ''' To check if the ship will not be generated over the edge of the board: that will cause an error
+    ''' Example of use: isValidPlace(3,4,5,"left")
+    ''' </summary>
+    ''' <param name="col">An integer representing the X value (column) of the ships beginning</param>
+    ''' <param name="row">An integer representing the Y value (row) of the ships beginning</param>
+    ''' <param name="length">An integer representing the length of the ship</param>
+    ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
+    ''' <returns>A boolean for if the placement of the ship is valid</returns>
+    Private Function isValidPlace(col As Integer, row As Integer, length As Integer, direction As String) As Boolean
         'Assume to be true unless an edge case below
         Dim valid As Boolean
         valid = True
 
         Select Case direction
-            Case 1 'up and ship faces down
+            Case "up" 'Ship faces up: Down from random start position
                 If row - length < 0 Then
                     'If too close to the edge on the top side
                     valid = False
                 End If
-            Case 2 'down
+            Case "down" 'Ship faces down: Up from random start position
                 If row + length > gridSize Then
                     'If too close to the edge on the bottom side
                     valid = False
                 End If
-            Case 3 'left
+            Case "right" 'Ship faces right: Left from random start position
                 If col - length < 0 Then
                     'If too close to the edge on the left side
                     valid = False
                 End If
-            Case 4 'right
+            Case "left" 'Ship faces left: Right from random start position
                 If col + length > gridSize Then
                     'If too close to the edge on the right side
                     valid = False
@@ -983,9 +1001,11 @@ Public Class BattleShipsGame
         picbox.Image = new_b
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine assigns the picturebox with the correct image from the pictures folder.
+    ''' </summary>
+    ''' <param name="picboard">The picturebox of the ship</param>
     Private Sub assignShipImages(picboard As PictureBox)
-
         'Assign each ship picturebox with the correct picture
         Select Case picboard.Name
             Case opponentShipPicbox2.Name : opponentShipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
@@ -1204,9 +1224,12 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine ends the game without determining the score or taking the user to the game over form.
+    ''' </summary>
     Private Sub gameIsOverNoResult()
         timeEnd()
+        'Re-setting the variables that will cause incorrect statistics if left
         playerMissCount = 0
         playerHitCount = 0
         opponentMissCount = 0
@@ -1222,16 +1245,20 @@ Public Class BattleShipsGame
         timeInitialise()
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine ends the game and runs scoring before taking the user to the game over form.
+    ''' </summary>
     Private Sub gameIsOverWithResult()
         timeEnd()
         determineScore()
         scoring()
 
-        If time = 0 OrElse time = 3599 Then
+        'If the timer has run out: set the time to be the chosen time
+        If time = 0 Then
             time = timeLeft
         End If
 
+        'Re-setting the variables that will cause incorrect statistics if left
         playerMissCount = 0
         playerHitCount = 0
         opponentMissCount = 0
@@ -1239,7 +1266,9 @@ Public Class BattleShipsGame
         showgameOverForm()
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine takes the user to the gameOver form and updates the global variables
+    ''' </summary>
     Private Sub showgameOverForm()
         Me.Hide()
         endTime = convertStringIntegerTimeToDisplayTime(time)
