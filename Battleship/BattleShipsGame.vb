@@ -848,14 +848,14 @@ Public Class BattleShipsGame
 
         Select Case direction
             Case "left"
-                rotateImage90(targetship)
-                rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
             Case "down"
-                rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
             Case "up"
-                rotateImage90(targetship)
-                rotateImage90(targetship)
-                rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
+                targetship = rotateImage90(targetship)
         End Select
 
         targetship.Parent = parentgridbox
@@ -999,21 +999,27 @@ Public Class BattleShipsGame
         End Select
     End Sub
 
-
-    Private Sub rotateImage90(picbox As PictureBox)
+    ''' <summary>
+    ''' Function rotates the image 90 degrees clockwise within it's picturebox
+    ''' Example of use: targetship = rotateImage90(targetship)
+    ''' </summary>
+    ''' <param name="picbox">The picturebox thats image is to be rotated inside it</param>
+    ''' <returns>The same picturebox with it's image rotated 90 degrees</returns>
+    Private Function rotateImage90(picbox As PictureBox) As PictureBox
         'To rotate the image 90 degrees and scale it correctly
-        Dim bmp As Bitmap = New Bitmap(picbox.Image)
+        Dim bmp As Bitmap
+        bmp = New Bitmap(picbox.Image)
         bmp.RotateFlip(RotateFlipType.Rotate90FlipNone)
         picbox.Image = bmp
-    End Sub
+        Return picbox
+    End Function
 
     ''' <summary>
     ''' Subroutine reveals the opponents ships at the end of the game.
-    ''' As opponent ships are hidden at the start, there is really only a need to make them visible.  
     ''' </summary>
     Private Sub revealships()
         If gameOver = True Then
-            'show opponents Ships
+            'Sets all the ships to be 'hit' to allow them to appear with the correct images
             For i = 1 To 2
                 opponentShip2(i).isHit = True
             Next i
@@ -1029,6 +1035,8 @@ Public Class BattleShipsGame
             Next i
 
             checkIfSunk(2)
+
+            'Allows the user to view the opponents ships for 1 second before being taken to the game over form
             wait(1)
         End If
     End Sub
@@ -1549,19 +1557,19 @@ Public Class BattleShipsGame
                             Case "left"
                                 Xscale = gridCircleSizeNum * length
                                 Yscale = gridCircleSizeNum
-                                rotateImage90(targetShipPicbox)
-                                rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
                             Case "up"
                                 Xscale = gridCircleSizeNum
                                 Yscale = gridCircleSizeNum * length
-                                rotateImage90(targetShipPicbox)
-                                rotateImage90(targetShipPicbox)
-                                rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
                                 targetShipPicbox.Location = targetShipPicbox.Location - New Point(0, ((length - 1) * gridCircleSizeNum))
                             Case "down"
                                 Xscale = gridCircleSizeNum
                                 Yscale = gridCircleSizeNum * length
-                                rotateImage90(targetShipPicbox)
+                                targetShipPicbox = rotateImage90(targetShipPicbox)
                         End Select
 
                         targetShipPicbox.Size = New Size(Xscale, Yscale)
@@ -1686,10 +1694,12 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine freezes the processing the computer for 10 milliseconds at a time until it reaches the given time
+    ''' Example of use: wait(0.5)
+    ''' </summary>
+    ''' <param name="seconds">A single precision floating point of the number of seconds to wait for: eg. 0.5</param>
     Private Sub wait(ByVal seconds As Single)
-        'Freeze the processing the computer for 10 milliseconds until it reaches the given time
-
         Dim i As Integer
         i = 0
 
