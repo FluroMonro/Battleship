@@ -1007,22 +1007,29 @@ Public Class BattleShipsGame
         picbox.Image = bmp
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine reveals the opponents ships at the end of the game.
+    ''' As opponent ships are hidden at the start, there is really only a need to make them visible.  
+    ''' </summary>
     Private Sub revealships()
         If gameOver = True Then
             'show opponents Ships
-            opponentShipPicbox2.Visible = True
-            opponentShipPicbox3a.Visible = True
-            opponentShipPicbox3b.Visible = True
-            opponentShipPicbox4.Visible = True
-            opponentShipPicbox5.Visible = True
-        Else
-            'hide opponents ships
-            opponentShipPicbox2.Visible = False
-            opponentShipPicbox3a.Visible = False
-            opponentShipPicbox3b.Visible = False
-            opponentShipPicbox4.Visible = False
-            opponentShipPicbox5.Visible = False
+            For i = 1 To 2
+                opponentShip2(i).isHit = True
+            Next i
+            For i = 1 To 3
+                opponentShip3a(i).isHit = True
+                opponentShip3b(i).isHit = True
+            Next i
+            For i = 1 To 4
+                opponentShip4(i).isHit = True
+            Next i
+            For i = 1 To 5
+                opponentShip5(i).isHit = True
+            Next i
+
+            checkIfSunk(2)
+            wait(1)
         End If
     End Sub
 
@@ -1208,7 +1215,6 @@ Public Class BattleShipsGame
 
     Private Sub gameIsOverWithResult()
         timeEnd()
-        revealships()
         determineScore()
         scoring()
 
@@ -1519,12 +1525,18 @@ Public Class BattleShipsGame
                     If playerstr = "player" Then
                         MsgBox("Your " & length & " length ship has been sunk")
                     Else
-                        MsgBox("You sunk the opponents " & length & " length ship")
-                        playershipSunkCount = playershipSunkCount + 1
+                        If gameOver = False Then
+                            MsgBox("You sunk the opponents " & length & " length ship")
+                            playershipSunkCount = playershipSunkCount + 1
+                        End If
                         targetShipPicbox.Visible = True
                         targetShipPicbox.Parent = parentBoard
                         targetShipPicbox.BringToFront()
-                        targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
+                        If gameOver = False Then
+                            targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
+                        Else
+                            targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Unsunk.png"
+                        End If
                         targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
                         targetShipPicbox.Load(targetShipPicbox.ImageLocation)
 
@@ -1634,6 +1646,9 @@ Public Class BattleShipsGame
                 End If
                 'If score Is negative, Then the opponent has more ships left than the player and player loses
             End If
+        End If
+        If gameOutcome = "lose" OrElse gameOutcome = "Draw" Then
+            revealships()
         End If
         Return score
     End Function
@@ -1948,7 +1963,12 @@ Public Class BattleShipsGame
         Return num
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine takes the user back to the main menu form when clicked.
+    ''' Runs the gameIsOverNoResult() to make sure score is not recorded, but game is left in a state that a new one can be created by the user. 
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Exit back to the main menu
         gameIsOverNoResult()
@@ -1956,18 +1976,32 @@ Public Class BattleShipsGame
         MainMenuForm.Show()
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving mouse over the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
 
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving mouse off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine reloads the page when clicked.
+    ''' Disables itself from being clicked for 2 seconds after the form has been re-loaded to stop the user from being able to spam click it.
+    ''' Runs the gameIsOverNoResult() to make sure score is not recorded, but game is left in a state that a new one can be run.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Click(sender As Object, e As EventArgs) Handles resetbtn.Click
         'Reload the page
         resetbtn.Enabled = False
@@ -1977,24 +2011,40 @@ Public Class BattleShipsGame
         resetbtn.Enabled = True
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving mouse over the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
         HighScoresForm.EnterOverSmallButton("resetbtn", Me)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
         HighScoresForm.ExitOverSmallButton("resetbtn", Me)
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine changes the grid circle from a transparent circle to a green circle (hover)
+    ''' Each picbox created in generatePicture() has been set to handle this subroutine
+    ''' Example of use: AddHandler picbox.MouseEnter, AddressOf mouseEnterGridCircle
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub mouseEnterGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim picbox As PictureBox
         picbox = sender
         If picbox.ImageLocation = (Application.StartupPath & "\pictures\TransparentCircle.png") Then
+            'To change a transparent circle to a green circle
             picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png"
             resizeAndMoveImageWithinPicbox(picbox, 1, gridCircleSizeNum, "noDirection")
         Else
+            'To change a 'hidden' ship location with a transparent circle to a green circle
             If picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" Then
                 picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircleHidden.png"
                 resizeAndMoveImageWithinPicbox(picbox, 1, gridCircleSizeNum, "noDirection")
@@ -2002,14 +2052,22 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine changes the grid circle back to a transparent circle from a green circle.
+    ''' Each picbox created in generatePicture() has been set to handle this subroutine
+    '''  Example of use: AddHandler() picbox.MouseLeave, AddressOf mouseExitGridCircle
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub mouseExitGridCircle(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim picbox As PictureBox
         picbox = sender
         If picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircle.png" Then
+            'To change back a green circle to a transparent circle
             picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
             resizeAndMoveImageWithinPicbox(picbox, 1, gridCircleSizeNum, "noDirection")
         Else
+            'To change a 'hidden' ship location with a green circle back to a transparent circle
             If picbox.ImageLocation = Application.StartupPath & "\pictures\GreenCircleHidden.png" Then
                 picbox.ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
                 resizeAndMoveImageWithinPicbox(picbox, 1, gridCircleSizeNum, "noDirection")
