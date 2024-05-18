@@ -80,13 +80,20 @@ Public Class BattleShipsGame
     Public opponentMoveDirection As Integer
     Public opponentContinueOnCount As Integer
 
-
-    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, shipPlacementOption As Boolean, timeOption As Boolean, timeSet As Integer)
+    ''' <summary>
+    ''' Subroutine updates the form's global variables from the module of global variables 
+    ''' Example of use: updateGlobalVars("John",10,"Normal"
+    ''' </summary>
+    ''' <param name="name">A string representing the </param>
+    ''' <param name="size"></param>
+    ''' <param name="userDifficulty"></param>
+    ''' <param name="timeOption"></param>
+    ''' <param name="timeSet"></param>
+    Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, timeOption As Boolean, timeSet As Integer)
         'Updating the global variables from across forms
         playerName = name
         gridSize = size
         difficulty = userDifficulty
-        isShipPlacementRandom = shipPlacementOption
         timeOptionAsCountUp = timeOption
         timeLeft = timeSet
         formID = "Game"
@@ -443,19 +450,12 @@ Public Class BattleShipsGame
 
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
-        If isShipPlacementRandom = True Then
-            generateShips(gameArr, 2, player)
+        generateShips(gameArr, 2, player)
             generateShips(gameArr, 3, player)
             generateShips(gameArr, 3, player)
             generateShips(gameArr, 4, player)
             generateShips(gameArr, 5, player)
             wait(0.2)
-        Else
-            If isShipPlacementRandom = False Then
-                MsgBox("own choice shipPlacement")
-            End If
-        End If
-
     End Sub
 
 

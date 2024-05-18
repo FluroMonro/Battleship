@@ -29,9 +29,6 @@ Partial Class GameSettingsForm
         Titlelbl = New Label()
         playerNameInputTxtbox = New TextBox()
         playernamewarninglbl = New Label()
-        shipPlacementlbl = New Label()
-        shipPlacementOwn = New RadioButton()
-        shipPlacementRand = New RadioButton()
         difficultylbl = New Label()
         difUnfair = New RadioButton()
         difHard = New RadioButton()
@@ -43,7 +40,6 @@ Partial Class GameSettingsForm
         BoardSizebtn14 = New RadioButton()
         boardSizelbl = New Label()
         Panel1 = New Panel()
-        Panel2 = New Panel()
         Panel3 = New Panel()
         difImpos = New RadioButton()
         timerckbx = New CheckBox()
@@ -51,7 +47,6 @@ Partial Class GameSettingsForm
         timervalue = New Label()
         CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
-        Panel2.SuspendLayout()
         Panel3.SuspendLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -143,43 +138,6 @@ Partial Class GameSettingsForm
         playernamewarninglbl.Size = New Size(195, 19)
         playernamewarninglbl.TabIndex = 10
         playernamewarninglbl.Text = "Must be 3-16 characters Long"
-        ' 
-        ' shipPlacementlbl
-        ' 
-        shipPlacementlbl.AutoSize = True
-        shipPlacementlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipPlacementlbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        shipPlacementlbl.Location = New Point(24, 15)
-        shipPlacementlbl.Name = "shipPlacementlbl"
-        shipPlacementlbl.Size = New Size(169, 28)
-        shipPlacementlbl.TabIndex = 18
-        shipPlacementlbl.Text = "Ship Placement: "
-        ' 
-        ' shipPlacementOwn
-        ' 
-        shipPlacementOwn.AutoSize = True
-        shipPlacementOwn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipPlacementOwn.FlatStyle = FlatStyle.Flat
-        shipPlacementOwn.Location = New Point(204, 49)
-        shipPlacementOwn.Name = "shipPlacementOwn"
-        shipPlacementOwn.Size = New Size(89, 19)
-        shipPlacementOwn.TabIndex = 17
-        shipPlacementOwn.Text = "Own Choice"
-        shipPlacementOwn.UseVisualStyleBackColor = False
-        ' 
-        ' shipPlacementRand
-        ' 
-        shipPlacementRand.AutoSize = True
-        shipPlacementRand.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        shipPlacementRand.Checked = True
-        shipPlacementRand.FlatStyle = FlatStyle.Flat
-        shipPlacementRand.Location = New Point(204, 24)
-        shipPlacementRand.Name = "shipPlacementRand"
-        shipPlacementRand.Size = New Size(69, 19)
-        shipPlacementRand.TabIndex = 16
-        shipPlacementRand.TabStop = True
-        shipPlacementRand.Text = "Random"
-        shipPlacementRand.UseVisualStyleBackColor = False
         ' 
         ' difficultylbl
         ' 
@@ -321,17 +279,6 @@ Partial Class GameSettingsForm
         Panel1.Size = New Size(265, 151)
         Panel1.TabIndex = 23
         ' 
-        ' Panel2
-        ' 
-        Panel2.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Panel2.Controls.Add(shipPlacementlbl)
-        Panel2.Controls.Add(shipPlacementOwn)
-        Panel2.Controls.Add(shipPlacementRand)
-        Panel2.Location = New Point(797, 412)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(320, 107)
-        Panel2.TabIndex = 24
-        ' 
         ' Panel3
         ' 
         Panel3.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
@@ -404,7 +351,6 @@ Partial Class GameSettingsForm
         Controls.Add(timerValueBar)
         Controls.Add(timerckbx)
         Controls.Add(Panel3)
-        Controls.Add(Panel2)
         Controls.Add(Panel1)
         Controls.Add(playernamewarninglbl)
         Controls.Add(playerNameInputTxtbox)
@@ -418,8 +364,6 @@ Partial Class GameSettingsForm
         CType(backgroundImg, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        Panel2.ResumeLayout(False)
-        Panel2.PerformLayout()
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).EndInit()
@@ -433,9 +377,6 @@ Partial Class GameSettingsForm
     Friend WithEvents Titlelbl As Label
     Friend WithEvents playerNameInputTxtbox As TextBox
     Friend WithEvents playernamewarninglbl As Label
-    Friend WithEvents shipPlacementlbl As Label
-    Friend WithEvents shipPlacementOwn As RadioButton
-    Friend WithEvents shipPlacementRand As RadioButton
     Friend WithEvents difficultylbl As Label
     Friend WithEvents difUnfair As RadioButton
     Friend WithEvents difHard As RadioButton
@@ -447,7 +388,6 @@ Partial Class GameSettingsForm
     Friend WithEvents BoardSizebtn14 As RadioButton
     Friend WithEvents boardSizelbl As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents timerckbx As CheckBox
     Friend WithEvents timerValueBar As TrackBar

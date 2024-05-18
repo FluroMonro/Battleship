@@ -31,7 +31,6 @@
         playerNameInputTxtbox.Text = ""
         playernamewarninglbl.Visible = False
         BoardSizebtn10.Checked = True
-        shipPlacementRand.Checked = True
         difNorm.Checked = True
         timerValueBar.Visible = False
         timervalue.Visible = False
@@ -95,13 +94,6 @@
             End If
         End If
 
-        'Get the chosen placement setting
-        If shipPlacementRand.Checked = True Then
-            isShipPlacementRandom = True
-        Else
-            isShipPlacementRandom = False
-        End If
-
         'Get the chosen difficulty
         If difBegin.Checked = True Then
             difficulty = "Beginner"
@@ -142,7 +134,7 @@
         playerNameInputTxtbox.Text = ""
 
         'Update the global variables across forms
-        BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, isShipPlacementRandom, timeOptionAsCountUp, timeLeft)
+        BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, timeOptionAsCountUp, timeLeft)
         Me.Hide()
         BattleShipsGame.Show()
         BattleShipsGame.onFormLoad()
