@@ -82,13 +82,14 @@ Public Class BattleShipsGame
 
     ''' <summary>
     ''' Subroutine updates the form's global variables from the module of global variables 
-    ''' Example of use: updateGlobalVars("John",10,"Normal"
+    ''' Is called by the gameSettings Form
+    ''' Example of use: updateGlobalVars("John",10,"Normal",True,0)
     ''' </summary>
-    ''' <param name="name">A string representing the </param>
-    ''' <param name="size"></param>
-    ''' <param name="userDifficulty"></param>
-    ''' <param name="timeOption"></param>
-    ''' <param name="timeSet"></param>
+    ''' <param name="name">A string representing the player's name. Eg. "John"</param>
+    ''' <param name="size">An integer representing the number of grid circles in the game. Eg. 10: the board would be 10x10 grid circles in size.</param>
+    ''' <param name="userDifficulty">A string representing the difficulty the user has chosen. Eg. "Normal"</param>
+    ''' <param name="timeOption">A boolean representing whether the user has chosen to have a timer or a stopwatch. For True: a stopwatch (counting up), and for False a timer (counting down)</param>
+    ''' <param name="timeSet">The time the user has set, if they have chosen the 'timer'. Otherwise (for above timeOption as True): is 0</param>
     Public Sub updateGlobalVars(name As String, size As Integer, userDifficulty As String, timeOption As Boolean, timeSet As Integer)
         'Updating the global variables from across forms
         playerName = name
@@ -97,6 +98,7 @@ Public Class BattleShipsGame
         timeOptionAsCountUp = timeOption
         timeLeft = timeSet
         formID = "Game"
+        MsgBox(timeLeft)
     End Sub
 
 
