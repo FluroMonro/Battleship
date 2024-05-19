@@ -31,7 +31,6 @@
         Me.Height = Screen.PrimaryScreen.Bounds.Height
 
         'Setting the placement and size of controls on the form
-
         backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
         backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundImg.Location = New Point(0, 0)
@@ -39,6 +38,7 @@
         scoretxt.Text = endScore
         timetxt.Text = endTime
 
+        'Display the appropriate form controls 
         If outcomeOfGame = "Win" Then
             youwinlbl.Visible = True
             scorelbl.Visible = True
@@ -57,7 +57,6 @@
                 computerwinslbl.Visible = False
                 drawlbl.Visible = True
             End If
-
         End If
     End Sub
 

@@ -220,6 +220,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
+        'Increments of 30s
         timerNumValue = timerValueBar.Value * 30
         timervalue.Text = BattleShipsGame.convertStringIntegerTimeToDisplayTime(timerNumValue)
     End Sub

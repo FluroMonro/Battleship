@@ -468,16 +468,22 @@ Public Class BattleShipsGame
     ''' <param name="player">An integer representation of the player. Eg. 1: the player, 2: the opponent</param>
     Private Sub generateGameArr(gameArr As Array, player As Integer)
         'To generate the game array, whether randomly or by choice
-        generateShips(gameArr, 2, player)
-        generateShips(gameArr, 3, player)
-        generateShips(gameArr, 3, player)
-        generateShips(gameArr, 4, player)
-        generateShips(gameArr, 5, player)
+        gameArr = generateShips(gameArr, 2, player)
+        gameArr = generateShips(gameArr, 3, player)
+        gameArr = generateShips(gameArr, 3, player)
+        gameArr = generateShips(gameArr, 4, player)
+        gameArr = generateShips(gameArr, 5, player)
     End Sub
 
-
+    ''' <summary>
+    ''' Populates the game array with a ship at a valid random location in a random direction 
+    ''' Example of use: gameArr = generateShips(playerGameArr, 3, 1)
+    ''' </summary>
+    ''' <param name="gameArr">The game array to be populated: eg. playerGameArr </param>
+    ''' <param name="length">The length of the ship: eg. 3</param>
+    ''' <param name="currentplayernum">The integer representation of the owner of the game array: eg. 1 for the player</param>
+    ''' <returns>An updated version of the game array</returns>
     Private Function generateShips(gameArr As Array, length As Integer, currentplayernum As Integer) As Array
-
         'Declare local variables
         Dim valid As Boolean
         valid = False
@@ -521,24 +527,24 @@ Public Class BattleShipsGame
                         Case 2
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 Then
                                 'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                                 'Set the respective ship record to the same starting location
                             End If
                         Case 3
                             'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
 
                             End If
                         Case 4
                             'If all the other 3 squares are empty: set all 4 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                         Case 5
                             'If all the other 4 squares are empty: set all 5 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 AndAlso gameArr(col + (4 * signedIndicatorX), row + (4 * signedIndicatorY)) = 0 Then
-                                valid = loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
                             End If
                     End Select
                 End If
@@ -553,64 +559,65 @@ Public Class BattleShipsGame
         Return gameArr
     End Function
 
-
-    Private Function loopThroughForEachShipUntilValidAndChangeValue(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
-        Dim X As Integer
-        Dim Y As Integer
-        Dim RowOrColumn As Integer
+    ''' <summary>
+    ''' Function assigns the location for the ship, populating the game array
+    ''' Once stored and run, return a true to allow generateShips() to continue
+    ''' Example of use: populateGameArr(1,0,3,"left",5,2,playerGameArr,1) = true
+    ''' </summary>
+    ''' <param name="signedIndicatorX">An integer which is used to multiply by 1 or -1 in the X direction</param>
+    ''' <param name="signedIndicatorY">An integer which is used to multiply by 1 or -1 in the Y direction</param>
+    ''' <param name="length">The length of the ship: eg. 3</param>
+    ''' <param name="directionShipFacing">A string representing the direction the ship is facing: eg. "left"</param>
+    ''' <param name="col">An integer representing the column the ship has been placed in</param>
+    ''' <param name="row">An integer representing the row the ship has been placed in</param>
+    ''' <param name="gameArr">The game array to be populated: eg. playerGameArr</param>
+    ''' <param name="currentplayernum">The integer representation of the owner of the game array: eg. 1 for the player</param>
+    ''' <returns>A boolean of True (valid = true)</returns>
+    Private Function populateGameArr(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
         Dim i As Integer
-
-        X = 0
-        Y = 0
-        RowOrColumn = 0
         i = 0
 
+        'Assign every location of the ship in the game Array
         Select Case directionShipFacing
             Case "right"
-                RowOrColumn = col
-                For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1))) Step -1
-                    X = i
-                    Y = row
-
-                    gameArr(X, Y) = 1
+                'Goes backwards in X from start
+                For i = col To (col + (signedIndicatorX * (length - 1))) Step -1
+                    gameArr(i, row) = 1
                 Next i
 
-
             Case "left"
-                RowOrColumn = col
-                For i = RowOrColumn To (RowOrColumn + (signedIndicatorX * (length - 1)))
-                    X = i
-                    Y = row
-
-                    gameArr(X, Y) = 1
+                'Goes fowards in X from start
+                For i = col To (col + (signedIndicatorX * (length - 1)))
+                    gameArr(i, row) = 1
                 Next i
 
             Case "up"
-                RowOrColumn = row
-                For i = RowOrColumn To (RowOrColumn + (signedIndicatorY * (length - 1))) Step -1
-                    X = col
-                    Y = i
-
-                    gameArr(X, Y) = 1
+                'Goes backwards in Y from start
+                For i = row To (row + (signedIndicatorY * (length - 1))) Step -1
+                    gameArr(col, i) = 1
                 Next i
 
             Case "down"
-                RowOrColumn = row
-                For i = RowOrColumn To (RowOrColumn + (signedIndicatorY * (length - 1)))
-                    X = col
-                    Y = i
-
-                    gameArr(X, Y) = 1
+                'Goes forwards in Y from start
+                For i = row To (row + (signedIndicatorY * (length - 1)))
+                    gameArr(col, i) = 1
                 Next i
         End Select
+        'Store those positions within each individual ship record
         setIndividualShipLocations(col, row, length, directionShipFacing, currentplayernum)
         Return True
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine stores the locations of each individual ship into their respective records
+    ''' Example of use: setIndividualShipLocations(5, 2, 3, "left", 1)
+    ''' </summary>
+    ''' <param name="col">An integer representing the column the ship has been placed in</param>
+    ''' <param name="row">An integer representing the row the ship has been placed in</param>
+    ''' <param name="length">The length of the ship: eg. 3</param>
+    ''' <param name="direction">A string representing the direction the ship is facing: eg. "left"</param>
+    ''' <param name="currentplayernum">The integer representation of the owner of the game array: eg. 1 for the player</param>
     Private Sub setIndividualShipLocations(col As Integer, row As Integer, length As Integer, direction As String, currentplayernum As Integer)
-        'to set storage of the individual ships
-
         Dim Xoffset As Integer
         Dim Yoffset As Integer
         Dim playerDuplicateship As Boolean
@@ -1194,7 +1201,7 @@ Public Class BattleShipsGame
     ''' <param name="playerMove">A record with field X and field Y representing the location of the move on the grid.</param>
     Private Sub game(playerMove As gridLocation)
         'check the move of the player (hit, miss, game over)
-        check(playerMove, opponentgameArray) ' function needs a better name
+        opponentgameArray = check(playerMove, opponentgameArray) ' function needs a better name
 
         'Update displayed score and stats for the player
         updateInGameScore(1)
@@ -1218,7 +1225,7 @@ Public Class BattleShipsGame
                 'Fetch opponents move
                 opponentmove = computerMove()
                 'check whether a hit or a miss or if game is over
-                check(opponentmove, playergameArray)
+                playergameArray = check(opponentmove, playergameArray)
 
                 'Update diaplyed score and stats for the opponent
                 updateInGameScore(2)
@@ -1239,7 +1246,7 @@ Public Class BattleShipsGame
                             opponentmove = computerMove()
 
                             'check, returns whether it is game over or not
-                            check(opponentmove, playergameArray)
+                            playergameArray = check(opponentmove, playergameArray)
 
                             'update score and stats
                             updateInGameScore(2)
@@ -1322,10 +1329,15 @@ Public Class BattleShipsGame
         time = 0
     End Sub
 
-
+    ''' <summary>
+    ''' Function determines whether the move is a hit or a miss and what to do in either case.
+    ''' Checks if ships have been hit or sunk and check if the game can continue (there are still battleships left to hit)
+    ''' Example: check(playerMove, opponentGameArr)
+    ''' </summary>
+    ''' <param name="Move">A record of gridLocation with fields X,Y and isHit: eg. playerMove</param>
+    ''' <param name="gameArr">The game array in question: eg. opponentGameArr</param>
+    ''' <returns>The updated game array</returns>
     Private Function check(ByRef Move As gridLocation, gameArr As Array) As Array
-        'Determines whether the move is a hit or a miss and what to do in either case
-
         If gameArr(Move.X, Move.Y) = 0 Then
             'Miss
             If currentPlayer = 1 Then
