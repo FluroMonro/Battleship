@@ -254,7 +254,8 @@ Public Class BattleShipsGame
         timelbl.Size = New Size(80, 30)
 
         'Using an offset dependent on the length of playername so that the text won't overlap on the game boards
-        Dim playernameoffSet = 5 * (playerName.Length)
+        Dim playernameoffSet As Integer
+        playernameoffSet = 5 * (playerName.Length)
         playernametxt.Text = playerName
         playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
         playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
@@ -419,7 +420,7 @@ Public Class BattleShipsGame
 
         For row = 1 To gridSize
             For col = 1 To gridSize
-                Dim picbox = New PictureBox
+                Dim picbox As New PictureBox
                 'Data
                 picbox.Name = col & "_" & row
                 picbox.Parent = picBoard
@@ -487,13 +488,14 @@ Public Class BattleShipsGame
     Private Function generateShips(gameArr As Array, length As Integer, currentplayernum As Integer) As Array
         'Declare local variables
         Dim valid As Boolean
-        valid = False
         Dim col As Integer
         Dim row As Integer
         Dim direction As Integer
         Dim signedIndicatorX As Integer
         Dim signedIndicatorY As Integer
         Dim directionShipFacing As String
+        valid = False
+        directionShipFacing = ""
 
         'While loop to continue until there is a valid location chosen
         While valid = False
@@ -883,7 +885,6 @@ Public Class BattleShipsGame
     ''' <param name="parentgridbox">The original (lowest layer) picturebox to be changed each loop creating a parenting stack</param>
     ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
     Private Sub rightAndDown(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
-        Dim newCount As Integer
         Dim targetgridbox As PictureBox
         Dim count As Integer
         count = 0
@@ -963,9 +964,10 @@ Public Class BattleShipsGame
     ''' <param name="radius">An integer that represents the size (radius) of the image</param>
     ''' <param name="direction">A string representing the direction in which to move the image</param>
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
-        picbox.Load(picbox.ImageLocation)
         Dim Xloc As Integer
         Dim Yloc As Integer
+
+        picbox.Load(picbox.ImageLocation)
 
         'Transformation magnitidue and direction of picture 
         Select Case direction
@@ -1153,7 +1155,6 @@ Public Class BattleShipsGame
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param
     Private Sub getPlayerMove(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim playerMove As gridLocation
-        Dim correctGridSquare As Boolean
         Dim picLocation As String
         picLocation = sender.Name
 
@@ -1601,6 +1602,7 @@ Public Class BattleShipsGame
         Dim count As Integer
         length = 0
         count = 0
+        targetShipPicboxStr = ""
 
         'For every ship
         For length = 2 To 5
@@ -1777,8 +1779,9 @@ Public Class BattleShipsGame
     ''' <returns>The score of the user as an integer</returns>
     Private Function determineScore() As Integer
         'As swap player is after determine score in game(), the current player will always be the one who had the last move, and is hence, the winner
-        Dim winner = currentPlayer
+        Dim winner As Integer
         Dim tempScore As Integer
+        winner = currentPlayer
 
         'To check whether the game has been ended by time or by sinking all the ships
         If boardEmpty = True Then
@@ -1910,11 +1913,11 @@ Public Class BattleShipsGame
         'Get the move for the computer
         Dim row As Integer
         Dim column As Integer
-        row = 0
-        column = 0
-
         Dim opponentMove As gridLocation
         Dim tempdifficulty As String
+        tempdifficulty = ""
+        row = 0
+        column = 0
 
         'As only difference between Unfair and Hard difficulties is Extra turns, they have the same processes
         tempdifficulty = difficulty
@@ -1985,9 +1988,9 @@ Public Class BattleShipsGame
     ''' <returns>A record with X and Y fields representing the grid location</returns>
     Private Function randomSquare() As gridLocation
         Dim count As Integer
-        count = 1
         Dim foundMovePos As Boolean
         Dim opponentMove As gridLocation
+        count = 1
 
         'To make sure each location has not been taken already
         While foundMovePos = False And count < 20
@@ -2194,7 +2197,6 @@ Public Class BattleShipsGame
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-
         HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
 
@@ -2329,10 +2331,11 @@ Public Class BattleShipsGame
 
         'For the top 10 in 'default' sorting
         For i = 1 To 10
+            Dim fileContents As String
+
             'score
-            Dim fileContents
             FileSystem.Input(1, fileContents)
-            arrHighScores(i).score = fileContents
+            arrHighScores(i).score = CInt(fileContents)
 
             'name
             FileSystem.Input(1, fileContents)
@@ -2446,8 +2449,8 @@ Public Class BattleShipsGame
     ''' <param name="orderAsDescending">A boolean determining whether to sort in ascending or descending order</param>
     Public Sub BubbleSort(isTypeScore As Boolean, orderAsDescending As Boolean)
         Dim Swapped As Boolean
-        Swapped = True
         Dim Last As Integer
+        Swapped = True
         Last = arrHighScores.Length - 1
 
         'Swapped as a bailout if in order (no swaps) instead of having to keep checking
