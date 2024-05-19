@@ -328,20 +328,35 @@ Public Class BattleShipsGame
         Next player
     End Sub
 
-
+    ''' <summary>
+    ''' Determines the pictrebox associated with the correct ship after it has been parented with the grid circles it is on top of.
+    ''' Example of use: referenceShipFromParents("4_2", 3, "playerShip3a", "player") = playershipPicbox3a
+    ''' </summary>
+    ''' <param name="targetobject">A picturebox: Will be either 'Nothing' or a grid picture box: eg. "4_2"</param>
+    ''' <param name="length">An integer representing the length of the ship: eg. 3</param>
+    ''' <param name="shipstr">A string representing the chosen ship: eg. "playerShip3a"</param>
+    ''' <param name="currentplayerstr">A string representing the target player: eg. "player" or "opponent"</param>
+    ''' <returns>The picturebox of the ship</returns>
     Private Function referenceShipFromParents(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
-        Dim targetship
-        Dim targetpicboxArr
+        Dim targetship() As shipGridLocations
+        Dim targetpicboxArr(,) As PictureBox
 
+        'Gets the picturebox array of the target and the targetship array of records that holds the locations of the ship.
         targetship = CallByName(Me, shipstr, vbGet)
         targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
 
+        'Passes the child of the picturebox at the location in the picturebox array into GetShipFromParent()
         targetobject = GetShipFromParent(targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0))
 
         Return targetobject
     End Function
 
-
+    ''' <summary>
+    ''' Function gets the picturebox of the ship (which is at the top layer of parenting) from one of the parents in a lower layer
+    ''' Example of use: GetShipFromParent("4_2") = playerShipPicbox3a
+    ''' </summary>
+    ''' <param name="parentPicbox">A picturebox that is a parent of a ship picture box</param>
+    ''' <returns>The picturebox of the ship on the top layer of the grid box layers. </returns>
     Public Function GetShipFromParent(parentPicbox As PictureBox)
         Dim targetobject As PictureBox
         Dim i As Integer
@@ -351,12 +366,15 @@ Public Class BattleShipsGame
         i = 0
         count = 0
 
+        'Move up the layers until there are no more children (top layer)
         Do
             targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
             count = count + 1
         Loop Until targetobject Is Nothing
 
         targetobject = parentPicbox
+
+        'Move up the layers to the top layer (1 before there are no children) which will be the ship.
         For i = 1 To (count - 1)
             targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
         Next i
@@ -1145,10 +1163,13 @@ Public Class BattleShipsGame
         Return playerMove
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine is mainline of the game, started by it's call from playerMove
+    ''' If the player does not have an extra turn, it responds with the computers turn. 
+    ''' Example of use: game(playerMove)
+    ''' </summary>
+    ''' <param name="playerMove">A record with field X and field Y representing the location of the move on the grid.</param>
     Private Sub game(playerMove As gridLocation)
-        'Mainline of the game, started by it's call from playerMove
-
         'check the move of the player (hit, miss, game over)
         check(playerMove, opponentgameArray) ' function needs a better name
 
@@ -1219,7 +1240,7 @@ Public Class BattleShipsGame
                 End If
             Else
                 'To wait for the players next move
-                MsgBox("player extra turn...")
+                MsgBox("You get an extra turn!")
             End If
         End If
     End Sub
@@ -1615,9 +1636,16 @@ Public Class BattleShipsGame
         Next length
     End Sub
 
-
+    ''' <summary>
+    ''' Function determines the direction of the ship from the grid locations of the ship
+    ''' Example of use: shipDirection = findDirectionFromShipGridLocs(targetShip, length)
+    ''' </summary>
+    ''' <param name="targetShip">The array of records associated with the specific ship and it's location</param>
+    ''' <param name="length">An integer representing the length of the ship</param>
+    ''' <returns>A string representing the direction of the ship. Eg. "right"</returns>
     Public Function findDirectionFromShipGridLocs(targetShip() As shipGridLocations, length As Integer) As String
         Dim direction As String
+        'Checks whether the location one away from the end in a specific direction is the same location as the second last location of the shpi
         If (targetShip(length).X) - 1 = targetShip(length - 1).X Then
             direction = "right"
         Else
@@ -1627,9 +1655,7 @@ Public Class BattleShipsGame
                 If (targetShip(length).Y) - 1 = targetShip(length - 1).Y Then
                     direction = "down"
                 Else
-                    If (targetShip(length).Y) + 1 = targetShip(length - 1).Y Then
-                        direction = "up"
-                    End If
+                    direction = "up"
                 End If
             End If
         End If
@@ -1697,7 +1723,11 @@ Public Class BattleShipsGame
         Return score
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine counts the number of hits and updates the in-game score.
+    ''' Example of use: updateInGameScore(1)
+    ''' </summary>
+    ''' <param name="currentPlayer">An integer representation of the player being updated</param>
     Private Sub updateInGameScore(currentPlayer As Integer)
         Dim playerScore As Integer
         Dim opponentScore As Integer
@@ -1747,8 +1777,10 @@ Public Class BattleShipsGame
         Next i
     End Sub
 
-
-    Private Sub displayCurrentPlayer()  'Choose whether to display the player or the opponents banner
+    ''' <summary>
+    ''' Subroutine displays the player or the opponents banner depending on the current player
+    ''' </summary>
+    Private Sub displayCurrentPlayer()
         If currentPlayer = 1 Then 'Player
             TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
         ElseIf currentPlayer = 2 Then 'Opponent
@@ -1977,7 +2009,7 @@ Public Class BattleShipsGame
     End Function
 
     ''' <summary>
-    ''' Function swaps the direction path 
+    ''' Function swaps the direction path for the computer move
     ''' </summary>
     Private Sub swapPathDirection()
         'Swap the direction of the path
@@ -2204,17 +2236,21 @@ Public Class BattleShipsGame
         FileSystem.FileClose(1)
     End Sub
 
-
-    Public Function convertStringIntegerTimeToDisplayTime(time As Integer) As String '23 lines long
-        'Convert integer time into display time (dd:dd)
-
+    ''' <summary>
+    ''' Function which converts a string representing integer time (dddd) into a display time (dd:dd) 
+    ''' Example of use: convertDisplayTimeToIntegerStringTime("610") = "10:10"
+    ''' </summary>
+    ''' <param name="time">A string representing integer time in dddd format. Eg. "610"</param>
+    ''' <returns>A string representing the display time. Eg. "10:10"</returns>
+    Public Function convertStringIntegerTimeToDisplayTime(time As Integer) As String
         Dim newTime As String
         Select Case time
-            Case >= 3599 : newTime = "59:59"
-            Case < 10 : newTime = "00:0" & CStr(time)
-            Case < 60 : newTime = "00:" & CStr(time)
-            Case < 600
+            Case >= 3599 : newTime = "59:59" 'Greater than an hour
+            Case < 10 : newTime = "00:0" & CStr(time) 'Less than 10s
+            Case < 60 : newTime = "00:" & CStr(time) 'Less than a minute
+            Case < 600 'less than 10min
                 Select Case True
+                    'Subtract the minutes from the time and deal with the left over seconds
                     Case time - (Math.Floor(time / 60) * 60) = 0 : newTime = "0" & Math.Floor(time / 60) & ":" & "00"
                     Case time - (Math.Floor(time / 60) * 60) < 10 : newTime = "0" & Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
                     Case Else : newTime = "0" & Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
@@ -2222,44 +2258,50 @@ Public Class BattleShipsGame
 
             Case Else 'anything above 10min
                 Select Case True
-                    Case time - (Math.Floor(time / 60) * 60) = 0 : newTime = Math.Floor(time / 60) & ":" & "00"
-                    Case time - (Math.Floor(time / 60) * 60) < 10 : newTime = Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60))
-                    Case Else : newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60))
+                     'Subtract the minutes from the time and deal with the left over seconds
+                    Case time - (Math.Floor(time / 60) * 60) = 0 : newTime = Math.Floor(time / 60) & ":" & "00" 'Only minutes no seconds
+                    Case time - (Math.Floor(time / 60) * 60) < 10 : newTime = Math.Floor(time / 60) & ":0" & (time - (Math.Floor(time / 60) * 60)) 'Leftovers less than 10s
+                    Case Else : newTime = Math.Floor(time / 60) & ":" & (time - (Math.Floor(time / 60) * 60)) 'Minutes : seconds
                 End Select
         End Select
         Return newTime
     End Function
 
-
+    ''' <summary>
+    ''' Function which converts display time (dd:dd) into a string representing integer time (dddd)
+    ''' Example of use: convertDisplayTimeToIntegerStringTime("10:10") = "610"
+    ''' </summary>
+    ''' <param name="time">A string representing time in dd:dd format. Eg. "10:10"</param>
+    ''' <returns>A string representing the integer conversion. Eg. "610"</returns>
     Private Function convertDisplayTimeToIntegerStringTime(time As String) As String
-        'Convert display time (dd:dd) into a sting representing integer time (dddd)
-
         'subtime as integer to be added after leading 0s
         Dim subtime As String
         Dim newtime As String
         Select Case time
             Case "00:00" : newtime = timeLeft 'To make sure that 00:00 does not run (impossible time)
-                Select Case newtime.Length
+                Select Case newtime.Length 'To pad the time to be characters digits long
                     Case 1 : newtime = "000" & newtime
                     Case 2 : newtime = "00" & newtime
                     Case 3 : newtime = "0" & newtime
                 End Select
             Case "59:59" : newtime = "3599"
-            Case Else
-                If Asc(time(0)) <> 48 Or Asc(time(1)) <> 48 Or Asc(time(2)) <> 48 Or Asc(time(3)) <> 48 Or Asc(time(4)) <> 48 Then
-                    Select Case True
-                        Case time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" : subtime = Mid(time, 5, 1)  'under than 10 sec
-                            newtime = "000" & subtime
+            Case Else ' 
+                Select Case True
+                        'under 10 sec
+                    Case time(0) = "0" AndAlso time(1) = "0" AndAlso time(3) = "0" : subtime = Mid(time, 5, 1)
+                        newtime = "000" & subtime
 
-                        Case time(0) = "0" AndAlso time(1) = "0" : subtime = Mid(time, 4, 2)  'between 10s and 1min
-                            newtime = "00" & subtime
+                        'between 10s and 1min
+                    Case time(0) = "0" AndAlso time(1) = "0" : subtime = Mid(time, 4, 2)
+                        newtime = "00" & subtime
 
-                        Case time(0) = "0" : subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))  'between 1min and 10min
-                            newtime = "0" & subtime
+                        'between 1min and 10min
+                    Case time(0) = "0" : subtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 2, 1) * 60)))
+                        newtime = "0" & subtime
 
-                        Case Else : newtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))  'anything above 10min
-                    End Select
-                End If
+                        'anything above 10min
+                    Case Else : newtime = CStr(CInt(Mid(time, 4, 2)) + Math.Floor(CInt(Mid(time, 1, 2) * 60)))
+                End Select
         End Select
         Return newtime
     End Function
