@@ -1574,7 +1574,12 @@ Public Class BattleShipsGame
         Return correctShip
     End Function
 
-
+    ''' <summary>
+    ''' Subroutine checks if a ship has been sunk and deals with it appropriately
+    ''' If an opponents ship has been sunk, it needs to be displayed correctly.
+    ''' Example of use: checkIfSunk(2)
+    ''' </summary>
+    ''' <param name="playerNum">An integer representation of the current player: eg. 2 (if player 1 has just hit player 2, then check if any ships of player 2 have been sunk)</param>
     Private Sub checkIfSunk(playerNum As Integer)
         'If a ship has been sunk
         Dim playerstr As String
@@ -1597,12 +1602,13 @@ Public Class BattleShipsGame
         length = 0
         count = 0
 
+        'For every ship
         For length = 2 To 5
+            'Setup for player dependent variables
             If playerNum = 1 Then
                 playerstr = "player"
                 sunkArrStr = "playerShipSunkArr"
                 targetPicboxArr = playerpictureBoxArray
-                parentBoard = Controls.Item("PlayerBoardBGImg")
             Else
                 playerstr = "opponent"
                 targetShipPicboxStr = playerstr & "ShipPicbox" & length
@@ -1611,6 +1617,8 @@ Public Class BattleShipsGame
                 parentBoard = Controls.Item("OpponentBoardBGImg")
             End If
 
+            'To get the string and length and of the ship
+            'And to account for there being 2 of length 3
             shipstr = playerstr & "Ship" & length
             If length = 4 AndAlso duplicateShip = True Then
                 length = 3
@@ -1623,24 +1631,32 @@ Public Class BattleShipsGame
                         newLength = 3
                         duplicateShip = True
                     Else
+                        duplicateShip = False
                         shipstr = playerstr & "Ship3b"
                         targetShipPicboxStr = playerstr & "ShipPicbox" & length & "b"
+
+                        'TargetShipSunkArr is only 5 long but position 1 is not being used and there are 2 with the length 3.
+                        'It is convenient to set aside the second of length 3 to position 1 in the array.
                         newLength = 1
-                        duplicateShip = False
                     End If
                 Case Else : newLength = length
             End Select
 
+            'Get the array associated with this name
             targetShipSunkArr = CallByName(Me, sunkArrStr, vbGet)
             If targetShipSunkArr(newLength) = False Then
+
+                'Get the array of records associated with this ship
                 targetShip = CallByName(Me, shipstr, vbGet)
 
+                'Get the picturebox of the ship
                 If playerstr = "player" Then
                     targetShipPicbox = referenceShipFromParents(targetShipPicbox, length, shipstr, playerstr)
                 Else
                     targetShipPicbox = Me.Controls.Item(targetShipPicboxStr)
                 End If
 
+                'Assume a ship has been sunk, loop through, and set it to be false it it still hasn't been hit on a location
                 Dim shipSunk As Boolean
                 shipSunk = True
                 For count = 1 To length
@@ -1653,30 +1669,50 @@ Public Class BattleShipsGame
 
                 If shipSunk = True Then
                     targetShipSunkArr(newLength) = True
+
                     If currentPlayer = 2 Then
+                        'For the Hard/Unfair computer difficulties for a smarter, more efficient and effective guess
                         NextShip = True
                         oppositePath = False
                     End If
 
                     If playerstr = "player" Then
+                        'The player's ships are already correctly displayed through the parenting system.
                         MsgBox("Your " & length & " length ship has been sunk")
                     Else
+                        'The opponents ships have not been displayed through the parenting system.
+                        'As they only need to be visible once they are sunk or the game is over, there is no need to deal with the parenting system.
+                        'Instead they can be shown on top with either all sunk or all unsunk behind them (although this will visually over-ride 'progress' in attempting to sink a ship, however, the location will be revealed which is more important)
+
                         If gameOver = False Then
                             MsgBox("You sunk the opponents " & length & " length ship")
                             playershipSunkCount = playershipSunkCount + 1
                         End If
+
+                        'Display the ship
                         targetShipPicbox.Visible = True
                         targetShipPicbox.Parent = parentBoard
                         targetShipPicbox.BringToFront()
+
                         If gameOver = False Then
+                            'If shown before game over then it would have been fully sunk
                             targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Sunk.png"
                         Else
+                            'If shown after game over than it would not have been fully sunk
                             targetShipPicbox.ImageLocation = Application.StartupPath & "\Pictures\BattleShip" & length & "Unsunk.png"
                         End If
+
+                        'Set the location of the ship's picturebox to be the location of the picturebox at last element in the array of records
                         targetShipPicbox.Location = targetPicboxArr(targetShip(countOfShip).X, targetShip(countOfShip).Y).Location
+
+                        'Load the image location into the image to create a bitmap that can be rotated.
                         targetShipPicbox.Load(targetShipPicbox.ImageLocation)
 
+                        'Determine the direction of the ship
                         shipDirection = findDirectionFromShipGridLocs(targetShip, length)
+
+                        'Appropriately set the scale and location in relation to direction
+                        'Appropriately rotate the image 
                         Select Case shipDirection
                             Case "right"
                                 Xscale = gridCircleSizeNum * length
@@ -1700,6 +1736,7 @@ Public Class BattleShipsGame
                                 targetShipPicbox = rotateImage90(targetShipPicbox)
                         End Select
 
+                        'Set the scale to the ships picturebox
                         targetShipPicbox.Size = New Size(Xscale, Yscale)
                     End If
                 End If
@@ -1709,7 +1746,7 @@ Public Class BattleShipsGame
 
     ''' <summary>
     ''' Function determines the direction of the ship from the grid locations of the ship
-    ''' Example of use: shipDirection = findDirectionFromShipGridLocs(targetShip, length)
+    ''' Example of use: findDirectionFromShipGridLocs(playership3a, 3) = "right"
     ''' </summary>
     ''' <param name="targetShip">The array of records associated with the specific ship and it's location</param>
     ''' <param name="length">An integer representing the length of the ship</param>
