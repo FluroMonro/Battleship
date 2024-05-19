@@ -402,10 +402,14 @@ Public Class BattleShipsGame
         Return array
     End Function
 
-
-    Public Sub generatePicture(pictureBoxArray As Array, picBoard As Object, currentPlayer As Integer)
-        'generates grid of pictures
-
+    ''' <summary>
+    ''' Subroutine generates the grid of pictureboxes with correct Data, presentation and placement
+    ''' Example of use: generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+    ''' </summary>
+    ''' <param name="pictureBoxArray">The array that holds each pictrebox created</param>
+    ''' <param name="picBoard">The picturebox of the board that sits behind the grid of pictureboxes</param>
+    ''' <param name="currentPlayer">An integer representation of the player to be created</param>
+    Public Sub generatePicture(pictureBoxArray As Array, picBoard As PictureBox, currentPlayer As Integer)
         Dim col As Integer
         Dim row As Integer
 
@@ -427,46 +431,28 @@ Public Class BattleShipsGame
                 picbox.Height = gridCircleSizeNum
 
                 'placement of each picture box dependent on row and col
-                If currentPlayer = 1 Then
-                    'for player
-                    Select Case gridSize
-                        Case 8
-                            picbox.Left = col * gridCircleSizeNum - 33
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
-                        Case 10
-                            picbox.Left = col * gridCircleSizeNum - 20
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
-                        Case 12
-                            picbox.Left = col * gridCircleSizeNum - 15
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
-                        Case 14
-                            picbox.Left = col * gridCircleSizeNum - 14
-                            picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
-                    End Select
-                Else
-                    If currentPlayer = 2 Then
-                        'for opponent
-                        Select Case gridSize
-                            Case 8
-                                picbox.Left = col * gridCircleSizeNum - 33
-                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
-                            Case 10
-                                picbox.Left = col * gridCircleSizeNum - 20
-                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
-                            Case 12
-                                picbox.Left = col * gridCircleSizeNum - 15
-                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
-                            Case 14
-                                picbox.Left = col * gridCircleSizeNum - 14
-                                picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
-                        End Select
+                Select Case gridSize
+                    Case 8
+                        picbox.Left = col * gridCircleSizeNum - 33
+                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 91
+                    Case 10
+                        picbox.Left = col * gridCircleSizeNum - 20
+                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 94
+                    Case 12
+                        picbox.Left = col * gridCircleSizeNum - 15
+                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 92
+                    Case 14
+                        picbox.Left = col * gridCircleSizeNum - 14
+                        picbox.Top = (Me.Height / 2) - (row * gridCircleSizeNum) - 89
+                End Select
 
-                        'Adding the option to click and send to getPlayerMove function
-                        AddHandler picbox.Click, AddressOf getPlayerMove
-                        AddHandler picbox.MouseEnter, AddressOf mouseEnterGridCircle
-                        AddHandler picbox.MouseLeave, AddressOf mouseExitGridCircle
-                    End If
+                'Adding the option to click and hover which calls each respective subroutine
+                If currentPlayer = 2 Then
+                    AddHandler picbox.Click, AddressOf getPlayerMove
+                    AddHandler picbox.MouseEnter, AddressOf mouseEnterGridCircle
+                    AddHandler picbox.MouseLeave, AddressOf mouseExitGridCircle
                 End If
+
                 'Image presentation
                 picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircle.png"
                 picbox.SizeMode = PictureBoxSizeMode.StretchImage
@@ -1144,7 +1130,7 @@ Public Class BattleShipsGame
 
     ''' <summary>
     ''' Function determines the location of the player move from the name of the picturebox that has been clicked.
-    ''' Example of use: getPlayerMoveFromPicboxName(42,"42").X = 4
+    ''' Example of use: getPlayerMoveFromPicboxName(4_2,"4_2").X = 4
     ''' </summary>
     ''' <param name="sender">The picturebox that has been clicked</param>
     ''' <param name="piclocation">A string representing the name of the picturebox that has been clicked</param>
