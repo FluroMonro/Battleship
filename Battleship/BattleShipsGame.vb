@@ -704,7 +704,7 @@ Public Class BattleShipsGame
             End If
 
             Select Case direction
-                    'Increment the offsets appropiately for the direction of the ship
+                'Increment the offsets appropiately for the direction of the ship
                 Case "up" : Yoffset = Yoffset - 1
                 Case "down" : Yoffset = Yoffset + 1
                 Case "right" : Xoffset = Xoffset - 1
@@ -1081,18 +1081,24 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
-    Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Object, playerStr As String)
-        'Updates and changes the picture depending on the value of the 
+    ''' <summary>
+    ''' Subroutine updates and changes the picture depending on the value of the 2D array at the same grid position
+    ''' </summary>
+    ''' <param name="gameArray">The 2D game array holding the information about the ships, the misses, the hits and the empty positions</param>
+    ''' <param name="pictureBoxArray">The 2D array of pictureboxes for the grid locations</param>
+    ''' <param name="playerStr">The string representation of the current player</param>
+    Private Sub assignGridImages(gameArray As Array, pictureBoxArray As Array, playerStr As String)
         Dim col As Integer
         Dim row As Integer
         col = 0
         row = 0
 
+        'For every picturebox in the array
         For col = 1 To gridSize
             For row = 1 To gridSize
 
                 If playerStr = "opponent" Then
+                    'The opponent's board has not got ship parenting, and so the images do not need to be preserved and can be updated directly
                     Select Case gameArray(col, row)
                         Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png"
                         Case 1 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircleHidden.png" 'hidden
@@ -1102,6 +1108,8 @@ Public Class BattleShipsGame
                     End Select
 
                 Else
+                    'The players board has been parented, and so the images that are parents of the ship need to be preserved
+                    'The images have been modified (moved within their stretched picturebox) and this transformation needs to be preserved
                     Select Case gameArray(col, row)
                         Case 0 : pictureBoxArray(col, row).ImageLocation = Application.StartupPath & "\pictures\TransparentCircle.png"
                         Case Else : updateImageKeepCorrectSize(pictureBoxArray(col, row), gameArray(col, row), gridCircleSizeNum)
@@ -1111,10 +1119,13 @@ Public Class BattleShipsGame
         Next col
     End Sub
 
-
-    Private Function getPlayerMove(ByVal sender As PictureBox, ByVal e As EventArgs)
-        'When the picture box is clicked, the name of the picture box is used to determine the moves location on the 
-
+    ''' <summary>
+    ''' Subroutine passes the player's move to the game() subroutine if it has't been previously guessed
+    ''' Is called upon a click of a picturebox, handled within generatePicture()
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param
+    Private Sub getPlayerMove(ByVal sender As PictureBox, ByVal e As EventArgs)
         Dim playerMove As gridLocation
         Dim correctGridSquare As Boolean
         Dim picLocation As String
@@ -1122,19 +1133,22 @@ Public Class BattleShipsGame
 
         playerMove = getPlayerMoveFromPicboxName(sender, picLocation)
 
-
         If currentPlayer = 1 Then
+            'The players move starts each round of the game
             If opponentgameArray(playerMove.X, playerMove.Y) = 1 Or opponentgameArray(playerMove.X, playerMove.Y) = 4 Or opponentgameArray(playerMove.X, playerMove.Y) = 0 Then
                 timeStart()
                 game(playerMove)
             End If
-            'The players move starts each round of the game
         End If
+    End Sub
 
-        Return playerMove
-    End Function
-
-
+    ''' <summary>
+    ''' Function determines the location of the player move from the name of the picturebox that has been clicked.
+    ''' Example of use: getPlayerMoveFromPicboxName(42,"42").X = 4
+    ''' </summary>
+    ''' <param name="sender">The picturebox that has been clicked</param>
+    ''' <param name="piclocation">A string representing the name of the picturebox that has been clicked</param>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
     Public Function getPlayerMoveFromPicboxName(sender As PictureBox, piclocation As String) As gridLocation
         Dim playerMove As gridLocation
         If piclocation.Length = 4 Then
@@ -1271,7 +1285,7 @@ Public Class BattleShipsGame
     ''' </summary>
     Private Sub gameIsOverWithResult()
         timeEnd()
-        determineScore()
+        score = determineScore()
         scoring()
 
         'If the timer has run out: set the time to be the chosen time
@@ -1662,10 +1676,15 @@ Public Class BattleShipsGame
         Return direction
     End Function
 
-
+    ''' <summary>
+    ''' Function determines the end score of the user at the end of the game.
+    ''' Also determines the outcome of the game (Win,Loss,Draw)
+    ''' </summary>
+    ''' <returns>The score of the user as an integer</returns>
     Private Function determineScore() As Integer
         'As swap player is after determine score in game(), the current player will always be the one who had the last move, and is hence, the winner
         Dim winner = currentPlayer
+        Dim tempScore As Integer
 
         'To check whether the game has been ended by time or by sinking all the ships
         If boardEmpty = True Then
@@ -1678,7 +1697,7 @@ Public Class BattleShipsGame
             End If
 
             'Final score is playerscore - opponentscore
-            score = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
+            tempScore = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
         Else
             'If ended by the timer
 
@@ -1691,7 +1710,7 @@ Public Class BattleShipsGame
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
-                        score = score + 1
+                        tempScore = tempScore + 1
                     End If
                 Next column
             Next row
@@ -1700,16 +1719,16 @@ Public Class BattleShipsGame
             For row = 1 To gridSize
                 For column = 1 To gridSize
                     If opponentgameArray(column, row) = 1 OrElse opponentgameArray(column, row) = 4 Then
-                        score = score - 1
+                        tempScore = tempScore - 1
                     End If
                 Next column
             Next row
 
-            If score > 0 Then
+            If tempScore > 0 Then
                 'If score Is positive, Then the player has more ships left than the opponent and player wins
                 gameOutcome = "Win"
             Else
-                If score = 0 Then
+                If tempScore = 0 Then
                     gameOutcome = "Draw"
                 Else
                     gameOutcome = "Lose"
@@ -1720,7 +1739,7 @@ Public Class BattleShipsGame
         If gameOutcome = "lose" OrElse gameOutcome = "Draw" Then
             revealships()
         End If
-        Return score
+        Return tempScore
     End Function
 
     ''' <summary>
@@ -1788,8 +1807,12 @@ Public Class BattleShipsGame
         End If
     End Sub
 
-
-    Private Function computerMove()
+    ''' <summary>
+    ''' Function is the mainline in determining the computers next move.
+    ''' Process is determined by the difficulty chosen by the player.
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function computerMove() As gridLocation
         'Get the move for the computer
         Dim row As Integer
         Dim column As Integer
