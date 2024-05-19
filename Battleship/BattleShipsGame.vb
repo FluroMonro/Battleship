@@ -1808,15 +1808,15 @@ Public Class BattleShipsGame
         'What to do for each difficulty
         Select Case tempdifficulty
             Case "Beginner"
-                randomSquare(opponentMove)
+                opponentMove = randomSquare()
 
             Case "Normal"
                 If hasAHit = False Then
                     'If there hasn't been a hit, randomly choose an avaliable square on the board
-                    randomSquare(opponentMove)
+                    opponentMove = randomSquare()
                 Else
                     'If there has been a hit, randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
-                    randomAdjacent(opponentMove)
+                    opponentMove = randomAdjacent()
                 End If
 
             Case "Hard"
@@ -1824,24 +1824,23 @@ Public Class BattleShipsGame
                     'If there hasn't been a hit, randomly choose an avaliable square on the board
                     hasAHit = False
                     NextShip = False
-                    randomSquare(opponentMove)
+                    opponentMove = randomSquare()
                 Else
                     'If there has been a hit, computerStage will either be 1 or 2.
                     'Computer stage is 1 (from check()) if hasAhit was false when the opponents move hit a ship of the player
                     'Computer stage is 2 (from check()) if hasAhit was true when the opponents move hit a ship of the player
 
                     If computerStage = 1 Then
-                        randomAdjacent(opponentMove)
+                        opponentMove = randomAdjacent()
                     Else 'Computer stage 2
                         If previousHit = True Then 'Set in check(), when hasAhit = True and there is another hit
-                            continueOnPath(opponentMove) 'Follow the direction until previousHit = False
+                            opponentMove = continueOnPath() 'Follow the direction until previousHit = False
                         Else 'previousHit = false when the computer misses
                             If NextShip = True Then 'Set in check() if there is a miss after swapping path direction
                                 hasAHit = False
-                                randomSquare(opponentMove)
+                                opponentMove = randomSquare()
                             Else 'Has followed direction to a miss, will now swap direction and continue on the other side of the initial hasAhit
-                                swapPathDirection()
-                                continueOnPath(opponentMove)
+                                opponentMove = swapPathDirection()
                             End If
                         End If
                     End If
@@ -1863,11 +1862,15 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
 
-
-    Private Function randomSquare(ByRef opponentMove As gridLocation)
+    ''' <summary>
+    ''' Function randomly generates a grid location on the board that hasn't been already guessed.
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function randomSquare() As gridLocation
         Dim count As Integer
         count = 1
         Dim foundMovePos As Boolean
+        Dim opponentMove As gridLocation
 
         'To make sure each location has not been taken already
         While foundMovePos = False And count < 20
@@ -1885,10 +1888,14 @@ Public Class BattleShipsGame
         Return opponentMove
     End Function
 
-
-    Private Function randomAdjacent(ByRef opponentMove As gridLocation)
+    ''' <summary>
+    ''' Function choses a random adjacent location (that hasn't already been guessed) to the previously hit location 
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function randomAdjacent() As gridLocation
         Dim foundMovePos As Boolean
         Dim count As Integer
+        Dim opponentMove As gridLocation
         count = 1
 
         'To ensure a valid move is chosen, bailing out at 20 (a reasonable number for random generation of 4 possible numbers)
@@ -1944,14 +1951,19 @@ Public Class BattleShipsGame
         If count = 20 Then
             'Go back to randomly guessing
             hasAHit = False
-            randomSquare(opponentMove)
+            opponentMove = randomSquare()
         End If
         Return opponentMove
     End Function
 
-
-    Private Function continueOnPath(ByRef opponentMove As gridLocation)
+    ''' <summary>
+    ''' Function continues guessing along the path of the previous hit.
+    ''' If it's path is blocked by a previous guess, then it has either sunk (if it has already swapped directions) the ship or it has reached the end of one and needs to swap its direction (Original guess in the middle of the ship)
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function continueOnPath() As gridLocation
         Dim validMove As Boolean
+        Dim opponentMove As gridLocation
 
         'Uses direction randomly generated by randomAdjacent
         Select Case opponentMoveDirection
@@ -1995,23 +2007,24 @@ Public Class BattleShipsGame
             'If it cannot continue down a path because it is blocked
             If oppositePath = True Then
                 'If it is already swapped direction then the ship should be sunk, so random square is called and variables are reset
-                randomSquare(opponentMove)
+                opponentMove = randomSquare()
                 oppositePath = False
                 NextShip = False
                 hasAHit = False
             Else
-                'if it hasn't swapped directions yet, do so and continue on path
-                swapPathDirection()
-                continueOnPath(opponentMove)
+                'Swap directions if it hasn't already
+                opponentMove = swapPathDirection()
             End If
         End If
         Return opponentMove
     End Function
 
     ''' <summary>
-    ''' Function swaps the direction path for the computer move
+    ''' Function swaps the direction path for the computer move and continues it's guess.
     ''' </summary>
-    Private Sub swapPathDirection()
+    ''' <returns>>A record with X and Y fields representing the grid location</returns>
+    Private Function swapPathDirection() As gridLocation
+        Dim opponentMove As gridLocation
         'Swap the direction of the path
         oppositePath = True
         Select Case opponentMoveDirection
@@ -2021,7 +2034,9 @@ Public Class BattleShipsGame
             Case 4 : opponentMoveDirection = 3 'down -> up
         End Select
         opponentContinueOnCount = 1
-    End Sub
+        opponentMove = continueOnPath()
+        Return opponentMove
+    End Function
 
     ''' <summary>
     ''' Subroutine switches between the value of 1 and 2 each time to swap players after each turn
