@@ -358,7 +358,7 @@ Public Class BattleShipsGame
     ''' </summary>
     ''' <param name="parentPicbox">A picturebox that is a parent of a ship picture box</param>
     ''' <returns>The picturebox of the ship on the top layer of the grid box layers. </returns>
-    Public Function GetShipFromParent(parentPicbox As PictureBox)
+    Public Function GetShipFromParent(parentPicbox As PictureBox) As PictureBox
         Dim targetobject As PictureBox
         Dim i As Integer
         Dim count As Integer
@@ -557,7 +557,7 @@ Public Class BattleShipsGame
 
         'Generate each ship pictrebox in it's correct location
         If currentplayernum = 1 Then
-            displayShipLocations(col, row, length, directionShipFacing, currentplayernum)
+            displayShipsAsParentingStack(col, row, length, directionShipFacing)
         End If
         revealships()
         Return gameArr
@@ -750,30 +750,38 @@ Public Class BattleShipsGame
         Return valid
     End Function
 
-
-    Private Sub displayShipLocations(col As Integer, row As Integer, shipLength As Integer, direction As String, currentplayernum As Integer)
-        'overall parent must be highest count
-        'aka back to front
+    ''' <summary>
+    ''' Subroutine which displays the ships pictureboxes in the correct way.
+    ''' Creates a parenting stack with the randomly generated guess forming the lowest layer, with each picturebox above it forming another layer until the ships picturebox is placed on top.
+    ''' Needs to expand the layers to the size of the entire ship, and needs to preserve image while doing so.
+    ''' Example of use: displayShipsAsParentingStack(5,2,3,"left")
+    ''' </summary>
+    ''' <param name="col">An integer representing the X value (column) of the ships beginning: eg. 5</param>
+    ''' <param name="row">An integer representing the Y value (row) of the ships beginning: eg. 2</param>
+    ''' <param name="shipLength">An integer representing the length of the ship: eg. 3</param>
+    ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
+    Private Sub displayShipsAsParentingStack(col As Integer, row As Integer, shipLength As Integer, direction As String)
+        'overall parent must be highest count (aka back to front)
         Dim X As Integer
         Dim Y As Integer
         Dim Xscale As Integer
         Dim Yscale As Integer
         Dim XOffset As Integer
         Dim YOffset As Integer
-        Dim playerstring As String
+        Dim count As Integer
         Dim parentgridbox As PictureBox
         Dim targetship As PictureBox
         Dim originalParent As PictureBox
 
-        If currentplayernum = 1 Then
-            playerstring = "player"
-            originalParent = playerpictureBoxArray(col, row)
-        End If
+        'Set the original parent to be the randomly generated location
+        originalParent = playerpictureBoxArray(col, row)
 
-        Dim count As Integer
-        count = shipLength
+        'Change the sizemode back to normal from streched (if stretched- image is stretched to fit the entire picturebox which would hide the other pictureboxes underneath) 
         originalParent.SizeMode = PictureBoxSizeMode.Normal
 
+        count = shipLength
+
+        'X,Y,Xscale,Yscle,XOffset,YOffset are all dependent on the direction the ship is facing
         Select Case direction
             Case "right"
                 X = gridCircleSizeNum * (shipLength - 1)
@@ -781,13 +789,16 @@ Public Class BattleShipsGame
                 Yscale = gridCircleSizeNum
                 XOffset = -1
                 YOffset = 0
+                'Expanding picturebox to the left so needs to be moved back
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
+                'To move back to the far end of where was chosen (so expanding does not go over the limit onto the others)
                 originalParent.Location = originalParent.Location - New Point(X, Y)
             Case "left"
                 Xscale = gridCircleSizeNum * shipLength
                 Yscale = gridCircleSizeNum
                 XOffset = 1
                 YOffset = 0
+                'Expanding picturebox to the left so it does not need to be moved
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
             Case "down"
                 Y = gridCircleSizeNum * (shipLength - 1)
@@ -795,41 +806,49 @@ Public Class BattleShipsGame
                 Yscale = gridCircleSizeNum * shipLength
                 XOffset = 0
                 YOffset = 1
+                'Expanding picturebox upwards so needs to be moved back down
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
+                'To move back to the far end of where was chosen (so expanding does not go over the limit onto the others)
                 originalParent.Location = originalParent.Location - New Point(X, Y)
             Case "up"
                 Xscale = gridCircleSizeNum
                 Yscale = gridCircleSizeNum * shipLength
                 XOffset = 0
                 YOffset = -1
+                'Expanding picturebox upwards so it does not need to be moved
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
         End Select
 
+        'Expands the picturebox to the correct size and sets it transparent
         originalParent.Size = New Size(Xscale, Yscale)
         originalParent.BackColor = Color.Transparent
         parentgridbox = originalParent
 
+        'Parent stacking each picturebox until the top layer
         If direction = "right" OrElse direction = "down" Then
-            rightAndDown(shipLength, currentplayernum, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+            rightAndDown(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
         Else
-            leftAndUp(shipLength, currentplayernum, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+            leftAndUp(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
         End If
-        'Ships
+
+        'Get the picturebox of the ship
         If shipLength = 3 Then
             If duplicateShip = False Then
-                targetship = Me.Controls.Item(playerstring & "ShipPicbox3a")
+                targetship = Me.Controls.Item("playerShipPicbox3a")
                 duplicateShip = True
             Else
-                targetship = Me.Controls.Item(playerstring & "ShipPicbox3b")
+                targetship = Me.Controls.Item("playerShipPicbox3b")
                 duplicateShip = False
             End If
         Else
-            targetship = Me.Controls.Item(playerstring & "ShipPicbox" & shipLength)
+            targetship = Me.Controls.Item("playerShipPicbox" & shipLength)
         End If
 
+        'Assigns and loads the image inside the ships picturebox
         assignShipImages(targetship)
         targetship.Load(targetship.ImageLocation)
 
+        'Rotate the image the appropriate number of times for correct orientation
         Select Case direction
             Case "left"
                 targetship = rotateImage90(targetship)
@@ -842,6 +861,7 @@ Public Class BattleShipsGame
                 targetship = rotateImage90(targetship)
         End Select
 
+        'Set the correct parametres for the ships picturebox to display correctly
         targetship.Parent = parentgridbox
         targetship.Size = parentgridbox.Size
         targetship.BackColor = Color.Transparent
@@ -849,48 +869,85 @@ Public Class BattleShipsGame
         targetship.Location = New Point(0, 0)
     End Sub
 
-
-    Private Sub rightAndDown(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+    ''' <summary>
+    ''' Handles parenting stack for directions "right" and "down" 
+    ''' Example of use: rightAndDown(3,5,2,-1,0, 3*gridCircleSizeNum, gridCircleSizeNum,5_2,"right")
+    ''' </summary>
+    ''' <param name="shipLength">An integer representing the length of the ship: eg. 3</param>
+    ''' <param name="col">An integer representing the X value (column) of the ships beginning: eg. 5</param>
+    ''' <param name="row">An integer representing the Y value (row) of the ships beginning: eg. 2</param>
+    ''' <param name="XOffset">An integer that either is -1, 0 or 1 and is used to offset through the array in the X component</param>
+    ''' <param name="Yoffset">An integer that either is -1, 0 or 1 and is used to offset through the array in the Y component</param>
+    ''' <param name="Xscale">An integer representing the new width of the picturebox</param>
+    ''' <param name="Yscale">An integer representing the new height of the picturebox</param>
+    ''' <param name="parentgridbox">The original (lowest layer) picturebox to be changed each loop creating a parenting stack</param>
+    ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
+    Private Sub rightAndDown(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim newCount As Integer
         Dim targetgridbox As PictureBox
         Dim count As Integer
         count = 0
 
+        'From left to right or up to down
         For count = 1 To (shipLength - 1)
-            If currentPlayerNum = 1 Then
-                targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-            Else
-                targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-            End If
+            'Get the correct picturebox
+            targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+
+            'Change the sizemode back to normal from streched (if stretched- image is stretched to fit the entire picturebox which would hide the other pictureboxes underneath
             targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+
+            'Correctly display the image inside the picturebox as to not obsecure any below it.
             resizeAndMoveImageWithinPicbox(targetgridbox, shipLength - count, gridCircleSizeNum, direction)
+
+            'Set the correct parametres for the picturebox to display correctly
             targetgridbox.Size = New Size(Xscale, Yscale)
             targetgridbox.Parent = parentgridbox
             targetgridbox.BringToFront()
             targetgridbox.Location = New Point(0, 0)
             targetgridbox.BackColor = Color.Transparent
+
+            'Chain the parenting stack
             parentgridbox = targetgridbox
         Next count
     End Sub
 
-
-    Private Sub leftAndUp(shipLength As Integer, currentPlayerNum As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+    ''' <summary>
+    ''' Handles parenting stack for directions "left" and "up" 
+    ''' Example of use: leftAndUp(3,5,2,1,0, 3*gridCircleSizeNum, gridCircleSizeNum,5_2,"left")
+    ''' </summary>
+    ''' <param name="shipLength">An integer representing the length of the ship: eg. 3</param>
+    ''' <param name="col">An integer representing the X value (column) of the ships beginning: eg. 5</param>
+    ''' <param name="row">An integer representing the Y value (row) of the ships beginning: eg. 2</param>
+    ''' <param name="XOffset">An integer that either is -1, 0 or 1 and is used to offset through the array in the X component</param>
+    ''' <param name="Yoffset">An integer that either is -1, 0 or 1 and is used to offset through the array in the Y component</param>
+    ''' <param name="Xscale">An integer representing the new width of the picturebox</param>
+    ''' <param name="Yscale">An integer representing the new height of the picturebox</param>
+    ''' <param name="parentgridbox">The original (lowest layer) picturebox to be changed each loop creating a parenting stack</param>
+    ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
+    Private Sub leftAndUp(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim targetgridbox As PictureBox
         Dim count As Integer
         count = 0
+
+        'From right to left or down to up
         For count = (shipLength - 1) To 1 Step -1
-            If currentPlayerNum = 1 Then
-                targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-            Else
-                targetgridbox = opponentpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-            End If
+            'Get the correct picturebox
+            targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
+
+            'Change the sizemode back to normal from streched (if stretched- image is stretched to fit the entire picturebox which would hide the other pictureboxes 
             targetgridbox.SizeMode = PictureBoxSizeMode.Normal
+
+            'Correctly display the image inside the picturebox as to not obsecure any below it.
             resizeAndMoveImageWithinPicbox(targetgridbox, count, gridCircleSizeNum, direction)
+
+            'Set the correct parametres for the picturebox to display correctly
             targetgridbox.Size = New Size(Xscale, Yscale)
             targetgridbox.Parent = parentgridbox
             targetgridbox.BringToFront()
             targetgridbox.Location = New Point(0, 0)
             targetgridbox.BackColor = Color.Transparent
+
+            'Chain the parenting stack
             parentgridbox = targetgridbox
         Next count
     End Sub
@@ -1327,7 +1384,7 @@ Public Class BattleShipsGame
                 gameArr(Move.X, Move.Y) = 3
 
                 'Check if any of the individual ship records are hit, and if they are sunk
-                checkShipsIfHit(Move.X, Move.Y, AlternateNum(currentPlayer))
+                updateShipRecOnHit(Move.X, Move.Y, AlternateNum(currentPlayer))
                 checkIfSunk(AlternateNum(currentPlayer))
 
                 'Variables used in opponents randomAdjacent function
@@ -1405,8 +1462,14 @@ Public Class BattleShipsGame
         Return gameArr
     End Function
 
-
-    Private Sub checkShipsIfHit(MoveX As Integer, MoveY As Integer, playerNum As Integer) 'Check if move has hit a ship
+    ''' <summary>
+    ''' Subroutine updates the array of records of the individual ship which has been hit.
+    ''' Example of use: updateShipsIfHit(5,4,1)
+    ''' </summary>
+    ''' <param name="MoveX">An integer representing the X coordinate of the move: eg. 5</param>
+    ''' <param name="MoveY">An integer representing the Y coordinate of the move: eg. 4</param>
+    ''' <param name="playerNum">The player who has just been shot at: eg 1 (the user if the opponent has just shot)</param>
+    Private Sub updateShipRecOnHit(MoveX As Integer, MoveY As Integer, playerNum As Integer) 'Check if move has hit a ship
         Dim targetpicboxArr(,) As PictureBox
         Dim shipPicboxStr As String
         Dim shipStr As String
@@ -1415,11 +1478,15 @@ Public Class BattleShipsGame
         Dim i As Integer
         i = 0
 
+        'Find the string of the ship
         If playerNum = 1 Then
             targetpicboxArr = playerpictureBoxArray
             shipStr = "playerShip"
+
+            'Gets the name of the picturebox associated with the ship (from the top layer of the picturebox array at the location of the moves)
             shipPicboxStr = GetShipFromParent(targetpicboxArr(MoveX, MoveY)).Name
 
+            'Set the length and extract the string of the array of records associated with the ship
             If Strings.Right(shipPicboxStr, 1) = "a" Or Strings.Right(shipPicboxStr, 1) = "b" Then
                 shipStr = shipStr + Strings.Right(shipPicboxStr, 2)
                 length = 3
@@ -1428,7 +1495,10 @@ Public Class BattleShipsGame
                 length = CInt(Strings.Right(shipPicboxStr, 1))
             End If
         Else
+            'Gets the string of the array of records associated with the location
             shipStr = getShipFromMoves(MoveX, MoveY)
+
+            'Extract the length
             If Strings.Right(shipStr, 1) = "a" Or Strings.Right(shipStr, 1) = "b" Then
                 length = 3
             Else
@@ -1436,8 +1506,10 @@ Public Class BattleShipsGame
             End If
         End If
 
+        'Get the array of records associated with this name in the string
         targetShip = CallByName(Me, shipStr, vbGet)
 
+        'Update the hit if the position matches
         For i = 1 To length
             If targetShip(i).X = MoveX AndAlso targetShip(i).Y = MoveY Then
                 targetShip(i).isHit = True
@@ -1445,7 +1517,13 @@ Public Class BattleShipsGame
         Next i
     End Sub
 
-
+    ''' <summary>
+    ''' Function finds the array of records that is associated with the hit location and returns the string
+    ''' Example of use: getShipFromMoves(5,3) = "opponentShip3a"
+    ''' </summary>
+    ''' <param name="MoveX">An integer representing the X coordinate of the move: eg. 5</param>
+    ''' <param name="MoveY">An integer representing the Y coordinate of the move: eg. 4</param>
+    ''' <returns>The string representing the name of the ship's array of records</returns>
     Private Function getShipFromMoves(MoveX As Integer, MoveY As Integer) As String
         Dim lengthstr As String
         Dim shipstr As String
@@ -1457,12 +1535,16 @@ Public Class BattleShipsGame
         Dim i As Integer
         length = 0
         i = 0
+        correctShip = ""
 
+        'Loop through each ship until the correct one is found
         Do
             For length = 2 To 5
+                'The string of each ship
                 lengthstr = length.ToString
                 shipstr = "opponentShip" & length
 
+                'The strings for the two 3 length ships (run the first and then the second by resetting back to length 3)
                 If length = 4 AndAlso isDuplicateShip = True Then
                     length = 3
                 End If
@@ -1477,8 +1559,10 @@ Public Class BattleShipsGame
                         End If
                 End Select
 
+                'Get the array of records associated with this name in the string
                 targetship = CallByName(Me, shipstr, vbGet)
 
+                'If the array of records is associated with the hit location: it is the correct ship
                 For i = 1 To length
                     If targetship(i).X = MoveX AndAlso targetship(i).Y = MoveY Then
                         hasBeenHit = True
@@ -1487,7 +1571,6 @@ Public Class BattleShipsGame
                 Next i
             Next length
         Loop Until hasBeenHit = True
-
         Return correctShip
     End Function
 
