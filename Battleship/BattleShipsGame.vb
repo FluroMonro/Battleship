@@ -935,11 +935,22 @@ Public Class BattleShipsGame
         Next count
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine resizes and moves the image of a picturebox within itself.
+    ''' To be used for correct visuals in parenting for the ships
+    ''' To allow the image to be seen without obsecuring the image of it's aprent
+    ''' Example of use: resizeAndMoveImageWithinPicbox(picbox, 1, gridCircleSizeNum, "noDirection")
+    ''' </summary>
+    ''' <param name="picbox">The picturebox whose picture needs to be resized and moved</param>
+    ''' <param name="count">An integer representing how far along to move the image (the stage of parenting)</param>
+    ''' <param name="radius">An integer that represents the size (radius) of the image</param>
+    ''' <param name="direction">A string representing the direction in which to move the image</param>
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
         picbox.Load(picbox.ImageLocation)
         Dim Xloc As Integer
         Dim Yloc As Integer
+
+        'Transformation magnitidue and direction of picture 
         Select Case direction
             Case "right"
                 Xloc = radius * (count - 1)
@@ -958,35 +969,45 @@ Public Class BattleShipsGame
                 Yloc = 0
         End Select
 
+        'Apply transformation to a new bitmap
         Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
         Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
         Dim g As Graphics = Graphics.FromImage(new_b)
 
-        g.DrawImage(b, Xloc, Yloc, radius, radius) 'Moves and scales the picture
+        'Draw with the new transformations: moves and scales the picture
+        g.DrawImage(b, Xloc, Yloc, radius, radius)
         g.Save()
 
         picbox.Image = new_b
     End Sub
 
-
+    ''' <summary>
+    ''' Subroutine preserves the image size and transformation within the picturebox whilst also updating the image.
+    ''' Example of use: updateImageKeepCorrectSize(4_2,3,10)
+    ''' </summary>
+    ''' <param name="picbox">>The picturebox whose picture needs to be updated</param>
+    ''' <param name="arrayValue">An integer representing the value of the position inside the gameArray (empty, a ship, a hit, a miss)</param>
+    ''' <param name="radius">An integer that represents the size (radius) of the image</param>
     Private Sub updateImageKeepCorrectSize(picbox As PictureBox, arrayValue As Integer, radius As Integer)
         Dim Xloc As Integer
         Dim Yloc As Integer
 
+        'Store the transformations of the image
         If picbox.Image.Width - radius = 0 AndAlso picbox.Image.Height - radius = 0 Then
             'No movement
         Else
             If picbox.Image.Width - radius = 0 Then
-                'If only y stretch
+                'If y has been stretched
                 Yloc = picbox.Image.Height - radius
             Else
                 If picbox.Image.Height - radius = 0 Then
-                    'If only x stretch
+                    'If x has been stretched
                     Xloc = picbox.Image.Width - radius
                 End If
             End If
         End If
 
+        'Update the images
         Select Case arrayValue
             Case 1 : picbox.ImageLocation = Application.StartupPath & "\pictures\transparentCircleHidden.png" 'hidden
             Case 2 : picbox.ImageLocation = Application.StartupPath & "\pictures\BlueCircle.png" 'miss
@@ -995,11 +1016,13 @@ Public Class BattleShipsGame
         End Select
         picbox.Load(picbox.ImageLocation)
 
+        'Apply stored transformation to a new bitmap
         Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
         Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
         Dim g As Graphics = Graphics.FromImage(new_b)
 
-        g.DrawImage(b, Xloc, Yloc, radius, radius) 'Moves and scales the picture
+        'Draw with the stored transformations: moves and scales the picture
+        g.DrawImage(b, Xloc, Yloc, radius, radius)
         g.Save()
 
         picbox.Image = new_b
