@@ -1,4 +1,5 @@
-﻿Imports System.Diagnostics.PerformanceData
+﻿Imports System.Data.Common
+Imports System.Diagnostics.PerformanceData
 Imports System.Drawing.Text
 Imports System.Reflection.Emit
 Imports System.Runtime.CompilerServices
@@ -553,8 +554,11 @@ Public Class BattleShipsGame
 
         'useful for debuging purposes, to determine where the head of the ship is. Can be used to turn the square in the front of the ship to a different colour circle
         gameArr(col, row) = 4
-        'Assign the ships with each picture box
-        assignShips(gameArr, currentplayernum, length, directionShipFacing, col, row)
+
+        'Generate each ship pictrebox in it's correct location
+        If currentplayernum = 1 Then
+            displayShipLocations(col, row, length, directionShipFacing, currentplayernum)
+        End If
         revealships()
         Return gameArr
     End Function
@@ -745,57 +749,6 @@ Public Class BattleShipsGame
         End Select
         Return valid
     End Function
-
-
-    Private Sub assignShips(gameArr As Array, currentplayernum As Integer, length As Integer, direction As String, column As Integer, row As Integer)
-        'Assign each picture box to the correct object on the form with regards to length and player
-
-        Dim shipPictureBox As PictureBox
-        Select Case length
-            Case 2
-                If currentplayernum = 2 Then
-                    shipPictureBox = opponentShipPicbox2
-                Else
-                    shipPictureBox = playerShipPicbox2
-                End If
-            Case 3
-                If currentplayernum = 2 Then
-                    'To determine if there has already been a ship of 3
-                    If has3alreadydone = True Then
-                        shipPictureBox = opponentShipPicbox3b
-                        has3alreadydone = False
-                    Else
-                        shipPictureBox = opponentShipPicbox3a
-                        has3alreadydone = True
-                    End If
-                Else
-                    If has3alreadydone = True Then
-                        shipPictureBox = playerShipPicbox3b
-                        has3alreadydone = False
-                    Else
-                        shipPictureBox = playerShipPicbox3a
-                        has3alreadydone = True
-                    End If
-                End If
-            Case 4
-                If currentPlayer = 2 Then
-                    shipPictureBox = opponentShipPicbox4
-                Else
-                    shipPictureBox = playerShipPicbox4
-                End If
-            Case 5
-                If currentPlayer = 2 Then
-                    shipPictureBox = opponentShipPicbox5
-                Else
-                    shipPictureBox = playerShipPicbox5
-                End If
-        End Select
-
-        'Generate each assigned picture in it's correct location
-        If currentplayernum = 1 Then
-            displayShipLocations(column, row, length, direction, currentplayernum)
-        End If
-    End Sub
 
 
     Private Sub displayShipLocations(col As Integer, row As Integer, shipLength As Integer, direction As String, currentplayernum As Integer)
