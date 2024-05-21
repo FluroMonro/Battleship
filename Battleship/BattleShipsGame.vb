@@ -317,11 +317,7 @@ Public Class BattleShipsGame
                 Dim shipstr As String
 
                 shipstr = currentplayerstr & "Ship" & shippicstr
-                'Me.WindowState = FormWindowState.Minimized
                 targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
-                If targetObject Is Nothing Then
-                    targetObject = referenceShipFromParents(targetObject, length, shipstr, currentplayerstr)
-                End If
                 targetObject.Location = New Point(100, 100)
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
@@ -329,59 +325,6 @@ Public Class BattleShipsGame
             Next length
         Next player
     End Sub
-
-    ''' <summary>
-    ''' Determines the pictrebox associated with the correct ship after it has been parented with the grid circles it is on top of.
-    ''' Example of use: referenceShipFromParents("4_2", 3, "playerShip3a", "player") = playershipPicbox3a
-    ''' </summary>
-    ''' <param name="targetobject">A picturebox: Will be either 'Nothing' or a grid picture box: eg. "4_2"</param>
-    ''' <param name="length">An integer representing the length of the ship: eg. 3</param>
-    ''' <param name="shipstr">A string representing the chosen ship: eg. "playerShip3a"</param>
-    ''' <param name="currentplayerstr">A string representing the target player: eg. "player" or "opponent"</param>
-    ''' <returns>The picturebox of the ship</returns>
-    Private Function referenceShipFromParents(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
-        Dim targetship() As shipGridLocations
-        Dim targetpicboxArr(,) As PictureBox
-
-        'Gets the picturebox array of the target and the targetship array of records that holds the locations of the ship.
-        targetship = CallByName(Me, shipstr, vbGet)
-        targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
-
-        'Passes the child of the picturebox at the location in the picturebox array into GetShipFromParent()
-        targetobject = GetShipFromParent(targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0))
-
-        Return targetobject
-    End Function
-
-    ''' <summary>
-    ''' Function gets the picturebox of the ship (which is at the top layer of parenting) from one of the parents in a lower layer
-    ''' Example of use: GetShipFromParent("4_2") = playerShipPicbox3a
-    ''' </summary>
-    ''' <param name="parentPicbox">A picturebox that is a parent of a ship picture box</param>
-    ''' <returns>The picturebox of the ship on the top layer of the grid box layers. </returns>
-    Public Function GetShipFromParent(parentPicbox As PictureBox) As PictureBox
-        Dim targetobject As PictureBox
-        Dim i As Integer
-        Dim count As Integer
-
-        targetobject = parentPicbox
-        i = 0
-        count = 0
-
-        'Move up the layers until there are no more children (top layer)
-        Do
-            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
-            count = count + 1
-        Loop Until targetobject Is Nothing
-
-        targetobject = parentPicbox
-
-        'Move up the layers to the top layer (1 before there are no children) which will be the ship.
-        For i = 1 To (count - 1)
-            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
-        Next i
-        Return targetobject
-    End Function
 
     ''' <summary>
     ''' Function sets all the elements in the array to be 0 (empty)
@@ -783,7 +726,6 @@ Public Class BattleShipsGame
 
         count = shipLength
 
-        'X,Y,Xscale,Yscle,XOffset,YOffset are all dependent on the direction the ship is facing
         Select Case direction
             Case "right"
                 X = gridCircleSizeNum * (shipLength - 1)
@@ -800,7 +742,6 @@ Public Class BattleShipsGame
                 Yscale = gridCircleSizeNum
                 XOffset = 1
                 YOffset = 0
-                'Expanding picturebox to the left so it does not need to be moved
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
             Case "down"
                 Y = gridCircleSizeNum * (shipLength - 1)
@@ -808,16 +749,13 @@ Public Class BattleShipsGame
                 Yscale = gridCircleSizeNum * shipLength
                 XOffset = 0
                 YOffset = 1
-                'Expanding picturebox upwards so needs to be moved back down
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, direction)
-                'To move back to the far end of where was chosen (so expanding does not go over the limit onto the others)
                 originalParent.Location = originalParent.Location - New Point(X, Y)
             Case "up"
                 Xscale = gridCircleSizeNum
                 Yscale = gridCircleSizeNum * shipLength
                 XOffset = 0
                 YOffset = -1
-                'Expanding picturebox upwards so it does not need to be moved
                 resizeAndMoveImageWithinPicbox(originalParent, count, gridCircleSizeNum, "noMovement")
         End Select
 
@@ -893,8 +831,6 @@ Public Class BattleShipsGame
         For count = 1 To (shipLength - 1)
             'Get the correct picturebox
             targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-
-            'Change the sizemode back to normal from streched (if stretched- image is stretched to fit the entire picturebox which would hide the other pictureboxes underneath
             targetgridbox.SizeMode = PictureBoxSizeMode.Normal
 
             'Correctly display the image inside the picturebox as to not obsecure any below it.
@@ -934,8 +870,6 @@ Public Class BattleShipsGame
         For count = (shipLength - 1) To 1 Step -1
             'Get the correct picturebox
             targetgridbox = playerpictureBoxArray(col + (XOffset * count), row + (Yoffset * count))
-
-            'Change the sizemode back to normal from streched (if stretched- image is stretched to fit the entire picturebox which would hide the other pictureboxes 
             targetgridbox.SizeMode = PictureBoxSizeMode.Normal
 
             'Correctly display the image inside the picturebox as to not obsecure any below it.
@@ -1303,6 +1237,9 @@ Public Class BattleShipsGame
             timelbl.Text = displayTime
         End If
 
+        unParentShipsOnGameOver()
+        removePreviousGrid()
+
         gameTimer.Stop()
         timeInitialise()
     End Sub
@@ -1325,7 +1262,112 @@ Public Class BattleShipsGame
         playerHitCount = 0
         opponentMissCount = 0
         opponentHitCount = 0
+
+        unParentShipsOnGameOver()
+        removePreviousGrid()
         showgameOverForm()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine unparents the players ships from its parent stack with the grid boxes and makes the form the parent.
+    ''' </summary>
+    Private Sub unParentShipsOnGameOver()
+        Dim shippicstr As String
+        Dim targetObject As PictureBox
+        For length = 2 To 5
+            shippicstr = length.ToString
+            If length = 3 Then
+                If duplicateShip = False Then
+                    shippicstr = "3a"
+                    duplicateShip = True
+                End If
+            End If
+            If length = 4 Then
+                If duplicateShip = True Then
+                    shippicstr = "3b"
+                    duplicateShip = False
+                    length = length - 1
+                End If
+            End If
+
+            Dim shipstr As String
+
+            shipstr = "playerShip" & shippicstr
+            targetObject = referenceShipFromParents(targetObject, length, shipstr, "player")
+            targetObject.Parent = Me
+        Next length
+    End Sub
+    ''' <summary>
+    ''' Determines the pictrebox associated with the correct ship after it has been parented with the grid circles it is on top of.
+    ''' Example of use: referenceShipFromParents("4_2", 3, "playerShip3a", "player") = playershipPicbox3a
+    ''' </summary>
+    ''' <param name="targetobject">A picturebox: Will be either 'Nothing' or a grid picture box: eg. "4_2"</param>
+    ''' <param name="length">An integer representing the length of the ship: eg. 3</param>
+    ''' <param name="shipstr">A string representing the chosen ship: eg. "playerShip3a"</param>
+    ''' <param name="currentplayerstr">A string representing the target player: eg. "player" or "opponent"</param>
+    ''' <returns>The picturebox of the ship</returns>
+    Private Function referenceShipFromParents(targetobject As PictureBox, length As Integer, shipstr As String, currentplayerstr As String) As PictureBox
+        Dim targetship() As shipGridLocations
+        Dim targetpicboxArr(,) As PictureBox
+
+        'Gets the picturebox array of the target and the targetship array of records that holds the locations of the ship.
+        targetship = CallByName(Me, shipstr, vbGet)
+        targetpicboxArr = CallByName(Me, currentplayerstr & "pictureBoxArray", vbGet)
+
+        'Passes the child of the picturebox at the location in the picturebox array into GetShipFromParent()
+        targetobject = GetShipFromParent(targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0))
+
+        Return targetobject
+    End Function
+
+    ''' <summary>
+    ''' Function gets the picturebox of the ship (which is at the top layer of parenting) from one of the parents in a lower layer
+    ''' Example of use: GetShipFromParent("4_2") = playerShipPicbox3a
+    ''' </summary>
+    ''' <param name="parentPicbox">A picturebox that is a parent of a ship picture box</param>
+    ''' <returns>The picturebox of the ship on the top layer of the grid box layers. </returns>
+    Public Function GetShipFromParent(parentPicbox As PictureBox) As PictureBox
+        Dim targetobject As PictureBox
+        Dim i As Integer
+        Dim count As Integer
+
+        targetobject = parentPicbox
+        i = 0
+        count = 0
+
+        'Move up the layers until there are no more children (top layer)
+        Do
+            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
+            count = count + 1
+        Loop Until targetobject Is Nothing
+
+        targetobject = parentPicbox
+
+        'Move up the layers to the top layer (1 before there are no children) which will be the ship.
+        For i = 1 To (count - 1)
+            targetobject = targetobject.GetChildAtPoint(New Point(0, 0), 0)
+        Next i
+        Return targetobject
+    End Function
+
+    ''' <summary>
+    ''' Subroutine removes all the elements of the array of pictureboxes from the form.
+    ''' This is for a clean reset
+    ''' </summary>
+    Private Sub removePreviousGrid()
+        Dim column As Integer
+        Dim row As Integer
+        column = 0
+        row = 0
+        If playerpictureBoxArray(1, 1) IsNot Nothing Then
+            For column = 1 To gridSize
+                For row = 1 To gridSize
+                    'Dispose() removes the control and all associated resources from the form
+                    playerpictureBoxArray(column, row).Dispose()
+                    opponentpictureBoxArray(column, row).Dispose()
+                Next row
+            Next column
+        End If
     End Sub
 
     ''' <summary>
@@ -1932,10 +1974,10 @@ Public Class BattleShipsGame
 
             Case "Normal"
                 If hasAHit = False Then
-                    'If there hasn't been a hit, randomly choose an avaliable square on the board
+                    'Randomly choose an avaliable square on the board
                     opponentMove = randomSquare()
                 Else
-                    'If there has been a hit, randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
+                    'Randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
                     opponentMove = randomAdjacent()
                 End If
 
