@@ -39,6 +39,10 @@ Partial Class gameOverfrm
         shotslbl = New Label()
         shipsSunktxt = New Label()
         shipsSunklbl = New Label()
+        diftxt = New Label()
+        diflbl = New Label()
+        boardsizetxt = New Label()
+        boardSizelbl = New Label()
         CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -90,7 +94,7 @@ Partial Class gameOverfrm
         scorelbl.AutoSize = True
         scorelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         scorelbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        scorelbl.Location = New Point(687, 583)
+        scorelbl.Location = New Point(719, 520)
         scorelbl.Name = "scorelbl"
         scorelbl.Size = New Size(60, 25)
         scorelbl.TabIndex = 12
@@ -101,7 +105,7 @@ Partial Class gameOverfrm
         scoretxt.AutoSize = True
         scoretxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         scoretxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        scoretxt.Location = New Point(787, 583)
+        scoretxt.Location = New Point(785, 520)
         scoretxt.Name = "scoretxt"
         scoretxt.Size = New Size(22, 25)
         scoretxt.TabIndex = 13
@@ -112,7 +116,7 @@ Partial Class gameOverfrm
         timetxt.AutoSize = True
         timetxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         timetxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        timetxt.Location = New Point(785, 521)
+        timetxt.Location = New Point(650, 570)
         timetxt.Name = "timetxt"
         timetxt.Size = New Size(56, 25)
         timetxt.TabIndex = 15
@@ -123,7 +127,7 @@ Partial Class gameOverfrm
         timelbl.AutoSize = True
         timelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         timelbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl.Location = New Point(687, 521)
+        timelbl.Location = New Point(594, 570)
         timelbl.Name = "timelbl"
         timelbl.Size = New Size(54, 25)
         timelbl.TabIndex = 14
@@ -181,7 +185,7 @@ Partial Class gameOverfrm
         accuracytxt.AutoSize = True
         accuracytxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         accuracytxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracytxt.Location = New Point(975, 635)
+        accuracytxt.Location = New Point(900, 670)
         accuracytxt.Name = "accuracytxt"
         accuracytxt.Size = New Size(19, 25)
         accuracytxt.TabIndex = 21
@@ -192,7 +196,7 @@ Partial Class gameOverfrm
         accuracylbl.AutoSize = True
         accuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         accuracylbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl.Location = New Point(875, 635)
+        accuracylbl.Location = New Point(808, 670)
         accuracylbl.Name = "accuracylbl"
         accuracylbl.Size = New Size(86, 25)
         accuracylbl.TabIndex = 20
@@ -203,7 +207,7 @@ Partial Class gameOverfrm
         shotstxt.AutoSize = True
         shotstxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         shotstxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        shotstxt.Location = New Point(787, 635)
+        shotstxt.Location = New Point(900, 620)
         shotstxt.Name = "shotstxt"
         shotstxt.Size = New Size(22, 25)
         shotstxt.TabIndex = 23
@@ -214,7 +218,7 @@ Partial Class gameOverfrm
         shotslbl.AutoSize = True
         shotslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         shotslbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        shotslbl.Location = New Point(638, 635)
+        shotslbl.Location = New Point(785, 620)
         shotslbl.Name = "shotslbl"
         shotslbl.Size = New Size(109, 25)
         shotslbl.TabIndex = 22
@@ -225,7 +229,7 @@ Partial Class gameOverfrm
         shipsSunktxt.AutoSize = True
         shipsSunktxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         shipsSunktxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        shipsSunktxt.Location = New Point(564, 635)
+        shipsSunktxt.Location = New Point(650, 670)
         shipsSunktxt.Name = "shipsSunktxt"
         shipsSunktxt.Size = New Size(22, 25)
         shipsSunktxt.TabIndex = 25
@@ -236,11 +240,55 @@ Partial Class gameOverfrm
         shipsSunklbl.AutoSize = True
         shipsSunklbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         shipsSunklbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        shipsSunklbl.Location = New Point(455, 635)
+        shipsSunklbl.Location = New Point(545, 670)
         shipsSunklbl.Name = "shipsSunklbl"
         shipsSunklbl.Size = New Size(103, 25)
         shipsSunklbl.TabIndex = 24
         shipsSunklbl.Text = "Ships Sunk:"
+        ' 
+        ' diftxt
+        ' 
+        diftxt.AutoSize = True
+        diftxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        diftxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        diftxt.Location = New Point(900, 570)
+        diftxt.Name = "diftxt"
+        diftxt.Size = New Size(19, 25)
+        diftxt.TabIndex = 27
+        diftxt.Text = "-"
+        ' 
+        ' diflbl
+        ' 
+        diflbl.AutoSize = True
+        diflbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        diflbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        diflbl.Location = New Point(808, 570)
+        diflbl.Name = "diflbl"
+        diflbl.Size = New Size(86, 25)
+        diflbl.TabIndex = 26
+        diflbl.Text = "Difficulty:"
+        ' 
+        ' boardsizetxt
+        ' 
+        boardsizetxt.AutoSize = True
+        boardsizetxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        boardsizetxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        boardsizetxt.Location = New Point(650, 620)
+        boardsizetxt.Name = "boardsizetxt"
+        boardsizetxt.Size = New Size(19, 25)
+        boardsizetxt.TabIndex = 29
+        boardsizetxt.Text = "-"
+        ' 
+        ' boardSizelbl
+        ' 
+        boardSizelbl.AutoSize = True
+        boardSizelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        boardSizelbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl.Location = New Point(549, 620)
+        boardSizelbl.Name = "boardSizelbl"
+        boardSizelbl.Size = New Size(99, 25)
+        boardSizelbl.TabIndex = 28
+        boardSizelbl.Text = "Board Size:"
         ' 
         ' gameOverfrm
         ' 
@@ -248,6 +296,10 @@ Partial Class gameOverfrm
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 921)
+        Controls.Add(boardsizetxt)
+        Controls.Add(boardSizelbl)
+        Controls.Add(diftxt)
+        Controls.Add(diflbl)
         Controls.Add(shipsSunktxt)
         Controls.Add(shipsSunklbl)
         Controls.Add(shotstxt)
@@ -288,4 +340,8 @@ Partial Class gameOverfrm
     Friend WithEvents shotslbl As Label
     Friend WithEvents shipsSunktxt As Label
     Friend WithEvents shipsSunklbl As Label
+    Friend WithEvents diftxt As Label
+    Friend WithEvents diflbl As Label
+    Friend WithEvents boardsizetxt As Label
+    Friend WithEvents boardSizelbl As Label
 End Class

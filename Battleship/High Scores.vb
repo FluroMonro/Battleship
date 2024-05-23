@@ -99,7 +99,7 @@ Public Class highScoresfrm
 
             targetObject = shotsTakenpnl.Controls.Item("shotsTakenlbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).shotNum
-            battleShipsGamefrm.wait(0.07)
+            battleShipsGamefrm.wait(0.06)
         Next
     End Sub
 

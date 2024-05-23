@@ -47,6 +47,8 @@
         shotstxt.Text = shotsNum.ToString
         shipsSunktxt.Text = sunkNum.ToString
         accuracytxt.Text = accuracyStr
+        boardsizetxt.Text = gridSize & "x" & gridSize
+        diftxt.Text = difficulty
         gameOverlbl.Location = New Point((Me.Width / 2) - (gameOverlbl.Width / 2), 200)
 
         'Display the appropriate form controls 

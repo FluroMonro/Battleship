@@ -169,7 +169,7 @@ Partial Class highScoresfrm
         ' 
         namelbl3.AutoSize = True
         namelbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl3.Location = New Point(44, 135)
+        namelbl3.Location = New Point(28, 135)
         namelbl3.Name = "namelbl3"
         namelbl3.Size = New Size(62, 21)
         namelbl3.TabIndex = 10
@@ -179,7 +179,7 @@ Partial Class highScoresfrm
         ' 
         namelbl2.AutoSize = True
         namelbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl2.Location = New Point(44, 95)
+        namelbl2.Location = New Point(28, 95)
         namelbl2.Name = "namelbl2"
         namelbl2.Size = New Size(62, 21)
         namelbl2.TabIndex = 11
@@ -189,7 +189,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl1.AutoSize = True
         ranklbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl1.Location = New Point(63, 60)
+        ranklbl1.Location = New Point(25, 60)
         ranklbl1.Name = "ranklbl1"
         ranklbl1.Size = New Size(19, 21)
         ranklbl1.TabIndex = 12
@@ -199,7 +199,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl2.AutoSize = True
         ranklbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl2.Location = New Point(63, 100)
+        ranklbl2.Location = New Point(25, 100)
         ranklbl2.Name = "ranklbl2"
         ranklbl2.Size = New Size(19, 21)
         ranklbl2.TabIndex = 13
@@ -209,7 +209,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl3.AutoSize = True
         ranklbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl3.Location = New Point(63, 140)
+        ranklbl3.Location = New Point(25, 140)
         ranklbl3.Name = "ranklbl3"
         ranklbl3.Size = New Size(19, 21)
         ranklbl3.TabIndex = 14
@@ -219,7 +219,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl4.AutoSize = True
         ranklbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl4.Location = New Point(63, 180)
+        ranklbl4.Location = New Point(25, 180)
         ranklbl4.Name = "ranklbl4"
         ranklbl4.Size = New Size(19, 21)
         ranklbl4.TabIndex = 15
@@ -229,7 +229,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl5.AutoSize = True
         ranklbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl5.Location = New Point(63, 220)
+        ranklbl5.Location = New Point(25, 220)
         ranklbl5.Name = "ranklbl5"
         ranklbl5.Size = New Size(19, 21)
         ranklbl5.TabIndex = 16
@@ -239,7 +239,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl6.AutoSize = True
         ranklbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl6.Location = New Point(63, 260)
+        ranklbl6.Location = New Point(25, 260)
         ranklbl6.Name = "ranklbl6"
         ranklbl6.Size = New Size(19, 21)
         ranklbl6.TabIndex = 17
@@ -249,7 +249,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl7.AutoSize = True
         ranklbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl7.Location = New Point(63, 300)
+        ranklbl7.Location = New Point(25, 300)
         ranklbl7.Name = "ranklbl7"
         ranklbl7.Size = New Size(19, 21)
         ranklbl7.TabIndex = 18
@@ -259,7 +259,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl8.AutoSize = True
         ranklbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl8.Location = New Point(63, 340)
+        ranklbl8.Location = New Point(25, 340)
         ranklbl8.Name = "ranklbl8"
         ranklbl8.Size = New Size(19, 21)
         ranklbl8.TabIndex = 19
@@ -269,7 +269,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl9.AutoSize = True
         ranklbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl9.Location = New Point(63, 380)
+        ranklbl9.Location = New Point(25, 380)
         ranklbl9.Name = "ranklbl9"
         ranklbl9.Size = New Size(19, 21)
         ranklbl9.TabIndex = 20
@@ -279,7 +279,7 @@ Partial Class highScoresfrm
         ' 
         ranklbl10.AutoSize = True
         ranklbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        ranklbl10.Location = New Point(54, 420)
+        ranklbl10.Location = New Point(16, 420)
         ranklbl10.Name = "ranklbl10"
         ranklbl10.Size = New Size(28, 21)
         ranklbl10.TabIndex = 21
@@ -289,7 +289,7 @@ Partial Class highScoresfrm
         ' 
         namelbl4.AutoSize = True
         namelbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl4.Location = New Point(44, 175)
+        namelbl4.Location = New Point(28, 175)
         namelbl4.Name = "namelbl4"
         namelbl4.Size = New Size(62, 21)
         namelbl4.TabIndex = 22
@@ -299,7 +299,7 @@ Partial Class highScoresfrm
         ' 
         namelbl5.AutoSize = True
         namelbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl5.Location = New Point(44, 215)
+        namelbl5.Location = New Point(28, 215)
         namelbl5.Name = "namelbl5"
         namelbl5.Size = New Size(62, 21)
         namelbl5.TabIndex = 23
@@ -309,7 +309,7 @@ Partial Class highScoresfrm
         ' 
         namelbl6.AutoSize = True
         namelbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl6.Location = New Point(44, 257)
+        namelbl6.Location = New Point(28, 257)
         namelbl6.Name = "namelbl6"
         namelbl6.Size = New Size(62, 21)
         namelbl6.TabIndex = 24
@@ -319,7 +319,7 @@ Partial Class highScoresfrm
         ' 
         namelbl7.AutoSize = True
         namelbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl7.Location = New Point(44, 300)
+        namelbl7.Location = New Point(28, 300)
         namelbl7.Name = "namelbl7"
         namelbl7.Size = New Size(62, 21)
         namelbl7.TabIndex = 25
@@ -329,7 +329,7 @@ Partial Class highScoresfrm
         ' 
         namelbl8.AutoSize = True
         namelbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl8.Location = New Point(44, 340)
+        namelbl8.Location = New Point(28, 340)
         namelbl8.Name = "namelbl8"
         namelbl8.Size = New Size(62, 21)
         namelbl8.TabIndex = 26
@@ -339,7 +339,7 @@ Partial Class highScoresfrm
         ' 
         namelbl9.AutoSize = True
         namelbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl9.Location = New Point(44, 380)
+        namelbl9.Location = New Point(28, 380)
         namelbl9.Name = "namelbl9"
         namelbl9.Size = New Size(62, 21)
         namelbl9.TabIndex = 27
@@ -349,7 +349,7 @@ Partial Class highScoresfrm
         ' 
         namelbl10.AutoSize = True
         namelbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl10.Location = New Point(44, 420)
+        namelbl10.Location = New Point(28, 420)
         namelbl10.Name = "namelbl10"
         namelbl10.Size = New Size(71, 21)
         namelbl10.TabIndex = 28
@@ -369,18 +369,18 @@ Partial Class highScoresfrm
         rankingpnl.Controls.Add(ranklbl3)
         rankingpnl.Controls.Add(ranklbl2)
         rankingpnl.Controls.Add(ranklbl1)
-        rankingpnl.Location = New Point(132, 300)
+        rankingpnl.Location = New Point(256, 300)
         rankingpnl.Name = "rankingpnl"
-        rankingpnl.Size = New Size(132, 453)
+        rankingpnl.Size = New Size(65, 453)
         rankingpnl.TabIndex = 29
         ' 
         ' rankslbl
         ' 
         rankslbl.AutoSize = True
-        rankslbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        rankslbl.Location = New Point(42, 9)
+        rankslbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        rankslbl.Location = New Point(3, 16)
         rankslbl.Name = "rankslbl"
-        rankslbl.Size = New Size(59, 28)
+        rankslbl.Size = New Size(57, 25)
         rankslbl.TabIndex = 22
         rankslbl.Text = "Rank"
         ' 
@@ -398,16 +398,16 @@ Partial Class highScoresfrm
         namepnl.Controls.Add(namelbl4)
         namepnl.Controls.Add(namelbl2)
         namepnl.Controls.Add(namelbl3)
-        namepnl.Location = New Point(270, 300)
+        namepnl.Location = New Point(327, 300)
         namepnl.Name = "namepnl"
-        namepnl.Size = New Size(205, 453)
+        namepnl.Size = New Size(179, 453)
         namepnl.TabIndex = 30
         ' 
         ' namelbl1
         ' 
         namelbl1.AutoSize = True
         namelbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        namelbl1.Location = New Point(44, 55)
+        namelbl1.Location = New Point(28, 55)
         namelbl1.Name = "namelbl1"
         namelbl1.Size = New Size(66, 21)
         namelbl1.TabIndex = 29
@@ -416,10 +416,10 @@ Partial Class highScoresfrm
         ' namelbl
         ' 
         namelbl.AutoSize = True
-        namelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        namelbl.Location = New Point(29, 9)
+        namelbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        namelbl.Location = New Point(35, 16)
         namelbl.Name = "namelbl"
-        namelbl.Size = New Size(68, 28)
+        namelbl.Size = New Size(64, 25)
         namelbl.TabIndex = 23
         namelbl.Text = "Name"
         ' 
@@ -538,18 +538,18 @@ Partial Class highScoresfrm
         scorepnl.Controls.Add(scorelbl3)
         scorepnl.Controls.Add(scorelbl2)
         scorepnl.Controls.Add(scorelbl1)
-        scorepnl.Location = New Point(481, 300)
+        scorepnl.Location = New Point(512, 300)
         scorepnl.Name = "scorepnl"
-        scorepnl.Size = New Size(128, 453)
+        scorepnl.Size = New Size(104, 453)
         scorepnl.TabIndex = 40
         ' 
         ' scorelbl
         ' 
         scorelbl.AutoSize = True
-        scorelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        scorelbl.Location = New Point(3, 9)
+        scorelbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        scorelbl.Location = New Point(3, 16)
         scorelbl.Name = "scorelbl"
-        scorelbl.Size = New Size(64, 28)
+        scorelbl.Size = New Size(62, 25)
         scorelbl.TabIndex = 29
         scorelbl.Text = "Score"
         ' 
@@ -557,7 +557,7 @@ Partial Class highScoresfrm
         ' 
         scorebtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         scorebtn.Image = My.Resources.Resources.BlackDownArrow
-        scorebtn.Location = New Point(73, 9)
+        scorebtn.Location = New Point(71, 15)
         scorebtn.Name = "scorebtn"
         scorebtn.Size = New Size(21, 32)
         scorebtn.SizeMode = PictureBoxSizeMode.StretchImage
@@ -568,7 +568,7 @@ Partial Class highScoresfrm
         ' 
         timelbl1.AutoSize = True
         timelbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl1.Location = New Point(62, 55)
+        timelbl1.Location = New Point(28, 55)
         timelbl1.Name = "timelbl1"
         timelbl1.Size = New Size(49, 21)
         timelbl1.TabIndex = 40
@@ -578,7 +578,7 @@ Partial Class highScoresfrm
         ' 
         timelbl2.AutoSize = True
         timelbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl2.Location = New Point(62, 95)
+        timelbl2.Location = New Point(28, 95)
         timelbl2.Name = "timelbl2"
         timelbl2.Size = New Size(49, 21)
         timelbl2.TabIndex = 41
@@ -588,7 +588,7 @@ Partial Class highScoresfrm
         ' 
         timelbl3.AutoSize = True
         timelbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl3.Location = New Point(62, 135)
+        timelbl3.Location = New Point(28, 135)
         timelbl3.Name = "timelbl3"
         timelbl3.Size = New Size(49, 21)
         timelbl3.TabIndex = 42
@@ -598,7 +598,7 @@ Partial Class highScoresfrm
         ' 
         timelbl6.AutoSize = True
         timelbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl6.Location = New Point(62, 260)
+        timelbl6.Location = New Point(28, 260)
         timelbl6.Name = "timelbl6"
         timelbl6.Size = New Size(49, 21)
         timelbl6.TabIndex = 45
@@ -608,7 +608,7 @@ Partial Class highScoresfrm
         ' 
         timelbl5.AutoSize = True
         timelbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl5.Location = New Point(62, 220)
+        timelbl5.Location = New Point(28, 220)
         timelbl5.Name = "timelbl5"
         timelbl5.Size = New Size(49, 21)
         timelbl5.TabIndex = 44
@@ -618,7 +618,7 @@ Partial Class highScoresfrm
         ' 
         timelbl4.AutoSize = True
         timelbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl4.Location = New Point(62, 180)
+        timelbl4.Location = New Point(28, 180)
         timelbl4.Name = "timelbl4"
         timelbl4.Size = New Size(49, 21)
         timelbl4.TabIndex = 43
@@ -628,7 +628,7 @@ Partial Class highScoresfrm
         ' 
         timelbl9.AutoSize = True
         timelbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl9.Location = New Point(62, 380)
+        timelbl9.Location = New Point(28, 380)
         timelbl9.Name = "timelbl9"
         timelbl9.Size = New Size(49, 21)
         timelbl9.TabIndex = 48
@@ -638,7 +638,7 @@ Partial Class highScoresfrm
         ' 
         timelbl8.AutoSize = True
         timelbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl8.Location = New Point(62, 340)
+        timelbl8.Location = New Point(28, 340)
         timelbl8.Name = "timelbl8"
         timelbl8.Size = New Size(49, 21)
         timelbl8.TabIndex = 47
@@ -648,7 +648,7 @@ Partial Class highScoresfrm
         ' 
         timelbl7.AutoSize = True
         timelbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl7.Location = New Point(62, 300)
+        timelbl7.Location = New Point(28, 300)
         timelbl7.Name = "timelbl7"
         timelbl7.Size = New Size(49, 21)
         timelbl7.TabIndex = 46
@@ -658,7 +658,7 @@ Partial Class highScoresfrm
         ' 
         timelbl10.AutoSize = True
         timelbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        timelbl10.Location = New Point(62, 420)
+        timelbl10.Location = New Point(28, 420)
         timelbl10.Name = "timelbl10"
         timelbl10.Size = New Size(49, 21)
         timelbl10.TabIndex = 49
@@ -679,18 +679,18 @@ Partial Class highScoresfrm
         timepnl.Controls.Add(timelbl3)
         timepnl.Controls.Add(timelbl2)
         timepnl.Controls.Add(timelbl1)
-        timepnl.Location = New Point(615, 300)
+        timepnl.Location = New Point(622, 300)
         timepnl.Name = "timepnl"
-        timepnl.Size = New Size(165, 453)
+        timepnl.Size = New Size(119, 453)
         timepnl.TabIndex = 50
         ' 
         ' timelbl
         ' 
         timelbl.AutoSize = True
-        timelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        timelbl.Location = New Point(52, 9)
+        timelbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        timelbl.Location = New Point(21, 16)
         timelbl.Name = "timelbl"
-        timelbl.Size = New Size(59, 28)
+        timelbl.Size = New Size(55, 25)
         timelbl.TabIndex = 40
         timelbl.Text = "Time"
         timelbl.UseWaitCursor = True
@@ -699,7 +699,7 @@ Partial Class highScoresfrm
         ' 
         timebtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         timebtn.Image = My.Resources.Resources.BlackDownArrow
-        timebtn.Location = New Point(116, 9)
+        timebtn.Location = New Point(82, 15)
         timebtn.Name = "timebtn"
         timebtn.Size = New Size(21, 32)
         timebtn.SizeMode = PictureBoxSizeMode.StretchImage
@@ -742,18 +742,18 @@ Partial Class highScoresfrm
         difficultypnl.Controls.Add(diflbl3)
         difficultypnl.Controls.Add(diflbl2)
         difficultypnl.Controls.Add(diflbl1)
-        difficultypnl.Location = New Point(786, 300)
+        difficultypnl.Location = New Point(747, 300)
         difficultypnl.Name = "difficultypnl"
-        difficultypnl.Size = New Size(165, 453)
+        difficultypnl.Size = New Size(132, 453)
         difficultypnl.TabIndex = 57
         ' 
         ' difficultylbl
         ' 
         difficultylbl.AutoSize = True
-        difficultylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        difficultylbl.Location = New Point(31, 9)
+        difficultylbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        difficultylbl.Location = New Point(14, 16)
         difficultylbl.Name = "difficultylbl"
-        difficultylbl.Size = New Size(102, 28)
+        difficultylbl.Size = New Size(93, 25)
         difficultylbl.TabIndex = 40
         difficultylbl.Text = "Difficulty"
         difficultylbl.UseWaitCursor = True
@@ -762,7 +762,7 @@ Partial Class highScoresfrm
         ' 
         diflbl10.AutoSize = True
         diflbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl10.Location = New Point(56, 420)
+        diflbl10.Location = New Point(35, 420)
         diflbl10.Name = "diflbl10"
         diflbl10.Size = New Size(16, 21)
         diflbl10.TabIndex = 49
@@ -772,7 +772,7 @@ Partial Class highScoresfrm
         ' 
         diflbl9.AutoSize = True
         diflbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl9.Location = New Point(56, 380)
+        diflbl9.Location = New Point(35, 380)
         diflbl9.Name = "diflbl9"
         diflbl9.Size = New Size(16, 21)
         diflbl9.TabIndex = 48
@@ -782,7 +782,7 @@ Partial Class highScoresfrm
         ' 
         diflbl8.AutoSize = True
         diflbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl8.Location = New Point(56, 340)
+        diflbl8.Location = New Point(35, 340)
         diflbl8.Name = "diflbl8"
         diflbl8.Size = New Size(16, 21)
         diflbl8.TabIndex = 47
@@ -792,7 +792,7 @@ Partial Class highScoresfrm
         ' 
         diflbl7.AutoSize = True
         diflbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl7.Location = New Point(56, 300)
+        diflbl7.Location = New Point(35, 300)
         diflbl7.Name = "diflbl7"
         diflbl7.Size = New Size(16, 21)
         diflbl7.TabIndex = 46
@@ -802,7 +802,7 @@ Partial Class highScoresfrm
         ' 
         diflbl6.AutoSize = True
         diflbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl6.Location = New Point(56, 260)
+        diflbl6.Location = New Point(35, 260)
         diflbl6.Name = "diflbl6"
         diflbl6.Size = New Size(16, 21)
         diflbl6.TabIndex = 45
@@ -812,7 +812,7 @@ Partial Class highScoresfrm
         ' 
         diflbl5.AutoSize = True
         diflbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl5.Location = New Point(56, 220)
+        diflbl5.Location = New Point(35, 220)
         diflbl5.Name = "diflbl5"
         diflbl5.Size = New Size(16, 21)
         diflbl5.TabIndex = 44
@@ -822,7 +822,7 @@ Partial Class highScoresfrm
         ' 
         diflbl4.AutoSize = True
         diflbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl4.Location = New Point(56, 180)
+        diflbl4.Location = New Point(35, 180)
         diflbl4.Name = "diflbl4"
         diflbl4.Size = New Size(16, 21)
         diflbl4.TabIndex = 43
@@ -832,7 +832,7 @@ Partial Class highScoresfrm
         ' 
         diflbl3.AutoSize = True
         diflbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl3.Location = New Point(56, 135)
+        diflbl3.Location = New Point(35, 135)
         diflbl3.Name = "diflbl3"
         diflbl3.Size = New Size(16, 21)
         diflbl3.TabIndex = 42
@@ -842,7 +842,7 @@ Partial Class highScoresfrm
         ' 
         diflbl2.AutoSize = True
         diflbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl2.Location = New Point(56, 95)
+        diflbl2.Location = New Point(35, 95)
         diflbl2.Name = "diflbl2"
         diflbl2.Size = New Size(16, 21)
         diflbl2.TabIndex = 41
@@ -852,7 +852,7 @@ Partial Class highScoresfrm
         ' 
         diflbl1.AutoSize = True
         diflbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        diflbl1.Location = New Point(56, 55)
+        diflbl1.Location = New Point(35, 55)
         diflbl1.Name = "diflbl1"
         diflbl1.Size = New Size(16, 21)
         diflbl1.TabIndex = 40
@@ -872,18 +872,18 @@ Partial Class highScoresfrm
         boardSizepnl.Controls.Add(boardSizelbl3)
         boardSizepnl.Controls.Add(boardSizelbl2)
         boardSizepnl.Controls.Add(boardSizelbl1)
-        boardSizepnl.Location = New Point(957, 300)
+        boardSizepnl.Location = New Point(885, 300)
         boardSizepnl.Name = "boardSizepnl"
-        boardSizepnl.Size = New Size(142, 453)
+        boardSizepnl.Size = New Size(116, 453)
         boardSizepnl.TabIndex = 58
         ' 
         ' boardSizelbl
         ' 
         boardSizelbl.AutoSize = True
-        boardSizelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        boardSizelbl.Location = New Point(19, 9)
+        boardSizelbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        boardSizelbl.Location = New Point(8, 15)
         boardSizelbl.Name = "boardSizelbl"
-        boardSizelbl.Size = New Size(112, 28)
+        boardSizelbl.Size = New Size(106, 25)
         boardSizelbl.TabIndex = 40
         boardSizelbl.Text = "Board Size"
         boardSizelbl.UseWaitCursor = True
@@ -892,7 +892,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl10.AutoSize = True
         boardSizelbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl10.Location = New Point(56, 420)
+        boardSizelbl10.Location = New Point(28, 420)
         boardSizelbl10.Name = "boardSizelbl10"
         boardSizelbl10.Size = New Size(16, 21)
         boardSizelbl10.TabIndex = 49
@@ -902,7 +902,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl9.AutoSize = True
         boardSizelbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl9.Location = New Point(56, 380)
+        boardSizelbl9.Location = New Point(28, 380)
         boardSizelbl9.Name = "boardSizelbl9"
         boardSizelbl9.Size = New Size(16, 21)
         boardSizelbl9.TabIndex = 48
@@ -912,7 +912,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl8.AutoSize = True
         boardSizelbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl8.Location = New Point(56, 340)
+        boardSizelbl8.Location = New Point(28, 340)
         boardSizelbl8.Name = "boardSizelbl8"
         boardSizelbl8.Size = New Size(16, 21)
         boardSizelbl8.TabIndex = 47
@@ -922,7 +922,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl7.AutoSize = True
         boardSizelbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl7.Location = New Point(56, 300)
+        boardSizelbl7.Location = New Point(28, 300)
         boardSizelbl7.Name = "boardSizelbl7"
         boardSizelbl7.Size = New Size(16, 21)
         boardSizelbl7.TabIndex = 46
@@ -932,7 +932,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl6.AutoSize = True
         boardSizelbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl6.Location = New Point(56, 260)
+        boardSizelbl6.Location = New Point(28, 260)
         boardSizelbl6.Name = "boardSizelbl6"
         boardSizelbl6.Size = New Size(16, 21)
         boardSizelbl6.TabIndex = 45
@@ -942,7 +942,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl5.AutoSize = True
         boardSizelbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl5.Location = New Point(56, 220)
+        boardSizelbl5.Location = New Point(28, 220)
         boardSizelbl5.Name = "boardSizelbl5"
         boardSizelbl5.Size = New Size(16, 21)
         boardSizelbl5.TabIndex = 44
@@ -952,7 +952,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl4.AutoSize = True
         boardSizelbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl4.Location = New Point(56, 180)
+        boardSizelbl4.Location = New Point(28, 180)
         boardSizelbl4.Name = "boardSizelbl4"
         boardSizelbl4.Size = New Size(16, 21)
         boardSizelbl4.TabIndex = 43
@@ -962,7 +962,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl3.AutoSize = True
         boardSizelbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl3.Location = New Point(56, 135)
+        boardSizelbl3.Location = New Point(28, 135)
         boardSizelbl3.Name = "boardSizelbl3"
         boardSizelbl3.Size = New Size(16, 21)
         boardSizelbl3.TabIndex = 42
@@ -972,7 +972,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl2.AutoSize = True
         boardSizelbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl2.Location = New Point(56, 95)
+        boardSizelbl2.Location = New Point(28, 95)
         boardSizelbl2.Name = "boardSizelbl2"
         boardSizelbl2.Size = New Size(16, 21)
         boardSizelbl2.TabIndex = 41
@@ -982,7 +982,7 @@ Partial Class highScoresfrm
         ' 
         boardSizelbl1.AutoSize = True
         boardSizelbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        boardSizelbl1.Location = New Point(56, 55)
+        boardSizelbl1.Location = New Point(28, 55)
         boardSizelbl1.Name = "boardSizelbl1"
         boardSizelbl1.Size = New Size(16, 21)
         boardSizelbl1.TabIndex = 40
@@ -1002,18 +1002,18 @@ Partial Class highScoresfrm
         accuracypnl.Controls.Add(accuracylbl3)
         accuracypnl.Controls.Add(accuracylbl2)
         accuracypnl.Controls.Add(accuracylbl1)
-        accuracypnl.Location = New Point(1105, 300)
+        accuracypnl.Location = New Point(1007, 300)
         accuracypnl.Name = "accuracypnl"
-        accuracypnl.Size = New Size(133, 453)
+        accuracypnl.Size = New Size(114, 453)
         accuracypnl.TabIndex = 59
         ' 
         ' accuracylbl
         ' 
         accuracylbl.AutoSize = True
-        accuracylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        accuracylbl.Location = New Point(16, 9)
+        accuracylbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        accuracylbl.Location = New Point(11, 15)
         accuracylbl.Name = "accuracylbl"
-        accuracylbl.Size = New Size(98, 28)
+        accuracylbl.Size = New Size(92, 25)
         accuracylbl.TabIndex = 40
         accuracylbl.Text = "Accuracy"
         accuracylbl.UseWaitCursor = True
@@ -1022,7 +1022,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl10.AutoSize = True
         accuracylbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl10.Location = New Point(56, 420)
+        accuracylbl10.Location = New Point(34, 420)
         accuracylbl10.Name = "accuracylbl10"
         accuracylbl10.Size = New Size(16, 21)
         accuracylbl10.TabIndex = 49
@@ -1032,7 +1032,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl9.AutoSize = True
         accuracylbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl9.Location = New Point(56, 380)
+        accuracylbl9.Location = New Point(34, 380)
         accuracylbl9.Name = "accuracylbl9"
         accuracylbl9.Size = New Size(16, 21)
         accuracylbl9.TabIndex = 48
@@ -1042,7 +1042,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl8.AutoSize = True
         accuracylbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl8.Location = New Point(56, 340)
+        accuracylbl8.Location = New Point(34, 340)
         accuracylbl8.Name = "accuracylbl8"
         accuracylbl8.Size = New Size(16, 21)
         accuracylbl8.TabIndex = 47
@@ -1052,7 +1052,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl7.AutoSize = True
         accuracylbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl7.Location = New Point(56, 300)
+        accuracylbl7.Location = New Point(34, 300)
         accuracylbl7.Name = "accuracylbl7"
         accuracylbl7.Size = New Size(16, 21)
         accuracylbl7.TabIndex = 46
@@ -1062,7 +1062,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl6.AutoSize = True
         accuracylbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl6.Location = New Point(56, 260)
+        accuracylbl6.Location = New Point(34, 260)
         accuracylbl6.Name = "accuracylbl6"
         accuracylbl6.Size = New Size(16, 21)
         accuracylbl6.TabIndex = 45
@@ -1072,7 +1072,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl5.AutoSize = True
         accuracylbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl5.Location = New Point(56, 220)
+        accuracylbl5.Location = New Point(34, 220)
         accuracylbl5.Name = "accuracylbl5"
         accuracylbl5.Size = New Size(16, 21)
         accuracylbl5.TabIndex = 44
@@ -1082,7 +1082,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl4.AutoSize = True
         accuracylbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl4.Location = New Point(56, 180)
+        accuracylbl4.Location = New Point(34, 180)
         accuracylbl4.Name = "accuracylbl4"
         accuracylbl4.Size = New Size(16, 21)
         accuracylbl4.TabIndex = 43
@@ -1092,7 +1092,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl3.AutoSize = True
         accuracylbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl3.Location = New Point(56, 135)
+        accuracylbl3.Location = New Point(34, 135)
         accuracylbl3.Name = "accuracylbl3"
         accuracylbl3.Size = New Size(16, 21)
         accuracylbl3.TabIndex = 42
@@ -1102,7 +1102,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl2.AutoSize = True
         accuracylbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl2.Location = New Point(56, 95)
+        accuracylbl2.Location = New Point(34, 95)
         accuracylbl2.Name = "accuracylbl2"
         accuracylbl2.Size = New Size(16, 21)
         accuracylbl2.TabIndex = 41
@@ -1112,7 +1112,7 @@ Partial Class highScoresfrm
         ' 
         accuracylbl1.AutoSize = True
         accuracylbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        accuracylbl1.Location = New Point(56, 55)
+        accuracylbl1.Location = New Point(34, 55)
         accuracylbl1.Name = "accuracylbl1"
         accuracylbl1.Size = New Size(16, 21)
         accuracylbl1.TabIndex = 40
@@ -1132,18 +1132,18 @@ Partial Class highScoresfrm
         shotsTakenpnl.Controls.Add(shotsTakenlbl3)
         shotsTakenpnl.Controls.Add(shotsTakenlbl2)
         shotsTakenpnl.Controls.Add(shotsTakenlbl1)
-        shotsTakenpnl.Location = New Point(1244, 300)
+        shotsTakenpnl.Location = New Point(1127, 300)
         shotsTakenpnl.Name = "shotsTakenpnl"
-        shotsTakenpnl.Size = New Size(148, 453)
+        shotsTakenpnl.Size = New Size(146, 453)
         shotsTakenpnl.TabIndex = 60
         ' 
         ' shotsTakenlbl
         ' 
         shotsTakenlbl.AutoSize = True
-        shotsTakenlbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        shotsTakenlbl.Location = New Point(16, 9)
+        shotsTakenlbl.Font = New Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point)
+        shotsTakenlbl.Location = New Point(16, 15)
         shotsTakenlbl.Name = "shotsTakenlbl"
-        shotsTakenlbl.Size = New Size(125, 28)
+        shotsTakenlbl.Size = New Size(118, 25)
         shotsTakenlbl.TabIndex = 40
         shotsTakenlbl.Text = "Shots Taken"
         shotsTakenlbl.UseWaitCursor = True

@@ -249,7 +249,7 @@ Public Class battleShipsGamefrm
         timelbl.BackColor = Color.Transparent
         timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
         timelbl.Size = New Size(80, 30)
-        timelbl.Location = New Point((backgroundpb.Width / 2) - (timelbl.Width / 2), backgroundpb.Height - 2 * (timelbl.Height))
+        timelbl.Location = New Point((backgroundpb.Width / 2) - (timelbl.Width / 2) + 7, backgroundpb.Height - 2 * (timelbl.Height))
 
         'Using an offset dependent on the length of playername so that the text won't overlap on the game boards
         Dim playernameoffSet As Integer
@@ -265,8 +265,8 @@ Public Class battleShipsGamefrm
         playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, 658)
         playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, 658)
         opponentnamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - 40 - opponentnamelbl.Width, Me.Top + 195)
-        opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Top + 225)
-        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Top + 225)
+        opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 168, Me.Top + 225)
+        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 94, Me.Top + 225)
 
         turnsBannerpb.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         turnsBannerpb.Size = New Size(turnsbannerWidth, turnsbannerHeight)
@@ -912,6 +912,9 @@ Public Class battleShipsGamefrm
     Private Sub resizeAndMoveImageWithinPicbox(picbox As PictureBox, count As Integer, radius As Integer, direction As String)
         Dim Xloc As Integer
         Dim Yloc As Integer
+        Dim bmp As Bitmap
+        Dim newbmp As Bitmap
+        Dim graphicDrawing As Graphics
 
         picbox.Load(picbox.ImageLocation)
 
@@ -935,15 +938,15 @@ Public Class battleShipsGamefrm
         End Select
 
         'Apply transformation to a new bitmap
-        Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
-        Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
-        Dim g As Graphics = Graphics.FromImage(new_b)
+        bmp = DirectCast(picbox.Image, Bitmap)
+        newbmp = New Bitmap(radius + Xloc, radius + Yloc)
+        graphicDrawing = Graphics.FromImage(newbmp)
 
         'Draw with the new transformations: moves and scales the picture
-        g.DrawImage(b, Xloc, Yloc, radius, radius)
-        g.Save()
+        graphicDrawing.DrawImage(bmp, Xloc, Yloc, radius, radius)
+        graphicDrawing.Save()
 
-        picbox.Image = new_b
+        picbox.Image = newbmp
     End Sub
 
     ''' <summary>
@@ -956,6 +959,9 @@ Public Class battleShipsGamefrm
     Private Sub updateImageKeepCorrectSize(picbox As PictureBox, arrayValue As Integer, radius As Integer)
         Dim Xloc As Integer
         Dim Yloc As Integer
+        Dim bmp As Bitmap
+        Dim newbmp As Bitmap
+        Dim graphicDrawing As Graphics
 
         'Store the transformations of the image
         If picbox.Image.Width - radius = 0 AndAlso picbox.Image.Height - radius = 0 Then
@@ -982,15 +988,15 @@ Public Class battleShipsGamefrm
         picbox.Load(picbox.ImageLocation)
 
         'Apply stored transformation to a new bitmap
-        Dim b As Bitmap = DirectCast(picbox.Image, Bitmap)
-        Dim new_b As New Bitmap(radius + Xloc, radius + Yloc)
-        Dim g As Graphics = Graphics.FromImage(new_b)
+        bmp = DirectCast(picbox.Image, Bitmap)
+        newbmp = New Bitmap(radius + Xloc, radius + Yloc)
+        graphicDrawing = Graphics.FromImage(newbmp)
 
         'Draw with the stored transformations: moves and scales the picture
-        g.DrawImage(b, Xloc, Yloc, radius, radius)
-        g.Save()
+        graphicDrawing.DrawImage(bmp, Xloc, Yloc, radius, radius)
+        graphicDrawing.Save()
 
-        picbox.Image = new_b
+        picbox.Image = newbmp
     End Sub
 
     ''' <summary>
@@ -1320,7 +1326,6 @@ Public Class battleShipsGamefrm
 
         'Passes the child of the picturebox at the location in the picturebox array into GetShipFromParent()
         targetobject = GetShipFromParent(targetpicboxArr(targetship(length).X, targetship(length).Y).GetChildAtPoint(New Point(0, 0), 0))
-
         Return targetobject
     End Function
 
