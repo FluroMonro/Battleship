@@ -138,13 +138,7 @@ Public Class battleShipsGamefrm
     ''' Subroutine initialises all the public variables
     ''' </summary>
     Private Sub initialiseVariables()
-        Dim playerMissCount As Integer
-        Dim playerHitCount As Integer
-        Dim opponentMissCount As Integer
-        Dim opponentHitCount As Integer
-        Dim playershipSunkCount As Integer
         Dim i As Integer
-
         playerMissCount = 0
         playerHitCount = 0
         opponentMissCount = 0
@@ -1248,6 +1242,8 @@ Public Class battleShipsGamefrm
         playerHitCount = 0
         opponentMissCount = 0
         opponentHitCount = 0
+        playershipHitListCount = 5
+        playershipSunkCount = 0
         time = 0
         score = 0
         If timeOptionAsCountUp = True Then
@@ -1279,6 +1275,8 @@ Public Class battleShipsGamefrm
         playerHitCount = 0
         opponentMissCount = 0
         opponentHitCount = 0
+        playershipHitListCount = 5
+        playershipSunkCount = 0
 
         unParentShipsOnGameOver()
         removePreviousGrid()

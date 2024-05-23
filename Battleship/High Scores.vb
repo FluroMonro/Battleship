@@ -58,7 +58,6 @@ Public Class highScoresfrm
         subtitlelbl.Location = New Point(Me.Width / 2 - (subtitlelbl.Width / 2), 200)
         subtitlelbl.Size = New Size(208, 54)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
-        WindowState = FormWindowState.Minimized
     End Sub
 
     ''' <summary>
