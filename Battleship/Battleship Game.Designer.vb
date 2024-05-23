@@ -111,7 +111,7 @@ Partial Class battleShipsGamefrm
         playerBoardpb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerBoardpb.BackgroundImageLayout = ImageLayout.Stretch
         playerBoardpb.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\bdum3ufq.wjq\\Pictures\Board.png"
-        playerBoardpb.Location = New Point(0, 50)
+        playerBoardpb.Location = New Point(688, 610)
         playerBoardpb.Name = "playerBoardpb"
         playerBoardpb.Size = New Size(100, 50)
         playerBoardpb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -123,7 +123,7 @@ Partial Class battleShipsGamefrm
         opponentBoardpb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentBoardpb.BackgroundImageLayout = ImageLayout.Stretch
         opponentBoardpb.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\bdum3ufq.wjq\\Pictures\Board.png"
-        opponentBoardpb.Location = New Point(207, 75)
+        opponentBoardpb.Location = New Point(688, 175)
         opponentBoardpb.Name = "opponentBoardpb"
         opponentBoardpb.Size = New Size(100, 50)
         opponentBoardpb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -134,7 +134,7 @@ Partial Class battleShipsGamefrm
         ' 
         turnsBannerpb.BackColor = Color.FromArgb(CByte(156), CByte(156), CByte(156))
         turnsBannerpb.BackgroundImageLayout = ImageLayout.None
-        turnsBannerpb.Location = New Point(207, 85)
+        turnsBannerpb.Location = New Point(688, 395)
         turnsBannerpb.Name = "turnsBannerpb"
         turnsBannerpb.Size = New Size(100, 50)
         turnsBannerpb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -147,7 +147,7 @@ Partial Class battleShipsGamefrm
         timelbl.Font = New Font("Segoe UI", 30F, FontStyle.Bold, GraphicsUnit.Point)
         timelbl.ForeColor = Color.Red
         timelbl.ImageAlign = ContentAlignment.BottomCenter
-        timelbl.Location = New Point(72, 391)
+        timelbl.Location = New Point(716, 821)
         timelbl.Margin = New Padding(0)
         timelbl.Name = "timelbl"
         timelbl.Size = New Size(100, 23)
@@ -160,11 +160,11 @@ Partial Class battleShipsGamefrm
         playernamelbl.BackColor = Color.Transparent
         playernamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
         playernamelbl.ForeColor = Color.Black
-        playernamelbl.Location = New Point(104, 35)
+        playernamelbl.Location = New Point(307, 634)
         playernamelbl.Name = "playernamelbl"
-        playernamelbl.Size = New Size(88, 26)
+        playernamelbl.Size = New Size(160, 26)
         playernamelbl.TabIndex = 12
-        playernamelbl.Text = "Player: "
+        playernamelbl.Text = "Player's Board"
         ' 
         ' playerscorelbl
         ' 
@@ -172,7 +172,7 @@ Partial Class battleShipsGamefrm
         playerscorelbl.BackColor = Color.Transparent
         playerscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
         playerscorelbl.ForeColor = Color.Black
-        playerscorelbl.Location = New Point(104, 9)
+        playerscorelbl.Location = New Point(365, 660)
         playerscorelbl.Name = "playerscorelbl"
         playerscorelbl.Size = New Size(79, 26)
         playerscorelbl.TabIndex = 13
@@ -184,7 +184,7 @@ Partial Class battleShipsGamefrm
         playerscoretxt.BackColor = Color.Transparent
         playerscoretxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
         playerscoretxt.ForeColor = Color.Black
-        playerscoretxt.Location = New Point(104, 61)
+        playerscoretxt.Location = New Point(450, 662)
         playerscoretxt.Name = "playerscoretxt"
         playerscoretxt.Size = New Size(22, 24)
         playerscoretxt.TabIndex = 14
@@ -196,7 +196,7 @@ Partial Class battleShipsGamefrm
         opponentnamelbl.BackColor = Color.Transparent
         opponentnamelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
         opponentnamelbl.ForeColor = Color.Black
-        opponentnamelbl.Location = New Point(341, 10)
+        opponentnamelbl.Location = New Point(307, 175)
         opponentnamelbl.Name = "opponentnamelbl"
         opponentnamelbl.Size = New Size(198, 26)
         opponentnamelbl.TabIndex = 16
@@ -208,7 +208,7 @@ Partial Class battleShipsGamefrm
         opponentscorelbl.BackColor = Color.Transparent
         opponentscorelbl.Font = New Font("Arial", 16F, FontStyle.Bold, GraphicsUnit.Point)
         opponentscorelbl.ForeColor = Color.Black
-        opponentscorelbl.Location = New Point(341, 36)
+        opponentscorelbl.Location = New Point(365, 210)
         opponentscorelbl.Name = "opponentscorelbl"
         opponentscorelbl.Size = New Size(79, 26)
         opponentscorelbl.TabIndex = 17
@@ -220,7 +220,7 @@ Partial Class battleShipsGamefrm
         opponentscoretxt.BackColor = Color.Transparent
         opponentscoretxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
         opponentscoretxt.ForeColor = Color.Black
-        opponentscoretxt.Location = New Point(341, 62)
+        opponentscoretxt.Location = New Point(446, 212)
         opponentscoretxt.Name = "opponentscoretxt"
         opponentscoretxt.Size = New Size(22, 24)
         opponentscoretxt.TabIndex = 18
@@ -236,7 +236,7 @@ Partial Class battleShipsGamefrm
         backtomainbtn.FlatStyle = FlatStyle.Flat
         backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
         backtomainbtn.ForeColor = SystemColors.ButtonHighlight
-        backtomainbtn.Location = New Point(537, 131)
+        backtomainbtn.Location = New Point(1398, 821)
         backtomainbtn.Margin = New Padding(0)
         backtomainbtn.Name = "backtomainbtn"
         backtomainbtn.Size = New Size(80, 23)
@@ -254,7 +254,7 @@ Partial Class battleShipsGamefrm
         resetbtn.FlatStyle = FlatStyle.Flat
         resetbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
         resetbtn.ForeColor = SystemColors.ButtonHighlight
-        resetbtn.Location = New Point(308, 163)
+        resetbtn.Location = New Point(1297, 821)
         resetbtn.Margin = New Padding(0)
         resetbtn.Name = "resetbtn"
         resetbtn.Size = New Size(80, 23)
@@ -266,7 +266,7 @@ Partial Class battleShipsGamefrm
         ' 
         opponentShip2pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentShip2pb.Image = My.Resources.Resources.BattleShip2
-        opponentShip2pb.Location = New Point(473, 45)
+        opponentShip2pb.Location = New Point(60, 395)
         opponentShip2pb.Name = "opponentShip2pb"
         opponentShip2pb.Size = New Size(100, 50)
         opponentShip2pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -277,7 +277,7 @@ Partial Class battleShipsGamefrm
         ' 
         opponentShip3apb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentShip3apb.Image = My.Resources.Resources.BattleShip3
-        opponentShip3apb.Location = New Point(23, 615)
+        opponentShip3apb.Location = New Point(60, 395)
         opponentShip3apb.Name = "opponentShip3apb"
         opponentShip3apb.Size = New Size(100, 50)
         opponentShip3apb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -288,7 +288,7 @@ Partial Class battleShipsGamefrm
         ' 
         opponentShip3bpb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentShip3bpb.Image = My.Resources.Resources.BattleShip3
-        opponentShip3bpb.Location = New Point(23, 690)
+        opponentShip3bpb.Location = New Point(60, 395)
         opponentShip3bpb.Name = "opponentShip3bpb"
         opponentShip3bpb.Size = New Size(100, 50)
         opponentShip3bpb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -299,7 +299,7 @@ Partial Class battleShipsGamefrm
         ' 
         opponentShip4pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentShip4pb.Image = My.Resources.Resources.BattleShip4
-        opponentShip4pb.Location = New Point(124, 783)
+        opponentShip4pb.Location = New Point(60, 395)
         opponentShip4pb.Name = "opponentShip4pb"
         opponentShip4pb.Size = New Size(100, 50)
         opponentShip4pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -310,7 +310,7 @@ Partial Class battleShipsGamefrm
         ' 
         opponentShip5pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         opponentShip5pb.Image = My.Resources.Resources.BattleShip5
-        opponentShip5pb.Location = New Point(155, 701)
+        opponentShip5pb.Location = New Point(60, 395)
         opponentShip5pb.Name = "opponentShip5pb"
         opponentShip5pb.Size = New Size(100, 50)
         opponentShip5pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -321,7 +321,7 @@ Partial Class battleShipsGamefrm
         ' 
         playerShip5pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerShip5pb.Image = My.Resources.Resources.BattleShip5
-        playerShip5pb.Location = New Point(473, 45)
+        playerShip5pb.Location = New Point(60, 395)
         playerShip5pb.Name = "playerShip5pb"
         playerShip5pb.Size = New Size(100, 50)
         playerShip5pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -332,7 +332,7 @@ Partial Class battleShipsGamefrm
         ' 
         playerShip4pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerShip4pb.Image = My.Resources.Resources.BattleShip4
-        playerShip4pb.Location = New Point(473, 45)
+        playerShip4pb.Location = New Point(60, 395)
         playerShip4pb.Name = "playerShip4pb"
         playerShip4pb.Size = New Size(100, 50)
         playerShip4pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -343,7 +343,7 @@ Partial Class battleShipsGamefrm
         ' 
         playerShip3bpb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerShip3bpb.Image = My.Resources.Resources.BattleShip3
-        playerShip3bpb.Location = New Point(473, 45)
+        playerShip3bpb.Location = New Point(60, 395)
         playerShip3bpb.Name = "playerShip3bpb"
         playerShip3bpb.Size = New Size(100, 50)
         playerShip3bpb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -354,7 +354,7 @@ Partial Class battleShipsGamefrm
         ' 
         playerShip3apb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerShip3apb.Image = My.Resources.Resources.BattleShip3
-        playerShip3apb.Location = New Point(473, 45)
+        playerShip3apb.Location = New Point(60, 395)
         playerShip3apb.Name = "playerShip3apb"
         playerShip3apb.Size = New Size(100, 50)
         playerShip3apb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -365,7 +365,7 @@ Partial Class battleShipsGamefrm
         ' 
         playerShip2pb.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
         playerShip2pb.Image = My.Resources.Resources.BattleShip2
-        playerShip2pb.Location = New Point(473, 45)
+        playerShip2pb.Location = New Point(60, 395)
         playerShip2pb.Name = "playerShip2pb"
         playerShip2pb.Size = New Size(100, 50)
         playerShip2pb.SizeMode = PictureBoxSizeMode.StretchImage
@@ -461,7 +461,7 @@ Partial Class battleShipsGamefrm
         playerStatspnl.Controls.Add(playerStatslbl)
         playerStatspnl.Location = New Point(1020, 45)
         playerStatspnl.Name = "playerStatspnl"
-        playerStatspnl.Size = New Size(214, 306)
+        playerStatspnl.Size = New Size(279, 306)
         playerStatspnl.TabIndex = 36
         ' 
         ' playerShipsLeftCounttxt

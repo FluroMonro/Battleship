@@ -263,12 +263,13 @@ Public Class battleShipsGamefrm
         opponentscorelbl.Parent = backgroundpb
         opponentscoretxt.Parent = backgroundpb
         playernamelbl.Text = playerName & "'s Board"
+        playerStatslbl.Text = playerName & "'s Stats"
         playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, 628)
         playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, 658)
         playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, 658)
-        opponentnamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - 40 - opponentnamelbl.Width, Me.Top + 195)
-        opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 168, Me.Top + 225)
-        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 94, Me.Top + 225)
+        opponentnamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - 40 - opponentnamelbl.Width, 195)
+        opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 168, 225)
+        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 94, 225)
 
         turnsBannerpb.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         turnsBannerpb.Size = New Size(turnsbannerWidth, turnsbannerHeight)

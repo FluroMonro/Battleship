@@ -71,7 +71,7 @@
         If length >= 3 And length <= 16 Then
             valid = True
         Else 'show a warning label that tells them the information
-            playernamewarninglbl.Visible = True
+            valid = False
         End If
         Return valid
     End Function
@@ -124,12 +124,19 @@
     End Sub
 
     ''' <summary>
-    ''' Subroutine takes the information the user has given on the game settings form and sets the global variables to reflect this.
-    ''' Does not allow the player to play the game until they have a valid name.
+    ''' Subroutine calls onPlayClick when the button is clicked
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playtbn.Click
+        onPlayClick()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine takes the information the user has given on the game settings form and sets the global variables to reflect this.
+    ''' Does not allow the player to play the game until they have a valid name.
+    ''' </summary>
+    Private Sub onPlayClick()
         'When the Play button is clicked
 
         'Get player's name from input field
@@ -186,6 +193,8 @@
             initialiseFormControls()
             onLoadSettings()
             playGame()
+        Else
+            playernamewarninglbl.Visible = True
         End If
     End Sub
 
