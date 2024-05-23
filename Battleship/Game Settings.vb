@@ -1,4 +1,4 @@
-﻿Public Class GameSettingsForm
+﻿Public Class gameSettingsfrm
     Dim playerName As String
     Dim timerNumValue As Integer
 
@@ -25,29 +25,34 @@
     Private Sub initialiseFormControls()
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
-        Me.Width = Screen.PrimaryScreen.Bounds.Width
-        Me.Height = Screen.PrimaryScreen.Bounds.Height
+        Me.Size = New Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height)
+
+        'To force the game to a 1528x960 window unless already that resolution in fullscreen
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Size = New Size(1528, 960)
+        End If
 
         'Setting the placement and size of controls on the form
-        Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
-        Titlelbl.Size = New Size(336, 71)
+        titlelbl.Location = New Point((Me.Width / 2) - (titlelbl.Width / 2), 125)
+        titlelbl.Size = New Size(336, 71)
         playerNameInputTxtbox.Size = New Size(100, 40)
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
-        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
-        backgroundImg.Location = New Point(0, 0)
-        backgroundImg.Load(backgroundImg.ImageLocation)
+        backgroundpb.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
+        backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundpb.Location = New Point(0, 0)
+        backgroundpb.Load(backgroundpb.ImageLocation)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
-        playbtnGameSettings.Location = New Point(Me.Width - 365, Me.Height - 195)
+        playtbn.Location = New Point(Me.Width - 365, Me.Height - 195)
 
         'Initialise the control parameters
         playerNameInputTxtbox.Text = ""
         playernamewarninglbl.Visible = False
-        BoardSizebtn10.Checked = True
-        difNorm.Checked = True
+        boardSizebtn10.Checked = True
+        normopt.Checked = True
         timerValueBar.Visible = False
-        timervalue.Visible = False
+        timervaluetxt.Visible = False
         timerValueBar.Value = 5
-        timervalue.Text = "02:30"
+        timervaluetxt.Text = "02:30"
         timerckbx.Checked = False
     End Sub
 
@@ -77,7 +82,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
 
     ''' <summary>
@@ -86,7 +91,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
 
     ''' <summary>
@@ -97,7 +102,7 @@
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'When Exit button is clicked
         Me.Hide()
-        MainMenuForm.Show()
+        mainMenufrm.Show()
     End Sub
 
     ''' <summary>
@@ -105,8 +110,8 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playbtnGameSettings_Enter(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseEnter
-        HighScoresForm.EnterOverSmallButton("playbtnGameSettings", Me)
+    Private Sub playbtnGameSettings_Enter(sender As Object, e As EventArgs) Handles playtbn.MouseEnter
+        highScoresfrm.EnterOverSmallButton("playtbn", Me)
     End Sub
 
     ''' <summary>
@@ -114,8 +119,8 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playbtnGameSettings_Leave(sender As Object, e As EventArgs) Handles playbtnGameSettings.MouseLeave
-        HighScoresForm.ExitOverSmallButton("playbtnGameSettings", Me)
+    Private Sub playbtnGameSettings_Leave(sender As Object, e As EventArgs) Handles playtbn.MouseLeave
+        highScoresfrm.ExitOverSmallButton("playtbn", Me)
     End Sub
 
     ''' <summary>
@@ -124,23 +129,23 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playbtnGameSettings.Click
+    Private Sub playbtnGameSettings_Click(sender As Object, e As EventArgs) Handles playtbn.Click
         'When the Play button is clicked
 
         'Get player's name from input field
         playerName = playerNameInputTxtbox.Text
 
         'Get the chosen boardsize
-        If BoardSizebtn8.Checked = True Then
+        If boardSizebtn8.Checked = True Then
             gridSize = 8
         Else
-            If BoardSizebtn10.Checked = True Then
+            If boardSizebtn10.Checked = True Then
                 gridSize = 10
             Else
-                If BoardSizebtn12.Checked = True Then
+                If boardSizebtn12.Checked = True Then
                     gridSize = 12
                 Else
-                    If BoardSizebtn14.Checked = True Then
+                    If boardSizebtn14.Checked = True Then
                         gridSize = 14
                     End If
                 End If
@@ -148,19 +153,19 @@
         End If
 
         'Get the chosen difficulty
-        If difBegin.Checked = True Then
+        If beginopt.Checked = True Then
             difficulty = "Beginner"
         Else
-            If difNorm.Checked = True Then
+            If normopt.Checked = True Then
                 difficulty = "Normal"
             Else
-                If difHard.Checked = True Then
+                If hardopt.Checked = True Then
                     difficulty = "Hard"
                 Else
-                    If difUnfair.Checked = True Then
+                    If unfairopt.Checked = True Then
                         difficulty = "Unfair"
                     Else
-                        If difImpos.Checked = True Then
+                        If imposopt.Checked = True Then
                             difficulty = "Impossible"
                         End If
                     End If
@@ -192,10 +197,10 @@
         playerNameInputTxtbox.Text = ""
 
         'Update the global variables across forms
-        BattleShipsGame.updateGlobalVars(playerName, gridSize, difficulty, timeOptionAsCountUp, timeLeft)
+        battleShipsGamefrm.updateGlobalVars(playerName, gridSize, difficulty, timeOptionAsCountUp, timeLeft)
         Me.Hide()
-        BattleShipsGame.Show()
-        BattleShipsGame.onFormLoad()
+        battleShipsGamefrm.Show()
+        battleShipsGamefrm.onFormLoad()
     End Sub
 
     ''' <summary>
@@ -207,11 +212,12 @@
         'When the check box for the timer is checked show the value bar
         If timerckbx.Checked = True Then
             timerValueBar.Visible = True
-            timervalue.Visible = True
+            timervaluetxt.Visible = True
         Else
             timerValueBar.Visible = False
-            timervalue.Visible = False
+            timervaluetxt.Visible = False
         End If
+        timerNumValue = 150
     End Sub
 
     ''' <summary>
@@ -222,6 +228,6 @@
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
         'Increments of 30s
         timerNumValue = timerValueBar.Value * 30
-        timervalue.Text = BattleShipsGame.convertStringIntegerTimeToDisplayTime(timerNumValue)
+        timervaluetxt.Text = battleShipsGamefrm.convertStringIntegerTimeToDisplayTime(timerNumValue)
     End Sub
 End Class

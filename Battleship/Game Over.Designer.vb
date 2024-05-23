@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class gameOverForm
+Partial Class gameOverfrm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class gameOverForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        backgroundImg = New PictureBox()
+        backgroundpb = New PictureBox()
         gameOverlbl = New Label()
         youwinlbl = New Label()
         computerwinslbl = New Label()
@@ -30,30 +30,30 @@ Partial Class gameOverForm
         scoretxt = New Label()
         timetxt = New Label()
         timelbl = New Label()
-        Label8 = New Label()
         backtomainbtn = New Button()
         drawlbl = New Label()
-        CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
+        tohsbtn = New Button()
+        CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' backgroundImg
+        ' backgroundpb
         ' 
-        backgroundImg.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\42okntgt.zbq\\Pictures\WaterBoard.png"
-        backgroundImg.Location = New Point(12, 12)
-        backgroundImg.Name = "backgroundImg"
-        backgroundImg.Size = New Size(300, 300)
-        backgroundImg.SizeMode = PictureBoxSizeMode.StretchImage
-        backgroundImg.TabIndex = 8
-        backgroundImg.TabStop = False
+        backgroundpb.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\42okntgt.zbq\\Pictures\WaterBoard.png"
+        backgroundpb.Location = New Point(12, 12)
+        backgroundpb.Name = "backgroundpb"
+        backgroundpb.Size = New Size(300, 300)
+        backgroundpb.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundpb.TabIndex = 8
+        backgroundpb.TabStop = False
         ' 
         ' gameOverlbl
         ' 
         gameOverlbl.AutoSize = True
         gameOverlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        gameOverlbl.Font = New Font("Segoe UI", 40F, FontStyle.Regular, GraphicsUnit.Point)
+        gameOverlbl.Font = New Font("Candara Light", 39.75F, FontStyle.Bold, GraphicsUnit.Point)
         gameOverlbl.Location = New Point(594, 152)
         gameOverlbl.Name = "gameOverlbl"
-        gameOverlbl.Size = New Size(340, 72)
+        gameOverlbl.Size = New Size(318, 64)
         gameOverlbl.TabIndex = 9
         gameOverlbl.Text = "GAME OVER!"
         ' 
@@ -123,14 +123,6 @@ Partial Class gameOverForm
         timelbl.TabIndex = 14
         timelbl.Text = "Time:"
         ' 
-        ' Label8
-        ' 
-        Label8.AutoSize = True
-        Label8.Location = New Point(279, 344)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(0, 15)
-        Label8.TabIndex = 16
-        ' 
         ' backtomainbtn
         ' 
         backtomainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
@@ -156,19 +148,37 @@ Partial Class gameOverForm
         drawlbl.Font = New Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point)
         drawlbl.Location = New Point(680, 350)
         drawlbl.Name = "drawlbl"
-        drawlbl.Size = New Size(169, 28)
+        drawlbl.Size = New Size(167, 28)
         drawlbl.TabIndex = 18
-        drawlbl.Text = "Draw! No Winner!"
+        drawlbl.Text = "Draw: No Winner!"
         ' 
-        ' gameOverForm
+        ' tohsbtn
+        ' 
+        tohsbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        tohsbtn.BackgroundImage = My.Resources.Resources.smallButtonBlue
+        tohsbtn.BackgroundImageLayout = ImageLayout.Stretch
+        tohsbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        tohsbtn.FlatAppearance.BorderSize = 0
+        tohsbtn.FlatStyle = FlatStyle.Flat
+        tohsbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        tohsbtn.ForeColor = SystemColors.ButtonHighlight
+        tohsbtn.Location = New Point(585, 447)
+        tohsbtn.Margin = New Padding(0)
+        tohsbtn.Name = "tohsbtn"
+        tohsbtn.Size = New Size(117, 26)
+        tohsbtn.TabIndex = 19
+        tohsbtn.Text = "High Scores"
+        tohsbtn.UseVisualStyleBackColor = False
+        ' 
+        ' gameOverfrm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 921)
+        Controls.Add(tohsbtn)
         Controls.Add(drawlbl)
         Controls.Add(backtomainbtn)
-        Controls.Add(Label8)
         Controls.Add(timetxt)
         Controls.Add(timelbl)
         Controls.Add(scoretxt)
@@ -176,14 +186,14 @@ Partial Class gameOverForm
         Controls.Add(computerwinslbl)
         Controls.Add(youwinlbl)
         Controls.Add(gameOverlbl)
-        Controls.Add(backgroundImg)
-        Name = "gameOverForm"
+        Controls.Add(backgroundpb)
+        Name = "gameOverfrm"
         Text = "gameOverForm"
-        CType(backgroundImg, ComponentModel.ISupportInitialize).EndInit()
+        CType(backgroundpb, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
-    Friend WithEvents backgroundImg As PictureBox
+    Friend WithEvents backgroundpb As PictureBox
     Friend WithEvents gameOverlbl As Label
     Friend WithEvents youwinlbl As Label
     Friend WithEvents computerwinslbl As Label
@@ -191,7 +201,7 @@ Partial Class gameOverForm
     Friend WithEvents scoretxt As Label
     Friend WithEvents timetxt As Label
     Friend WithEvents timelbl As Label
-    Friend WithEvents Label8 As Label
     Friend WithEvents backtomainbtn As Button
     Friend WithEvents drawlbl As Label
+    Friend WithEvents tohsbtn As Button
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class HighScoresForm
+Partial Class highScoresfrm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class HighScoresForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        backgroundImg = New PictureBox()
+        backgroundpb = New PictureBox()
         backtomainbtn = New Button()
         namelbl3 = New Label()
         namelbl2 = New Label()
@@ -43,9 +43,9 @@ Partial Class HighScoresForm
         namelbl8 = New Label()
         namelbl9 = New Label()
         namelbl10 = New Label()
-        rankingpanel = New Panel()
+        rankingpnl = New Panel()
         rankslbl = New Label()
-        namepanel = New Panel()
+        namepnl = New Panel()
         namelbl1 = New Label()
         namelbl = New Label()
         scorelbl1 = New Label()
@@ -58,7 +58,7 @@ Partial Class HighScoresForm
         scorelbl8 = New Label()
         scorelbl9 = New Label()
         scorelbl10 = New Label()
-        scorepanel = New Panel()
+        scorepnl = New Panel()
         scorelbl = New Label()
         scorebtn = New PictureBox()
         timelbl1 = New Label()
@@ -71,12 +71,12 @@ Partial Class HighScoresForm
         timelbl8 = New Label()
         timelbl7 = New Label()
         timelbl10 = New Label()
-        timepanel = New Panel()
+        timepnl = New Panel()
         timelbl = New Label()
         timebtn = New PictureBox()
-        Titlelbl = New Label()
+        titlelbl = New Label()
         subtitlelbl = New Label()
-        difficultyPanel = New Panel()
+        difficultypnl = New Panel()
         difficultylbl = New Label()
         diflbl10 = New Label()
         diflbl9 = New Label()
@@ -88,25 +88,25 @@ Partial Class HighScoresForm
         diflbl3 = New Label()
         diflbl2 = New Label()
         diflbl1 = New Label()
-        CType(backgroundImg, ComponentModel.ISupportInitialize).BeginInit()
-        rankingpanel.SuspendLayout()
-        namepanel.SuspendLayout()
-        scorepanel.SuspendLayout()
+        CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
+        rankingpnl.SuspendLayout()
+        namepnl.SuspendLayout()
+        scorepnl.SuspendLayout()
         CType(scorebtn, ComponentModel.ISupportInitialize).BeginInit()
-        timepanel.SuspendLayout()
+        timepnl.SuspendLayout()
         CType(timebtn, ComponentModel.ISupportInitialize).BeginInit()
-        difficultyPanel.SuspendLayout()
+        difficultypnl.SuspendLayout()
         SuspendLayout()
         ' 
-        ' backgroundImg
+        ' backgroundpb
         ' 
-        backgroundImg.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\5rql1nrc.he4\\Pictures\WaterBoard.png"
-        backgroundImg.Location = New Point(12, 12)
-        backgroundImg.Name = "backgroundImg"
-        backgroundImg.Size = New Size(300, 300)
-        backgroundImg.SizeMode = PictureBoxSizeMode.StretchImage
-        backgroundImg.TabIndex = 0
-        backgroundImg.TabStop = False
+        backgroundpb.ImageLocation = "\\?\C:\Users\ben\AppData\Local\Microsoft\VisualStudio\17.0_935cd82f\WinFormsDesigner\5rql1nrc.he4\\Pictures\WaterBoard.png"
+        backgroundpb.Location = New Point(12, 12)
+        backgroundpb.Name = "backgroundpb"
+        backgroundpb.Size = New Size(300, 300)
+        backgroundpb.SizeMode = PictureBoxSizeMode.StretchImage
+        backgroundpb.TabIndex = 0
+        backgroundpb.TabStop = False
         ' 
         ' backtomainbtn
         ' 
@@ -316,24 +316,24 @@ Partial Class HighScoresForm
         namelbl10.TabIndex = 28
         namelbl10.Text = "player10"
         ' 
-        ' rankingpanel
+        ' rankingpnl
         ' 
-        rankingpanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        rankingpanel.Controls.Add(rankslbl)
-        rankingpanel.Controls.Add(ranklbl10)
-        rankingpanel.Controls.Add(ranklbl9)
-        rankingpanel.Controls.Add(ranklbl8)
-        rankingpanel.Controls.Add(ranklbl7)
-        rankingpanel.Controls.Add(ranklbl6)
-        rankingpanel.Controls.Add(ranklbl5)
-        rankingpanel.Controls.Add(ranklbl4)
-        rankingpanel.Controls.Add(ranklbl3)
-        rankingpanel.Controls.Add(ranklbl2)
-        rankingpanel.Controls.Add(ranklbl1)
-        rankingpanel.Location = New Point(329, 303)
-        rankingpanel.Name = "rankingpanel"
-        rankingpanel.Size = New Size(165, 453)
-        rankingpanel.TabIndex = 29
+        rankingpnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        rankingpnl.Controls.Add(rankslbl)
+        rankingpnl.Controls.Add(ranklbl10)
+        rankingpnl.Controls.Add(ranklbl9)
+        rankingpnl.Controls.Add(ranklbl8)
+        rankingpnl.Controls.Add(ranklbl7)
+        rankingpnl.Controls.Add(ranklbl6)
+        rankingpnl.Controls.Add(ranklbl5)
+        rankingpnl.Controls.Add(ranklbl4)
+        rankingpnl.Controls.Add(ranklbl3)
+        rankingpnl.Controls.Add(ranklbl2)
+        rankingpnl.Controls.Add(ranklbl1)
+        rankingpnl.Location = New Point(329, 303)
+        rankingpnl.Name = "rankingpnl"
+        rankingpnl.Size = New Size(165, 453)
+        rankingpnl.TabIndex = 29
         ' 
         ' rankslbl
         ' 
@@ -341,28 +341,28 @@ Partial Class HighScoresForm
         rankslbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         rankslbl.Location = New Point(42, 9)
         rankslbl.Name = "rankslbl"
-        rankslbl.Size = New Size(68, 28)
+        rankslbl.Size = New Size(59, 28)
         rankslbl.TabIndex = 22
-        rankslbl.Text = "Ranks"
+        rankslbl.Text = "Rank"
         ' 
-        ' namepanel
+        ' namepnl
         ' 
-        namepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        namepanel.Controls.Add(namelbl1)
-        namepanel.Controls.Add(namelbl)
-        namepanel.Controls.Add(namelbl10)
-        namepanel.Controls.Add(namelbl9)
-        namepanel.Controls.Add(namelbl8)
-        namepanel.Controls.Add(namelbl7)
-        namepanel.Controls.Add(namelbl6)
-        namepanel.Controls.Add(namelbl5)
-        namepanel.Controls.Add(namelbl4)
-        namepanel.Controls.Add(namelbl2)
-        namepanel.Controls.Add(namelbl3)
-        namepanel.Location = New Point(500, 303)
-        namepanel.Name = "namepanel"
-        namepanel.Size = New Size(222, 453)
-        namepanel.TabIndex = 30
+        namepnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        namepnl.Controls.Add(namelbl1)
+        namepnl.Controls.Add(namelbl)
+        namepnl.Controls.Add(namelbl10)
+        namepnl.Controls.Add(namelbl9)
+        namepnl.Controls.Add(namelbl8)
+        namepnl.Controls.Add(namelbl7)
+        namepnl.Controls.Add(namelbl6)
+        namepnl.Controls.Add(namelbl5)
+        namepnl.Controls.Add(namelbl4)
+        namepnl.Controls.Add(namelbl2)
+        namepnl.Controls.Add(namelbl3)
+        namepnl.Location = New Point(500, 303)
+        namepnl.Name = "namepnl"
+        namepnl.Size = New Size(205, 453)
+        namepnl.TabIndex = 30
         ' 
         ' namelbl1
         ' 
@@ -380,9 +380,9 @@ Partial Class HighScoresForm
         namelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         namelbl.Location = New Point(29, 9)
         namelbl.Name = "namelbl"
-        namelbl.Size = New Size(77, 28)
+        namelbl.Size = New Size(68, 28)
         namelbl.TabIndex = 23
-        namelbl.Text = "Names"
+        namelbl.Text = "Name"
         ' 
         ' scorelbl1
         ' 
@@ -484,25 +484,25 @@ Partial Class HighScoresForm
         scorelbl10.TabIndex = 39
         scorelbl10.Text = "0"
         ' 
-        ' scorepanel
+        ' scorepnl
         ' 
-        scorepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        scorepanel.Controls.Add(scorelbl)
-        scorepanel.Controls.Add(scorebtn)
-        scorepanel.Controls.Add(scorelbl10)
-        scorepanel.Controls.Add(scorelbl9)
-        scorepanel.Controls.Add(scorelbl8)
-        scorepanel.Controls.Add(scorelbl7)
-        scorepanel.Controls.Add(scorelbl6)
-        scorepanel.Controls.Add(scorelbl5)
-        scorepanel.Controls.Add(scorelbl4)
-        scorepanel.Controls.Add(scorelbl3)
-        scorepanel.Controls.Add(scorelbl2)
-        scorepanel.Controls.Add(scorelbl1)
-        scorepanel.Location = New Point(708, 303)
-        scorepanel.Name = "scorepanel"
-        scorepanel.Size = New Size(128, 453)
-        scorepanel.TabIndex = 40
+        scorepnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        scorepnl.Controls.Add(scorelbl)
+        scorepnl.Controls.Add(scorebtn)
+        scorepnl.Controls.Add(scorelbl10)
+        scorepnl.Controls.Add(scorelbl9)
+        scorepnl.Controls.Add(scorelbl8)
+        scorepnl.Controls.Add(scorelbl7)
+        scorepnl.Controls.Add(scorelbl6)
+        scorepnl.Controls.Add(scorelbl5)
+        scorepnl.Controls.Add(scorelbl4)
+        scorepnl.Controls.Add(scorelbl3)
+        scorepnl.Controls.Add(scorelbl2)
+        scorepnl.Controls.Add(scorelbl1)
+        scorepnl.Location = New Point(708, 303)
+        scorepnl.Name = "scorepnl"
+        scorepnl.Size = New Size(128, 453)
+        scorepnl.TabIndex = 40
         ' 
         ' scorelbl
         ' 
@@ -510,9 +510,9 @@ Partial Class HighScoresForm
         scorelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         scorelbl.Location = New Point(3, 9)
         scorelbl.Name = "scorelbl"
-        scorelbl.Size = New Size(73, 28)
+        scorelbl.Size = New Size(64, 28)
         scorelbl.TabIndex = 29
-        scorelbl.Text = "Scores"
+        scorelbl.Text = "Score"
         ' 
         ' scorebtn
         ' 
@@ -625,25 +625,25 @@ Partial Class HighScoresForm
         timelbl10.TabIndex = 49
         timelbl10.Text = "00:00"
         ' 
-        ' timepanel
+        ' timepnl
         ' 
-        timepanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timepanel.Controls.Add(timelbl)
-        timepanel.Controls.Add(timebtn)
-        timepanel.Controls.Add(timelbl10)
-        timepanel.Controls.Add(timelbl9)
-        timepanel.Controls.Add(timelbl8)
-        timepanel.Controls.Add(timelbl7)
-        timepanel.Controls.Add(timelbl6)
-        timepanel.Controls.Add(timelbl5)
-        timepanel.Controls.Add(timelbl4)
-        timepanel.Controls.Add(timelbl3)
-        timepanel.Controls.Add(timelbl2)
-        timepanel.Controls.Add(timelbl1)
-        timepanel.Location = New Point(842, 303)
-        timepanel.Name = "timepanel"
-        timepanel.Size = New Size(165, 453)
-        timepanel.TabIndex = 50
+        timepnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timepnl.Controls.Add(timelbl)
+        timepnl.Controls.Add(timebtn)
+        timepnl.Controls.Add(timelbl10)
+        timepnl.Controls.Add(timelbl9)
+        timepnl.Controls.Add(timelbl8)
+        timepnl.Controls.Add(timelbl7)
+        timepnl.Controls.Add(timelbl6)
+        timepnl.Controls.Add(timelbl5)
+        timepnl.Controls.Add(timelbl4)
+        timepnl.Controls.Add(timelbl3)
+        timepnl.Controls.Add(timelbl2)
+        timepnl.Controls.Add(timelbl1)
+        timepnl.Location = New Point(842, 303)
+        timepnl.Name = "timepnl"
+        timepnl.Size = New Size(165, 453)
+        timepnl.TabIndex = 50
         ' 
         ' timelbl
         ' 
@@ -651,9 +651,9 @@ Partial Class HighScoresForm
         timelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
         timelbl.Location = New Point(52, 9)
         timelbl.Name = "timelbl"
-        timelbl.Size = New Size(68, 28)
+        timelbl.Size = New Size(59, 28)
         timelbl.TabIndex = 40
-        timelbl.Text = "Times"
+        timelbl.Text = "Time"
         timelbl.UseWaitCursor = True
         ' 
         ' timebtn
@@ -667,16 +667,16 @@ Partial Class HighScoresForm
         timebtn.TabIndex = 56
         timebtn.TabStop = False
         ' 
-        ' Titlelbl
+        ' titlelbl
         ' 
-        Titlelbl.AutoSize = True
-        Titlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        Titlelbl.Font = New Font("Segoe UI", 39.75F, FontStyle.Bold, GraphicsUnit.Point)
-        Titlelbl.Location = New Point(588, 125)
-        Titlelbl.Name = "Titlelbl"
-        Titlelbl.Size = New Size(336, 71)
-        Titlelbl.TabIndex = 51
-        Titlelbl.Text = "BATTLESHIP"
+        titlelbl.AutoSize = True
+        titlelbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        titlelbl.Font = New Font("Candara Light", 39.75F, FontStyle.Regular, GraphicsUnit.Point)
+        titlelbl.Location = New Point(609, 126)
+        titlelbl.Name = "titlelbl"
+        titlelbl.Size = New Size(297, 64)
+        titlelbl.TabIndex = 51
+        titlelbl.Text = "BATTLESHIP"
         ' 
         ' subtitlelbl
         ' 
@@ -689,30 +689,30 @@ Partial Class HighScoresForm
         subtitlelbl.TabIndex = 52
         subtitlelbl.Text = "Highscores"
         ' 
-        ' difficultyPanel
+        ' difficultypnl
         ' 
-        difficultyPanel.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        difficultyPanel.Controls.Add(difficultylbl)
-        difficultyPanel.Controls.Add(diflbl10)
-        difficultyPanel.Controls.Add(diflbl9)
-        difficultyPanel.Controls.Add(diflbl8)
-        difficultyPanel.Controls.Add(diflbl7)
-        difficultyPanel.Controls.Add(diflbl6)
-        difficultyPanel.Controls.Add(diflbl5)
-        difficultyPanel.Controls.Add(diflbl4)
-        difficultyPanel.Controls.Add(diflbl3)
-        difficultyPanel.Controls.Add(diflbl2)
-        difficultyPanel.Controls.Add(diflbl1)
-        difficultyPanel.Location = New Point(1013, 303)
-        difficultyPanel.Name = "difficultyPanel"
-        difficultyPanel.Size = New Size(165, 453)
-        difficultyPanel.TabIndex = 57
+        difficultypnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difficultypnl.Controls.Add(difficultylbl)
+        difficultypnl.Controls.Add(diflbl10)
+        difficultypnl.Controls.Add(diflbl9)
+        difficultypnl.Controls.Add(diflbl8)
+        difficultypnl.Controls.Add(diflbl7)
+        difficultypnl.Controls.Add(diflbl6)
+        difficultypnl.Controls.Add(diflbl5)
+        difficultypnl.Controls.Add(diflbl4)
+        difficultypnl.Controls.Add(diflbl3)
+        difficultypnl.Controls.Add(diflbl2)
+        difficultypnl.Controls.Add(diflbl1)
+        difficultypnl.Location = New Point(1013, 303)
+        difficultypnl.Name = "difficultypnl"
+        difficultypnl.Size = New Size(165, 453)
+        difficultypnl.TabIndex = 57
         ' 
         ' difficultylbl
         ' 
         difficultylbl.AutoSize = True
         difficultylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
-        difficultylbl.Location = New Point(31, 13)
+        difficultylbl.Location = New Point(31, 9)
         difficultylbl.Name = "difficultylbl"
         difficultylbl.Size = New Size(102, 28)
         difficultylbl.TabIndex = 40
@@ -725,9 +725,9 @@ Partial Class HighScoresForm
         diflbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl10.Location = New Point(56, 420)
         diflbl10.Name = "diflbl10"
-        diflbl10.Size = New Size(28, 21)
+        diflbl10.Size = New Size(16, 21)
         diflbl10.TabIndex = 49
-        diflbl10.Text = "dif"
+        diflbl10.Text = "-"
         ' 
         ' diflbl9
         ' 
@@ -735,9 +735,9 @@ Partial Class HighScoresForm
         diflbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl9.Location = New Point(56, 380)
         diflbl9.Name = "diflbl9"
-        diflbl9.Size = New Size(28, 21)
+        diflbl9.Size = New Size(16, 21)
         diflbl9.TabIndex = 48
-        diflbl9.Text = "dif"
+        diflbl9.Text = "-"
         ' 
         ' diflbl8
         ' 
@@ -745,9 +745,9 @@ Partial Class HighScoresForm
         diflbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl8.Location = New Point(56, 340)
         diflbl8.Name = "diflbl8"
-        diflbl8.Size = New Size(28, 21)
+        diflbl8.Size = New Size(16, 21)
         diflbl8.TabIndex = 47
-        diflbl8.Text = "dif"
+        diflbl8.Text = "-"
         ' 
         ' diflbl7
         ' 
@@ -755,9 +755,9 @@ Partial Class HighScoresForm
         diflbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl7.Location = New Point(56, 300)
         diflbl7.Name = "diflbl7"
-        diflbl7.Size = New Size(28, 21)
+        diflbl7.Size = New Size(16, 21)
         diflbl7.TabIndex = 46
-        diflbl7.Text = "dif"
+        diflbl7.Text = "-"
         ' 
         ' diflbl6
         ' 
@@ -765,9 +765,9 @@ Partial Class HighScoresForm
         diflbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl6.Location = New Point(56, 260)
         diflbl6.Name = "diflbl6"
-        diflbl6.Size = New Size(28, 21)
+        diflbl6.Size = New Size(16, 21)
         diflbl6.TabIndex = 45
-        diflbl6.Text = "dif"
+        diflbl6.Text = "-"
         ' 
         ' diflbl5
         ' 
@@ -775,9 +775,9 @@ Partial Class HighScoresForm
         diflbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl5.Location = New Point(56, 220)
         diflbl5.Name = "diflbl5"
-        diflbl5.Size = New Size(28, 21)
+        diflbl5.Size = New Size(16, 21)
         diflbl5.TabIndex = 44
-        diflbl5.Text = "dif"
+        diflbl5.Text = "-"
         ' 
         ' diflbl4
         ' 
@@ -785,9 +785,9 @@ Partial Class HighScoresForm
         diflbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl4.Location = New Point(56, 180)
         diflbl4.Name = "diflbl4"
-        diflbl4.Size = New Size(28, 21)
+        diflbl4.Size = New Size(16, 21)
         diflbl4.TabIndex = 43
-        diflbl4.Text = "dif"
+        diflbl4.Text = "-"
         ' 
         ' diflbl3
         ' 
@@ -795,9 +795,9 @@ Partial Class HighScoresForm
         diflbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl3.Location = New Point(56, 135)
         diflbl3.Name = "diflbl3"
-        diflbl3.Size = New Size(28, 21)
+        diflbl3.Size = New Size(16, 21)
         diflbl3.TabIndex = 42
-        diflbl3.Text = "dif"
+        diflbl3.Text = "-"
         ' 
         ' diflbl2
         ' 
@@ -805,9 +805,9 @@ Partial Class HighScoresForm
         diflbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl2.Location = New Point(56, 95)
         diflbl2.Name = "diflbl2"
-        diflbl2.Size = New Size(28, 21)
+        diflbl2.Size = New Size(16, 21)
         diflbl2.TabIndex = 41
-        diflbl2.Text = "dif"
+        diflbl2.Text = "-"
         ' 
         ' diflbl1
         ' 
@@ -815,48 +815,48 @@ Partial Class HighScoresForm
         diflbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         diflbl1.Location = New Point(56, 55)
         diflbl1.Name = "diflbl1"
-        diflbl1.Size = New Size(28, 21)
+        diflbl1.Size = New Size(16, 21)
         diflbl1.TabIndex = 40
-        diflbl1.Text = "dif"
+        diflbl1.Text = "-"
         ' 
-        ' HighScoresForm
+        ' highScoresfrm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(difficultyPanel)
+        Controls.Add(difficultypnl)
         Controls.Add(subtitlelbl)
-        Controls.Add(Titlelbl)
-        Controls.Add(timepanel)
-        Controls.Add(scorepanel)
-        Controls.Add(namepanel)
-        Controls.Add(rankingpanel)
+        Controls.Add(titlelbl)
+        Controls.Add(timepnl)
+        Controls.Add(scorepnl)
+        Controls.Add(namepnl)
+        Controls.Add(rankingpnl)
         Controls.Add(backtomainbtn)
-        Controls.Add(backgroundImg)
+        Controls.Add(backgroundpb)
         HelpButton = True
         MinimizeBox = False
-        Name = "HighScoresForm"
+        Name = "highScoresfrm"
         Text = "High Scores"
         TopMost = True
-        CType(backgroundImg, ComponentModel.ISupportInitialize).EndInit()
-        rankingpanel.ResumeLayout(False)
-        rankingpanel.PerformLayout()
-        namepanel.ResumeLayout(False)
-        namepanel.PerformLayout()
-        scorepanel.ResumeLayout(False)
-        scorepanel.PerformLayout()
+        CType(backgroundpb, ComponentModel.ISupportInitialize).EndInit()
+        rankingpnl.ResumeLayout(False)
+        rankingpnl.PerformLayout()
+        namepnl.ResumeLayout(False)
+        namepnl.PerformLayout()
+        scorepnl.ResumeLayout(False)
+        scorepnl.PerformLayout()
         CType(scorebtn, ComponentModel.ISupportInitialize).EndInit()
-        timepanel.ResumeLayout(False)
-        timepanel.PerformLayout()
+        timepnl.ResumeLayout(False)
+        timepnl.PerformLayout()
         CType(timebtn, ComponentModel.ISupportInitialize).EndInit()
-        difficultyPanel.ResumeLayout(False)
-        difficultyPanel.PerformLayout()
+        difficultypnl.ResumeLayout(False)
+        difficultypnl.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents backgroundImg As PictureBox
+    Friend WithEvents backgroundpb As PictureBox
     Friend WithEvents backtomainbtn As Button
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents namelbl3 As Label
@@ -878,8 +878,8 @@ Partial Class HighScoresForm
     Friend WithEvents namelbl8 As Label
     Friend WithEvents namelbl9 As Label
     Friend WithEvents namelbl10 As Label
-    Friend WithEvents rankingpanel As Panel
-    Friend WithEvents namepanel As Panel
+    Friend WithEvents rankingpnl As Panel
+    Friend WithEvents namepnl As Panel
     Friend WithEvents scorelbl1 As Label
     Friend WithEvents scorelbl2 As Label
     Friend WithEvents scorelbl3 As Label
@@ -890,7 +890,7 @@ Partial Class HighScoresForm
     Friend WithEvents scorelbl8 As Label
     Friend WithEvents scorelbl9 As Label
     Friend WithEvents scorelbl10 As Label
-    Friend WithEvents scorepanel As Panel
+    Friend WithEvents scorepnl As Panel
     Friend WithEvents timelbl1 As Label
     Friend WithEvents timelbl2 As Label
     Friend WithEvents timelbl3 As Label
@@ -901,17 +901,17 @@ Partial Class HighScoresForm
     Friend WithEvents timelbl8 As Label
     Friend WithEvents timelbl7 As Label
     Friend WithEvents timelbl10 As Label
-    Friend WithEvents timepanel As Panel
+    Friend WithEvents timepnl As Panel
     Friend WithEvents rankslbl As Label
     Friend WithEvents namelbl As Label
     Friend WithEvents scorelbl As Label
     Friend WithEvents timelbl As Label
-    Friend WithEvents Titlelbl As Label
+    Friend WithEvents titlelbl As Label
     Friend WithEvents subtitlelbl As Label
     Friend WithEvents scorebtn As PictureBox
     Friend WithEvents timebtn As PictureBox
     Friend WithEvents namelbl1 As Label
-    Friend WithEvents difficultyPanel As Panel
+    Friend WithEvents difficultypnl As Panel
     Friend WithEvents difficultylbl As Label
     Friend WithEvents diflbl10 As Label
     Friend WithEvents diflbl9 As Label

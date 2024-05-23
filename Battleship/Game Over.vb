@@ -1,4 +1,4 @@
-﻿Public Class gameOverForm
+﻿Public Class gameOverfrm
     ''' <summary>
     '''  subroutine called upon the form's load to call the subroutine to initialise controls
     ''' </summary>
@@ -26,17 +26,25 @@
     ''' </summary>
     ''' <param name="outcomeOfGame">Who won the game. Determines what is shown on the form.</param>
     Private Sub initialiseFormControls(outcomeOfGame As String)
+        'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
-        Me.Width = Screen.PrimaryScreen.Bounds.Width
-        Me.Height = Screen.PrimaryScreen.Bounds.Height
+        Me.Size = New Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height)
+
+        'To force the game to a 1528x960 window unless already that resolution in fullscreen
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Size = New Size(1528, 960)
+        End If
 
         'Setting the placement and size of controls on the form
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
-        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
-        backgroundImg.Location = New Point(0, 0)
+        backgroundpb.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
+        backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundpb.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        tohsbtn.Location = New Point(Me.Width - 395, Me.Height - 195)
         scoretxt.Text = endScore
         timetxt.Text = endTime
+        gameOverlbl.Location = New Point((Me.Width / 2) - (gameOverlbl.Width / 2), 200)
 
         'Display the appropriate form controls 
         If outcomeOfGame = "Win" Then
@@ -66,7 +74,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
 
     ''' <summary>
@@ -75,8 +83,26 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
+    ''' <summary>
+    ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving on the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
+    Private Sub tohsbtn_Enter(sender As Object, e As EventArgs) Handles tohsbtn.MouseEnter
+        highScoresfrm.EnterOverSmallButton("tohsbtn", Me)
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine which calls the ExitOverSmallButton() from the highscores form upon moving off the button
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
+    Private Sub tohsbtn_Leave(sender As Object, e As EventArgs) Handles tohsbtn.MouseLeave
+        highScoresfrm.ExitOverSmallButton("tohsbtn", Me)
+    End Sub
+
 
     ''' <summary>
     ''' Subroutine which takes the user to the main menu form.
@@ -86,6 +112,17 @@
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'When Exit button is clicked
         Me.Hide()
-        MainMenuForm.Show()
+        mainMenufrm.Show()
+    End Sub
+    ''' <summary>
+    ''' Subroutine which takes the user to the High Scores Form.
+    ''' </summary>
+    ''' <param name="sender">Reference to the control which called the subroutine</param>
+    ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
+    Private Sub tohsbtn_Click(sender As Object, e As EventArgs) Handles tohsbtn.Click
+        'When the Highscore button is clicked
+        Me.Hide()
+        highScoresfrm.Show()
+        highScoresfrm.onLoadHighScores()
     End Sub
 End Class

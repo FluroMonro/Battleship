@@ -11,7 +11,7 @@ Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Windows.Forms.VisualStyles
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Public Class BattleShipsGame
+Public Class battleShipsGamefrm
     Dim currentPlayer As Integer
     Dim gameOver As Boolean
     Dim boardEmpty As Boolean
@@ -116,8 +116,8 @@ Public Class BattleShipsGame
         playergameArray = resetGameArray(playergameArray)
 
         'Generate the array of picture boxes that represents the game array 
-        generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
-        generatePicture(playerpictureBoxArray, PlayerBoardBGImg, 1)
+        generatePicture(opponentpictureBoxArray, opponentBoardpb, 2)
+        generatePicture(playerpictureBoxArray, playerBoardpb, 1)
 
         'generate the 2D array: gameArray randomly (both computer and Player)
         generateGameArr(opponentgameArray, 2)
@@ -127,6 +127,10 @@ Public Class BattleShipsGame
         assignGridImages(opponentgameArray, opponentpictureBoxArray, "opponent")
         assignGridImages(playergameArray, playerpictureBoxArray, "player")
 
+        updateInGameScore(1)
+        updateInGameScore(2)
+        updateGameStats(playerHitCount, playerMissCount, 1)
+        updateGameStats(opponentHitCount, opponentMissCount, 2)
         currentPlayer = 1
     End Sub
 
@@ -147,9 +151,7 @@ Public Class BattleShipsGame
         opponentHitCount = 0
         playershipSunkCount = 0
         i = 0
-
-        updateGameStats(playerHitCount, playerMissCount, 1)
-        updateGameStats(opponentHitCount, opponentMissCount, 2)
+        gameOver = False
 
         'Initialise all the global variable
         For i = 1 To 5
@@ -236,42 +238,54 @@ Public Class BattleShipsGame
         turnsbannerYLoc = (Me.Height / 2 - (turnsbannerHeight / 2)) - 40
         boardSizes = turnsbannerYLoc - ((turnsbannerHeight / 2) - 9)
 
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
-        backgroundImg.Location = New Point(0, 0)
-        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
-        backgroundImg.Load(backgroundImg.ImageLocation)
+        backgroundpb.ImageLocation = Application.StartupPath & "\Pictures\gameBackground.png"
+        backgroundpb.Location = New Point(0, 0)
+        backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundpb.Load(backgroundpb.ImageLocation)
 
         'Setting the placement and size of controls on the form
         backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
         resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
-
-        OpponentBoardBGImg.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
-        PlayerBoardBGImg.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
-
-
+        opponentBoardpb.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
+        playerBoardpb.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
+        timelbl.Parent = backgroundpb
+        timelbl.BackColor = Color.Transparent
         timelbl.Font = New Font("Segoe UI", CShort(Me.Height / 48.5333328F), FontStyle.Bold, GraphicsUnit.Point)
-        timelbl.Location = New Point((Me.Width / 2) - 40, Me.Height - 95)
         timelbl.Size = New Size(80, 30)
+        timelbl.Location = New Point((backgroundpb.Width / 2) - (timelbl.Width / 2), backgroundpb.Height - 2 * (timelbl.Height))
 
         'Using an offset dependent on the length of playername so that the text won't overlap on the game boards
         Dim playernameoffSet As Integer
         playernameoffSet = 5 * (playerName.Length)
+        playernamelbl.Parent = backgroundpb
+        playernametxt.Parent = backgroundpb
+        playernametxt.BringToFront()
+        playerscorelbl.Parent = backgroundpb
+        playerscoretxt.Parent = backgroundpb
+        opponentnamelbl.Parent = backgroundpb
+        opponentscorelbl.Parent = backgroundpb
+        opponentscoretxt.Parent = backgroundpb
         playernametxt.Text = playerName
         playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
         playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
         playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
         playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
-
         opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 40, Me.Top + 150)
         opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
         opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
 
-        TurnsBannerPic.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
-        TurnsBannerPic.Size = New Size(turnsbannerWidth, turnsbannerHeight)
-        TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
+        turnsBannerpb.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
+        turnsBannerpb.Size = New Size(turnsbannerWidth, turnsbannerHeight)
+        turnsBannerpb.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
 
-        KeyPanel.Location = New Point(Me.Width / 20, Me.Height / 18)
+        keypnl.Parent = backgroundpb
+        keypnl.BackColor = Color.Transparent
+        keypnl.Location = New Point(Me.Width / 20, Me.Height / 18)
+        playerStatspnl.Parent = backgroundpb
+        playerStatspnl.BackColor = Color.Transparent
         playerStatspnl.Location = New Point(Me.Width / 5, Me.Height / 18)
+        opponentStatspnl.Parent = backgroundpb
+        opponentStatspnl.BackColor = Color.Transparent
 
         'Setting the size of the grid circle to be dependent on the boardSize (minus it's border) and divided by how many elements the grid is
         'Ability to adjust the sizes of the grid and to have corresponding changes to the size of each circle
@@ -293,7 +307,7 @@ Public Class BattleShipsGame
             End If
 
             'Game boards
-            targetObject = Me.Controls.Item(currentplayerstr + "BoardBGImg")
+            targetObject = Me.Controls.Item(currentplayerstr + "Boardpb")
             targetObject.ImageLocation = Application.StartupPath & "\Pictures\board.png"
             targetObject.Size = New Size(boardSizes, boardSizes)
 
@@ -317,11 +331,15 @@ Public Class BattleShipsGame
                 Dim shipstr As String
 
                 shipstr = currentplayerstr & "Ship" & shippicstr
-                targetObject = Me.Controls.Item(currentplayerstr & "ShipPicbox" & shippicstr)
-                targetObject.Location = New Point(100, 100)
+                targetObject = Me.Controls.Item(currentplayerstr & "Ship" & shippicstr & "pb")
+                targetObject.Location = New Point(400, 400)
                 targetObject.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
                 targetObject.ImageLocation = Application.StartupPath & "\Pictures\BoardBlue.png"
                 targetObject.Parent = Me
+
+                If player = 2 Then
+                    targetObject.Visible = False
+                End If
             Next length
         Next player
     End Sub
@@ -349,7 +367,7 @@ Public Class BattleShipsGame
 
     ''' <summary>
     ''' Subroutine generates the grid of pictureboxes with correct Data, presentation and placement
-    ''' Example of use: generatePicture(opponentpictureBoxArray, OpponentBoardBGImg, 2)
+    ''' Example of use: generatePicture(opponentpictureBoxArray, OpponentBoardpb, 2)
     ''' </summary>
     ''' <param name="pictureBoxArray">The array that holds each pictrebox created</param>
     ''' <param name="picBoard">The picturebox of the board that sits behind the grid of pictureboxes</param>
@@ -774,14 +792,14 @@ Public Class BattleShipsGame
         'Get the picturebox of the ship
         If shipLength = 3 Then
             If duplicateShip = False Then
-                targetship = Me.Controls.Item("playerShipPicbox3a")
+                targetship = Me.Controls.Item("playerShip3apb")
                 duplicateShip = True
             Else
-                targetship = Me.Controls.Item("playerShipPicbox3b")
+                targetship = Me.Controls.Item("playerShip3bpb")
                 duplicateShip = False
             End If
         Else
-            targetship = Me.Controls.Item("playerShipPicbox" & shipLength)
+            targetship = Me.Controls.Item("playerShip" & shipLength & "pb")
         End If
 
         'Assigns and loads the image inside the ships picturebox
@@ -988,16 +1006,16 @@ Public Class BattleShipsGame
     Private Sub assignShipImages(picboard As PictureBox)
         'Assign each ship picturebox with the correct picture
         Select Case picboard.Name
-            Case opponentShipPicbox2.Name : opponentShipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
-            Case playerShipPicbox2.Name : playerShipPicbox2.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
-            Case opponentShipPicbox3a.Name : opponentShipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
-            Case playerShipPicbox3a.Name : playerShipPicbox3a.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
-            Case opponentShipPicbox3b.Name : opponentShipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
-            Case playerShipPicbox3b.Name : playerShipPicbox3b.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
-            Case opponentShipPicbox4.Name : opponentShipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
-            Case playerShipPicbox4.Name : playerShipPicbox4.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
-            Case opponentShipPicbox5.Name : opponentShipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
-            Case playerShipPicbox5.Name : playerShipPicbox5.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+            Case opponentShip2pb.Name : opponentShip2pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+            Case playerShip2pb.Name : playerShip2pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip2.png"
+            Case opponentShip3apb.Name : opponentShip3apb.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case playerShip3apb.Name : playerShip3apb.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case opponentShip3bpb.Name : opponentShip3bpb.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case playerShip3bpb.Name : playerShip3bpb.ImageLocation = Application.StartupPath & "\pictures\BattleShip3.png"
+            Case opponentShip4pb.Name : opponentShip4pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+            Case playerShip4pb.Name : playerShip4pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip4.png"
+            Case opponentShip5pb.Name : opponentShip5pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
+            Case playerShip5pb.Name : playerShip5pb.ImageLocation = Application.StartupPath & "\pictures\BattleShip5.png"
         End Select
     End Sub
 
@@ -1239,7 +1257,6 @@ Public Class BattleShipsGame
 
         unParentShipsOnGameOver()
         removePreviousGrid()
-
         gameTimer.Stop()
         timeInitialise()
     End Sub
@@ -1269,37 +1286,23 @@ Public Class BattleShipsGame
     End Sub
 
     ''' <summary>
-    ''' Subroutine unparents the players ships from its parent stack with the grid boxes and makes the form the parent.
+    ''' Subroutine unparents all the ships from the players parent stack with the grid boxes or the opponents board by making the form the parent.
     ''' </summary>
     Private Sub unParentShipsOnGameOver()
-        Dim shippicstr As String
-        Dim targetObject As PictureBox
-        For length = 2 To 5
-            shippicstr = length.ToString
-            If length = 3 Then
-                If duplicateShip = False Then
-                    shippicstr = "3a"
-                    duplicateShip = True
-                End If
-            End If
-            If length = 4 Then
-                If duplicateShip = True Then
-                    shippicstr = "3b"
-                    duplicateShip = False
-                    length = length - 1
-                End If
-            End If
-
-            Dim shipstr As String
-
-            shipstr = "playerShip" & shippicstr
-            targetObject = referenceShipFromParents(targetObject, length, shipstr, "player")
-            targetObject.Parent = Me
-        Next length
+        opponentShip2pb.Parent = Me
+        opponentShip3apb.Parent = Me
+        opponentShip3bpb.Parent = Me
+        opponentShip4pb.Parent = Me
+        opponentShip5pb.Parent = Me
+        playerShip2pb.Parent = Me
+        playerShip3apb.Parent = Me
+        playerShip3bpb.Parent = Me
+        playerShip4pb.Parent = Me
+        playerShip5pb.Parent = Me
     End Sub
     ''' <summary>
     ''' Determines the pictrebox associated with the correct ship after it has been parented with the grid circles it is on top of.
-    ''' Example of use: referenceShipFromParents("4_2", 3, "playerShip3a", "player") = playershipPicbox3a
+    ''' Example of use: referenceShipFromParents("4_2", 3, "playerShip3a", "player") = playership3apb
     ''' </summary>
     ''' <param name="targetobject">A picturebox: Will be either 'Nothing' or a grid picture box: eg. "4_2"</param>
     ''' <param name="length">An integer representing the length of the ship: eg. 3</param>
@@ -1322,7 +1325,7 @@ Public Class BattleShipsGame
 
     ''' <summary>
     ''' Function gets the picturebox of the ship (which is at the top layer of parenting) from one of the parents in a lower layer
-    ''' Example of use: GetShipFromParent("4_2") = playerShipPicbox3a
+    ''' Example of use: GetShipFromParent("4_2") = playerShip3apb
     ''' </summary>
     ''' <param name="parentPicbox">A picturebox that is a parent of a ship picture box</param>
     ''' <returns>The picturebox of the ship on the top layer of the grid box layers. </returns>
@@ -1377,8 +1380,8 @@ Public Class BattleShipsGame
         Me.Hide()
         endTime = convertStringIntegerTimeToDisplayTime(time)
         endScore = score
-        gameOverForm.onLoadsettings()
-        gameOverForm.Show()
+        gameOverfrm.onLoadsettings()
+        gameOverfrm.Show()
         time = 0
     End Sub
 
@@ -1528,6 +1531,7 @@ Public Class BattleShipsGame
 
             'Gets the name of the picturebox associated with the ship (from the top layer of the picturebox array at the location of the moves)
             shipPicboxStr = GetShipFromParent(targetpicboxArr(MoveX, MoveY)).Name
+            shipPicboxStr = Strings.Left(shipPicboxStr, (shipPicboxStr.Length - 2))
 
             'Set the length and extract the string of the array of records associated with the ship
             If Strings.Right(shipPicboxStr, 1) = "a" Or Strings.Right(shipPicboxStr, 1) = "b" Then
@@ -1655,10 +1659,10 @@ Public Class BattleShipsGame
                 targetPicboxArr = playerpictureBoxArray
             Else
                 playerstr = "opponent"
-                targetShipPicboxStr = playerstr & "ShipPicbox" & length
+                targetShipPicboxStr = playerstr & "Ship" & length & "pb"
                 sunkArrStr = "opponentShipSunkArr"
                 targetPicboxArr = opponentpictureBoxArray
-                parentBoard = Controls.Item("OpponentBoardBGImg")
+                parentBoard = Controls.Item("OpponentBoardpb")
             End If
 
             'To get the string and length and of the ship
@@ -1671,13 +1675,13 @@ Public Class BattleShipsGame
                 Case 3
                     If duplicateShip = False Then
                         shipstr = shipstr & "a"
-                        targetShipPicboxStr = playerstr & "ShipPicbox" & length & "a"
+                        targetShipPicboxStr = playerstr & "Ship" & length & "a" & "pb"
                         newLength = 3
                         duplicateShip = True
                     Else
                         duplicateShip = False
                         shipstr = playerstr & "Ship3b"
-                        targetShipPicboxStr = playerstr & "ShipPicbox" & length & "b"
+                        targetShipPicboxStr = playerstr & "Ship" & length & "b" & "pb"
 
                         'TargetShipSunkArr is only 5 long but position 1 is not being used and there are 2 with the length 3.
                         'It is convenient to set aside the second of length 3 to position 1 in the array.
@@ -1923,7 +1927,7 @@ Public Class BattleShipsGame
     ''' Example of use: wait(0.5)
     ''' </summary>
     ''' <param name="seconds">A single precision floating point of the number of seconds to wait for: eg. 0.5</param>
-    Private Sub wait(ByVal seconds As Single)
+    Public Sub wait(ByVal seconds As Single)
         Dim i As Integer
         i = 0
 
@@ -1940,9 +1944,9 @@ Public Class BattleShipsGame
     ''' </summary>
     Private Sub displayCurrentPlayer()
         If currentPlayer = 1 Then 'Player
-            TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
+            turnsBannerpb.ImageLocation = Application.StartupPath & "\Pictures\PlayerTurnBanner.png"
         ElseIf currentPlayer = 2 Then 'Opponent
-            TurnsBannerPic.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
+            turnsBannerpb.ImageLocation = Application.StartupPath & "\Pictures\OpponentTurnBanner.png"
         End If
     End Sub
 
@@ -2230,7 +2234,7 @@ Public Class BattleShipsGame
         'Exit back to the main menu
         gameIsOverNoResult()
         Me.Hide()
-        MainMenuForm.Show()
+        mainMenufrm.Show()
     End Sub
 
     ''' <summary>
@@ -2239,7 +2243,7 @@ Public Class BattleShipsGame
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        HighScoresForm.EnterOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.EnterOverSmallButton("backtomainbtn", Me)
     End Sub
 
     ''' <summary>
@@ -2248,7 +2252,7 @@ Public Class BattleShipsGame
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        HighScoresForm.ExitOverSmallButton("backtomainbtn", Me)
+        highScoresfrm.ExitOverSmallButton("backtomainbtn", Me)
     End Sub
 
     ''' <summary>
@@ -2273,7 +2277,7 @@ Public Class BattleShipsGame
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
-        HighScoresForm.EnterOverSmallButton("resetbtn", Me)
+        highScoresfrm.EnterOverSmallButton("resetbtn", Me)
     End Sub
 
     ''' <summary>
@@ -2282,7 +2286,7 @@ Public Class BattleShipsGame
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
-        HighScoresForm.ExitOverSmallButton("resetbtn", Me)
+        highScoresfrm.ExitOverSmallButton("resetbtn", Me)
     End Sub
 
     ''' <summary>
@@ -2505,24 +2509,24 @@ Public Class BattleShipsGame
                     If orderAsDescending = True Then
 
                         'Temporary fake score as lower than possible so it can't show up as top 10 in descending
+                        'This is for when the user is viewing the highscores page and hasn't gotten a score
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).score = -50
                         End If
 
                         'Swap if the current one is smaller than the one on it's right
                         If arrHighScores(i).score < arrHighScores(i + 1).score Then
-                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
-                        'Temporary fake score as higher than possible so it can't show up as top 10 in ascending
                         If arrHighScores(11).name = "ZZZZZZ" Then
                             arrHighScores(11).score = 50
                         End If
 
                         'Swap if the current one is bigger than the one on it's right
                         If arrHighScores(i).score > arrHighScores(i + 1).score Then
-                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     End If
@@ -2536,7 +2540,7 @@ Public Class BattleShipsGame
 
                         'Swap if the current one is smaller than the one on it's right
                         If CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i).time)) < CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i + 1).time)) Then
-                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     Else
@@ -2547,7 +2551,7 @@ Public Class BattleShipsGame
 
                         'Swap if the current one is bigger than the one on it's right
                         If CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i).time)) > CInt(convertDisplayTimeToIntegerStringTime(arrHighScores(i + 1).time)) Then
-                            Swap(arrHighScores(i), arrHighScores(i + 1))
+                            swap(arrHighScores(i), arrHighScores(i + 1))
                             Swapped = True
                         End If
                     End If

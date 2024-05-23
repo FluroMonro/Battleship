@@ -1,5 +1,5 @@
 ﻿Imports System.Runtime
-Public Class HighScoresForm
+Public Class highScoresfrm
     Public currentScoreArrowActive As Boolean
     Public currentTimeArrowActive As Boolean
     ''' <summary>
@@ -16,11 +16,11 @@ Public Class HighScoresForm
         initialiseLastHighscore()
 
         'Make sure the form is displaying correctly for descending and sorting by scores.
-        updateArrowButtonImages(True, True)
         updateRankings(True, True)
+        updateArrowButtonImages(True, True)
 
         'Read and print the highscore into the form
-        BattleShipsGame.readHighScores()
+        battleShipsGamefrm.readHighScores()
         printHighScores()
     End Sub
 
@@ -30,29 +30,45 @@ Public Class HighScoresForm
     Private Sub initialiseFormControls()
         'To initialise the screen size as the fullscreen display size of the user
         Me.WindowState = FormWindowState.Maximized
-        Me.Width = Screen.PrimaryScreen.Bounds.Width
-        Me.Height = Screen.PrimaryScreen.Bounds.Height
+        Me.Size = New Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height)
+
+        'To force the game to a 1528x960 window unless already that resolution in fullscreen
+        If Me.Width <> 1528 And Me.Height <> 960 Then
+            Me.WindowState = FormWindowState.Normal
+            Me.Size = New Size(1528, 960)
+        End If
 
         'Setting the placement and size of controls onto the screen
-        backgroundImg.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
-        backgroundImg.Size = New Size(Me.Width - 15, Me.Height - 38)
-        backgroundImg.Location = New Point(0, 0)
-        backgroundImg.Load(backgroundImg.ImageLocation)
-        Titlelbl.Location = New Point(Me.Width / 2 - (336 / 2), 125)
-        Titlelbl.Size = New Size(336, 71)
-        subtitlelbl.Location = New Point(Me.Width / 2 - (208 / 2), 200)
+        backgroundpb.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
+        backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
+        backgroundpb.Location = New Point(0, 0)
+        backgroundpb.Load(backgroundpb.ImageLocation)
+        rankingpnl.Parent = backgroundpb
+        rankingpnl.BackColor = Color.Transparent
+        namepnl.Parent = backgroundpb
+        namepnl.BackColor = Color.Transparent
+        scorepnl.Parent = backgroundpb
+        scorepnl.BackColor = Color.Transparent
+        timepnl.Parent = backgroundpb
+        timepnl.BackColor = Color.Transparent
+        difficultypnl.Parent = backgroundpb
+        difficultypnl.BackColor = Color.Transparent
+        titlelbl.Size = New Size(336, 71)
+        titlelbl.Location = New Point((Me.Width / 2) - (titlelbl.Width / 2), 125)
+        subtitlelbl.Location = New Point(Me.Width / 2 - (subtitlelbl.Width / 2), 200)
         subtitlelbl.Size = New Size(208, 54)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        WindowState = FormWindowState.Minimized
     End Sub
 
     ''' <summary>
     ''' Subroutine initialises the player's high-score temporarily as the lowest possible (to not show on the form).
     ''' </summary>
     Public Sub initialiseLastHighscore()
-        BattleShipsGame.arrHighScores(11).name = "ZZZZZZ" 'A player is not likely to use this as their name.
-        BattleShipsGame.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
-        BattleShipsGame.arrHighScores(11).time = "59:59" 'The highest possible time
-        BattleShipsGame.arrHighScores(11).difficulty = "None"
+        battleShipsGamefrm.arrHighScores(11).name = "ZZZZZZ" 'A player is not likely to use this as their name.
+        battleShipsGamefrm.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
+        battleShipsGamefrm.arrHighScores(11).time = "59:59" 'The highest possible time
+        battleShipsGamefrm.arrHighScores(11).difficulty = "None"
     End Sub
 
     ''' <summary>
@@ -61,17 +77,18 @@ Public Class HighScoresForm
     Private Sub printHighScores()
         Dim targetObject As Label
         For i = 1 To 10 'i = the ranking
-            targetObject = Me.namepanel.Controls.Item("namelbl" + i.ToString())
-            targetObject.Text = BattleShipsGame.arrHighScores(i).name
+            targetObject = Me.namepnl.Controls.Item("namelbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).name
 
-            targetObject = Me.scorepanel.Controls.Item("scorelbl" + i.ToString())
-            targetObject.Text = BattleShipsGame.arrHighScores(i).score
+            targetObject = Me.scorepnl.Controls.Item("scorelbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).score
 
-            targetObject = Me.timepanel.Controls.Item("timelbl" + i.ToString())
-            targetObject.Text = BattleShipsGame.arrHighScores(i).time
+            targetObject = Me.timepnl.Controls.Item("timelbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).time
 
-            targetObject = Me.difficultyPanel.Controls.Item("diflbl" + i.ToString())
-            targetObject.Text = BattleShipsGame.arrHighScores(i).difficulty
+            targetObject = Me.difficultypnl.Controls.Item("diflbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).difficulty
+            battleShipsGamefrm.wait(0.1)
         Next
     End Sub
 
@@ -125,8 +142,8 @@ Public Class HighScoresForm
 
         'Update the visuals to reflect the current array
         updateArrowButtonImages(isTypeScore, isOrderDescending)
-        BattleShipsGame.BubbleSort(isTypeScore, isOrderDescending)
-        BattleShipsGame.WriteHighScores()
+        battleShipsGamefrm.BubbleSort(isTypeScore, isOrderDescending)
+        battleShipsGamefrm.WriteHighScores()
         'print and update the rankings to reflect the order
         printHighScores()
     End Sub
@@ -208,7 +225,7 @@ Public Class HighScoresForm
 
         'To go through all the labels and change the text to be the correct number
         For i = 10 To 1 Step -1
-            targetObject = Me.rankingpanel.Controls.Item("ranklbl" + i.ToString())
+            targetObject = Me.rankingpnl.Controls.Item("ranklbl" + i.ToString())
             If rankingOrderStr = "ascending" Then
                 targetObject.Text = i
             Else '11 - i as each ranking needs to be on the opposite side of 10 from i
@@ -225,11 +242,11 @@ Public Class HighScoresForm
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
         'Leaves the hs.txt in the same order every time
-        BattleShipsGame.BubbleSort(True, True)
-        BattleShipsGame.WriteHighScores()
+        battleShipsGamefrm.BubbleSort(True, True)
+        battleShipsGamefrm.WriteHighScores()
 
         Me.Hide()
-        MainMenuForm.Show()
+        mainMenufrm.Show()
     End Sub
 
     ''' <summary>
