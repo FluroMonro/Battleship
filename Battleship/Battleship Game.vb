@@ -118,6 +118,8 @@ Public Class battleShipsGamefrm
         opponentgameArray = resetGameArray(opponentgameArray)
         playergameArray = resetGameArray(playergameArray)
 
+        Randomize()
+
         'Generate the array of picture boxes that represents the game array 
         generatePicture(opponentpictureBoxArray, opponentBoardpb, 2)
         generatePicture(playerpictureBoxArray, playerBoardpb, 1)
