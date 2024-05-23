@@ -162,12 +162,12 @@ Partial Class gameOverfrm
         tohsbtn.FlatStyle = FlatStyle.Flat
         tohsbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
         tohsbtn.ForeColor = SystemColors.ButtonHighlight
-        tohsbtn.Location = New Point(585, 447)
+        tohsbtn.Location = New Point(569, 447)
         tohsbtn.Margin = New Padding(0)
         tohsbtn.Name = "tohsbtn"
-        tohsbtn.Size = New Size(117, 26)
+        tohsbtn.Size = New Size(133, 26)
         tohsbtn.TabIndex = 19
-        tohsbtn.Text = "High Scores"
+        tohsbtn.Text = "HIGH SCORES"
         tohsbtn.UseVisualStyleBackColor = False
         ' 
         ' gameOverfrm

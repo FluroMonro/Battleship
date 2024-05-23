@@ -41,7 +41,7 @@
         backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundpb.Location = New Point(0, 0)
         backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
-        tohsbtn.Location = New Point(Me.Width - 395, Me.Height - 195)
+        tohsbtn.Location = New Point(Me.Width - 405, Me.Height - 195)
         scoretxt.Text = endScore
         timetxt.Text = endTime
         gameOverlbl.Location = New Point((Me.Width / 2) - (gameOverlbl.Width / 2), 200)

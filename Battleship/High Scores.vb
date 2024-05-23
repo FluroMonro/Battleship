@@ -87,7 +87,7 @@ Public Class highScoresfrm
 
             targetObject = Me.difficultypnl.Controls.Item("diflbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).difficulty
-            battleShipsGamefrm.wait(0.1)
+            battleShipsGamefrm.wait(0.07)
         Next
     End Sub
 
