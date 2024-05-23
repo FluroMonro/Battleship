@@ -485,24 +485,26 @@ Public Class battleShipsGamefrm
                         Case 2
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 Then
                                 'If the element to the left is empty: Set the initially chosen location and the one to the left as a ship
-                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
-                                'Set the respective ship record to the same starting location
+                                populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = True
                             End If
                         Case 3
                             'If the element to the left is empty and the one to the left of that is also empty: Set all 3 to be a ship
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 Then
-                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
-
+                                populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = True
                             End If
                         Case 4
                             'If all the other 3 squares are empty: set all 4 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 Then
-                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = True
                             End If
                         Case 5
                             'If all the other 4 squares are empty: set all 5 to be ships
                             If gameArr(col + signedIndicatorX, row + signedIndicatorY) = 0 AndAlso gameArr(col + (2 * signedIndicatorX), row + (2 * signedIndicatorY)) = 0 AndAlso gameArr(col + (3 * signedIndicatorX), row + (3 * signedIndicatorY)) = 0 AndAlso gameArr(col + (4 * signedIndicatorX), row + (4 * signedIndicatorY)) = 0 Then
-                                valid = populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                populateGameArr(signedIndicatorX, signedIndicatorY, length, directionShipFacing, col, row, gameArr, currentplayernum)
+                                valid = True
                             End If
                     End Select
                 End If
@@ -521,9 +523,8 @@ Public Class battleShipsGamefrm
     End Function
 
     ''' <summary>
-    ''' Function assigns the location for the ship, populating the game array
-    ''' Once stored and run, return a true to allow generateShips() to continue
-    ''' Example of use: populateGameArr(1,0,3,"left",5,2,playerGameArr,1) = true
+    ''' Subroutine assigns the location for the ship, populating the game array
+    ''' Example of use: populateGameArr(1,0,3,"left",5,2,playerGameArr,1)
     ''' </summary>
     ''' <param name="signedIndicatorX">An integer which is used to multiply by 1 or -1 in the X direction</param>
     ''' <param name="signedIndicatorY">An integer which is used to multiply by 1 or -1 in the Y direction</param>
@@ -533,8 +534,7 @@ Public Class battleShipsGamefrm
     ''' <param name="row">An integer representing the row the ship has been placed in</param>
     ''' <param name="gameArr">The game array to be populated: eg. playerGameArr</param>
     ''' <param name="currentplayernum">The integer representation of the owner of the game array: eg. 1 for the player</param>
-    ''' <returns>A boolean of True (valid = true)</returns>
-    Private Function populateGameArr(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer) As Boolean
+    Private Sub populateGameArr(signedIndicatorX As Integer, signedIndicatorY As Integer, length As Integer, directionShipFacing As String, col As Integer, row As Integer, gameArr As Array, currentplayernum As Integer)
         Dim i As Integer
         i = 0
 
@@ -566,8 +566,7 @@ Public Class battleShipsGamefrm
         End Select
         'Store those positions within each individual ship record
         setIndividualShipLocations(col, row, length, directionShipFacing, currentplayernum)
-        Return True
-    End Function
+    End Sub
 
     ''' <summary>
     ''' Subroutine stores the locations of each individual ship into their respective records
@@ -778,9 +777,9 @@ Public Class battleShipsGamefrm
 
         'Parent stacking each picturebox until the top layer
         If direction = "right" OrElse direction = "down" Then
-            rightAndDown(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+            parentingStackRightAndDown(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
         Else
-            leftAndUp(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
+            parentingStackleftAndUp(shipLength, col, row, XOffset, YOffset, Xscale, Yscale, parentgridbox, direction)
         End If
 
         'Get the picturebox of the ship
@@ -834,7 +833,7 @@ Public Class battleShipsGamefrm
     ''' <param name="Yscale">An integer representing the new height of the picturebox</param>
     ''' <param name="parentgridbox">The original (lowest layer) picturebox to be changed each loop creating a parenting stack</param>
     ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
-    Private Sub rightAndDown(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+    Private Sub parentingStackRightAndDown(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim targetgridbox As PictureBox
         Dim count As Integer
         count = 0
@@ -873,7 +872,7 @@ Public Class battleShipsGamefrm
     ''' <param name="Yscale">An integer representing the new height of the picturebox</param>
     ''' <param name="parentgridbox">The original (lowest layer) picturebox to be changed each loop creating a parenting stack</param>
     ''' <param name="direction">An string representing the direction the ship is facing. The ship is facing in the opposite direction to the direction it is going in after the random position is chosen.</param>
-    Private Sub leftAndUp(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
+    Private Sub parentingStackleftAndUp(shipLength As Integer, col As Integer, row As Integer, XOffset As Integer, Yoffset As Integer, Xscale As Integer, Yscale As Integer, ByRef parentgridbox As PictureBox, direction As String)
         Dim targetgridbox As PictureBox
         Dim count As Integer
         count = 0
@@ -2423,7 +2422,7 @@ Public Class battleShipsGamefrm
     ''' <summary>
     ''' Subroutine writes each element a field a time into a text file
     ''' </summary>
-    Public Sub WriteHighScores()
+    Public Sub writeHighScores()
         Dim i As Integer
         i = 0
 
