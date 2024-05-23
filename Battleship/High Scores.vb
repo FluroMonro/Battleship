@@ -68,6 +68,9 @@ Public Class highScoresfrm
         battleShipsGamefrm.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
         battleShipsGamefrm.arrHighScores(11).time = "59:59" 'The highest possible time
         battleShipsGamefrm.arrHighScores(11).difficulty = "None"
+        battleShipsGamefrm.arrHighScores(11).boardSize = "None"
+        battleShipsGamefrm.arrHighScores(11).accuracy = "-"
+        battleShipsGamefrm.arrHighScores(11).shotNum = 0
     End Sub
 
     ''' <summary>
@@ -76,17 +79,26 @@ Public Class highScoresfrm
     Private Sub printHighScores()
         Dim targetObject As Label
         For i = 1 To 10 'i = the ranking
-            targetObject = Me.namepnl.Controls.Item("namelbl" + i.ToString())
+            targetObject = namepnl.Controls.Item("namelbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).name
 
-            targetObject = Me.scorepnl.Controls.Item("scorelbl" + i.ToString())
+            targetObject = scorepnl.Controls.Item("scorelbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).score
 
-            targetObject = Me.timepnl.Controls.Item("timelbl" + i.ToString())
+            targetObject = timepnl.Controls.Item("timelbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).time
 
-            targetObject = Me.difficultypnl.Controls.Item("diflbl" + i.ToString())
+            targetObject = difficultypnl.Controls.Item("diflbl" + i.ToString())
             targetObject.Text = battleShipsGamefrm.arrHighScores(i).difficulty
+
+            targetObject = boardSizepnl.Controls.Item("boardSizelbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).boardSize
+
+            targetObject = accuracypnl.Controls.Item("accuracylbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).accuracy
+
+            targetObject = shotsTakenpnl.Controls.Item("shotsTakenlbl" + i.ToString())
+            targetObject.Text = battleShipsGamefrm.arrHighScores(i).shotNum
             battleShipsGamefrm.wait(0.07)
         Next
     End Sub

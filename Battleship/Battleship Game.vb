@@ -49,6 +49,9 @@ Public Class battleShipsGamefrm
         Public score As Integer
         Public time As String
         Public difficulty As String
+        Public boardSize As String
+        Public accuracy As String
+        Public shotNum As Integer
     End Structure
     Public Structure shipGridLocations
         Public X As Integer
@@ -1260,6 +1263,9 @@ Public Class battleShipsGamefrm
     Private Sub gameIsOverWithResult()
         timeEnd()
         score = determineScore()
+        shotsNum = CInt(playerMissCount + playerHitCount)
+        sunkNum = playershipSunkCount
+        accuracyStr = playerAccuracyCounttxt.Text
         scoring()
 
         'If the timer has run out: set the time to be the chosen time
@@ -2353,10 +2359,13 @@ Public Class battleShipsGamefrm
     ''' </summary>
     Private Sub addPlayerScoreToHighscores()
         'To overwrite the temporary 11th element created in the highscores form with the user's info
-        arrHighScores(11).score = score
         arrHighScores(11).name = playerName
-        arrHighScores(11).difficulty = difficulty
+        arrHighScores(11).score = score
         arrHighScores(11).time = convertStringIntegerTimeToDisplayTime(time)
+        arrHighScores(11).difficulty = difficulty
+        arrHighScores(11).boardSize = gridSize & "x" & gridSize
+        arrHighScores(11).accuracy = accuracyStr
+        arrHighScores(11).shotNum = shotsNum
     End Sub
 
     ''' <summary>
@@ -2390,6 +2399,18 @@ Public Class battleShipsGamefrm
             'difficulty
             FileSystem.Input(1, fileContents)
             arrHighScores(i).difficulty = fileContents
+
+            'boardSize
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).boardSize = fileContents
+
+            'boardSize
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).accuracy = fileContents
+
+            'boardSize
+            FileSystem.Input(1, fileContents)
+            arrHighScores(i).shotNum = fileContents
         Next i
         FileSystem.FileClose(1)
     End Sub
@@ -2408,6 +2429,9 @@ Public Class battleShipsGamefrm
             FileSystem.Write(1, arrHighScores(i).name)
             FileSystem.Write(1, convertDisplayTimeToIntegerStringTime(arrHighScores(i).time))
             FileSystem.Write(1, arrHighScores(i).difficulty)
+            FileSystem.Write(1, arrHighScores(i).boardSize)
+            FileSystem.Write(1, arrHighScores(i).accuracy)
+            FileSystem.Write(1, arrHighScores(i).shotNum)
         Next i
         FileSystem.FileClose(1)
     End Sub

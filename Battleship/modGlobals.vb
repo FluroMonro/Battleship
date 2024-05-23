@@ -10,4 +10,7 @@
     Public endScore As Integer
     Public gameOutcome As String
     Public endTime As String
+    Public accuracyStr As String
+    Public shotsNum As Integer
+    Public sunkNum As Integer
 End Module

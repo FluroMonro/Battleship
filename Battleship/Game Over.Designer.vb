@@ -33,6 +33,12 @@ Partial Class gameOverfrm
         backtomainbtn = New Button()
         drawlbl = New Label()
         tohsbtn = New Button()
+        accuracytxt = New Label()
+        accuracylbl = New Label()
+        shotstxt = New Label()
+        shotslbl = New Label()
+        shipsSunktxt = New Label()
+        shipsSunklbl = New Label()
         CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -170,12 +176,84 @@ Partial Class gameOverfrm
         tohsbtn.Text = "HIGH SCORES"
         tohsbtn.UseVisualStyleBackColor = False
         ' 
+        ' accuracytxt
+        ' 
+        accuracytxt.AutoSize = True
+        accuracytxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        accuracytxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracytxt.Location = New Point(975, 635)
+        accuracytxt.Name = "accuracytxt"
+        accuracytxt.Size = New Size(19, 25)
+        accuracytxt.TabIndex = 21
+        accuracytxt.Text = "-"
+        ' 
+        ' accuracylbl
+        ' 
+        accuracylbl.AutoSize = True
+        accuracylbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        accuracylbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl.Location = New Point(875, 635)
+        accuracylbl.Name = "accuracylbl"
+        accuracylbl.Size = New Size(86, 25)
+        accuracylbl.TabIndex = 20
+        accuracylbl.Text = "Accuracy:"
+        ' 
+        ' shotstxt
+        ' 
+        shotstxt.AutoSize = True
+        shotstxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shotstxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        shotstxt.Location = New Point(787, 635)
+        shotstxt.Name = "shotstxt"
+        shotstxt.Size = New Size(22, 25)
+        shotstxt.TabIndex = 23
+        shotstxt.Text = "0"
+        ' 
+        ' shotslbl
+        ' 
+        shotslbl.AutoSize = True
+        shotslbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shotslbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        shotslbl.Location = New Point(638, 635)
+        shotslbl.Name = "shotslbl"
+        shotslbl.Size = New Size(109, 25)
+        shotslbl.TabIndex = 22
+        shotslbl.Text = "Shots taken:"
+        ' 
+        ' shipsSunktxt
+        ' 
+        shipsSunktxt.AutoSize = True
+        shipsSunktxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsSunktxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsSunktxt.Location = New Point(564, 635)
+        shipsSunktxt.Name = "shipsSunktxt"
+        shipsSunktxt.Size = New Size(22, 25)
+        shipsSunktxt.TabIndex = 25
+        shipsSunktxt.Text = "0"
+        ' 
+        ' shipsSunklbl
+        ' 
+        shipsSunklbl.AutoSize = True
+        shipsSunklbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shipsSunklbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        shipsSunklbl.Location = New Point(455, 635)
+        shipsSunklbl.Name = "shipsSunklbl"
+        shipsSunklbl.Size = New Size(103, 25)
+        shipsSunklbl.TabIndex = 24
+        shipsSunklbl.Text = "Ships Sunk:"
+        ' 
         ' gameOverfrm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 921)
+        Controls.Add(shipsSunktxt)
+        Controls.Add(shipsSunklbl)
+        Controls.Add(shotstxt)
+        Controls.Add(shotslbl)
+        Controls.Add(accuracytxt)
+        Controls.Add(accuracylbl)
         Controls.Add(tohsbtn)
         Controls.Add(drawlbl)
         Controls.Add(backtomainbtn)
@@ -204,4 +282,10 @@ Partial Class gameOverfrm
     Friend WithEvents backtomainbtn As Button
     Friend WithEvents drawlbl As Label
     Friend WithEvents tohsbtn As Button
+    Friend WithEvents accuracytxt As Label
+    Friend WithEvents accuracylbl As Label
+    Friend WithEvents shotstxt As Label
+    Friend WithEvents shotslbl As Label
+    Friend WithEvents shipsSunktxt As Label
+    Friend WithEvents shipsSunklbl As Label
 End Class

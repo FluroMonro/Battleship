@@ -88,6 +88,42 @@ Partial Class highScoresfrm
         diflbl3 = New Label()
         diflbl2 = New Label()
         diflbl1 = New Label()
+        boardSizepnl = New Panel()
+        boardSizelbl = New Label()
+        boardSizelbl10 = New Label()
+        boardSizelbl9 = New Label()
+        boardSizelbl8 = New Label()
+        boardSizelbl7 = New Label()
+        boardSizelbl6 = New Label()
+        boardSizelbl5 = New Label()
+        boardSizelbl4 = New Label()
+        boardSizelbl3 = New Label()
+        boardSizelbl2 = New Label()
+        boardSizelbl1 = New Label()
+        accuracypnl = New Panel()
+        accuracylbl = New Label()
+        accuracylbl10 = New Label()
+        accuracylbl9 = New Label()
+        accuracylbl8 = New Label()
+        accuracylbl7 = New Label()
+        accuracylbl6 = New Label()
+        accuracylbl5 = New Label()
+        accuracylbl4 = New Label()
+        accuracylbl3 = New Label()
+        accuracylbl2 = New Label()
+        accuracylbl1 = New Label()
+        shotsTakenpnl = New Panel()
+        shotsTakenlbl = New Label()
+        shotsTakenlbl10 = New Label()
+        shotsTakenlbl9 = New Label()
+        shotsTakenlbl8 = New Label()
+        shotsTakenlbl7 = New Label()
+        shotsTakenlbl6 = New Label()
+        shotsTakenlbl5 = New Label()
+        shotsTakenlbl4 = New Label()
+        shotsTakenlbl3 = New Label()
+        shotsTakenlbl2 = New Label()
+        shotsTakenlbl1 = New Label()
         CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         rankingpnl.SuspendLayout()
         namepnl.SuspendLayout()
@@ -96,6 +132,9 @@ Partial Class highScoresfrm
         timepnl.SuspendLayout()
         CType(timebtn, ComponentModel.ISupportInitialize).BeginInit()
         difficultypnl.SuspendLayout()
+        boardSizepnl.SuspendLayout()
+        accuracypnl.SuspendLayout()
+        shotsTakenpnl.SuspendLayout()
         SuspendLayout()
         ' 
         ' backgroundpb
@@ -330,9 +369,9 @@ Partial Class highScoresfrm
         rankingpnl.Controls.Add(ranklbl3)
         rankingpnl.Controls.Add(ranklbl2)
         rankingpnl.Controls.Add(ranklbl1)
-        rankingpnl.Location = New Point(329, 303)
+        rankingpnl.Location = New Point(132, 300)
         rankingpnl.Name = "rankingpnl"
-        rankingpnl.Size = New Size(165, 453)
+        rankingpnl.Size = New Size(132, 453)
         rankingpnl.TabIndex = 29
         ' 
         ' rankslbl
@@ -359,7 +398,7 @@ Partial Class highScoresfrm
         namepnl.Controls.Add(namelbl4)
         namepnl.Controls.Add(namelbl2)
         namepnl.Controls.Add(namelbl3)
-        namepnl.Location = New Point(500, 303)
+        namepnl.Location = New Point(270, 300)
         namepnl.Name = "namepnl"
         namepnl.Size = New Size(205, 453)
         namepnl.TabIndex = 30
@@ -499,7 +538,7 @@ Partial Class highScoresfrm
         scorepnl.Controls.Add(scorelbl3)
         scorepnl.Controls.Add(scorelbl2)
         scorepnl.Controls.Add(scorelbl1)
-        scorepnl.Location = New Point(708, 303)
+        scorepnl.Location = New Point(481, 300)
         scorepnl.Name = "scorepnl"
         scorepnl.Size = New Size(128, 453)
         scorepnl.TabIndex = 40
@@ -640,7 +679,7 @@ Partial Class highScoresfrm
         timepnl.Controls.Add(timelbl3)
         timepnl.Controls.Add(timelbl2)
         timepnl.Controls.Add(timelbl1)
-        timepnl.Location = New Point(842, 303)
+        timepnl.Location = New Point(615, 300)
         timepnl.Name = "timepnl"
         timepnl.Size = New Size(165, 453)
         timepnl.TabIndex = 50
@@ -703,7 +742,7 @@ Partial Class highScoresfrm
         difficultypnl.Controls.Add(diflbl3)
         difficultypnl.Controls.Add(diflbl2)
         difficultypnl.Controls.Add(diflbl1)
-        difficultypnl.Location = New Point(1013, 303)
+        difficultypnl.Location = New Point(786, 300)
         difficultypnl.Name = "difficultypnl"
         difficultypnl.Size = New Size(165, 453)
         difficultypnl.TabIndex = 57
@@ -819,12 +858,405 @@ Partial Class highScoresfrm
         diflbl1.TabIndex = 40
         diflbl1.Text = "-"
         ' 
+        ' boardSizepnl
+        ' 
+        boardSizepnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        boardSizepnl.Controls.Add(boardSizelbl)
+        boardSizepnl.Controls.Add(boardSizelbl10)
+        boardSizepnl.Controls.Add(boardSizelbl9)
+        boardSizepnl.Controls.Add(boardSizelbl8)
+        boardSizepnl.Controls.Add(boardSizelbl7)
+        boardSizepnl.Controls.Add(boardSizelbl6)
+        boardSizepnl.Controls.Add(boardSizelbl5)
+        boardSizepnl.Controls.Add(boardSizelbl4)
+        boardSizepnl.Controls.Add(boardSizelbl3)
+        boardSizepnl.Controls.Add(boardSizelbl2)
+        boardSizepnl.Controls.Add(boardSizelbl1)
+        boardSizepnl.Location = New Point(957, 300)
+        boardSizepnl.Name = "boardSizepnl"
+        boardSizepnl.Size = New Size(142, 453)
+        boardSizepnl.TabIndex = 58
+        ' 
+        ' boardSizelbl
+        ' 
+        boardSizelbl.AutoSize = True
+        boardSizelbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        boardSizelbl.Location = New Point(19, 9)
+        boardSizelbl.Name = "boardSizelbl"
+        boardSizelbl.Size = New Size(112, 28)
+        boardSizelbl.TabIndex = 40
+        boardSizelbl.Text = "Board Size"
+        boardSizelbl.UseWaitCursor = True
+        ' 
+        ' boardSizelbl10
+        ' 
+        boardSizelbl10.AutoSize = True
+        boardSizelbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl10.Location = New Point(56, 420)
+        boardSizelbl10.Name = "boardSizelbl10"
+        boardSizelbl10.Size = New Size(16, 21)
+        boardSizelbl10.TabIndex = 49
+        boardSizelbl10.Text = "-"
+        ' 
+        ' boardSizelbl9
+        ' 
+        boardSizelbl9.AutoSize = True
+        boardSizelbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl9.Location = New Point(56, 380)
+        boardSizelbl9.Name = "boardSizelbl9"
+        boardSizelbl9.Size = New Size(16, 21)
+        boardSizelbl9.TabIndex = 48
+        boardSizelbl9.Text = "-"
+        ' 
+        ' boardSizelbl8
+        ' 
+        boardSizelbl8.AutoSize = True
+        boardSizelbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl8.Location = New Point(56, 340)
+        boardSizelbl8.Name = "boardSizelbl8"
+        boardSizelbl8.Size = New Size(16, 21)
+        boardSizelbl8.TabIndex = 47
+        boardSizelbl8.Text = "-"
+        ' 
+        ' boardSizelbl7
+        ' 
+        boardSizelbl7.AutoSize = True
+        boardSizelbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl7.Location = New Point(56, 300)
+        boardSizelbl7.Name = "boardSizelbl7"
+        boardSizelbl7.Size = New Size(16, 21)
+        boardSizelbl7.TabIndex = 46
+        boardSizelbl7.Text = "-"
+        ' 
+        ' boardSizelbl6
+        ' 
+        boardSizelbl6.AutoSize = True
+        boardSizelbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl6.Location = New Point(56, 260)
+        boardSizelbl6.Name = "boardSizelbl6"
+        boardSizelbl6.Size = New Size(16, 21)
+        boardSizelbl6.TabIndex = 45
+        boardSizelbl6.Text = "-"
+        ' 
+        ' boardSizelbl5
+        ' 
+        boardSizelbl5.AutoSize = True
+        boardSizelbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl5.Location = New Point(56, 220)
+        boardSizelbl5.Name = "boardSizelbl5"
+        boardSizelbl5.Size = New Size(16, 21)
+        boardSizelbl5.TabIndex = 44
+        boardSizelbl5.Text = "-"
+        ' 
+        ' boardSizelbl4
+        ' 
+        boardSizelbl4.AutoSize = True
+        boardSizelbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl4.Location = New Point(56, 180)
+        boardSizelbl4.Name = "boardSizelbl4"
+        boardSizelbl4.Size = New Size(16, 21)
+        boardSizelbl4.TabIndex = 43
+        boardSizelbl4.Text = "-"
+        ' 
+        ' boardSizelbl3
+        ' 
+        boardSizelbl3.AutoSize = True
+        boardSizelbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl3.Location = New Point(56, 135)
+        boardSizelbl3.Name = "boardSizelbl3"
+        boardSizelbl3.Size = New Size(16, 21)
+        boardSizelbl3.TabIndex = 42
+        boardSizelbl3.Text = "-"
+        ' 
+        ' boardSizelbl2
+        ' 
+        boardSizelbl2.AutoSize = True
+        boardSizelbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl2.Location = New Point(56, 95)
+        boardSizelbl2.Name = "boardSizelbl2"
+        boardSizelbl2.Size = New Size(16, 21)
+        boardSizelbl2.TabIndex = 41
+        boardSizelbl2.Text = "-"
+        ' 
+        ' boardSizelbl1
+        ' 
+        boardSizelbl1.AutoSize = True
+        boardSizelbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        boardSizelbl1.Location = New Point(56, 55)
+        boardSizelbl1.Name = "boardSizelbl1"
+        boardSizelbl1.Size = New Size(16, 21)
+        boardSizelbl1.TabIndex = 40
+        boardSizelbl1.Text = "-"
+        ' 
+        ' accuracypnl
+        ' 
+        accuracypnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        accuracypnl.Controls.Add(accuracylbl)
+        accuracypnl.Controls.Add(accuracylbl10)
+        accuracypnl.Controls.Add(accuracylbl9)
+        accuracypnl.Controls.Add(accuracylbl8)
+        accuracypnl.Controls.Add(accuracylbl7)
+        accuracypnl.Controls.Add(accuracylbl6)
+        accuracypnl.Controls.Add(accuracylbl5)
+        accuracypnl.Controls.Add(accuracylbl4)
+        accuracypnl.Controls.Add(accuracylbl3)
+        accuracypnl.Controls.Add(accuracylbl2)
+        accuracypnl.Controls.Add(accuracylbl1)
+        accuracypnl.Location = New Point(1105, 300)
+        accuracypnl.Name = "accuracypnl"
+        accuracypnl.Size = New Size(133, 453)
+        accuracypnl.TabIndex = 59
+        ' 
+        ' accuracylbl
+        ' 
+        accuracylbl.AutoSize = True
+        accuracylbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        accuracylbl.Location = New Point(16, 9)
+        accuracylbl.Name = "accuracylbl"
+        accuracylbl.Size = New Size(98, 28)
+        accuracylbl.TabIndex = 40
+        accuracylbl.Text = "Accuracy"
+        accuracylbl.UseWaitCursor = True
+        ' 
+        ' accuracylbl10
+        ' 
+        accuracylbl10.AutoSize = True
+        accuracylbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl10.Location = New Point(56, 420)
+        accuracylbl10.Name = "accuracylbl10"
+        accuracylbl10.Size = New Size(16, 21)
+        accuracylbl10.TabIndex = 49
+        accuracylbl10.Text = "-"
+        ' 
+        ' accuracylbl9
+        ' 
+        accuracylbl9.AutoSize = True
+        accuracylbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl9.Location = New Point(56, 380)
+        accuracylbl9.Name = "accuracylbl9"
+        accuracylbl9.Size = New Size(16, 21)
+        accuracylbl9.TabIndex = 48
+        accuracylbl9.Text = "-"
+        ' 
+        ' accuracylbl8
+        ' 
+        accuracylbl8.AutoSize = True
+        accuracylbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl8.Location = New Point(56, 340)
+        accuracylbl8.Name = "accuracylbl8"
+        accuracylbl8.Size = New Size(16, 21)
+        accuracylbl8.TabIndex = 47
+        accuracylbl8.Text = "-"
+        ' 
+        ' accuracylbl7
+        ' 
+        accuracylbl7.AutoSize = True
+        accuracylbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl7.Location = New Point(56, 300)
+        accuracylbl7.Name = "accuracylbl7"
+        accuracylbl7.Size = New Size(16, 21)
+        accuracylbl7.TabIndex = 46
+        accuracylbl7.Text = "-"
+        ' 
+        ' accuracylbl6
+        ' 
+        accuracylbl6.AutoSize = True
+        accuracylbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl6.Location = New Point(56, 260)
+        accuracylbl6.Name = "accuracylbl6"
+        accuracylbl6.Size = New Size(16, 21)
+        accuracylbl6.TabIndex = 45
+        accuracylbl6.Text = "-"
+        ' 
+        ' accuracylbl5
+        ' 
+        accuracylbl5.AutoSize = True
+        accuracylbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl5.Location = New Point(56, 220)
+        accuracylbl5.Name = "accuracylbl5"
+        accuracylbl5.Size = New Size(16, 21)
+        accuracylbl5.TabIndex = 44
+        accuracylbl5.Text = "-"
+        ' 
+        ' accuracylbl4
+        ' 
+        accuracylbl4.AutoSize = True
+        accuracylbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl4.Location = New Point(56, 180)
+        accuracylbl4.Name = "accuracylbl4"
+        accuracylbl4.Size = New Size(16, 21)
+        accuracylbl4.TabIndex = 43
+        accuracylbl4.Text = "-"
+        ' 
+        ' accuracylbl3
+        ' 
+        accuracylbl3.AutoSize = True
+        accuracylbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl3.Location = New Point(56, 135)
+        accuracylbl3.Name = "accuracylbl3"
+        accuracylbl3.Size = New Size(16, 21)
+        accuracylbl3.TabIndex = 42
+        accuracylbl3.Text = "-"
+        ' 
+        ' accuracylbl2
+        ' 
+        accuracylbl2.AutoSize = True
+        accuracylbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl2.Location = New Point(56, 95)
+        accuracylbl2.Name = "accuracylbl2"
+        accuracylbl2.Size = New Size(16, 21)
+        accuracylbl2.TabIndex = 41
+        accuracylbl2.Text = "-"
+        ' 
+        ' accuracylbl1
+        ' 
+        accuracylbl1.AutoSize = True
+        accuracylbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        accuracylbl1.Location = New Point(56, 55)
+        accuracylbl1.Name = "accuracylbl1"
+        accuracylbl1.Size = New Size(16, 21)
+        accuracylbl1.TabIndex = 40
+        accuracylbl1.Text = "-"
+        ' 
+        ' shotsTakenpnl
+        ' 
+        shotsTakenpnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        shotsTakenpnl.Controls.Add(shotsTakenlbl)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl10)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl9)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl8)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl7)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl6)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl5)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl4)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl3)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl2)
+        shotsTakenpnl.Controls.Add(shotsTakenlbl1)
+        shotsTakenpnl.Location = New Point(1244, 300)
+        shotsTakenpnl.Name = "shotsTakenpnl"
+        shotsTakenpnl.Size = New Size(148, 453)
+        shotsTakenpnl.TabIndex = 60
+        ' 
+        ' shotsTakenlbl
+        ' 
+        shotsTakenlbl.AutoSize = True
+        shotsTakenlbl.Font = New Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point)
+        shotsTakenlbl.Location = New Point(16, 9)
+        shotsTakenlbl.Name = "shotsTakenlbl"
+        shotsTakenlbl.Size = New Size(125, 28)
+        shotsTakenlbl.TabIndex = 40
+        shotsTakenlbl.Text = "Shots Taken"
+        shotsTakenlbl.UseWaitCursor = True
+        ' 
+        ' shotsTakenlbl10
+        ' 
+        shotsTakenlbl10.AutoSize = True
+        shotsTakenlbl10.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl10.Location = New Point(56, 420)
+        shotsTakenlbl10.Name = "shotsTakenlbl10"
+        shotsTakenlbl10.Size = New Size(19, 21)
+        shotsTakenlbl10.TabIndex = 49
+        shotsTakenlbl10.Text = "0"
+        ' 
+        ' shotsTakenlbl9
+        ' 
+        shotsTakenlbl9.AutoSize = True
+        shotsTakenlbl9.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl9.Location = New Point(56, 380)
+        shotsTakenlbl9.Name = "shotsTakenlbl9"
+        shotsTakenlbl9.Size = New Size(19, 21)
+        shotsTakenlbl9.TabIndex = 48
+        shotsTakenlbl9.Text = "0"
+        ' 
+        ' shotsTakenlbl8
+        ' 
+        shotsTakenlbl8.AutoSize = True
+        shotsTakenlbl8.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl8.Location = New Point(56, 340)
+        shotsTakenlbl8.Name = "shotsTakenlbl8"
+        shotsTakenlbl8.Size = New Size(19, 21)
+        shotsTakenlbl8.TabIndex = 47
+        shotsTakenlbl8.Text = "0"
+        ' 
+        ' shotsTakenlbl7
+        ' 
+        shotsTakenlbl7.AutoSize = True
+        shotsTakenlbl7.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl7.Location = New Point(56, 300)
+        shotsTakenlbl7.Name = "shotsTakenlbl7"
+        shotsTakenlbl7.Size = New Size(19, 21)
+        shotsTakenlbl7.TabIndex = 46
+        shotsTakenlbl7.Text = "0"
+        ' 
+        ' shotsTakenlbl6
+        ' 
+        shotsTakenlbl6.AutoSize = True
+        shotsTakenlbl6.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl6.Location = New Point(56, 260)
+        shotsTakenlbl6.Name = "shotsTakenlbl6"
+        shotsTakenlbl6.Size = New Size(19, 21)
+        shotsTakenlbl6.TabIndex = 45
+        shotsTakenlbl6.Text = "0"
+        ' 
+        ' shotsTakenlbl5
+        ' 
+        shotsTakenlbl5.AutoSize = True
+        shotsTakenlbl5.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl5.Location = New Point(56, 220)
+        shotsTakenlbl5.Name = "shotsTakenlbl5"
+        shotsTakenlbl5.Size = New Size(19, 21)
+        shotsTakenlbl5.TabIndex = 44
+        shotsTakenlbl5.Text = "0"
+        ' 
+        ' shotsTakenlbl4
+        ' 
+        shotsTakenlbl4.AutoSize = True
+        shotsTakenlbl4.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl4.Location = New Point(56, 180)
+        shotsTakenlbl4.Name = "shotsTakenlbl4"
+        shotsTakenlbl4.Size = New Size(19, 21)
+        shotsTakenlbl4.TabIndex = 43
+        shotsTakenlbl4.Text = "0"
+        ' 
+        ' shotsTakenlbl3
+        ' 
+        shotsTakenlbl3.AutoSize = True
+        shotsTakenlbl3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl3.Location = New Point(56, 135)
+        shotsTakenlbl3.Name = "shotsTakenlbl3"
+        shotsTakenlbl3.Size = New Size(19, 21)
+        shotsTakenlbl3.TabIndex = 42
+        shotsTakenlbl3.Text = "0"
+        ' 
+        ' shotsTakenlbl2
+        ' 
+        shotsTakenlbl2.AutoSize = True
+        shotsTakenlbl2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl2.Location = New Point(56, 95)
+        shotsTakenlbl2.Name = "shotsTakenlbl2"
+        shotsTakenlbl2.Size = New Size(19, 21)
+        shotsTakenlbl2.TabIndex = 41
+        shotsTakenlbl2.Text = "0"
+        ' 
+        ' shotsTakenlbl1
+        ' 
+        shotsTakenlbl1.AutoSize = True
+        shotsTakenlbl1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        shotsTakenlbl1.Location = New Point(56, 55)
+        shotsTakenlbl1.Name = "shotsTakenlbl1"
+        shotsTakenlbl1.Size = New Size(19, 21)
+        shotsTakenlbl1.TabIndex = 40
+        shotsTakenlbl1.Text = "0"
+        ' 
         ' highScoresfrm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
-        ClientSize = New Size(1512, 876)
+        ClientSize = New Size(1512, 921)
+        Controls.Add(shotsTakenpnl)
+        Controls.Add(accuracypnl)
+        Controls.Add(boardSizepnl)
         Controls.Add(difficultypnl)
         Controls.Add(subtitlelbl)
         Controls.Add(titlelbl)
@@ -852,6 +1284,12 @@ Partial Class highScoresfrm
         CType(timebtn, ComponentModel.ISupportInitialize).EndInit()
         difficultypnl.ResumeLayout(False)
         difficultypnl.PerformLayout()
+        boardSizepnl.ResumeLayout(False)
+        boardSizepnl.PerformLayout()
+        accuracypnl.ResumeLayout(False)
+        accuracypnl.PerformLayout()
+        shotsTakenpnl.ResumeLayout(False)
+        shotsTakenpnl.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -923,4 +1361,40 @@ Partial Class highScoresfrm
     Friend WithEvents diflbl3 As Label
     Friend WithEvents diflbl2 As Label
     Friend WithEvents diflbl1 As Label
+    Friend WithEvents boardSizepnl As Panel
+    Friend WithEvents boardSizelbl As Label
+    Friend WithEvents boardSizelbl10 As Label
+    Friend WithEvents boardSizelbl9 As Label
+    Friend WithEvents boardSizelbl8 As Label
+    Friend WithEvents boardSizelbl7 As Label
+    Friend WithEvents boardSizelbl6 As Label
+    Friend WithEvents boardSizelbl5 As Label
+    Friend WithEvents boardSizelbl4 As Label
+    Friend WithEvents boardSizelbl3 As Label
+    Friend WithEvents boardSizelbl2 As Label
+    Friend WithEvents boardSizelbl1 As Label
+    Friend WithEvents accuracypnl As Panel
+    Friend WithEvents accuracylbl As Label
+    Friend WithEvents accuracylbl10 As Label
+    Friend WithEvents accuracylbl9 As Label
+    Friend WithEvents accuracylbl8 As Label
+    Friend WithEvents accuracylbl7 As Label
+    Friend WithEvents accuracylbl6 As Label
+    Friend WithEvents accuracylbl5 As Label
+    Friend WithEvents accuracylbl4 As Label
+    Friend WithEvents accuracylbl3 As Label
+    Friend WithEvents accuracylbl2 As Label
+    Friend WithEvents accuracylbl1 As Label
+    Friend WithEvents shotsTakenpnl As Panel
+    Friend WithEvents shotsTakenlbl As Label
+    Friend WithEvents shotsTakenlbl10 As Label
+    Friend WithEvents shotsTakenlbl9 As Label
+    Friend WithEvents shotsTakenlbl8 As Label
+    Friend WithEvents shotsTakenlbl7 As Label
+    Friend WithEvents shotsTakenlbl6 As Label
+    Friend WithEvents shotsTakenlbl5 As Label
+    Friend WithEvents shotsTakenlbl4 As Label
+    Friend WithEvents shotsTakenlbl3 As Label
+    Friend WithEvents shotsTakenlbl2 As Label
+    Friend WithEvents shotsTakenlbl1 As Label
 End Class

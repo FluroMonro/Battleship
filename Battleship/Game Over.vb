@@ -44,6 +44,9 @@
         tohsbtn.Location = New Point(Me.Width - 405, Me.Height - 195)
         scoretxt.Text = endScore
         timetxt.Text = endTime
+        shotstxt.Text = shotsNum.ToString
+        shipsSunktxt.Text = sunkNum.ToString
+        accuracytxt.Text = accuracyStr
         gameOverlbl.Location = New Point((Me.Width / 2) - (gameOverlbl.Width / 2), 200)
 
         'Display the appropriate form controls 
