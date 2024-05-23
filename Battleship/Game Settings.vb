@@ -52,7 +52,7 @@
         timerValueBar.Visible = False
         timervaluetxt.Visible = False
         timerValueBar.Value = 5
-        timervaluetxt.Text = "02:30"
+        timervaluetxt.Text = "03:00"
         timerckbx.Checked = False
     End Sub
 
@@ -217,7 +217,7 @@
             timerValueBar.Visible = False
             timervaluetxt.Visible = False
         End If
-        timerNumValue = 150
+        timerNumValue = 180
     End Sub
 
     ''' <summary>
@@ -227,7 +227,7 @@
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
         'Increments of 30s
-        timerNumValue = timerValueBar.Value * 30
+        timerNumValue = (timerValueBar.Value + 1) * 30
         timervaluetxt.Text = battleShipsGamefrm.convertStringIntegerTimeToDisplayTime(timerNumValue)
     End Sub
 End Class

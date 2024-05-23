@@ -252,21 +252,18 @@ Public Class battleShipsGamefrm
         Dim playernameoffSet As Integer
         playernameoffSet = 5 * (playerName.Length)
         playernamelbl.Parent = backgroundpb
-        playernametxt.Parent = backgroundpb
-        playernametxt.BringToFront()
         playerscorelbl.Parent = backgroundpb
         playerscoretxt.Parent = backgroundpb
         opponentnamelbl.Parent = backgroundpb
         opponentscorelbl.Parent = backgroundpb
         opponentscoretxt.Parent = backgroundpb
-        playernametxt.Text = playerName
-        playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, Me.Bottom - 230)
-        playernametxt.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 120, Me.Bottom - 230)
-        playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Bottom - 200)
-        playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Bottom - 200)
-        opponentnamelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 40, Me.Top + 150)
-        opponentscorelbl.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 68, Me.Top + 180)
-        opponentscoretxt.Location = New Point((Me.Width / 2) + (boardSizes / 2) + 142, Me.Top + 180)
+        playernamelbl.Text = playerName & "'s Board"
+        playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, 628)
+        playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, 658)
+        playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, 658)
+        opponentnamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - 40 - opponentnamelbl.Width, Me.Top + 195)
+        opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, Me.Top + 225)
+        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, Me.Top + 225)
 
         turnsBannerpb.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         turnsBannerpb.Size = New Size(turnsbannerWidth, turnsbannerHeight)
@@ -277,7 +274,7 @@ Public Class battleShipsGamefrm
         keypnl.Location = New Point(Me.Width / 20, Me.Height / 18)
         playerStatspnl.Parent = backgroundpb
         playerStatspnl.BackColor = Color.Transparent
-        playerStatspnl.Location = New Point(Me.Width / 5, Me.Height / 18)
+        playerStatspnl.Location = New Point(1020, (Me.Height / 2) - (turnsbannerHeight / 2) - (boardSizes / 2) - (playerStatspnl.Height / 2))
         opponentStatspnl.Parent = backgroundpb
         opponentStatspnl.BackColor = Color.Transparent
 

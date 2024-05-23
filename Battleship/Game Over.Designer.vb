@@ -188,7 +188,7 @@ Partial Class gameOverfrm
         Controls.Add(gameOverlbl)
         Controls.Add(backgroundpb)
         Name = "gameOverfrm"
-        Text = "gameOverForm"
+        Text = "Game Over"
         CType(backgroundpb, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()

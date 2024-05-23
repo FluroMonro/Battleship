@@ -320,6 +320,7 @@ Partial Class gameSettingsfrm
         ' timerValueBar
         ' 
         timerValueBar.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timerValueBar.LargeChange = 4
         timerValueBar.Location = New Point(486, 542)
         timerValueBar.Name = "timerValueBar"
         timerValueBar.Size = New Size(205, 45)
@@ -338,7 +339,7 @@ Partial Class gameSettingsfrm
         timervaluetxt.Name = "timervaluetxt"
         timervaluetxt.Size = New Size(56, 25)
         timervaluetxt.TabIndex = 28
-        timervaluetxt.Text = "02:30"
+        timervaluetxt.Text = "03:00"
         timervaluetxt.Visible = False
         ' 
         ' gameSettingsfrm

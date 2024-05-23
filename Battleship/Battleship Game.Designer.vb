@@ -33,7 +33,6 @@ Partial Class battleShipsGamefrm
         playernamelbl = New Windows.Forms.Label()
         playerscorelbl = New Windows.Forms.Label()
         playerscoretxt = New Windows.Forms.Label()
-        playernametxt = New Windows.Forms.Label()
         opponentnamelbl = New Windows.Forms.Label()
         opponentscorelbl = New Windows.Forms.Label()
         opponentscoretxt = New Windows.Forms.Label()
@@ -191,17 +190,6 @@ Partial Class battleShipsGamefrm
         playerscoretxt.TabIndex = 14
         playerscoretxt.Text = "0"
         ' 
-        ' playernametxt
-        ' 
-        playernametxt.AutoSize = True
-        playernametxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playernametxt.Font = New Font("Arial", 15.75F, FontStyle.Regular, GraphicsUnit.Point)
-        playernametxt.ForeColor = Color.Black
-        playernametxt.Location = New Point(-18, 26)
-        playernametxt.Name = "playernametxt"
-        playernametxt.Size = New Size(0, 24)
-        playernametxt.TabIndex = 15
-        ' 
         ' opponentnamelbl
         ' 
         opponentnamelbl.AutoSize = True
@@ -210,9 +198,9 @@ Partial Class battleShipsGamefrm
         opponentnamelbl.ForeColor = Color.Black
         opponentnamelbl.Location = New Point(341, 10)
         opponentnamelbl.Name = "opponentnamelbl"
-        opponentnamelbl.Size = New Size(113, 26)
+        opponentnamelbl.Size = New Size(198, 26)
         opponentnamelbl.TabIndex = 16
-        opponentnamelbl.Text = "Opponent"
+        opponentnamelbl.Text = "Opponent's Board"
         ' 
         ' opponentscorelbl
         ' 
@@ -471,7 +459,7 @@ Partial Class battleShipsGamefrm
         playerStatspnl.Controls.Add(playerHitCountlbl)
         playerStatspnl.Controls.Add(playerMissCountLbl)
         playerStatspnl.Controls.Add(playerStatslbl)
-        playerStatspnl.Location = New Point(220, 45)
+        playerStatspnl.Location = New Point(1020, 45)
         playerStatspnl.Name = "playerStatspnl"
         playerStatspnl.Size = New Size(214, 306)
         playerStatspnl.TabIndex = 36
@@ -608,7 +596,7 @@ Partial Class battleShipsGamefrm
         opponentStatspnl.Controls.Add(opponentHitCountlbl)
         opponentStatspnl.Controls.Add(opponentMissCountlbl)
         opponentStatspnl.Controls.Add(opponentStatslbl)
-        opponentStatspnl.Location = New Point(1022, 561)
+        opponentStatspnl.Location = New Point(1020, 560)
         opponentStatspnl.Name = "opponentStatspnl"
         opponentStatspnl.Size = New Size(188, 179)
         opponentStatspnl.TabIndex = 43
@@ -713,7 +701,6 @@ Partial Class battleShipsGamefrm
         Controls.Add(opponentscoretxt)
         Controls.Add(opponentscorelbl)
         Controls.Add(opponentnamelbl)
-        Controls.Add(playernametxt)
         Controls.Add(playerscoretxt)
         Controls.Add(playerscorelbl)
         Controls.Add(playernamelbl)
@@ -763,7 +750,6 @@ Partial Class battleShipsGamefrm
     Friend WithEvents playernamelbl As Windows.Forms.Label
     Friend WithEvents playerscorelbl As Windows.Forms.Label
     Friend WithEvents playerscoretxt As Windows.Forms.Label
-    Friend WithEvents playernametxt As Windows.Forms.Label
     Friend WithEvents opponentnamelbl As Windows.Forms.Label
     Friend WithEvents opponentscorelbl As Windows.Forms.Label
     Friend WithEvents opponentscoretxt As Windows.Forms.Label
