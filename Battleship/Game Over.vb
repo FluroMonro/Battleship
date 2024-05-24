@@ -90,6 +90,7 @@
     Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backToMainbtn.MouseLeave
         highScoresfrm.ExitOverSmallButton(sender, Me)
     End Sub
+
     ''' <summary>
     ''' Subroutine which calls the EnterOverSmallButton() from the highscores form upon moving on the button
     ''' </summary>

@@ -109,7 +109,13 @@ Public Class highScoresfrm
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub scorebtn_Click(sender As Object, e As EventArgs) Handles scorebtn.Click
-        'Alternate the current arrow (flip)
+        onScoreClick()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine alternates the current arrow (flip)
+    ''' </summary>
+    Private Sub onScoreClick()
         currentScoreArrowActive = flipBoolean(currentScoreArrowActive)
         changeOrdering(True)
     End Sub
@@ -120,7 +126,13 @@ Public Class highScoresfrm
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timebtn_Click(sender As Object, e As EventArgs) Handles timebtn.Click
-        'Alternate the current arrow (flip)
+        onTimeClick()
+    End Sub
+
+    ''' <summary>
+    '''  Subroutine alternates the current arrow (flip)
+    ''' </summary>
+    Private Sub onTimeClick()
         currentTimeArrowActive = flipBoolean(currentTimeArrowActive)
         changeOrdering(False)
     End Sub
