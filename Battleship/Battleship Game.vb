@@ -1235,7 +1235,7 @@ Public Class battleshipGamefrm
                 End If
             Else
                 'To wait for the players next move
-                MsgBox("You get an extra turn!")
+                MsgBox("You get an extra turn!", Nothing, "Extra Turn!")
             End If
         End If
     End Sub
@@ -1734,14 +1734,14 @@ Public Class battleshipGamefrm
 
                     If playerstr = "player" Then
                         'The player's ships are already correctly displayed through the parenting system.
-                        MsgBox("Your " & length & " length ship has been sunk")
+                        MsgBox("Your " & length & " length ship has been sunk", Nothing, "Ship Sunk!")
                     Else
                         'The opponents ships have not been displayed through the parenting system.
                         'As they only need to be visible once they are sunk or the game is over, there is no need to deal with the parenting system.
                         'Instead they can be shown on top with either all sunk or all unsunk behind them (although this will visually over-ride 'progress' in attempting to sink a ship, however, the location will be revealed which is more important)
 
                         If gameOver = False Then
-                            MsgBox("You sunk the opponents " & length & " length ship")
+                            MsgBox("You sunk the opponents " & length & " length ship", Nothing, "Ship Sunk!")
                             playershipSunkCount = playershipSunkCount + 1
                         End If
 
