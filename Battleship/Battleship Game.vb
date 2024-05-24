@@ -1985,56 +1985,88 @@ Public Class battleshipGamefrm
                 opponentMove = randomSquare()
 
             Case "Normal"
-                If hasAHit = False Then
-                    'Randomly choose an avaliable square on the board
-                    opponentMove = randomSquare()
-                Else
-                    'Randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
-                    opponentMove = randomAdjacent()
-                End If
+                opponentMove = normalDifficultyComputerMoves()
 
             Case "Hard"
-                If hasAHit = False OrElse NextShip = True Then
-                    'If there hasn't been a hit, randomly choose an avaliable square on the board
-                    hasAHit = False
-                    NextShip = False
-                    opponentMove = randomSquare()
-                Else
-                    'If there has been a hit, computerStage will either be 1 or 2.
-                    'Computer stage is 1 (from check()) if hasAhit was false when the opponents move hit a ship of the player
-                    'Computer stage is 2 (from check()) if hasAhit was true when the opponents move hit a ship of the player
-
-                    If computerStage = 1 Then
-                        opponentMove = randomAdjacent()
-                    Else 'Computer stage 2
-                        If previousHit = True Then 'Set in check(), when hasAhit = True and there is another hit
-                            opponentMove = continueOnPath() 'Follow the direction until previousHit = False
-                        Else 'previousHit = false when the computer misses
-                            If NextShip = True Then 'Set in check() if there is a miss after swapping path direction
-                                hasAHit = False
-                                opponentMove = randomSquare()
-                            Else 'Has followed direction to a miss, will now swap direction and continue on the other side of the initial hasAhit
-                                opponentMove = swapPathDirection()
-                            End If
-                        End If
-                    End If
-                End If
+                opponentMove = hardDifficultyComputerMoves()
 
             Case "Impossible"
-                'Go through the players array until there are no 1s or 4s left (all sunk).
-                'Will go from the end of the array to the start as will continuously set the opponents move to the last 1 or 4 (which will turn into a 3 when in check())
-
-                For row = 1 To gridSize
-                    For column = 1 To gridSize
-                        If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
-                            opponentMove.X = column
-                            opponentMove.Y = row
-                        End If
-                    Next column
-                Next row
+                opponentMove = impossibleDifficultyComputerMoves()
         End Select
         Return opponentMove
     End Function
+
+    ''' <summary>
+    ''' Function chooses the move for the computer in normal difficulty.
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function normalDifficultyComputerMoves()
+        Dim opponentMove As gridLocation
+        If hasAHit = False Then
+            'Randomly choose an avaliable square on the board
+            opponentMove = randomSquare()
+        Else
+            'Randomly choose an adjacent square to move to (hasAHit location changes every time there is a new hit)
+            opponentMove = randomAdjacent()
+        End If
+        Return opponentMove
+    End Function
+
+    ''' <summary>
+    ''' Function chooses the move for the computer in hard difficulty.
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function hardDifficultyComputerMoves()
+        Dim opponentMove As gridLocation
+        If hasAHit = False OrElse NextShip = True Then
+            'If there hasn't been a hit, randomly choose an avaliable square on the board
+            hasAHit = False
+            NextShip = False
+            opponentMove = randomSquare()
+        Else
+            'If there has been a hit, computerStage will either be 1 or 2.
+            'Computer stage is 1 (from check()) if hasAhit was false when the opponents move hit a ship of the player
+            'Computer stage is 2 (from check()) if hasAhit was true when the opponents move hit a ship of the player
+
+            If computerStage = 1 Then
+                opponentMove = randomAdjacent()
+            Else 'Computer stage 2
+                If previousHit = True Then 'Set in check(), when hasAhit = True and there is another hit
+                    opponentMove = continueOnPath() 'Follow the direction until previousHit = False
+                Else 'previousHit = false when the computer misses
+                    If NextShip = True Then 'Set in check() if there is a miss after swapping path direction
+                        hasAHit = False
+                        opponentMove = randomSquare()
+                    Else 'Has followed direction to a miss, will now swap direction and continue on the other side of the initial hasAhit
+                        opponentMove = swapPathDirection()
+                    End If
+                End If
+            End If
+        End If
+        Return opponentMove
+    End Function
+
+    ''' <summary>
+    ''' Function chooses the move for the computer in impossible difficulty.
+    ''' </summary>
+    ''' <returns>A record with X and Y fields representing the grid location</returns>
+    Private Function impossibleDifficultyComputerMoves()
+        'Go through the players array until there are no 1s or 4s left (all sunk).
+        'Will go from the end of the array to the start as will continuously set the opponents move to the last 1 or 4 (which will turn into a 3 when in check())
+
+        Dim opponentMove As gridLocation
+
+        For row = 1 To gridSize
+            For column = 1 To gridSize
+                If playergameArray(column, row) = 1 OrElse playergameArray(column, row) = 4 Then
+                    opponentMove.X = column
+                    opponentMove.Y = row
+                End If
+            Next column
+        Next row
+        Return opponentMove
+    End Function
+
 
     ''' <summary>
     ''' Function randomly generates a grid location on the board that hasn't been already guessed.

@@ -61,6 +61,8 @@ Public Class mainMenufrm
     ''' Subroutine opens the Game Settings form
     ''' </summary>
     Private Sub openGameSettings()
+        battleshipGamefrm.Close()
+        gameOverfrm.Close()
         Me.Hide()
         gameSettingsfrm.onLoadSettings()
         gameSettingsfrm.Show()
