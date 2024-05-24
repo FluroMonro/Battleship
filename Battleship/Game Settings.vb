@@ -36,23 +36,23 @@
         'Setting the placement and size of controls on the form
         titlelbl.Location = New Point((Me.Width / 2) - (titlelbl.Width / 2), 125)
         titlelbl.Size = New Size(336, 71)
-        playerNameInputTxtbox.Size = New Size(100, 40)
+        playerNameInputtxt.Size = New Size(100, 40)
         backgroundpb.ImageLocation = Application.StartupPath & "\Pictures\battleShipsBackground.png"
         backgroundpb.Size = New Size(Me.Width - 15, Me.Height - 38)
         backgroundpb.Location = New Point(0, 0)
         backgroundpb.Load(backgroundpb.ImageLocation)
-        backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        backToMainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
         playtbn.Location = New Point(Me.Width - 365, Me.Height - 195)
 
         'Initialise the control parameters
-        playerNameInputTxtbox.Text = ""
-        playernamewarninglbl.Visible = False
+        playerNameInputtxt.Text = ""
+        playerNameWarninglbl.Visible = False
         boardSizebtn10.Checked = True
         normopt.Checked = True
         timerValueBar.Visible = False
-        timervaluetxt.Visible = False
+        timerValueTextlbl.Visible = False
         timerValueBar.Value = 5
-        timervaluetxt.Text = "03:00"
+        timerValueTextlbl.Text = "03:00"
         timerckbx.Checked = False
     End Sub
 
@@ -81,8 +81,8 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        highScoresfrm.EnterOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backToMainbtn.MouseEnter
+        highScoresfrm.EnterOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -90,8 +90,8 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        highScoresfrm.ExitOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backToMainbtn.MouseLeave
+        highScoresfrm.ExitOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -99,10 +99,8 @@
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
-        'When Exit button is clicked
-        Me.Hide()
-        mainMenufrm.Show()
+    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backToMainbtn.Click
+        gameOverfrm.openMainMenu(sender)
     End Sub
 
     ''' <summary>
@@ -111,7 +109,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Enter(sender As Object, e As EventArgs) Handles playtbn.MouseEnter
-        highScoresfrm.EnterOverSmallButton("playtbn", Me)
+        highScoresfrm.EnterOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -120,7 +118,7 @@
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub playbtnGameSettings_Leave(sender As Object, e As EventArgs) Handles playtbn.MouseLeave
-        highScoresfrm.ExitOverSmallButton("playtbn", Me)
+        highScoresfrm.ExitOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -140,7 +138,7 @@
         'When the Play button is clicked
 
         'Get player's name from input field
-        playerName = playerNameInputTxtbox.Text
+        playerName = playerNameInputtxt.Text
 
         'Get the chosen boardsize
         If boardSizebtn8.Checked = True Then
@@ -194,7 +192,7 @@
             onLoadSettings()
             playGame()
         Else
-            playernamewarninglbl.Visible = True
+            playerNameWarninglbl.Visible = True
         End If
     End Sub
 
@@ -203,40 +201,55 @@
     ''' </summary>
     Private Sub playGame()
         'Clear the input field for the name (for next reload)
-        playerNameInputTxtbox.Text = ""
+        playerNameInputtxt.Text = ""
 
         'Update the global variables across forms
-        battleShipsGamefrm.updateGlobalVars(playerName, gridSize, difficulty, timeOptionAsCountUp, timeLeft)
+        battleshipGamefrm.updateGlobalVars(playerName, gridSize, difficulty, timeOptionAsCountUp, timeLeft)
         Me.Hide()
-        battleShipsGamefrm.Show()
-        battleShipsGamefrm.onFormLoad()
+        battleshipGamefrm.Show()
+        battleshipGamefrm.onFormLoad()
     End Sub
 
     ''' <summary>
-    ''' Subroutine shows or hides the timer value bar depending on whether the timer check box is ticked.
+    ''' Subroutine calls timerckbkxChanged() when the timer check box is ticked.
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timerckbx_CheckedChanged(sender As Object, e As EventArgs) Handles timerckbx.CheckedChanged
+        timerckbkxChanged()
+    End Sub
+
+    ''' <summary>
+    '''  Subroutine shows or hides the timer value bar depending on whether the timer check box is ticked.
+    ''' </summary>
+    Private Sub timerckbkxChanged()
         'When the check box for the timer is checked show the value bar
         If timerckbx.Checked = True Then
             timerValueBar.Visible = True
-            timervaluetxt.Visible = True
+            timerValueTextlbl.Visible = True
         Else
             timerValueBar.Visible = False
-            timervaluetxt.Visible = False
+            timerValueTextlbl.Visible = False
         End If
         timerNumValue = 180
     End Sub
 
     ''' <summary>
-    ''' Subroutine changes the text of the timer value label to reflect the time chosen on the timer value bar.
+    ''' Subroutine calls timerValueChanged() on changed value
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub timervaluebar_ValueChanged(sender As Object, e As EventArgs) Handles timerValueBar.Scroll
+        timerValueChanged()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine changes the text of the timer value label to reflect the time chosen on the timer value bar.
+    ''' </summary>
+    Private Sub timerValueChanged()
         'Increments of 30s
         timerNumValue = (timerValueBar.Value + 1) * 30
-        timervaluetxt.Text = battleShipsGamefrm.convertStringIntegerTimeToDisplayTime(timerNumValue)
+        timerValueTextlbl.Text = battleshipGamefrm.convertStringIntegerTimeToDisplayTime(timerNumValue)
+
     End Sub
 End Class

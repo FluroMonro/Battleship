@@ -11,7 +11,7 @@ Imports System.Security.Permissions
 Imports System.Threading
 Imports System.Windows.Forms.VisualStyles
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Public Class battleShipsGamefrm
+Public Class battleshipGamefrm
     Dim currentPlayer As Integer
     Dim gameOver As Boolean
     Dim boardEmpty As Boolean
@@ -243,7 +243,7 @@ Public Class battleShipsGamefrm
         backgroundpb.Load(backgroundpb.ImageLocation)
 
         'Setting the placement and size of controls on the form
-        backtomainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
+        backToMainbtn.Location = New Point(Me.Width - (100 + 42), Me.Height - (60 + 64))
         resetbtn.Location = New Point(Me.Width - (200 + 42), Me.Height - (60 + 64))
         opponentBoardpb.Location = New Point((Me.Width / 2) - (boardSizes / 2), 20)
         playerBoardpb.Location = New Point(Me.Width / 2 - (boardSizes / 2), turnsbannerYLoc + 40)
@@ -258,18 +258,18 @@ Public Class battleShipsGamefrm
         playernameoffSet = 5 * (playerName.Length)
         playernamelbl.Parent = backgroundpb
         playerscorelbl.Parent = backgroundpb
-        playerscoretxt.Parent = backgroundpb
+        playerScoreTextlbl.Parent = backgroundpb
         opponentnamelbl.Parent = backgroundpb
         opponentscorelbl.Parent = backgroundpb
-        opponentscoretxt.Parent = backgroundpb
+        opponentScoreTextlbl.Parent = backgroundpb
         playernamelbl.Text = playerName & "'s Board"
         playerStatslbl.Text = playerName & "'s Stats"
         playernamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - playernameoffSet - 200, 628)
         playerscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 168, 658)
-        playerscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, 658)
+        playerScoreTextlbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - playernameoffSet - 94, 658)
         opponentnamelbl.Location = New Point((Me.Width / 2) - (boardSizes / 2) - 40 - opponentnamelbl.Width, 195)
         opponentscorelbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 168, 225)
-        opponentscoretxt.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 94, 225)
+        opponentScoreTextlbl.Location = New Point(Me.Width / 2 - (boardSizes / 2) - 94, 225)
 
         turnsBannerpb.Location = New Point(turnsbannerXloc, turnsbannerYLoc)
         turnsBannerpb.Size = New Size(turnsbannerWidth, turnsbannerHeight)
@@ -1273,7 +1273,7 @@ Public Class battleShipsGamefrm
         score = determineScore()
         shotsNum = CInt(playerMissCount + playerHitCount)
         sunkNum = playershipSunkCount
-        accuracyStr = playerAccuracyCounttxt.Text
+        accuracyStr = playerAccuracyCountTextlbl.Text
         scoring()
 
         'If the timer has run out: set the time to be the chosen time
@@ -1848,7 +1848,7 @@ Public Class battleShipsGamefrm
             End If
 
             'Final score is playerscore - opponentscore
-            tempScore = CInt(playerscoretxt.Text) - CInt(opponentscoretxt.Text)
+            tempScore = CInt(playerScoreTextlbl.Text) - CInt(opponentScoreTextlbl.Text)
         Else
             'If ended by the timer
 
@@ -1916,7 +1916,7 @@ Public Class battleShipsGamefrm
                     End If
                 Next column
             Next row
-            playerscoretxt.Text = playerScore
+            playerScoreTextlbl.Text = playerScore
         Else
             'For the opponenet
             For row = 1 To gridSize
@@ -1926,7 +1926,7 @@ Public Class battleShipsGamefrm
                     End If
                 Next column
             Next row
-            opponentscoretxt.Text = opponentScore
+            opponentScoreTextlbl.Text = opponentScore
         End If
     End Sub
 
@@ -2233,16 +2233,22 @@ Public Class battleShipsGamefrm
     End Function
 
     ''' <summary>
-    ''' Subroutine takes the user back to the main menu form when clicked.
-    ''' Runs the gameIsOverNoResult() to make sure score is not recorded, but game is left in a state that a new one can be created by the user. 
+    ''' Calls the backToMainFromGame() on button click
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
+    Private Sub backToMainFromGame(sender As Object, e As EventArgs) Handles backToMainbtn.Click
+        backToMainFromGame(sender)
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine takes the user back to the main menu form when clicked.
+    ''' Runs the gameIsOverNoResult() to make sure score is not recorded, but game is left in a state that a new one can be created by the user. 
+    ''' </summary>
+    Private Sub backToMainFromGame(sender As Object)
         'Exit back to the main menu
         gameIsOverNoResult()
-        Me.Hide()
-        mainMenufrm.Show()
+        gameOverfrm.openMainMenu(sender)
     End Sub
 
     ''' <summary>
@@ -2250,8 +2256,8 @@ Public Class battleShipsGamefrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        highScoresfrm.EnterOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backToMainbtn.MouseEnter
+        highScoresfrm.EnterOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -2259,8 +2265,8 @@ Public Class battleShipsGamefrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        highScoresfrm.ExitOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backToMainbtn.MouseLeave
+        highScoresfrm.ExitOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -2285,7 +2291,7 @@ Public Class battleShipsGamefrm
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Enter(sender As Object, e As EventArgs) Handles resetbtn.MouseEnter
-        highScoresfrm.EnterOverSmallButton("resetbtn", Me)
+        highScoresfrm.EnterOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -2294,7 +2300,7 @@ Public Class battleShipsGamefrm
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub resetbtn_Leave(sender As Object, e As EventArgs) Handles resetbtn.MouseLeave
-        highScoresfrm.ExitOverSmallButton("resetbtn", Me)
+        highScoresfrm.ExitOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -2358,7 +2364,7 @@ Public Class battleShipsGamefrm
         BubbleSort(True, True)
 
         'Write the scores to the file
-        WriteHighScores()
+        writeHighScores()
     End Sub
 
     ''' <summary>
@@ -2606,15 +2612,15 @@ Public Class battleShipsGamefrm
 
         'Updating the statistics onto the form labels
         If playernum = 1 Then
-            playerAccuracyCounttxt.Text = accuracy
-            playerHitCounttxt.Text = hitcount
-            playerMissCounttxt.Text = misscount
-            playerShipsHitCounttxt.Text = playershipSunkCount
-            playerShipsLeftCounttxt.Text = playershipHitListCount - playershipSunkCount
+            playerAccuracyCountTextlbl.Text = accuracy
+            playerHitCountTextlbl.Text = hitcount
+            playerMissCountTextlbl.Text = misscount
+            playerShipsHitCountTextlbl.Text = playershipSunkCount
+            playerShipsLeftCountTextlbl.Text = playershipHitListCount - playershipSunkCount
         Else
-            opponentAccuracyCounttxt.Text = accuracy
-            opponentShipsHitCounttxt.Text = hitcount
-            opponentShipsMissCounttxt.Text = misscount
+            opponentAccuracyCountTextlbl.Text = accuracy
+            opponentShipsHitCountTextlbl.Text = hitcount
+            opponentShipsMissCountTextlbl.Text = misscount
         End If
     End Sub
 

@@ -2,15 +2,21 @@
 
 Public Class mainMenufrm
     ''' <summary>
-    ''' Subroutine called upon the form's load to call the subroutine to initialise controls
+    ''' Subroutine called upon the form's load
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub MainMenuForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'When the game is opened
+        mainMenuFormLoad()
+    End Sub
 
-        initialiseFormControls()
+    ''' <summary>
+    ''' Subroutine calls the initialiseFormControls() subroutine
+    ''' </summary>
+    Public Sub mainMenuFormLoad()
+        'When the game is opened
         formID = "MainMenu"
+        initialiseFormControls()
     End Sub
 
     ''' <summary>
@@ -34,43 +40,70 @@ Public Class mainMenufrm
         backgroundpb.Load(backgroundpb.ImageLocation)
         titlelbl.Size = New Size(336, 71)
         titlelbl.Location = New Point((Me.Width / 2) - (titlelbl.Width / 2), 200)
-        playfrommainbtn.Location = New Point(Me.Width / 2 - (250 / 2), 375)
-        playfrommainbtn.Size = New Size(250, 50)
-        openhsbtn.Location = New Point(Me.Width / 2 - (250 / 2), 500)
-        openhsbtn.Size = New Size(250, 50)
+        playFromMainbtn.Location = New Point(Me.Width / 2 - (250 / 2), 375)
+        playFromMainbtn.Size = New Size(250, 50)
+        openHsbtn.Location = New Point(Me.Width / 2 - (250 / 2), 500)
+        openHsbtn.Size = New Size(250, 50)
         quitProgrambtn.Location = New Point(Me.Width / 2 - (250 / 2), 625)
         quitProgrambtn.Size = New Size(250, 50)
     End Sub
 
     ''' <summary>
-    ''' Subroutine which takes the user to the GameSettings form.
+    ''' Subroutine calls openGameSettings() upon button click
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playfrommainbtn_Click(sender As Object, e As EventArgs) Handles playfrommainbtn.Click
+    Private Sub playFromMainbtn_Click(sender As Object, e As EventArgs) Handles playFromMainbtn.Click
+        openGameSettings()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine opens the Game Settings form
+    ''' </summary>
+    Private Sub openGameSettings()
         Me.Hide()
         gameSettingsfrm.onLoadSettings()
         gameSettingsfrm.Show()
     End Sub
 
     ''' <summary>
-    ''' Subroutine which takes the user to the Highscores form.
+    ''' Subroutine calls openHsForm() upon the button click
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openhsbtn.Click
+    Private Sub openhsbutton_Click(sender As Object, e As EventArgs) Handles openHsbtn.Click
+        openHsForm(sender)
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine opens the High scores form
+    ''' Example of use: openHsForm(battleshipGamefrm)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    Public Sub openHsForm(sender As Object)
         Me.Hide()
         highScoresfrm.Show()
         highScoresfrm.onLoadHighScores()
     End Sub
 
     ''' <summary>
-    ''' Subroutine which quits the program.
+    ''' Subroutine calls closeProgram() on the button click
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
     Private Sub quitProgrambtn_Click(sender As Object, e As EventArgs) Handles quitProgrambtn.Click
+        closeProgram()
+    End Sub
+
+    ''' <summary>
+    ''' Subroutine closes the entire program, including the hidden forms.
+    ''' </summary>
+    Private Sub closeProgram()
         Me.Close()
+        battleshipGamefrm.Close()
+        gameOverfrm.Close()
+        gameSettingsfrm.Close()
+        highScoresfrm.Close()
     End Sub
 
     ''' <summary>
@@ -78,7 +111,7 @@ Public Class mainMenufrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playfrommainbtn_Enter(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseEnter
+    Private Sub playfrommainbtn_Enter(sender As Object, e As EventArgs) Handles playFromMainbtn.MouseEnter
         EnterOverBigButton(sender)
     End Sub
 
@@ -87,7 +120,7 @@ Public Class mainMenufrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub playfrommainbtn_Leave(sender As Object, e As EventArgs) Handles playfrommainbtn.MouseLeave
+    Private Sub playfrommainbtn_Leave(sender As Object, e As EventArgs) Handles playFromMainbtn.MouseLeave
         ExitOverBigButton(sender)
     End Sub
 
@@ -96,7 +129,7 @@ Public Class mainMenufrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub openhsbutton_Enter(sender As Object, e As EventArgs) Handles openhsbtn.MouseEnter
+    Private Sub openhsbutton_Enter(sender As Object, e As EventArgs) Handles openHsbtn.MouseEnter
         EnterOverBigButton(sender)
     End Sub
 
@@ -105,7 +138,7 @@ Public Class mainMenufrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub openhsbutton_Leave(sender As Object, e As EventArgs) Handles openhsbtn.MouseLeave
+    Private Sub openhsbutton_Leave(sender As Object, e As EventArgs) Handles openHsbtn.MouseLeave
         ExitOverBigButton(sender)
     End Sub
 

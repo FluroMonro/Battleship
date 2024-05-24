@@ -25,8 +25,8 @@ Partial Class mainMenufrm
         Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(mainMenufrm))
         backgroundpb = New PictureBox()
         titlelbl = New Label()
-        playfrommainbtn = New Button()
-        openhsbtn = New Button()
+        playFromMainbtn = New Button()
+        openHsbtn = New Button()
         quitProgrambtn = New Button()
         CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -52,40 +52,40 @@ Partial Class mainMenufrm
         titlelbl.TabIndex = 1
         titlelbl.Text = "BATTLESHIP"
         ' 
-        ' playfrommainbtn
+        ' playFromMainbtn
         ' 
-        playfrommainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playfrommainbtn.BackgroundImage = CType(resources.GetObject("playfrommainbtn.BackgroundImage"), Image)
-        playfrommainbtn.BackgroundImageLayout = ImageLayout.Stretch
-        playfrommainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        playfrommainbtn.FlatAppearance.BorderSize = 0
-        playfrommainbtn.FlatStyle = FlatStyle.Flat
-        playfrommainbtn.Font = New Font("Candara", 23.25F, FontStyle.Bold, GraphicsUnit.Point)
-        playfrommainbtn.ForeColor = SystemColors.ButtonHighlight
-        playfrommainbtn.Location = New Point(654, 155)
-        playfrommainbtn.Margin = New Padding(0)
-        playfrommainbtn.Name = "playfrommainbtn"
-        playfrommainbtn.Size = New Size(250, 50)
-        playfrommainbtn.TabIndex = 2
-        playfrommainbtn.Text = "PLAY"
-        playfrommainbtn.UseVisualStyleBackColor = False
+        playFromMainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playFromMainbtn.BackgroundImage = CType(resources.GetObject("playFromMainbtn.BackgroundImage"), Image)
+        playFromMainbtn.BackgroundImageLayout = ImageLayout.Stretch
+        playFromMainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        playFromMainbtn.FlatAppearance.BorderSize = 0
+        playFromMainbtn.FlatStyle = FlatStyle.Flat
+        playFromMainbtn.Font = New Font("Candara", 23.25F, FontStyle.Bold, GraphicsUnit.Point)
+        playFromMainbtn.ForeColor = SystemColors.ButtonHighlight
+        playFromMainbtn.Location = New Point(654, 155)
+        playFromMainbtn.Margin = New Padding(0)
+        playFromMainbtn.Name = "playFromMainbtn"
+        playFromMainbtn.Size = New Size(250, 50)
+        playFromMainbtn.TabIndex = 2
+        playFromMainbtn.Text = "PLAY"
+        playFromMainbtn.UseVisualStyleBackColor = False
         ' 
-        ' openhsbtn
+        ' openHsbtn
         ' 
-        openhsbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        openhsbtn.BackgroundImage = CType(resources.GetObject("openhsbtn.BackgroundImage"), Image)
-        openhsbtn.BackgroundImageLayout = ImageLayout.Stretch
-        openhsbtn.FlatAppearance.BorderSize = 0
-        openhsbtn.FlatStyle = FlatStyle.Flat
-        openhsbtn.Font = New Font("Candara", 23.25F, FontStyle.Bold, GraphicsUnit.Point)
-        openhsbtn.ForeColor = SystemColors.ButtonHighlight
-        openhsbtn.Location = New Point(654, 293)
-        openhsbtn.Name = "openhsbtn"
-        openhsbtn.Size = New Size(250, 50)
-        openhsbtn.TabIndex = 3
-        openhsbtn.Text = "HIGH SCORES"
-        openhsbtn.TextImageRelation = TextImageRelation.ImageBeforeText
-        openhsbtn.UseVisualStyleBackColor = False
+        openHsbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        openHsbtn.BackgroundImage = CType(resources.GetObject("openHsbtn.BackgroundImage"), Image)
+        openHsbtn.BackgroundImageLayout = ImageLayout.Stretch
+        openHsbtn.FlatAppearance.BorderSize = 0
+        openHsbtn.FlatStyle = FlatStyle.Flat
+        openHsbtn.Font = New Font("Candara", 23.25F, FontStyle.Bold, GraphicsUnit.Point)
+        openHsbtn.ForeColor = SystemColors.ButtonHighlight
+        openHsbtn.Location = New Point(654, 293)
+        openHsbtn.Name = "openHsbtn"
+        openHsbtn.Size = New Size(250, 50)
+        openHsbtn.TabIndex = 3
+        openHsbtn.Text = "HIGH SCORES"
+        openHsbtn.TextImageRelation = TextImageRelation.ImageBeforeText
+        openHsbtn.UseVisualStyleBackColor = False
         ' 
         ' quitProgrambtn
         ' 
@@ -111,8 +111,8 @@ Partial Class mainMenufrm
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
         Controls.Add(quitProgrambtn)
-        Controls.Add(openhsbtn)
-        Controls.Add(playfrommainbtn)
+        Controls.Add(openHsbtn)
+        Controls.Add(playFromMainbtn)
         Controls.Add(titlelbl)
         Controls.Add(backgroundpb)
         HelpButton = True
@@ -127,7 +127,7 @@ Partial Class mainMenufrm
 
     Friend WithEvents backgroundpb As PictureBox
     Friend WithEvents titlelbl As Label
-    Friend WithEvents playfrommainbtn As Button
-    Friend WithEvents openhsbtn As Button
+    Friend WithEvents playFromMainbtn As Button
+    Friend WithEvents openHsbtn As Button
     Friend WithEvents quitProgrambtn As Button
 End Class

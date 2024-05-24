@@ -24,11 +24,11 @@ Partial Class gameSettingsfrm
     Private Sub InitializeComponent()
         backgroundpb = New PictureBox()
         playtbn = New Button()
-        backtomainbtn = New Button()
+        backToMainbtn = New Button()
         playerNamelbl = New Label()
         titlelbl = New Label()
-        playerNameInputTxtbox = New TextBox()
-        playernamewarninglbl = New Label()
+        playerNameInputtxt = New TextBox()
+        playerNameWarninglbl = New Label()
         difficultylbl = New Label()
         unfairopt = New RadioButton()
         hardopt = New RadioButton()
@@ -40,14 +40,14 @@ Partial Class gameSettingsfrm
         boardSizebtn14 = New RadioButton()
         boardSizelbl = New Label()
         boardSizepnl = New Panel()
-        difficultyPnl = New Panel()
+        difficultypnl = New Panel()
         imposopt = New RadioButton()
         timerckbx = New CheckBox()
         timerValueBar = New TrackBar()
-        timervaluetxt = New Label()
+        timerValueTextlbl = New Label()
         CType(backgroundpb, ComponentModel.ISupportInitialize).BeginInit()
         boardSizepnl.SuspendLayout()
-        difficultyPnl.SuspendLayout()
+        difficultypnl.SuspendLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -79,23 +79,23 @@ Partial Class gameSettingsfrm
         playtbn.Text = "PLAY"
         playtbn.UseVisualStyleBackColor = False
         ' 
-        ' backtomainbtn
+        ' backToMainbtn
         ' 
-        backtomainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        backtomainbtn.BackgroundImage = My.Resources.Resources.smallButtonBlue
-        backtomainbtn.BackgroundImageLayout = ImageLayout.Stretch
-        backtomainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        backtomainbtn.FlatAppearance.BorderSize = 0
-        backtomainbtn.FlatStyle = FlatStyle.Flat
-        backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
-        backtomainbtn.ForeColor = SystemColors.ButtonHighlight
-        backtomainbtn.Location = New Point(300, 344)
-        backtomainbtn.Margin = New Padding(0)
-        backtomainbtn.Name = "backtomainbtn"
-        backtomainbtn.Size = New Size(80, 26)
-        backtomainbtn.TabIndex = 6
-        backtomainbtn.Text = "EXIT"
-        backtomainbtn.UseVisualStyleBackColor = False
+        backToMainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        backToMainbtn.BackgroundImage = My.Resources.Resources.smallButtonBlue
+        backToMainbtn.BackgroundImageLayout = ImageLayout.Stretch
+        backToMainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        backToMainbtn.FlatAppearance.BorderSize = 0
+        backToMainbtn.FlatStyle = FlatStyle.Flat
+        backToMainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        backToMainbtn.ForeColor = SystemColors.ButtonHighlight
+        backToMainbtn.Location = New Point(300, 344)
+        backToMainbtn.Margin = New Padding(0)
+        backToMainbtn.Name = "backToMainbtn"
+        backToMainbtn.Size = New Size(80, 26)
+        backToMainbtn.TabIndex = 6
+        backToMainbtn.Text = "EXIT"
+        backToMainbtn.UseVisualStyleBackColor = False
         ' 
         ' playerNamelbl
         ' 
@@ -119,25 +119,25 @@ Partial Class gameSettingsfrm
         titlelbl.TabIndex = 8
         titlelbl.Text = "SETTINGS"
         ' 
-        ' playerNameInputTxtbox
+        ' playerNameInputtxt
         ' 
-        playerNameInputTxtbox.Location = New Point(486, 265)
-        playerNameInputTxtbox.Name = "playerNameInputTxtbox"
-        playerNameInputTxtbox.PlaceholderText = "Enter your name"
-        playerNameInputTxtbox.Size = New Size(195, 23)
-        playerNameInputTxtbox.TabIndex = 9
+        playerNameInputtxt.Location = New Point(486, 265)
+        playerNameInputtxt.Name = "playerNameInputtxt"
+        playerNameInputtxt.PlaceholderText = "Enter your name"
+        playerNameInputtxt.Size = New Size(195, 23)
+        playerNameInputtxt.TabIndex = 9
         ' 
-        ' playernamewarninglbl
+        ' playerNameWarninglbl
         ' 
-        playernamewarninglbl.AutoSize = True
-        playernamewarninglbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        playernamewarninglbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
-        playernamewarninglbl.ForeColor = Color.Red
-        playernamewarninglbl.Location = New Point(486, 291)
-        playernamewarninglbl.Name = "playernamewarninglbl"
-        playernamewarninglbl.Size = New Size(195, 19)
-        playernamewarninglbl.TabIndex = 10
-        playernamewarninglbl.Text = "Must be 3-16 characters Long"
+        playerNameWarninglbl.AutoSize = True
+        playerNameWarninglbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        playerNameWarninglbl.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        playerNameWarninglbl.ForeColor = Color.Red
+        playerNameWarninglbl.Location = New Point(486, 291)
+        playerNameWarninglbl.Name = "playerNameWarninglbl"
+        playerNameWarninglbl.Size = New Size(195, 19)
+        playerNameWarninglbl.TabIndex = 10
+        playerNameWarninglbl.Text = "Must be 3-16 characters Long"
         ' 
         ' difficultylbl
         ' 
@@ -279,19 +279,19 @@ Partial Class gameSettingsfrm
         boardSizepnl.Size = New Size(265, 151)
         boardSizepnl.TabIndex = 23
         ' 
-        ' difficultyPnl
+        ' difficultypnl
         ' 
-        difficultyPnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        difficultyPnl.Controls.Add(imposopt)
-        difficultyPnl.Controls.Add(difficultylbl)
-        difficultyPnl.Controls.Add(unfairopt)
-        difficultyPnl.Controls.Add(hardopt)
-        difficultyPnl.Controls.Add(normopt)
-        difficultyPnl.Controls.Add(beginopt)
-        difficultyPnl.Location = New Point(920, 542)
-        difficultyPnl.Name = "difficultyPnl"
-        difficultyPnl.Size = New Size(321, 164)
-        difficultyPnl.TabIndex = 25
+        difficultypnl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        difficultypnl.Controls.Add(imposopt)
+        difficultypnl.Controls.Add(difficultylbl)
+        difficultypnl.Controls.Add(unfairopt)
+        difficultypnl.Controls.Add(hardopt)
+        difficultypnl.Controls.Add(normopt)
+        difficultypnl.Controls.Add(beginopt)
+        difficultypnl.Location = New Point(920, 542)
+        difficultypnl.Name = "difficultypnl"
+        difficultypnl.Size = New Size(321, 164)
+        difficultypnl.TabIndex = 25
         ' 
         ' imposopt
         ' 
@@ -328,19 +328,19 @@ Partial Class gameSettingsfrm
         timerValueBar.Value = 5
         timerValueBar.Visible = False
         ' 
-        ' timervaluetxt
+        ' timerValueTextlbl
         ' 
-        timervaluetxt.AutoSize = True
-        timervaluetxt.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        timervaluetxt.FlatStyle = FlatStyle.Flat
-        timervaluetxt.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
-        timervaluetxt.ForeColor = Color.Black
-        timervaluetxt.Location = New Point(561, 595)
-        timervaluetxt.Name = "timervaluetxt"
-        timervaluetxt.Size = New Size(56, 25)
-        timervaluetxt.TabIndex = 28
-        timervaluetxt.Text = "03:00"
-        timervaluetxt.Visible = False
+        timerValueTextlbl.AutoSize = True
+        timerValueTextlbl.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        timerValueTextlbl.FlatStyle = FlatStyle.Flat
+        timerValueTextlbl.Font = New Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point)
+        timerValueTextlbl.ForeColor = Color.Black
+        timerValueTextlbl.Location = New Point(561, 595)
+        timerValueTextlbl.Name = "timerValueTextlbl"
+        timerValueTextlbl.Size = New Size(56, 25)
+        timerValueTextlbl.TabIndex = 28
+        timerValueTextlbl.Text = "03:00"
+        timerValueTextlbl.Visible = False
         ' 
         ' gameSettingsfrm
         ' 
@@ -348,16 +348,16 @@ Partial Class gameSettingsfrm
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(84), CByte(85), CByte(84))
         ClientSize = New Size(1512, 876)
-        Controls.Add(timervaluetxt)
+        Controls.Add(timerValueTextlbl)
         Controls.Add(timerValueBar)
         Controls.Add(timerckbx)
-        Controls.Add(difficultyPnl)
+        Controls.Add(difficultypnl)
         Controls.Add(boardSizepnl)
-        Controls.Add(playernamewarninglbl)
-        Controls.Add(playerNameInputTxtbox)
+        Controls.Add(playerNameWarninglbl)
+        Controls.Add(playerNameInputtxt)
         Controls.Add(titlelbl)
         Controls.Add(playerNamelbl)
-        Controls.Add(backtomainbtn)
+        Controls.Add(backToMainbtn)
         Controls.Add(playtbn)
         Controls.Add(backgroundpb)
         Name = "gameSettingsfrm"
@@ -365,19 +365,19 @@ Partial Class gameSettingsfrm
         CType(backgroundpb, ComponentModel.ISupportInitialize).EndInit()
         boardSizepnl.ResumeLayout(False)
         boardSizepnl.PerformLayout()
-        difficultyPnl.ResumeLayout(False)
-        difficultyPnl.PerformLayout()
+        difficultypnl.ResumeLayout(False)
+        difficultypnl.PerformLayout()
         CType(timerValueBar, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
     Friend WithEvents backgroundpb As PictureBox
     Friend WithEvents playtbn As Button
-    Friend WithEvents backtomainbtn As Button
+    Friend WithEvents backToMainbtn As Button
     Friend WithEvents playerNamelbl As Label
     Friend WithEvents titlelbl As Label
-    Friend WithEvents playerNameInputTxtbox As TextBox
-    Friend WithEvents playernamewarninglbl As Label
+    Friend WithEvents playerNameInputtxt As TextBox
+    Friend WithEvents playerNameWarninglbl As Label
     Friend WithEvents difficultylbl As Label
     Friend WithEvents unfairopt As RadioButton
     Friend WithEvents hardopt As RadioButton
@@ -389,9 +389,9 @@ Partial Class gameSettingsfrm
     Friend WithEvents boardSizebtn14 As RadioButton
     Friend WithEvents boardSizelbl As Label
     Friend WithEvents boardSizepnl As Panel
-    Friend WithEvents difficultyPnl As Panel
+    Friend WithEvents difficultypnl As Panel
     Friend WithEvents timerckbx As CheckBox
     Friend WithEvents timerValueBar As TrackBar
     Friend WithEvents imposopt As RadioButton
-    Friend WithEvents timervaluetxt As Label
+    Friend WithEvents timerValueTextlbl As Label
 End Class

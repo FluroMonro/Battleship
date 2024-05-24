@@ -20,7 +20,7 @@ Public Class highScoresfrm
         updateArrowButtonImages(True, True)
 
         'Read and print the highscore into the form
-        battleShipsGamefrm.readHighScores()
+        battleshipGamefrm.readHighScores()
         printHighScores()
     End Sub
 
@@ -57,20 +57,20 @@ Public Class highScoresfrm
         titlelbl.Location = New Point((Me.Width / 2) - (titlelbl.Width / 2), 125)
         subtitlelbl.Location = New Point(Me.Width / 2 - (subtitlelbl.Width / 2), 200)
         subtitlelbl.Size = New Size(208, 54)
-        backtomainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
+        backToMainbtn.Location = New Point(Me.Width - 265, Me.Height - 195)
     End Sub
 
     ''' <summary>
     ''' Subroutine initialises the player's high-score temporarily as the lowest possible (to not show on the form).
     ''' </summary>
     Public Sub initialiseLastHighscore()
-        battleShipsGamefrm.arrHighScores(11).name = "ZZZZZZ" 'A player is not likely to use this as their name.
-        battleShipsGamefrm.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
-        battleShipsGamefrm.arrHighScores(11).time = "59:59" 'The highest possible time
-        battleShipsGamefrm.arrHighScores(11).difficulty = "None"
-        battleShipsGamefrm.arrHighScores(11).boardSize = "None"
-        battleShipsGamefrm.arrHighScores(11).accuracy = "-"
-        battleShipsGamefrm.arrHighScores(11).shotNum = 0
+        battleshipGamefrm.arrHighScores(11).name = "ZZZZZZ" 'A player is not likely to use this as their name.
+        battleshipGamefrm.arrHighScores(11).score = -17 '-17 is when the player loses to the computer 0:17
+        battleshipGamefrm.arrHighScores(11).time = "59:59" 'The highest possible time
+        battleshipGamefrm.arrHighScores(11).difficulty = "None"
+        battleshipGamefrm.arrHighScores(11).boardSize = "None"
+        battleshipGamefrm.arrHighScores(11).accuracy = "-"
+        battleshipGamefrm.arrHighScores(11).shotNum = 0
     End Sub
 
     ''' <summary>
@@ -80,26 +80,26 @@ Public Class highScoresfrm
         Dim targetObject As Label
         For i = 1 To 10 'i = the ranking
             targetObject = namepnl.Controls.Item("namelbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).name
+            targetObject.Text = battleShipGamefrm.arrHighScores(i).name
 
             targetObject = scorepnl.Controls.Item("scorelbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).score
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).score
 
             targetObject = timepnl.Controls.Item("timelbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).time
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).time
 
             targetObject = difficultypnl.Controls.Item("diflbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).difficulty
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).difficulty
 
             targetObject = boardSizepnl.Controls.Item("boardSizelbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).boardSize
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).boardSize
 
             targetObject = accuracypnl.Controls.Item("accuracylbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).accuracy
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).accuracy
 
             targetObject = shotsTakenpnl.Controls.Item("shotsTakenlbl" + i.ToString())
-            targetObject.Text = battleShipsGamefrm.arrHighScores(i).shotNum
-            battleShipsGamefrm.wait(0.06)
+            targetObject.Text = battleshipGamefrm.arrHighScores(i).shotNum
+            battleshipGamefrm.wait(0.06)
         Next
     End Sub
 
@@ -153,8 +153,8 @@ Public Class highScoresfrm
 
         'Update the visuals to reflect the current array
         updateArrowButtonImages(isTypeScore, isOrderDescending)
-        battleShipsGamefrm.BubbleSort(isTypeScore, isOrderDescending)
-        battleShipsGamefrm.WriteHighScores()
+        battleshipGamefrm.BubbleSort(isTypeScore, isOrderDescending)
+        battleshipGamefrm.writeHighScores()
         'print and update the rankings to reflect the order
         printHighScores()
     End Sub
@@ -246,18 +246,25 @@ Public Class highScoresfrm
     End Sub
 
     ''' <summary>
-    ''' Subroutine which preserves the highscores in descending and sorting by scores to be read the same way each time.
-    ''' Takes the user to the main menu form.
-    ''' </summary>
+    ''' Subroutine calls the backToMainClick on click
+    ''' </summary
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backtomainbtn.Click
-        'Leaves the hs.txt in the same order every time
-        battleShipsGamefrm.BubbleSort(True, True)
-        battleShipsGamefrm.WriteHighScores()
+    Private Sub backtomainbtn_Click(sender As Object, e As EventArgs) Handles backToMainbtn.Click
+        backToMainClick()
+    End Sub
 
+    ''' <summary>
+    '''  Subroutine which preserves the highscores in descending and sorting by scores to be read the same way each time.
+    ''' Takes the user to the main menu form.
+    ''' </summary>
+    Private Sub backToMainClick()
+        'Leaves the hs.txt in the same order every time
+        battleshipGamefrm.BubbleSort(True, True)
+        battleshipGamefrm.writeHighScores()
         Me.Hide()
         mainMenufrm.Show()
+        mainMenufrm.mainMenuFormLoad()
     End Sub
 
     ''' <summary>
@@ -265,8 +272,8 @@ Public Class highScoresfrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backtomainbtn.MouseEnter
-        EnterOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Enter(sender As Object, e As EventArgs) Handles backToMainbtn.MouseEnter
+        EnterOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
@@ -274,19 +281,18 @@ Public Class highScoresfrm
     ''' </summary>
     ''' <param name="sender">Reference to the control which called the subroutine</param>
     ''' <param name="e">Provides more information about the event that caused this subroutine to be called</param>
-    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backtomainbtn.MouseLeave
-        ExitOverSmallButton("backtomainbtn", Me)
+    Private Sub backtomainbtn_Leave(sender As Object, e As EventArgs) Handles backToMainbtn.MouseLeave
+        ExitOverSmallButton(sender, Me)
     End Sub
 
     ''' <summary>
     ''' Subroutine which switches the button's image out for the purple image (for hover)
     ''' Example of use: EnterOverSmallButton("exitbtn", Me)
     ''' </summary>
-    ''' <param name="buttonName">The name of the button that has called this subroutine </param>
+    ''' <param name="targetObject">The button that has called this subroutine </param>
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>
-    Public Sub EnterOverSmallButton(buttonName As String, formID As Form)
-        Dim targetObject As Button
-        targetObject = formID.Controls.Item(buttonName) 'Gets the control on the form with the name
+    Public Sub EnterOverSmallButton(targetObject As Button, formID As Form)
+        'Replaces the button image with a purple image
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonPurple.png")
     End Sub
 
@@ -294,11 +300,10 @@ Public Class highScoresfrm
     ''' Subroutine which switches the button's image out for the blue image (back to normal)
     ''' Example of use: ExitOverSmallButton("exitbtn", Me)
     ''' </summary>
-    ''' <param name="buttonName">The name of the button that has called this subroutine </param>
+    ''' <param name="targetObject">The button that has called this subroutine </param>
     ''' <param name="formID">The Identity of the form which has called this subroutine</param>
-    Public Sub ExitOverSmallButton(buttonName As String, formID As Form)
-        Dim targetObject As Button
-        targetObject = formID.Controls.Item(buttonName) 'Gets the control on the form with the name
+    Public Sub ExitOverSmallButton(targetObject As Button, formID As Form)
+        'Replaces the button image with a blue image
         targetObject.BackgroundImage = Image.FromFile(Application.StartupPath & "\Pictures\smallButtonBlue.png")
     End Sub
 

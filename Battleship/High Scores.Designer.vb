@@ -23,7 +23,7 @@ Partial Class highScoresfrm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         backgroundpb = New PictureBox()
-        backtomainbtn = New Button()
+        backToMainbtn = New Button()
         namelbl3 = New Label()
         namelbl2 = New Label()
         ranklbl1 = New Label()
@@ -147,23 +147,23 @@ Partial Class highScoresfrm
         backgroundpb.TabIndex = 0
         backgroundpb.TabStop = False
         ' 
-        ' backtomainbtn
+        ' backToMainbtn
         ' 
-        backtomainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
-        backtomainbtn.BackgroundImage = My.Resources.Resources.smallButtonBlue
-        backtomainbtn.BackgroundImageLayout = ImageLayout.Stretch
-        backtomainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        backtomainbtn.FlatAppearance.BorderSize = 0
-        backtomainbtn.FlatStyle = FlatStyle.Flat
-        backtomainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
-        backtomainbtn.ForeColor = SystemColors.ButtonHighlight
-        backtomainbtn.Location = New Point(1386, 791)
-        backtomainbtn.Margin = New Padding(0)
-        backtomainbtn.Name = "backtomainbtn"
-        backtomainbtn.Size = New Size(80, 26)
-        backtomainbtn.TabIndex = 7
-        backtomainbtn.Text = "EXIT"
-        backtomainbtn.UseVisualStyleBackColor = False
+        backToMainbtn.BackColor = Color.FromArgb(CByte(173), CByte(215), CByte(240))
+        backToMainbtn.BackgroundImage = My.Resources.Resources.smallButtonBlue
+        backToMainbtn.BackgroundImageLayout = ImageLayout.Stretch
+        backToMainbtn.FlatAppearance.BorderColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        backToMainbtn.FlatAppearance.BorderSize = 0
+        backToMainbtn.FlatStyle = FlatStyle.Flat
+        backToMainbtn.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        backToMainbtn.ForeColor = SystemColors.ButtonHighlight
+        backToMainbtn.Location = New Point(1386, 791)
+        backToMainbtn.Margin = New Padding(0)
+        backToMainbtn.Name = "backToMainbtn"
+        backToMainbtn.Size = New Size(80, 26)
+        backToMainbtn.TabIndex = 7
+        backToMainbtn.Text = "EXIT"
+        backToMainbtn.UseVisualStyleBackColor = False
         ' 
         ' namelbl3
         ' 
@@ -1264,7 +1264,7 @@ Partial Class highScoresfrm
         Controls.Add(scorepnl)
         Controls.Add(namepnl)
         Controls.Add(rankingpnl)
-        Controls.Add(backtomainbtn)
+        Controls.Add(backToMainbtn)
         Controls.Add(backgroundpb)
         HelpButton = True
         MinimizeBox = False
@@ -1295,7 +1295,7 @@ Partial Class highScoresfrm
     End Sub
 
     Friend WithEvents backgroundpb As PictureBox
-    Friend WithEvents backtomainbtn As Button
+    Friend WithEvents backToMainbtn As Button
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents namelbl3 As Label
     Friend WithEvents namelbl2 As Label
